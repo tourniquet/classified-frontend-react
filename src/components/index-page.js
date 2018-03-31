@@ -1,42 +1,52 @@
 /* globals fetch */
 
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
+const mapStateToProps = state => {
+  return {
+    items: state.items
+  }
+}
 
 class IndexPage extends Component {
   constructor (props) {
     super(props)
 
-    this.state = {
-      data: []
-    }
+    this.fetchData = this.fetchData.bind(this)
   }
 
-  componentDidMount () {
-    fetch('/api/index.php')
+  fetchData () {
+    fetch('/api/')
       .then(res => res.json())
-      .then(data => this.setState({ data: [...this.state.data, data] }))
+      .then(data => {
+        this.props.dispatch({
+          type: 'FETCH_DATA',
+          data
+        })
+      })
       .catch(err => console.log(err))
   }
 
+  componentDidMount () {
+    this.fetchData()
+  }
+
   render () {
-    const listItems = this.state.data.map((el, i) => {
-      return (
-        <li key={i.toString()}>
-          {el.title}
-        </li>
-      )
-    })
+    const items = this.props.items
 
     return (
       <div>
-        <h1>Hello, world!</h1>
-
         <ul>
-          {listItems}
+          {items.map((el, i) => (
+            <li key={i.toString()}>
+              {el.title}
+            </li>
+          ))}
         </ul>
       </div>
     )
   }
 }
 
-export default IndexPage
+export default connect(mapStateToProps)(IndexPage)
