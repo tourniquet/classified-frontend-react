@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const mapStateToProps = state => {
   return {
@@ -37,10 +38,20 @@ class IndexPage extends Component {
 
     return (
       <div>
-        <ul>
+        <ul className='list-group list-group-flash'>
           {items.map((el, i) => (
-            <li key={i.toString()}>
-              {el.title}
+            <li
+              className='list-group-item'
+              key={i.toString()}
+            >
+              <Link
+                key={el.id}
+                to={{
+                  pathname: `/item?id=${el.id}`
+                }}
+              >
+                {el.title}
+              </Link>
             </li>
           ))}
         </ul>

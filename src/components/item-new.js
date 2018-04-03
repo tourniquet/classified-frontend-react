@@ -36,30 +36,45 @@ class ItemNew extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <input
-            type='text'
-            name='title'
-            placeholder='Title'
-            value={this.state.title}
-            onChange={this.handleChange}
-          />
+          <div className='form-group'>
+            <label htmlFor='title'>Title</label>
+            <input
+              className='form-control'
+              type='text'
+              name='title'
+              placeholder='Title'
+              value={this.state.title}
+              onChange={this.handleChange}
+            />
+          </div>
 
-          <textarea
-            name='description'
-            placeholder='Description'
-          />
+          <div className='form-group'>
+            <label htmlFor='description'>Description</label>
+            <textarea
+              className='form-control'
+              name='description'
+              placeholder='Description'
+            />
+          </div>
 
-          <input
-            type='number'
-            name='price'
-            placeholder='Price'
-          />
+          <div className='form-group'>
+            <label htmlFor='price'>Price</label>
+            <input
+              className='form-control'
+              type='number'
+              name='price'
+              placeholder='Price'
+            />
+          </div>
 
-          <input
-            name='submit'
+          <button
+            className='btn btn-primary'
             type='submit'
+            name='submit'
             onClick={this.handleSubmit}
-          />
+          >
+            Submit
+          </button>
         </form>
       </div>
     )

@@ -13,6 +13,7 @@ module.exports = {
     contentBase: './public',
     historyApiFallback: true,
     port: 3000,
+    host: '0.0.0.0',
     proxy: {
       '/api/**': {
         target: 'http://localhost:3001/classified/backend',
@@ -35,7 +36,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loaders: ['style-loader', 'css-loader', 'resolve-url-loader']
+        loaders: ['style-loader', 'css-loader?sourceMap', 'resolve-url-loader']
       },
       {
         test: /\.scss$/,
