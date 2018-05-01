@@ -24,9 +24,9 @@ const App = () => (
   <Provider store={store}>
     <div className='container'>
       <Switch>
-        <Route exact path='/' component={IndexPage} />
-        <Route path='/item-new' component={ItemNew} />
-        <Route path='/:id' component={Item} />
+        <Route path='/' exact component={IndexPage} />
+        <Route path='/item/add' component={ItemNew} />
+        <Route path='/item/:id(\d+)' component={Item} />
       </Switch>
     </div>
   </Provider>
