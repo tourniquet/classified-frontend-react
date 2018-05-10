@@ -13,7 +13,7 @@ import ItemNew from './components/item-new'
 import Item from './components/item'
 
 // reducer
-import reducer from './reducer'
+import reducer from './config/reducer'
 
 const store = createStore(
   reducer,

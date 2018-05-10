@@ -46,9 +46,7 @@ class IndexPage extends Component {
             >
               <Link
                 key={el.id}
-                to={{
-                  pathname: `/item?id=${el.id}`
-                }}
+                to={{ pathname: `/item/${el.id}` }}
               >
                 {el.title}
               </Link>

@@ -1,5 +1,8 @@
 const initialState = {
-  items: []
+  items: [],
+  item: {
+    title: 'Item title'
+  }
 }
 
 export default initialState

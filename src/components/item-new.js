@@ -67,6 +67,15 @@ class ItemNew extends React.Component {
             />
           </div>
 
+          <div className='form-group'>
+            <label htmlFor='upload-image'>Upload image</label>
+            <input
+              id='upload-image'
+              className='form-control-file'
+              type='file'
+            />
+          </div>
+
           <button
             className='btn btn-primary'
             type='submit'
@@ -82,3 +91,5 @@ class ItemNew extends React.Component {
 }
 
 export default ItemNew
+
+// read about FormData https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData
