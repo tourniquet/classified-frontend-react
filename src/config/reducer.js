@@ -10,6 +10,10 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         item: action.data
       })
+    case 'SET_ITEM_TITLE':
+      return Object.assign({}, state, {
+        item: action.item
+      })
     default:
       return state
   }

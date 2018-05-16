@@ -1,7 +1,10 @@
 const initialState = {
   items: [],
   item: {
-    title: 'Item title'
+    title: '',
+    description: '',
+    price: '',
+    images: []
   }
 }
 
