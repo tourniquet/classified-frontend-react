@@ -13,18 +13,35 @@ const ItemNew = props => {
   const setItemTitle = el => {
     return {
       type: 'SET_ITEM_TITLE',
-      item: {
-        title: el.target.value
-      }
+      title: el.target.value
+    }
+  }
+
+  const setItemDescription = el => {
+    return {
+      type: 'SET_ITEM_DESCRIPTION',
+      description: el.target.value
+    }
+  }
+
+  const setItemPrice = el => {
+    return {
+      type: 'SET_ITEM_PRICE',
+      price: el.target.value
     }
   }
 
   const handleSubmit = event => {
     const url = '/api/item-posted.php'
+    const item = {
+      title: props.title,
+      description: props.description,
+      price: props.price
+    }
 
     window.fetch(url, {
       method: 'POST',
-      body: JSON.stringify(this.state)
+      body: JSON.stringify(item)
     })
       .then(res => console.log('Hi there!'))
       .catch(err => console.error(err))
@@ -34,7 +51,7 @@ const ItemNew = props => {
 
   return (
     <div>
-      <form> {/* onSubmit={handleSubmit} */}
+      <form>
         <div className='form-group'>
           <label htmlFor='title'>Title</label>
           <input
@@ -53,6 +70,8 @@ const ItemNew = props => {
             className='form-control'
             name='description'
             placeholder='Description'
+            value={props.description}
+            onChange={el => props.dispatch(setItemDescription(el))}
           />
         </div>
 
@@ -64,6 +83,8 @@ const ItemNew = props => {
             type='inputmode'
             name='price'
             placeholder='Price'
+            value={props.price}
+            onChange={el => props.dispatch(setItemPrice(el))}
           />
         </div>
 
@@ -78,7 +99,7 @@ const ItemNew = props => {
 
         <button
           className='btn btn-primary'
-          type='submit'
+          type='button'
           name='submit'
           onClick={handleSubmit}
         >
