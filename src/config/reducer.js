@@ -2,10 +2,17 @@ import initialState from './initialState'
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    // data for index page
     case 'FETCH_DATA':
       return Object.assign({}, state, {
         items: action.data
       })
+    // data for item page
+    case 'FETCH_ITEM_DATA':
+      return Object.assign({}, state, {
+        item: action.data
+      })
+    // reducers for new item
     case 'SET_ITEM_TITLE':
       return Object.assign({}, state, {
         item: {

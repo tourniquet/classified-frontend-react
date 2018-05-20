@@ -5,7 +5,9 @@ import { connect } from 'react-redux'
 
 const mapStateToProps = state => {
   return {
-    item: state.item
+    title: state.item.title,
+    description: state.item.description,
+    price: state.item.price
   }
 }
 
@@ -23,10 +25,8 @@ class Item extends Component {
     fetch(url)
       .then(res => res.json())
       .then(data => {
-        console.log(data)
-
         this.props.dispatch({
-          type: 'SET_ITEM',
+          type: 'FETCH_ITEM_DATA',
           data
         })
       })
@@ -38,15 +38,13 @@ class Item extends Component {
   }
 
   render () {
-    const item = this.props.item
-
     return (
       <div>
-        <h1>{item.title}</h1>
-        <p><b>Posted:</b> {item.pub_date}</p>
-        <p>{item.description}</p>
-        <p><b>Price:</b> {item.price}, {item.name}</p>
-        <image src={item.image} />
+        <h1>{this.props.title}</h1>
+        {/* <p><b>Posted:</b> {item.pub_date}</p> */}
+        <p>{this.props.description}</p>
+        <p><b>Price:</b> {this.props.price}, {this.props.name}</p>
+        <img src={this.props.image} />
       </div>
     )
   }
