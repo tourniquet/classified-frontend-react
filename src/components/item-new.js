@@ -5,7 +5,8 @@ const mapStateToProps = state => {
   return {
     title: state.item.title,
     description: state.item.description,
-    price: state.item.price
+    price: state.item.price,
+    images: state.item.images
   }
 }
 
@@ -28,6 +29,17 @@ const ItemNew = props => {
     return {
       type: 'SET_ITEM_PRICE',
       price: el.target.value
+    }
+  }
+
+  const handleImages = el => {
+    const image = el.target.files[0]
+    const blob = new window.Blob([image], { type: 'image/*' })
+    const imageURL = window.URL.createObjectURL(blob)
+
+    return {
+      type: 'UPLOAD_IMAGE',
+      image: imageURL
     }
   }
 
@@ -94,6 +106,7 @@ const ItemNew = props => {
             id='upload-image'
             className='form-control-file'
             type='file'
+            onChange={el => props.dispatch(handleImages(el))}
           />
         </div>
 
@@ -106,6 +119,20 @@ const ItemNew = props => {
           Submit
         </button>
       </form>
+
+      {props.images.map((el, i) => (
+        <div
+          className='demo-images'
+          key={i}
+          style={{
+            background: `url(${el}) center center / contain`,
+            height: 200,
+            width: 200
+          }}
+        >
+          +
+        </div>
+      ))}
     </div>
   )
 }

@@ -37,6 +37,15 @@ const reducer = (state = initialState, action) => {
           price: action.price
         }
       })
+    case 'UPLOAD_IMAGE':
+      return Object.assign({}, state, {
+        item: {
+          title: state.item.title,
+          description: state.item.description,
+          price: state.item.price,
+          images: state.item.images.concat(action.image)
+        }
+      })
     default:
       return state
   }
