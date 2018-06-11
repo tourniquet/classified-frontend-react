@@ -4,8 +4,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 
-// temporary styles from Bootstrap
-import './styles/bootstrap.css'
+// reset standard browser styles
+import './components/index-page.scss'
 
 // components
 import IndexPage from './components/index-page'

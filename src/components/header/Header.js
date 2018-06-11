@@ -23,25 +23,25 @@ const Header = props => {
       <button
         className='navbar-toggle collapsed'
         type='button'
-        {/* @click="openModal") */}
+        // @click="openModal")
       >
-        <span className='icon-bar'></span>
-        <span className='icon-bar'></span>
-        <span className='icon-bar'></span>
+        <span className='icon-bar'>&nbsp;</span>
+        <span className='icon-bar'>&nbsp;</span>
+        <span className='icon-bar'>&nbsp;</span>
       </button>
 
       <ul className='desktop-screen'>
-        <li style={{ display: 'none'}}>
+        <li style={{ display: 'none' }}>
           Înregistrare
         </li>
-        <li style={{ display: 'none'}}>
+        <li style={{ display: 'none' }}>
           Contul meu
         </li>
         <li>
           <input
             className='post-ad-button'
             type='button'
-            {/* onclick="location.href='/newad'" */}
+            // onclick="location.href='/newad'"
             value='Postează anunț'
           />
         </li>

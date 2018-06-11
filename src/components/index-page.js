@@ -1,5 +1,3 @@
-/* globals fetch */
-
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -18,7 +16,7 @@ class IndexPage extends Component {
   }
 
   fetchData () {
-    fetch('/api/')
+    window.fetch('/api/')
       .then(res => res.json())
       .then(data => {
         this.props.dispatch({
