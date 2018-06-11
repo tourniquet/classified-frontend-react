@@ -43,19 +43,25 @@ class Item extends Component {
   }
 
   render () {
+    const {
+      title,
+      description,
+      price
+    } = this.props
+
     return (
       <div>
         <Header />
 
         <div className='ad'>
           <div className='ad-breadcrumb'>
-            <span><a href='/'>Acasă</a></span>
-            <span className='slash'>/</span>
-            <span><a href='/category/{{category}}/'>category</a></span>
-            <span className='slash'>/</span>
-            <span><a href='/{{category}}/{{subcategory}}'>subcategory</a></span>
-            <span className='slash'>/</span>
-            <span className='breadcrumb-ad-title'>&nbsp;title</span>
+            <span><a href='/'>Home </a></span>
+            <span className='slash'>/ </span>
+            <span><a href='/category/{{category}}/'>Category </a></span>
+            <span className='slash'>/ </span>
+            <span><a href='/{{category}}/{{subcategory}}'>Subcategory </a></span>
+            <span className='slash'>/ </span>
+            <span className='breadcrumb-ad-title'>{title}</span>
           </div>
 
           <div className='ad-info'>
@@ -74,11 +80,11 @@ class Item extends Component {
 
           <div className='ad-details'>
             <div className='ad-title'>
-              <h2>title</h2>
+              <h2>{title}</h2>
             </div>
 
             <div className='ad-description'>
-              <span>description</span>
+              <span>{description}</span>
             </div>
 
             <div className='images'>
@@ -93,7 +99,7 @@ class Item extends Component {
           <div className='container'>
             <div className='price'>
               <span className='label'>Preţ:&nbsp;</span>
-              <span>18800 lei / 950 usd / 860 eur</span>
+              <span>{price}</span>
             </div>
             <br />
             <div className='region'>

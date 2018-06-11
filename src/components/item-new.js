@@ -1,6 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+// styles
+import './item-new.scss'
+
 const mapStateToProps = state => {
   return {
     title: state.item.title,
@@ -62,53 +65,73 @@ const ItemNew = props => {
   }
 
   return (
-    <div>
-      <form>
-        <div className='form-group'>
-          <label htmlFor='title'>Title</label>
-          <input
-            className='form-control'
-            type='text'
-            name='title'
-            placeholder='Title'
-            value={props.title}
-            onChange={el => props.dispatch(setItemTitle(el))}
-          />
-        </div>
+    <div className='ad-form'>
+      <div className='left-side'>
+        <p>Temprary paragraph</p>
+      </div>
 
-        <div className='form-group'>
-          <label htmlFor='description'>Description</label>
-          <textarea
-            className='form-control'
-            name='description'
-            placeholder='Description'
-            value={props.description}
-            onChange={el => props.dispatch(setItemDescription(el))}
-          />
-        </div>
+      <div className='right-side'>
+        <label htmlFor='title'>Title</label>
+        <input
+          className='form-control'
+          type='text'
+          name='title'
+          placeholder='Title'
+          value={props.title}
+          onChange={el => props.dispatch(setItemTitle(el))}
+        />
 
-        <div className='form-group'>
-          <label htmlFor='price'>Price</label>
-          <input
-            className='form-control'
-            // https://css-tricks.com/finger-friendly-numerical-inputs-with-inputmode/
-            type='inputmode'
-            name='price'
-            placeholder='Price'
-            value={props.price}
-            onChange={el => props.dispatch(setItemPrice(el))}
-          />
-        </div>
+        <label htmlFor='description'>Description</label>
+        <textarea
+          className='form-control'
+          name='description'
+          placeholder='Description'
+          value={props.description}
+          onChange={el => props.dispatch(setItemDescription(el))}
+        />
 
-        <div className='form-group'>
-          <label htmlFor='upload-image'>Upload image</label>
+        <label htmlFor='price'>Price</label>
+        <input
+          className='form-control'
+          // https://css-tricks.com/finger-friendly-numerical-inputs-with-inputmode/
+          type='inputmode'
+          name='price'
+          placeholder='Price'
+          value={props.price}
+          onChange={el => props.dispatch(setItemPrice(el))}
+        />
+
+        <label
+          className='label-for-images'
+          style={{
+            backgroundSize: 'cover',
+            display: 'inline-block',
+            height: 94,
+            width: 94,
+            border: '2px solid #f6f6f6',
+            borderRadius: 6,
+            textAlign: 'center',
+            lineHeight: '96px',
+            color: '#e26636',
+            fontSize: 32
+          }}
+        >
+          <span
+            style={{
+              lineHeight: 0
+            }}
+          >
+            +
+          </span>
           <input
-            id='upload-image'
-            className='form-control-file'
+            className='input-file'
             type='file'
-            onChange={el => props.dispatch(handleImages(el))}
+            accept='image/jpeg, image/png, image/gif'
+            style={{
+              display: 'none'
+            }}
           />
-        </div>
+        </label>
 
         <button
           className='btn btn-primary'
@@ -118,21 +141,40 @@ const ItemNew = props => {
         >
           Submit
         </button>
+      </div>
+
+      <form>
+        {/*<div className='form-group'>
+          <label htmlFor='upload-image'>Upload image</label>
+          <input
+            id='upload-image'
+            className='form-control-file'
+            type='file'
+            onChange={el => props.dispatch(handleImages(el))}
+          />
+        </div>*/}
       </form>
 
-      {props.images.map((el, i) => (
-        <div
-          className='demo-images'
-          key={i}
-          style={{
-            background: `url(${el}) center center / contain`,
-            height: 200,
-            width: 200
-          }}
-        >
-          +
-        </div>
-      ))}
+      {/*<label>Choose file</label>
+      <div className='images'>
+        {props.images.map((el, i) => (
+          <div
+            className='images-block'
+            key={i}
+            style={{
+              background: `url(${el}) center center / contain`,
+              height: 200,
+              width: 200
+            }}
+          >
+            <img
+              className='remove-image'
+              src='img/remove.png'
+            />
+            +
+          </div>
+        ))}
+      </div>*/}
     </div>
   )
 }

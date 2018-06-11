@@ -18,7 +18,7 @@ footer {
 
     a.fb {
       display: inline-block;
-      // background-image: url('../assets/fb.png');
+      background-image: url('/img/fb.png');
       background-repeat: no-repeat;
       background-size: 20px 20px;
       background-position: 6px 6px;
@@ -30,13 +30,13 @@ footer {
 
     a.ok {
       @extend a.fb;
-      // background-image: url('../assets/ok.png');
+      background-image: url('/img/ok.png');
       margin: 0 22px;
     }
 
     a.skype {
       @extend a.fb;
-      // background-image: url('../assets/skype.png');
+      background-image: url('/img/skype.png');
     }
   }
 }
