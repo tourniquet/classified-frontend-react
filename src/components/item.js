@@ -3,6 +3,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+// components
+import Header from './header/Header'
+import Footer from './footer/Footer'
+
 const mapStateToProps = state => {
   return {
     title: state.item.title,
@@ -40,11 +44,17 @@ class Item extends Component {
   render () {
     return (
       <div>
-        <h1>{this.props.title}</h1>
-        {/* <p><b>Posted:</b> {item.pub_date}</p> */}
-        <p>{this.props.description}</p>
-        <p><b>Price:</b> {this.props.price}, {this.props.name}</p>
-        <img src={this.props.image} />
+        <Header />
+
+        <div>
+          <h1>{this.props.title}</h1>
+          {/* <p><b>Posted:</b> {item.pub_date}</p> */}
+          <p>{this.props.description}</p>
+          <p><b>Price:</b> {this.props.price}, {this.props.name}</p>
+          <img src={this.props.image} />
+        </div>
+
+        <Footer />
       </div>
     )
   }
