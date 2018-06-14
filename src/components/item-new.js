@@ -1,6 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+// components
+import Button from './Button/Button'
+import Footer from './Footer/Footer'
+import Input from './Input/Input'
+import Header from './Header/Header'
+import Label from './Label/Label'
+import Textarea from './Textarea/Textarea'
+
 // styles
 import './item-new.scss'
 
@@ -65,116 +73,148 @@ const ItemNew = props => {
   }
 
   return (
-    <div className='ad-form'>
-      <div className='left-side'>
-        <p>Temprary paragraph</p>
-      </div>
+    <div>
+      <Header />
 
-      <div className='right-side'>
-        <label htmlFor='title'>Title</label>
-        <input
-          className='form-control'
-          type='text'
-          name='title'
-          placeholder='Title'
-          value={props.title}
-          onChange={el => props.dispatch(setItemTitle(el))}
-        />
+      <div className='form'>
+        <div className='left-side'>
+          <Label
+            className='label mandatory'
+            htmlFor='category'
+            title='Category'
+          />
+          {/* drop-down-menu(:name="category.title", :elements="categories", @change="setCategory") */}
 
-        <label htmlFor='description'>Description</label>
-        <textarea
-          className='form-control'
-          name='description'
-          placeholder='Description'
-          value={props.description}
-          onChange={el => props.dispatch(setItemDescription(el))}
-        />
+          <Label
+            className='label mandatory'
+            htmlFor='subcategory'
+            title='Subcategory'
+          />
+          {/* drop-down-menu(:name="subcategory.title", :elements="subcategories", @change="setSubcategory")
+          input(type="hidden", name="subcategory", value="{{subcategory.id}}") */}
 
-        <label htmlFor='price'>Price</label>
-        <input
-          className='form-control'
-          // https://css-tricks.com/finger-friendly-numerical-inputs-with-inputmode/
-          type='inputmode'
-          name='price'
-          placeholder='Price'
-          value={props.price}
-          onChange={el => props.dispatch(setItemPrice(el))}
-        />
+          <Label
+            htmlFor='region'
+            title='Region'
+          />
+          {/* drop-down-menu(:name="region.title", :elements="regions", @change="setRegion")
+          input(type="hidden", name="region", value="{{region.id}}") */}
+        </div>
 
-        <label
-          className='label-for-images'
-          style={{
-            backgroundSize: 'cover',
-            display: 'inline-block',
-            height: 94,
-            width: 94,
-            border: '2px solid #f6f6f6',
-            borderRadius: 6,
-            textAlign: 'center',
-            lineHeight: '96px',
-            color: '#e26636',
-            fontSize: 32
-          }}
-        >
-          <span
+        <div className='right-side'>
+          <Label
+            className='label mandatory'
+            htmlFor='title'
+            title='Title'
+          />
+          <Input
+            name='title'
+            placeholder='Title'
+            type='text'
+            value={props.title}
+            onChange={el => props.dispatch(setItemTitle(el))}
+          />
+
+          <Label
+            className='label mandatory'
+            htmlFor='description'
+            title='Description'
+          />
+          <Textarea
+            name='description'
+            placeholder='Description'
+            value={props.description}
+            onChange={el => props.dispatch(setItemDescription(el))}
+          />
+
+          <Label
+            htmlFor='title'
+            title='Price'
+          />
+          <Input
+            // https://css-tricks.com/finger-friendly-numerical-inputs-with-inputmode/
+            type='inputmode'
+            name='price'
+            placeholder='Price'
+            value={props.price}
+            onChange={el => props.dispatch(setItemPrice(el))}
+          />
+
+          {/* TODO: Change this label with Label component */}
+          <label
+            className='label-for-images'
             style={{
-              lineHeight: 0
+              backgroundSize: 'cover',
+              display: 'inline-block',
+              height: 94,
+              width: 94,
+              border: '2px solid #f6f6f6',
+              borderRadius: 6,
+              textAlign: 'center',
+              lineHeight: '96px',
+              color: '#e26636',
+              fontSize: 32
             }}
           >
-            +
-          </span>
-          <input
-            className='input-file'
-            type='file'
-            accept='image/jpeg, image/png, image/gif'
-            style={{
-              display: 'none'
-            }}
+            <span
+              style={{
+                lineHeight: 0
+              }}
+            >
+              +
+            </span>
+            <input
+              className='input-file'
+              type='file'
+              accept='image/jpeg, image/png, image/gif'
+              style={{
+                display: 'none'
+              }}
+            />
+          </label>
+
+          <Button
+            className='btn btn-primary'
+            name='submit'
+            title='Submit'
+            onClick={handleSubmit}
           />
-        </label>
+        </div>
 
-        <button
-          className='btn btn-primary'
-          type='button'
-          name='submit'
-          onClick={handleSubmit}
-        >
-          Submit
-        </button>
-      </div>
-
-      <form>
-        {/*<div className='form-group'>
+        <div className='form-group'>
           <label htmlFor='upload-image'>Upload image</label>
           <input
             id='upload-image'
             className='form-control-file'
             type='file'
+            accept='image/*'
             onChange={el => props.dispatch(handleImages(el))}
           />
-        </div>*/}
-      </form>
+        </div>
 
-      {/*<label>Choose file</label>
-      <div className='images'>
-        {props.images.map((el, i) => (
-          <div
-            className='images-block'
-            key={i}
-            style={{
-              background: `url(${el}) center center / contain`,
-              height: 200,
-              width: 200
-            }}
-          >
-            <img
-              className='remove-image'
-              src='img/remove.png'
-            />
-            +
-          </div>
-        ))}
-      </div>*/}
+        <label>Choose file</label>
+        <div className='images'>
+          {props.images.map((el, i) => (
+            <div
+              className='images-block'
+              key={i}
+              style={{
+                background: `url(${el}) center center / contain`,
+                height: 200,
+                width: 200
+              }}
+            >
+              <img
+                className='remove-image'
+                src='/img/remove.png'
+              />
+              +
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <Footer />
     </div>
   )
 }

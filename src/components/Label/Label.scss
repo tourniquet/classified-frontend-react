@@ -1,0 +1,12 @@
+.label {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: 18px;
+
+  &.mandatory::after {
+    content: "*";
+    color: red;
+  }  
+}

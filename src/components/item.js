@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 // components
-import Header from './header/Header'
-import Footer from './footer/Footer'
+import Header from './Header/Header'
+import Footer from './Footer/Footer'
 
 // styles
 import './item.scss'

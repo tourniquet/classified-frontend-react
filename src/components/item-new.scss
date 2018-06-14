@@ -1,39 +1,6 @@
 .form {
   padding: 0 30px;
 
-  .label {
-    display: inline-block;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    margin-bottom: 18px;
-  }
-
-  .input {
-    display: block;
-    background: #FFF;
-    border: 2px solid #F6F6F6;
-    border-radius: 8px;
-    height: 58px;
-    width: 100%;
-    padding-left: 15px;
-    margin-bottom: 18px;
-    font-size: 14px;
-    letter-spacing: 0.08em;
-    text-align: left;
-    box-sizing: border-box;
-  }
-
-  .description {
-    display: block;
-    border: 2px solid #F6F6F6;
-    border-radius: 8px;
-    height: 190px;
-    width: 100%;
-    margin-bottom: 26px;
-    resize: none;
-  }
-
   .images {
     display: flex;
     justify-content: space-between;
@@ -94,10 +61,6 @@
     margin: 20px auto 0px;
     width: 182px;
     height: 42px;
-  }
-
-  .mandatory {
-    color: red;
   }
 }  
 
