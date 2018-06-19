@@ -64,53 +64,70 @@
   }
 }  
 
-// @media (min-width: 1200px)
-//   .form
-//     width: 1200px
-//     margin: 0 auto
+@media (min-width: 1200px) {
+  .form {
+    width: 1200px;
+    margin: 0 auto;
 
-//     .left-side
-//       float: left
-//       width: 30%
+    .left-side {
+      float: left;
+      width: 30%;
+    }
 
-//     .right-side
-//       float: right
-//       width: 67%
-//       margin-bottom: 135px
+    .right-side {
+      float: right;
+      width: 67%;
+      margin-bottom: 135px;
+    }
 
-//     .input
-//       width: 70%
+    .input {
+      width: 70%;
+    }
 
-//     .description
-//       width: 70%
+    .description {
+      width: 70%;
+    }
 
-//     .images
-//       width: 73%
-//       margin-bottom: 10px
+    .images {
+      width: 73%;
+      margin-bottom: 10px;
 
-//       .label-for-images
-//         height: 167px
-//         width: 167px
-//         line-height: 164px
+      .label-for-images {
+        height: 167px;
+        width: 167px;
+        line-height: 164px;
+      }
+    }
 
-//     .contacts-block
-//       width: 70%
-//       .phone, .contact-name
-//         display: inline-block
-//         width: 48%
+    .contacts-block {
+      width: 70%;
+      
+      .phone, .contact-name {
+        display: inline-block;
+        width: 48%;
+      }
 
-//       .contact-name
-//         float: right
+      .contact-name {
+        float: right;
+      }
+    }
 
-//     .price-block
-//       width: 38%
-//       .price
-//         width: 145px
+    .price-block {
+      width: 38%;
 
-//       .currency
-//         width: 143px
-//         margin: 0
+      .price {
+        width: 145px;
+      }
 
-//     .post-button
-//       display: block
-//       float: left
+      .currency {
+        width: 143px;
+        margin: 0;
+      }
+    }
+
+    .post-button {
+      display: block;
+      float: left;
+    }
+  }
+}

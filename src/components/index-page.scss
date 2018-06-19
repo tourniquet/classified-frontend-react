@@ -50,3 +50,99 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+/* ---------------------------------------------------------------------------*/
+.categories {
+  padding: 0 30px;
+
+  .category-title {
+    border: 2px solid #F6F6F6;
+    border-radius: 8px;
+    margin-bottom: 20px;
+
+    a:link, a:visited, a:active, a:hover {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: .07em;
+      color: black;
+      text-decoration: none;
+      height: 58px;
+      line-height: 58px;
+      display: block;
+      padding-left: 30px;
+    }
+
+    .active-tab {
+      background: url('/img/arrow_up.png') no-repeat #F6F6F6;
+      background-position: 92%;
+    }
+
+    .inactive-tab {
+      background: url('/img/arrow_down.png') no-repeat;
+      background-position: 92%;
+    }
+
+    .subcategories {
+      padding-left: 29px;
+
+      .subcategory-title {
+        margin: 28px 0;
+
+        a:link, a:visited, a:active, a:hover {
+          height: 16px;
+          font-weight: 500;
+          line-height: 16px;
+          padding: 0;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .latest-ads {
+    margin: 0 auto;
+    margin-top: 51px;
+    margin-bottom: 92px;
+    width: 1268px;
+    font-size: 13px;
+
+    .latest-ads-item {
+      height: 50px;
+      line-height: 50px;
+      padding-left: 32px;
+      border-top: 2px solid #F6F6F6;
+      
+      span {
+        display: inline-block;
+      }
+
+      .star {
+        width: 32px;
+      }
+
+      .image {
+        width: 30px;
+      }
+
+      .ad-title {
+        width: 852px;
+        
+        a:link, a:visited, a:active {
+          text-decoration: none;
+          color: black;
+        }
+      }
+
+      .ad-category {
+        color: #E26433;
+        width: 125px;
+      }
+
+      .ad-date {
+        width: 135px;
+        text-align: right;
+      }
+    }
+  }
+}

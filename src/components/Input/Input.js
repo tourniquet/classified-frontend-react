@@ -10,6 +10,7 @@ const Input = props => {
       name={props.name}
       placeholder={props.placeholder}
       type={props.type}
+      accept={props.accept || ''}
       value={props.value}
       onChange={props.onChange}
     />

@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 // components
 import Button from './Button/Button'
 import Footer from './Footer/Footer'
-import Input from './Input/Input'
 import Header from './Header/Header'
+import Input from './Input/Input'
 import Label from './Label/Label'
 import Textarea from './Textarea/Textarea'
 
@@ -129,6 +129,48 @@ const ItemNew = props => {
 
           <Label
             htmlFor='title'
+            title='Adaugă fotografii'
+          />
+          <div className='images'>
+            {props.images.map(el => (
+              <div className='image-block'>
+                {/* TODO: Render this div only if images array length === && === 7 */}
+                <img className='remove-image' src='/img/remove.png' style={{ display: el.length ? 'inline-block' : 'none' }} />
+                {/* TODO: Change this label with Label component */}
+                <label className='label-for-images' style={{ backgroundImage: `url(${el})` }}>
+                  <span src='/img/remove.png' style={{ display: !el.length ? 'inline-block' : 'none' }}>+</span>
+                  <Input
+                    className='input-file'
+                    accept='image/jpeg,image/png,image/gif'
+                    type='file'
+                    onChange={el => props.dispatch(handleImages(el))}
+                  />
+                </label>
+              </div>
+            ))}
+          </div>
+
+          <Label
+            className='label contacts'
+            title='Contacte'
+          />
+          <div className='contacts-block'>
+            <Input
+              className='input phone'
+              name='phone'
+              type='text'
+              placeholder='telefon'
+            />
+            <Input
+              className='input contact-name'
+              type='text'
+              name='contact-name'
+              placeholder='nume de contact'
+            />
+          </div>
+
+          <Label
+            htmlFor='price'
             title='Price'
           />
           <Input
@@ -140,77 +182,30 @@ const ItemNew = props => {
             onChange={el => props.dispatch(setItemPrice(el))}
           />
 
-          {/* TODO: Change this label with Label component */}
-          <label
-            className='label-for-images'
-            style={{
-              backgroundSize: 'cover',
-              display: 'inline-block',
-              height: 94,
-              width: 94,
-              border: '2px solid #f6f6f6',
-              borderRadius: 6,
-              textAlign: 'center',
-              lineHeight: '96px',
-              color: '#e26636',
-              fontSize: 32
-            }}
-          >
-            <span
-              style={{
-                lineHeight: 0
-              }}
-            >
-              +
-            </span>
-            <input
-              className='input-file'
-              type='file'
-              accept='image/jpeg, image/png, image/gif'
-              style={{
-                display: 'none'
-              }}
+          <Label
+            className='label label-for-price'
+            htmlFor='price'
+            title='Price'
+          />
+          <div className='price-block'>
+            <Input
+              className='input price'
+              type='text'
+              name='price'
             />
-          </label>
+            <div className='ul-width currency'>
+              {/*
+                drop-down-menu(:name="currency", :elements="currencies", @change="setCurrency")
+              */}
+            </div>
+          </div>
 
           <Button
-            className='btn btn-primary'
+            className='post-button'
             name='submit'
             title='Submit'
             onClick={handleSubmit}
           />
-        </div>
-
-        <div className='form-group'>
-          <label htmlFor='upload-image'>Upload image</label>
-          <input
-            id='upload-image'
-            className='form-control-file'
-            type='file'
-            accept='image/*'
-            onChange={el => props.dispatch(handleImages(el))}
-          />
-        </div>
-
-        <label>Choose file</label>
-        <div className='images'>
-          {props.images.map((el, i) => (
-            <div
-              className='images-block'
-              key={i}
-              style={{
-                background: `url(${el}) center center / contain`,
-                height: 200,
-                width: 200
-              }}
-            >
-              <img
-                className='remove-image'
-                src='/img/remove.png'
-              />
-              +
-            </div>
-          ))}
         </div>
       </div>
 

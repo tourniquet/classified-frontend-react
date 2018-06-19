@@ -43,7 +43,7 @@ const reducer = (state = initialState, action) => {
           title: state.item.title,
           description: state.item.description,
           price: state.item.price,
-          images: state.item.images.concat(action.image)
+          images: [action.image, ...state.item.images]
         }
       })
     default:

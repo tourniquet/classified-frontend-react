@@ -4,7 +4,7 @@ const initialState = {
     title: '',
     description: '',
     price: '',
-    images: []
+    images: ['']
   }
 }
 

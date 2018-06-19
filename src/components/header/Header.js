@@ -1,6 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+// components
+import Button from '../Button/Button'
+
 // styles
 import './Header.scss'
 
@@ -38,11 +41,13 @@ const Header = props => {
           Contul meu
         </li>
         <li>
-          <input
+          // TODO: Go to '/item/add' page on button click
+          // input
+          // onclick="location.href='/newad'"
+          // />
+          <Button
             className='post-ad-button'
-            type='button'
-            // onclick="location.href='/newad'"
-            value='Postează anunț'
+            title='Postează anunț'
           />
         </li>
       </ul>

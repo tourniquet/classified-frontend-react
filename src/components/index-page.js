@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+// components
+import Header from './Header/Header'
+import Footer from './Footer/Footer'
+
 const mapStateToProps = state => {
   return {
     items: state.items
@@ -36,21 +40,31 @@ class IndexPage extends Component {
 
     return (
       <div>
-        <ul className='list-group list-group-flash'>
+        <Header />
+
+        <ul className='latest-ads'>
           {items.map((el, i) => (
             <li
-              className='list-group-item'
+              className='latest-ads-item'
               key={i.toString()}
             >
-              <Link
-                key={el.id}
-                to={{ pathname: `/item/${el.id}` }}
-              >
-                {el.title}
-              </Link>
+              <span className='star'>S</span>
+              <span className='image'>I</span>
+              <span className='ad-title'>
+                <Link
+                  key={el.id}
+                  to={{ pathname: `/item/${el.id}` }}
+                >
+                  {el.title}
+                </Link>
+              </span>
+              <span className='ad-category'>ss</span>
+              <span className='ad-date'>ad.date</span>
             </li>
           ))}
         </ul>
+
+        <Footer />
       </div>
     )
   }
