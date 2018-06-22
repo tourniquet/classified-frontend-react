@@ -12,12 +12,18 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         item: action.data
       })
+    // input value for search input
+    case 'SET_SEARCH_TEXT':
+      return Object.assign({}, state, {
+        search: action.search
+      })
     // reducers for new item
     case 'SET_ITEM_TITLE':
       return Object.assign({}, state, {
         item: {
           title: action.title,
           description: state.item.description,
+          images: state.item.images,
           price: state.item.price
         }
       })
@@ -26,6 +32,7 @@ const reducer = (state = initialState, action) => {
         item: {
           title: state.item.title,
           description: action.description,
+          images: state.item.images,
           price: state.item.price
         }
       })
@@ -34,6 +41,7 @@ const reducer = (state = initialState, action) => {
         item: {
           title: state.item.title,
           description: state.item.description,
+          images: state.item.images,
           price: action.price
         }
       })
@@ -42,8 +50,8 @@ const reducer = (state = initialState, action) => {
         item: {
           title: state.item.title,
           description: state.item.description,
-          price: state.item.price,
-          images: [action.image, ...state.item.images]
+          images: [action.image, ...state.item.images],
+          price: state.item.price
         }
       })
     default:

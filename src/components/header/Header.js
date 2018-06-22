@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
 // components
 import Button from '../Button/Button'
@@ -7,11 +6,7 @@ import Button from '../Button/Button'
 // styles
 import './Header.scss'
 
-const mapStateToProps = state => {
-  return {}
-}
-
-const Header = props => {
+const Header = () => {
   return (
     <header>
       {/* modal
@@ -55,4 +50,4 @@ const Header = props => {
   )
 }
 
-export default connect(mapStateToProps)(Header)
+export default Header

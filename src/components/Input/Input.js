@@ -9,7 +9,8 @@ const Input = props => {
       className={props.className || 'input'}
       name={props.name}
       placeholder={props.placeholder}
-      type={props.type}
+      inputmode={props.inputmode || ''}
+      type={props.type || 'text'}
       accept={props.accept || ''}
       value={props.value}
       onChange={props.onChange}

@@ -7,6 +7,7 @@ import Footer from './Footer/Footer'
 import Header from './Header/Header'
 import Input from './Input/Input'
 import Label from './Label/Label'
+import Search from './Search/Search'
 import Textarea from './Textarea/Textarea'
 
 // styles
@@ -14,6 +15,9 @@ import './item-new.scss'
 
 const mapStateToProps = state => {
   return {
+    categories: state.item.categories,
+    subcategories: state.item.subcategories,
+    regions: state.item.regions,
     title: state.item.title,
     description: state.item.description,
     price: state.item.price,
@@ -22,6 +26,12 @@ const mapStateToProps = state => {
 }
 
 const ItemNew = props => {
+  const toggleCategoriesList = () => {}
+
+  const toggleSubcategoriesList = () => {}
+
+  const toggleRegionsList = () => {}
+
   const setItemTitle = el => {
     return {
       type: 'SET_ITEM_TITLE',
@@ -54,6 +64,8 @@ const ItemNew = props => {
     }
   }
 
+  const toggleCurrencies = () => {}
+
   const handleSubmit = event => {
     const url = '/api/item-posted.php'
     const item = {
@@ -76,6 +88,8 @@ const ItemNew = props => {
     <div>
       <Header />
 
+      <Search />
+
       <div className='form'>
         <div className='left-side'>
           <Label
@@ -83,6 +97,21 @@ const ItemNew = props => {
             htmlFor='category'
             title='Category'
           />
+          <Button
+            className='button desktop-button'
+            title='Category name'
+            onClick={toggleCategoriesList}
+          />{/* :class="[hidden ? 'inactive-tab' : 'active-tab']") */}
+          <div className='ul-width'>
+            <ul className='show-ul-menu'>{/* (:class="{'hide-ul-menu': hidden}") */}
+              {props.categories.map(el => (
+                <li> {/* li(v-for="item in elements", @click="select($index)") {{ item.title }} */}
+                  {el}
+                </li>
+              ))}
+              {/* li(v-for="item in elements", @click="select($index)") {{ item.title }} */}
+            </ul>
+          </div>
           {/* drop-down-menu(:name="category.title", :elements="categories", @change="setCategory") */}
 
           <Label
@@ -90,15 +119,43 @@ const ItemNew = props => {
             htmlFor='subcategory'
             title='Subcategory'
           />
-          {/* drop-down-menu(:name="subcategory.title", :elements="subcategories", @change="setSubcategory")
-          input(type="hidden", name="subcategory", value="{{subcategory.id}}") */}
+          <Button
+            className='button desktop-button'
+            title='Subcategory name'
+            onClick={toggleSubcategoriesList}
+          />{/* :class="[hidden ? 'inactive-tab' : 'active-tab']") */}
+          <div className='ul-width'>
+            <ul className='show-ul-menu'>{/* (:class="{'hide-ul-menu': hidden}") */}
+              {/* li(v-for="item in elements", @click="select($index)") {{ item.title }} */}
+              {props.subcategories.map(el => (
+                <li> {/* li(v-for="item in elements", @click="select($index)") {{ item.title }} */}
+                  {el}
+                </li>
+              ))}
+            </ul>
+          </div>
+          {/* input(type="hidden", name="subcategory", value="{{subcategory.id}}") */}
 
           <Label
             htmlFor='region'
             title='Region'
           />
-          {/* drop-down-menu(:name="region.title", :elements="regions", @change="setRegion")
-          input(type="hidden", name="region", value="{{region.id}}") */}
+          <Button
+            className='button desktop-button'
+            title='Region'
+            onChange={toggleRegionsList}
+          />{/* :class="[hidden ? 'inactive-tab' : 'active-tab']") */}
+          <div className='ul-width'>
+            <ul className='show-ul-menu'>{/* (:class="{'hide-ul-menu': hidden}") */}
+              {/* li(v-for="item in elements", @click="select($index)") {{ item.title }} */}
+              {props.regions.map(el => (
+                <li> {/* li(v-for="item in elements", @click="select($index)") {{ item.title }} */}
+                  {el}
+                </li>
+              ))}
+            </ul>
+          </div>
+          {/* input(type="hidden", name="region", value="{{region.id}}") */}
         </div>
 
         <div className='right-side'>
@@ -134,8 +191,8 @@ const ItemNew = props => {
           <div className='images'>
             {props.images.map(el => (
               <div className='image-block'>
-                {/* TODO: Render this div only if images array length === && === 7 */}
                 <img className='remove-image' src='/img/remove.png' style={{ display: el.length ? 'inline-block' : 'none' }} />
+                {/* TODO: Render this element only if images array length === 0 && < 6 */}
                 {/* TODO: Change this label with Label component */}
                 <label className='label-for-images' style={{ backgroundImage: `url(${el})` }}>
                   <span src='/img/remove.png' style={{ display: !el.length ? 'inline-block' : 'none' }}>+</span>
@@ -159,28 +216,15 @@ const ItemNew = props => {
               className='input phone'
               name='phone'
               type='text'
-              placeholder='telefon'
+              placeholder='Phone number'
             />
             <Input
               className='input contact-name'
               type='text'
               name='contact-name'
-              placeholder='nume de contact'
+              placeholder='Contact name'
             />
           </div>
-
-          <Label
-            htmlFor='price'
-            title='Price'
-          />
-          <Input
-            // https://css-tricks.com/finger-friendly-numerical-inputs-with-inputmode/
-            type='inputmode'
-            name='price'
-            placeholder='Price'
-            value={props.price}
-            onChange={el => props.dispatch(setItemPrice(el))}
-          />
 
           <Label
             className='label label-for-price'
@@ -190,13 +234,23 @@ const ItemNew = props => {
           <div className='price-block'>
             <Input
               className='input price'
+              // https://css-tricks.com/finger-friendly-numerical-inputs-with-inputmode/
+              inputmode='numeric'
               type='text'
               name='price'
+              placeholder='Price'
+              onChange={el => props.dispatch(setItemPrice(el))}
             />
             <div className='ul-width currency'>
-              {/*
-                drop-down-menu(:name="currency", :elements="currencies", @change="setCurrency")
-              */}
+              <Button
+                className='button desktop-button'
+                title='Currency'
+                onClick={toggleCurrencies}
+              />{/* :class="[hidden ? 'inactive-tab' : 'active-tab']" */}
+              <div className='ul-width'>
+                <ul className='show-ul-menu'> {/* (:class="{'hide-ul-menu': hidden}") */}
+                </ul>
+              </div>
             </div>
           </div>
 

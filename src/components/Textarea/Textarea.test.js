@@ -1,4 +1,4 @@
-/* globals describe, test, expect */
+/* globals describe, expect, test */
 
 import React from 'react'
 import { shallow } from 'enzyme'

@@ -1,14 +1,9 @@
 import React from 'react'
-import { connect } from 'react-redux'
 
 // styles
 import './Footer.scss'
 
-const mapStateToProps = state => {
-  return {}
-}
-
-const Footer = props => {
+const Footer = () => {
   return (
     <footer>
       <div className='copyright'>
@@ -24,4 +19,4 @@ const Footer = props => {
   )
 }
 
-export default connect(mapStateToProps)(Footer)
+export default Footer
