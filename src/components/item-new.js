@@ -16,21 +16,56 @@ import './item-new.scss'
 const mapStateToProps = state => {
   return {
     categories: state.item.categories,
+    category: state.item.category,
+    showCategories: state.item.showCategories,
     subcategories: state.item.subcategories,
+    subcategory: state.item.subcategory,
+    showSubcategories: state.item.showSubcategories,
     regions: state.item.regions,
+    region: state.item.region,
+    showRegions: state.item.showRegions,
     title: state.item.title,
     description: state.item.description,
     price: state.item.price,
+    currency: state.item.currency,
+    currencies: state.item.currencies,
+    showCurrencies: state.item.showCurrencies,
     images: state.item.images
   }
 }
 
 const ItemNew = props => {
-  const toggleCategoriesList = () => {}
+  const toggleCategoriesList = () => {
+    return {
+      type: 'TOGGLE_CATEGORIES_LIST'
+    }
+  }
 
-  const toggleSubcategoriesList = () => {}
+  const setCategory = id => {
+    return {
+      type: 'SET_CATEGORY',
+      id
+    }
+  }
 
-  const toggleRegionsList = () => {}
+  const toggleSubcategoriesList = () => {
+    return {
+      type: 'TOGGLE_SUBCATEGORIES_LIST'
+    }
+  }
+
+  const setSubcategory = id => {
+    return {
+      type: 'SET_SUBCATEGORY',
+      id
+    }
+  }
+
+  const toggleRegionsList = () => {
+    return {
+      type: 'TOGGLE_REGIONS_LIST'
+    }
+  }
 
   const setItemTitle = el => {
     return {
@@ -64,7 +99,18 @@ const ItemNew = props => {
     }
   }
 
-  const toggleCurrencies = () => {}
+  const toggleCurrencies = () => {
+    return {
+      type: 'TOGGLE_CURRENCIES'
+    }
+  }
+
+  const setCurrency = id => {
+    return {
+      type: 'SET_CURRENCY',
+      id
+    }
+  }
 
   const handleSubmit = event => {
     const url = '/api/item-posted.php'
@@ -98,21 +144,22 @@ const ItemNew = props => {
             title='Category'
           />
           <Button
-            className='button desktop-button'
-            title='Category name'
-            onClick={toggleCategoriesList}
-          />{/* :class="[hidden ? 'inactive-tab' : 'active-tab']") */}
+            className={props.showCategories ? 'button desktop-button active-tab' : 'button desktop-button inactive-tab'}
+            title={props.category}
+            onClick={() => props.dispatch(toggleCategoriesList())}
+          />
           <div className='ul-width'>
-            <ul className='show-ul-menu'>{/* (:class="{'hide-ul-menu': hidden}") */}
-              {props.categories.map(el => (
-                <li> {/* li(v-for="item in elements", @click="select($index)") {{ item.title }} */}
+            <ul className={props.showCategories ? 'show-ul-menu' : 'hide-ul-menu'}>
+              {props.categories.map((el, id) => (
+                <li
+                  key={id}
+                  onClick={() => props.dispatch(setCategory(id))}
+                >
                   {el}
                 </li>
               ))}
-              {/* li(v-for="item in elements", @click="select($index)") {{ item.title }} */}
             </ul>
           </div>
-          {/* drop-down-menu(:name="category.title", :elements="categories", @change="setCategory") */}
 
           <Label
             className='label mandatory'
@@ -120,33 +167,36 @@ const ItemNew = props => {
             title='Subcategory'
           />
           <Button
-            className='button desktop-button'
+            className={props.showCategories ? 'button desktop-button active-tab' : 'button desktop-button inactive-tab'}
             title='Subcategory name'
-            onClick={toggleSubcategoriesList}
-          />{/* :class="[hidden ? 'inactive-tab' : 'active-tab']") */}
+            // onBlur={() => props.dispatch(toggleSubcategoriesList())}
+            onClick={() => props.dispatch(toggleSubcategoriesList())}
+          />
           <div className='ul-width'>
-            <ul className='show-ul-menu'>{/* (:class="{'hide-ul-menu': hidden}") */}
-              {/* li(v-for="item in elements", @click="select($index)") {{ item.title }} */}
-              {props.subcategories.map(el => (
-                <li> {/* li(v-for="item in elements", @click="select($index)") {{ item.title }} */}
+            <ul className={props.showSubcategories ? 'show-ul-menu' : 'show-ul-menu hide-ul-menu'}>
+              {props.subcategories.map((el, id) => (
+                <li
+                  key={id}
+                  onClick={() => setSubcategory(id)}
+                >
                   {el}
                 </li>
               ))}
             </ul>
           </div>
-          {/* input(type="hidden", name="subcategory", value="{{subcategory.id}}") */}
 
           <Label
             htmlFor='region'
             title='Region'
           />
           <Button
-            className='button desktop-button'
+            className={props.showCategories ? 'button desktop-button active-tab' : 'button desktop-button inactive-tab'}
             title='Region'
-            onChange={toggleRegionsList}
-          />{/* :class="[hidden ? 'inactive-tab' : 'active-tab']") */}
+            onBlur={() => props.dispatch(toggleRegionsList())}
+            onClick={() => props.dispatch(toggleRegionsList())}
+          />
           <div className='ul-width'>
-            <ul className='show-ul-menu'>{/* (:class="{'hide-ul-menu': hidden}") */}
+            <ul className={props.showRegions ? 'show-ul-menu' : 'show-ul-menu hide-ul-menu'}>
               {/* li(v-for="item in elements", @click="select($index)") {{ item.title }} */}
               {props.regions.map(el => (
                 <li> {/* li(v-for="item in elements", @click="select($index)") {{ item.title }} */}
@@ -243,12 +293,20 @@ const ItemNew = props => {
             />
             <div className='ul-width currency'>
               <Button
-                className='button desktop-button'
-                title='Currency'
-                onClick={toggleCurrencies}
-              />{/* :class="[hidden ? 'inactive-tab' : 'active-tab']" */}
+                className={props.showCurrencies ? 'button desktop-button active-tab' : 'button desktop-button inactive-tab'}
+                title={props.currency}
+                onClick={() => props.dispatch(toggleCurrencies())}
+              />
               <div className='ul-width'>
-                <ul className='show-ul-menu'> {/* (:class="{'hide-ul-menu': hidden}") */}
+                <ul className={props.showCurrencies ? 'show-ul-menu' : 'hide-ul-menu'}>
+                  {props.currencies.map((el, id) => (
+                    <li
+                      key={id}
+                      onClick={() => props.dispatch(setCurrency(id))}
+                    >
+                      {el}
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>

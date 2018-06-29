@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 // components
 import Button from '../Button/Button'
@@ -36,14 +37,12 @@ const Header = () => {
           Contul meu
         </li>
         <li>
-          // TODO: Go to '/item/add' page on button click
-          // input
-          // onclick="location.href='/newad'"
-          // />
-          <Button
-            className='post-ad-button'
-            title='Postează anunț'
-          />
+          <Link to={{ pathname: '/item/add' }}>
+            <Button
+              className='post-ad-button'
+              title='Postează anunț'
+            />
+          </Link>
         </li>
       </ul>
     </header>

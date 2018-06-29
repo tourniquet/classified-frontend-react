@@ -18,6 +18,80 @@ const reducer = (state = initialState, action) => {
         search: action.search
       })
     // reducers for new item
+    case 'TOGGLE_CATEGORIES_LIST':
+      return Object.assign({}, state, {
+        item: {
+          categories: state.item.categories,
+          category: state.item.category,
+          showCategories: !state.item.showCategories,
+          subcategories: state.item.subcategories,
+          subcategory: state.item.subcategory,
+          showSubcategories: state.item.showSubcategories,
+          regions: state.item.regions,
+          region: state.item.region,
+          showRegions: state.item.showRegions,
+          title: state.item.title,
+          description: state.item.description,
+          images: state.item.images,
+          price: state.item.price,
+          currencies: state.item.currencies,
+          currency: state.item.currency,
+          showCurrencies: state.item.showCurrencies
+        }
+      })
+    case 'SET_CATEGORY':
+      return Object.assign({}, state, {
+        item: {
+          categories: state.item.categories,
+          category: state.item.categories[action.id],
+          showCategories: false,
+          subcategories: state.item.subcategories,
+          subcategory: state.item.subcategory,
+          showSubcategories: false,
+          regions: state.item.regions,
+          region: state.item.region,
+          showRegions: false,
+          title: state.item.title,
+          description: state.item.description,
+          images: state.item.images,
+          price: state.item.price,
+          currencies: state.item.currencies,
+          currency: state.item.currency,
+          showCurrencies: false
+        }
+      })
+    case 'TOGGLE_SUBCATEGORIES_LIST':
+      return Object.assign({}, state, {
+        item: {
+          categories: state.item.categories,
+          showCategories: state.item.showCategories,
+          subcategories: state.item.subcategories,
+          showSubcategories: !state.item.showSubcategories,
+          regions: state.item.regions,
+          showRegions: state.item.showRegions,
+          title: state.item.title,
+          description: state.item.description,
+          images: state.item.images,
+          price: state.item.price,
+          currencies: state.item.currencies
+        }
+      })
+    case 'TOGGLE_REGIONS_LIST':
+      return Object.assign({}, state, {
+        item: {
+          categories: state.item.categories,
+          showCategories: state.item.showCategories,
+          subcategories: state.item.subcategories,
+          showSubcategories: state.item.showSubcategories,
+          regions: state.item.regions,
+          showRegions: !state.item.showRegions,
+          title: state.item.title,
+          description: state.item.description,
+          images: state.item.images,
+          price: state.item.price,
+          currencies: state.item.currencies
+        }
+      })
     case 'SET_ITEM_TITLE':
       return Object.assign({}, state, {
         item: {
@@ -45,13 +119,59 @@ const reducer = (state = initialState, action) => {
           price: action.price
         }
       })
+    case 'TOGGLE_CURRENCIES':
+      return Object.assign({}, state, {
+        item: {
+          categories: state.item.categories,
+          showCategories: state.item.showCategories,
+          subcategories: state.item.subcategories,
+          showSubcategories: state.item.showSubcategories,
+          regions: state.item.regions,
+          showRegions: state.item.showRegions,
+          title: state.item.title,
+          description: state.item.description,
+          images: state.item.images,
+          price: state.item.price,
+          currencies: state.item.currencies,
+          showCurrencies: !state.item.showCurrencies
+        }
+      })
+    case 'SET_CURRENCY':
+      return Object.assign({}, state, {
+        item: {
+          categories: state.item.categories,
+          category: state.item.category,
+          showCategories: false,
+          subcategories: state.item.subcategories,
+          subcategory: state.item.subcategory,
+          showSubcategories: false,
+          regions: state.item.regions,
+          region: state.item.region,
+          showRegions: false,
+          title: state.item.title,
+          description: state.item.description,
+          images: state.item.images,
+          price: state.item.price,
+          currencies: state.item.currencies,
+          currency: state.item.currencies[action.id],
+          showCurrencies: false
+        }
+      })
     case 'UPLOAD_IMAGE':
       return Object.assign({}, state, {
         item: {
+          categories: state.item.categories,
+          showCategories: state.item.showCategories,
+          subcategories: state.item.subcategories,
+          showSubcategories: state.item.showSubcategories,
+          regions: state.item.regions,
+          showRegions: state.item.showRegions,
           title: state.item.title,
           description: state.item.description,
           images: [action.image, ...state.item.images],
-          price: state.item.price
+          price: state.item.price,
+          currencies: state.item.currencies,
+          showCurrencies: state.item.showCurrencies
         }
       })
     default:
