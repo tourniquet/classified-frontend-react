@@ -30,7 +30,9 @@ const mapStateToProps = state => {
     currency: state.item.currency,
     currencies: state.item.currencies,
     showCurrencies: state.item.showCurrencies,
-    images: state.item.images
+    images: state.item.images,
+    phoneNumber: state.item.phoneNumber,
+    userName: state.item.userName
   }
 }
 
@@ -67,6 +69,13 @@ const ItemNew = props => {
     }
   }
 
+  const setRegion = id => {
+    return {
+      type: 'SET_REGION',
+      id
+    }
+  }
+
   const setItemTitle = el => {
     return {
       type: 'SET_ITEM_TITLE',
@@ -96,6 +105,20 @@ const ItemNew = props => {
     return {
       type: 'UPLOAD_IMAGE',
       image: imageURL
+    }
+  }
+
+  const removeImage = id => {
+    return {
+      type: 'REMOVE_IMAGE',
+      id
+    }
+  }
+
+  const setPhoneNumber = el => {
+    return {
+      type: 'SET_PHONE_NUMBER',
+      phoneNumber: el.target.value
     }
   }
 
@@ -168,8 +191,7 @@ const ItemNew = props => {
           />
           <Button
             className={props.showCategories ? 'button desktop-button active-tab' : 'button desktop-button inactive-tab'}
-            title='Subcategory name'
-            // onBlur={() => props.dispatch(toggleSubcategoriesList())}
+            title={props.subcategory}
             onClick={() => props.dispatch(toggleSubcategoriesList())}
           />
           <div className='ul-width'>
@@ -177,7 +199,7 @@ const ItemNew = props => {
               {props.subcategories.map((el, id) => (
                 <li
                   key={id}
-                  onClick={() => setSubcategory(id)}
+                  onClick={() => props.dispatch(setSubcategory(id))}
                 >
                   {el}
                 </li>
@@ -191,21 +213,21 @@ const ItemNew = props => {
           />
           <Button
             className={props.showCategories ? 'button desktop-button active-tab' : 'button desktop-button inactive-tab'}
-            title='Region'
-            onBlur={() => props.dispatch(toggleRegionsList())}
+            title={props.region}
             onClick={() => props.dispatch(toggleRegionsList())}
           />
           <div className='ul-width'>
             <ul className={props.showRegions ? 'show-ul-menu' : 'show-ul-menu hide-ul-menu'}>
-              {/* li(v-for="item in elements", @click="select($index)") {{ item.title }} */}
-              {props.regions.map(el => (
-                <li> {/* li(v-for="item in elements", @click="select($index)") {{ item.title }} */}
+              {props.regions.map((el, id) => (
+                <li
+                  key={id}
+                  onClick={() => props.dispatch(setRegion(id))}
+                >
                   {el}
                 </li>
               ))}
             </ul>
           </div>
-          {/* input(type="hidden", name="region", value="{{region.id}}") */}
         </div>
 
         <div className='right-side'>
@@ -239,9 +261,14 @@ const ItemNew = props => {
             title='Adaugă fotografii'
           />
           <div className='images'>
-            {props.images.map(el => (
+            {props.images.map((el, id) => (
               <div className='image-block'>
-                <img className='remove-image' src='/img/remove.png' style={{ display: el.length ? 'inline-block' : 'none' }} />
+                <img
+                  className='remove-image'
+                  src='/img/remove.png'
+                  style={{ display: el.length ? 'inline-block' : 'none' }}
+                  onClick={() => props.dispatch(removeImage(id))}
+                />
                 {/* TODO: Render this element only if images array length === 0 && < 6 */}
                 {/* TODO: Change this label with Label component */}
                 <label className='label-for-images' style={{ backgroundImage: `url(${el})` }}>
@@ -267,6 +294,8 @@ const ItemNew = props => {
               name='phone'
               type='text'
               placeholder='Phone number'
+              value={props.phone}
+              onChange={el => props.dispatch(setPhoneNumber(el))}
             />
             <Input
               className='input contact-name'

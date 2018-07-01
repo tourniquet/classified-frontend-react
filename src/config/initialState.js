@@ -16,7 +16,9 @@ const initialState = {
     currencies: ['$', '£'],
     currency: null,
     showCurrencies: false,
-    images: ['']
+    images: [''],
+    phoneNumber: '',
+    userName: ''
   },
   search: ''
 }
