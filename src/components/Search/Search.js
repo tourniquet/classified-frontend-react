@@ -7,19 +7,15 @@ import Input from '../Input/Input'
 // styles
 import './Search.scss'
 
-const mapStateToProps = state => {
-  return {
-    search: state.search
-  }
-}
+const mapStateToProps = state => ({
+  search: state.search
+})
 
 const Search = props => {
-  const setSearchText = el => {
-    return {
-      type: 'SET_SEARCH_TEXT',
-      text: el.target.value
-    }
-  }
+  const setSearchText = el => ({
+    type: 'SET_SEARCH_TEXT',
+    text: el.target.value
+  })
 
   return (
     <Input

@@ -8,13 +8,11 @@ import Footer from './Footer/Footer'
 // styles
 import './item.scss'
 
-const mapStateToProps = state => {
-  return {
-    title: state.item.title,
-    description: state.item.description,
-    price: state.item.price
-  }
-}
+const mapStateToProps = state => ({
+  title: state.item.title,
+  description: state.item.description,
+  price: state.item.price
+})
 
 class Item extends Component {
   constructor (props) {

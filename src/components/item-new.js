@@ -13,89 +13,69 @@ import Textarea from './Textarea/Textarea'
 // styles
 import './item-new.scss'
 
-const mapStateToProps = state => {
-  return {
-    categories: state.item.categories,
-    category: state.item.category,
-    showCategories: state.item.showCategories,
-    subcategories: state.item.subcategories,
-    subcategory: state.item.subcategory,
-    showSubcategories: state.item.showSubcategories,
-    regions: state.item.regions,
-    region: state.item.region,
-    showRegions: state.item.showRegions,
-    title: state.item.title,
-    description: state.item.description,
-    price: state.item.price,
-    currency: state.item.currency,
-    currencies: state.item.currencies,
-    showCurrencies: state.item.showCurrencies,
-    images: state.item.images,
-    phoneNumber: state.item.phoneNumber,
-    userName: state.item.userName
-  }
-}
+const mapStateToProps = state => ({
+  categories: state.item.categories,
+  category: state.item.category,
+  showCategories: state.item.showCategories,
+  subcategories: state.item.subcategories,
+  subcategory: state.item.subcategory,
+  showSubcategories: state.item.showSubcategories,
+  regions: state.item.regions,
+  region: state.item.region,
+  showRegions: state.item.showRegions,
+  title: state.item.title,
+  description: state.item.description,
+  price: state.item.price,
+  currency: state.item.currency,
+  currencies: state.item.currencies,
+  showCurrencies: state.item.showCurrencies,
+  images: state.item.images,
+  phoneNumber: state.item.phoneNumber,
+  userName: state.item.userName
+})
 
 const ItemNew = props => {
-  const toggleCategoriesList = () => {
-    return {
-      type: 'TOGGLE_CATEGORIES_LIST'
-    }
-  }
+  const toggleCategoriesList = () => ({
+    type: 'TOGGLE_CATEGORIES_LIST'
+  })
 
-  const setCategory = id => {
-    return {
-      type: 'SET_CATEGORY',
-      id
-    }
-  }
+  const setCategory = id => ({
+    type: 'SET_CATEGORY',
+    id
+  })
 
-  const toggleSubcategoriesList = () => {
-    return {
-      type: 'TOGGLE_SUBCATEGORIES_LIST'
-    }
-  }
+  const toggleSubcategoriesList = () => ({
+    type: 'TOGGLE_SUBCATEGORIES_LIST'
+  })
 
-  const setSubcategory = id => {
-    return {
-      type: 'SET_SUBCATEGORY',
-      id
-    }
-  }
+  const setSubcategory = id => ({
+    type: 'SET_SUBCATEGORY',
+    id
+  })
 
-  const toggleRegionsList = () => {
-    return {
-      type: 'TOGGLE_REGIONS_LIST'
-    }
-  }
+  const toggleRegionsList = () => ({
+    type: 'TOGGLE_REGIONS_LIST'
+  })
 
-  const setRegion = id => {
-    return {
-      type: 'SET_REGION',
-      id
-    }
-  }
+  const setRegion = id => ({
+    type: 'SET_REGION',
+    id
+  })
 
-  const setItemTitle = el => {
-    return {
-      type: 'SET_ITEM_TITLE',
-      title: el.target.value
-    }
-  }
+  const setItemTitle = el => ({
+    type: 'SET_ITEM_TITLE',
+    title: el.target.value
+  })
 
-  const setItemDescription = el => {
-    return {
-      type: 'SET_ITEM_DESCRIPTION',
-      description: el.target.value
-    }
-  }
+  const setItemDescription = el => ({
+    type: 'SET_ITEM_DESCRIPTION',
+    description: el.target.value
+  })
 
-  const setItemPrice = el => {
-    return {
-      type: 'SET_ITEM_PRICE',
-      price: el.target.value
-    }
-  }
+  const setItemPrice = el => ({
+    type: 'SET_ITEM_PRICE',
+    price: el.target.value
+  })
 
   const handleImages = el => {
     const image = el.target.files[0]
@@ -108,32 +88,24 @@ const ItemNew = props => {
     }
   }
 
-  const removeImage = id => {
-    return {
-      type: 'REMOVE_IMAGE',
-      id
-    }
-  }
+  const removeImage = id => ({
+    type: 'REMOVE_IMAGE',
+    id
+  })
 
-  const setPhoneNumber = el => {
-    return {
-      type: 'SET_PHONE_NUMBER',
-      phoneNumber: el.target.value
-    }
-  }
+  const setPhoneNumber = el => ({
+    type: 'SET_PHONE_NUMBER',
+    phoneNumber: el.target.value
+  })
 
-  const toggleCurrencies = () => {
-    return {
-      type: 'TOGGLE_CURRENCIES'
-    }
-  }
+  const toggleCurrencies = () => ({
+    type: 'TOGGLE_CURRENCIES'
+  })
 
-  const setCurrency = id => {
-    return {
-      type: 'SET_CURRENCY',
-      id
-    }
-  }
+  const setCurrency = id => ({
+    type: 'SET_CURRENCY',
+    id
+  })
 
   const handleSubmit = event => {
     const url = '/api/item-posted.php'
@@ -171,18 +143,16 @@ const ItemNew = props => {
             title={props.category}
             onClick={() => props.dispatch(toggleCategoriesList())}
           />
-          <div className='ul-width'>
-            <ul className={props.showCategories ? 'show-ul-menu' : 'hide-ul-menu'}>
-              {props.categories.map((el, id) => (
-                <li
-                  key={id}
-                  onClick={() => props.dispatch(setCategory(id))}
-                >
-                  {el}
-                </li>
-              ))}
-            </ul>
-          </div>
+          <ul className={props.showCategories ? 'show-ul-menu' : 'hide-ul-menu'}>
+            {props.categories.map((el, id) => (
+              <li
+                key={id}
+                onClick={() => props.dispatch(setCategory(id))}
+              >
+                {el}
+              </li>
+            ))}
+          </ul>
 
           <Label
             className='label mandatory'
@@ -190,44 +160,40 @@ const ItemNew = props => {
             title='Subcategory'
           />
           <Button
-            className={props.showCategories ? 'button desktop-button active-tab' : 'button desktop-button inactive-tab'}
+            className={props.showSubcategories ? 'button desktop-button active-tab' : 'button desktop-button inactive-tab'}
             title={props.subcategory}
             onClick={() => props.dispatch(toggleSubcategoriesList())}
           />
-          <div className='ul-width'>
-            <ul className={props.showSubcategories ? 'show-ul-menu' : 'show-ul-menu hide-ul-menu'}>
-              {props.subcategories.map((el, id) => (
-                <li
-                  key={id}
-                  onClick={() => props.dispatch(setSubcategory(id))}
-                >
-                  {el}
-                </li>
-              ))}
-            </ul>
-          </div>
+          <ul className={props.showSubcategories ? 'show-ul-menu' : 'show-ul-menu hide-ul-menu'}>
+            {props.subcategories.map((el, id) => (
+              <li
+                key={id}
+                onClick={() => props.dispatch(setSubcategory(id))}
+              >
+                {el}
+              </li>
+            ))}
+          </ul>
 
           <Label
             htmlFor='region'
             title='Region'
           />
           <Button
-            className={props.showCategories ? 'button desktop-button active-tab' : 'button desktop-button inactive-tab'}
+            className={props.showRegions ? 'button desktop-button active-tab' : 'button desktop-button inactive-tab'}
             title={props.region}
             onClick={() => props.dispatch(toggleRegionsList())}
           />
-          <div className='ul-width'>
-            <ul className={props.showRegions ? 'show-ul-menu' : 'show-ul-menu hide-ul-menu'}>
-              {props.regions.map((el, id) => (
-                <li
-                  key={id}
-                  onClick={() => props.dispatch(setRegion(id))}
-                >
-                  {el}
-                </li>
-              ))}
-            </ul>
-          </div>
+          <ul className={props.showRegions ? 'show-ul-menu' : 'show-ul-menu hide-ul-menu'}>
+            {props.regions.map((el, id) => (
+              <li
+                key={id}
+                onClick={() => props.dispatch(setRegion(id))}
+              >
+                {el}
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div className='right-side'>
@@ -320,24 +286,22 @@ const ItemNew = props => {
               placeholder='Price'
               onChange={el => props.dispatch(setItemPrice(el))}
             />
-            <div className='ul-width currency'>
+            <div className='currency'>
               <Button
                 className={props.showCurrencies ? 'button desktop-button active-tab' : 'button desktop-button inactive-tab'}
                 title={props.currency}
                 onClick={() => props.dispatch(toggleCurrencies())}
               />
-              <div className='ul-width'>
-                <ul className={props.showCurrencies ? 'show-ul-menu' : 'hide-ul-menu'}>
-                  {props.currencies.map((el, id) => (
-                    <li
-                      key={id}
-                      onClick={() => props.dispatch(setCurrency(id))}
-                    >
-                      {el}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <ul className={props.showCurrencies ? 'currencies show-ul-menu' : 'hide-ul-menu'}>
+                {props.currencies.map((el, id) => (
+                  <li
+                    key={id}
+                    onClick={() => props.dispatch(setCurrency(id))}
+                  >
+                    {el}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
 
