@@ -14,24 +14,24 @@ import Textarea from './Textarea/Textarea'
 import './item-new.scss'
 
 const mapStateToProps = state => ({
-  categories: state.item.categories,
-  category: state.item.category,
-  showCategories: state.item.showCategories,
-  subcategories: state.item.subcategories,
-  subcategory: state.item.subcategory,
-  showSubcategories: state.item.showSubcategories,
-  regions: state.item.regions,
-  region: state.item.region,
-  showRegions: state.item.showRegions,
-  title: state.item.title,
-  description: state.item.description,
-  price: state.item.price,
-  currency: state.item.currency,
-  currencies: state.item.currencies,
-  showCurrencies: state.item.showCurrencies,
-  images: state.item.images,
-  phoneNumber: state.item.phoneNumber,
-  userName: state.item.userName
+  categories: state.newItemReducer.categories,
+  category: state.newItemReducer.category,
+  showCategories: state.newItemReducer.showCategories,
+  subcategories: state.newItemReducer.subcategories,
+  subcategory: state.newItemReducer.subcategory,
+  showSubcategories: state.newItemReducer.showSubcategories,
+  regions: state.newItemReducer.regions,
+  region: state.newItemReducer.region,
+  showRegions: state.newItemReducer.showRegions,
+  title: state.newItemReducer.title,
+  description: state.newItemReducer.description,
+  price: state.newItemReducer.price,
+  currency: state.newItemReducer.currency,
+  currencies: state.newItemReducer.currencies,
+  showCurrencies: state.newItemReducer.showCurrencies,
+  images: state.newItemReducer.images,
+  phoneNumber: state.newItemReducer.phoneNumber,
+  userName: state.newItemReducer.userName
 })
 
 const ItemNew = props => {
@@ -98,6 +98,11 @@ const ItemNew = props => {
     phoneNumber: el.target.value
   })
 
+  const setUserName = el => ({
+    type: 'SET_USER_NAME',
+    userName: el.target.value
+  })
+
   const toggleCurrencies = () => ({
     type: 'TOGGLE_CURRENCIES'
   })
@@ -110,8 +115,10 @@ const ItemNew = props => {
   const handleSubmit = event => {
     const url = '/api/item-posted.php'
     const item = {
+      url: new Date().getTime().toString().slice(5),
       title: props.title,
       description: props.description,
+      name: props.userName,
       price: props.price
     }
 
@@ -119,7 +126,8 @@ const ItemNew = props => {
       method: 'POST',
       body: JSON.stringify(item)
     })
-      .then(res => console.log('Hi there!'))
+      // .then(res => console.log(res))
+      .then(() => { window.location = `/item/${item.url}` })
       .catch(err => console.error(err))
 
     event.preventDefault()
@@ -216,6 +224,7 @@ const ItemNew = props => {
             title='Description'
           />
           <Textarea
+            className='description'
             name='description'
             placeholder='Description'
             value={props.description}
@@ -268,6 +277,7 @@ const ItemNew = props => {
               type='text'
               name='contact-name'
               placeholder='Contact name'
+              onChange={el => props.dispatch(setUserName(el))}
             />
           </div>
 

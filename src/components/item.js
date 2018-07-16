@@ -11,7 +11,8 @@ import './item.scss'
 const mapStateToProps = state => ({
   title: state.item.title,
   description: state.item.description,
-  price: state.item.price
+  price: state.item.price,
+  pub_date: state.item.pub_date
 })
 
 class Item extends Component {
@@ -22,8 +23,8 @@ class Item extends Component {
   }
 
   fetchData () {
-    const id = this.props.match.params.id
-    const url = `/api/item.php?id=${id}`
+    const getUrl = this.props.match.params.url
+    const url = `/api/item.php?url=${getUrl}`
 
     window.fetch(url)
       .then(res => res.json())
@@ -44,8 +45,16 @@ class Item extends Component {
     const {
       title,
       description,
-      price
+      price,
+      pub_date
     } = this.props
+    const dateOptions = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric'
+    }
 
     return (
       <div>
@@ -70,7 +79,9 @@ class Item extends Component {
           <hr className='under-ad-info' />
 
           <div className='posting-date-and-views'>
-            <span className='date'>12 iulie 2016</span>
+            <span className='date'>
+              {new Date(pub_date).toLocaleDateString('en-GB', dateOptions)}
+            </span>
             <span className='views'>Vizualizări: views</span>
           </div>
 
@@ -96,16 +107,16 @@ class Item extends Component {
 
           <div className='container'>
             <div className='price'>
-              <span className='label'>Preţ:&nbsp;</span>
+              <span className='label'>Price:&nbsp;</span>
               <span>{price}</span>
             </div>
             <br />
             <div className='region'>
-              <span className='label'>Regiune:&nbsp;</span>
+              <span className='label'>Region:&nbsp;</span>
               <span>Orhei</span>
             </div>
             <div className='contacts'>
-              <span className='label'>Contacte:&nbsp;</span>
+              <span className='label'>Posted by:&nbsp;</span>
               <span>079357745, Eugen</span>
             </div>
           </div>

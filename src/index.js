@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { createStore } from 'redux'
+import { combineReducers, createStore } from 'redux'
 import { Provider } from 'react-redux'
 
 // reset standard browser styles
@@ -13,10 +13,16 @@ import ItemNew from './components/item-new'
 import Item from './components/item'
 
 // reducer
-import reducer from './config/reducer'
+import reducer from './store/reducer'
+import newItemReducer from './store/newItemReducer'
+
+const rootReducer = combineReducers({
+  reducer,
+  newItemReducer
+})
 
 const store = createStore(
-  reducer,
+  rootReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
@@ -26,7 +32,7 @@ const App = () => (
       <Switch>
         <Route path='/' exact component={IndexPage} />
         <Route path='/item/add' component={ItemNew} />
-        <Route path='/item/:id(\d+)' component={Item} />
+        <Route path='/item/:url(\d+)' component={Item} />
       </Switch>
     </div>
   </Provider>

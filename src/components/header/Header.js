@@ -40,7 +40,7 @@ const Header = () => {
           <Link to={{ pathname: '/item/add' }}>
             <Button
               className='post-ad-button'
-              title='Postează anunț'
+              title='Post an ad'
             />
           </Link>
         </li>

@@ -1,11 +1,11 @@
 {
-  "name": "react-test",
+  "name": "classified-frontend-react",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "dev": "webpack-dev-server --content-base=public/",
+    "dev": "webpack-dev-server --content-base=build/",
     "build": "webpack --mode=production"
   },
   "jest": {

@@ -35,6 +35,13 @@ class IndexPage extends Component {
 
   render () {
     const items = this.props.items
+    const dateOptions = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric'
+    }
 
     return (
       <div>
@@ -51,13 +58,15 @@ class IndexPage extends Component {
               <span className='ad-title'>
                 <Link
                   key={el.id}
-                  to={{ pathname: `/item/${el.id}` }}
+                  to={{ pathname: `/item/${el.url}` }}
                 >
                   {el.title}
                 </Link>
               </span>
-              <span className='ad-category'>ss</span>
-              <span className='ad-date'>ad.date</span>
+              <span className='ad-category'>category</span>
+              <span className='ad-date'>
+                {new Date(el.pub_date).toLocaleDateString('en-GB', dateOptions)}
+              </span>
             </li>
           ))}
         </ul>
