@@ -268,6 +268,8 @@ const ItemNew = props => {
               className='input phone'
               name='phone'
               type='text'
+              inputmode='numeric'
+              pattern='[0-9]*'
               placeholder='Phone number'
               value={props.phone}
               onChange={el => props.dispatch(setPhoneNumber(el))}
@@ -289,9 +291,9 @@ const ItemNew = props => {
           <div className='price-block'>
             <Input
               className='input price'
-              // https://css-tricks.com/finger-friendly-numerical-inputs-with-inputmode/
-              inputmode='numeric'
               type='text'
+              inputmode='numeric'
+              pattern='[0-9]*'
               name='price'
               placeholder='Price'
               onChange={el => props.dispatch(setItemPrice(el))}

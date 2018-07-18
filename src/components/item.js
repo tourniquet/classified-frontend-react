@@ -9,10 +9,10 @@ import Footer from './Footer/Footer'
 import './item.scss'
 
 const mapStateToProps = state => ({
-  title: state.item.title,
-  description: state.item.description,
-  price: state.item.price,
-  pub_date: state.item.pub_date
+  title: state.itemReducer.title,
+  description: state.itemReducer.description,
+  price: state.itemReducer.price,
+  pub_date: state.itemReducer.pub_date
 })
 
 class Item extends Component {

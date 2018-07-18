@@ -7,7 +7,7 @@ import Header from './Header/Header'
 import Footer from './Footer/Footer'
 
 const mapStateToProps = state => ({
-  items: state.items
+  items: state.itemsReducer.items
 })
 
 class IndexPage extends Component {

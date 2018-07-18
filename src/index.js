@@ -13,11 +13,13 @@ import ItemNew from './components/item-new'
 import Item from './components/item'
 
 // reducer
-import reducer from './store/reducer'
+import itemReducer from './store/itemReducer'
+import itemsReducer from './store/itemsReducer'
 import newItemReducer from './store/newItemReducer'
 
 const rootReducer = combineReducers({
-  reducer,
+  itemReducer,
+  itemsReducer,
   newItemReducer
 })
 
