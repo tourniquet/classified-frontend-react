@@ -13,6 +13,7 @@ const Input = props => {
       type={props.type || 'text'}
       accept={props.accept || ''}
       value={props.value}
+      aria-label={props['aria-label'] || ''}
       onChange={props.onChange}
     />
   )

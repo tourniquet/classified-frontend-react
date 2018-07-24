@@ -65,7 +65,7 @@ class IndexPage extends Component {
               </span>
               <span className='ad-category'>category</span>
               <span className='ad-date'>
-                {new Date(el.pub_date).toLocaleDateString('en-GB', dateOptions)}
+                {new Date(el.published).toLocaleDateString('en-GB', dateOptions)}
               </span>
             </li>
           ))}

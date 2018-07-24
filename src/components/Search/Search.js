@@ -22,6 +22,8 @@ const Search = props => {
       className='search'
       placeholder='Im looking for...'
       value={props.search}
+      type='search'
+      aria-label='Search through site content'
       onChange={el => props.dispatch(setSearchText(el))}
     />
   )

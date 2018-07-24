@@ -2,6 +2,8 @@ const path = require('path')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const webpack = require('webpack')
 
+// const settings = require('./config')
+
 module.exports = {
   mode: 'development',
   entry: './src/index.js',

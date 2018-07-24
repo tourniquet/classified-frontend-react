@@ -9,7 +9,7 @@ const initialState = {
   images: [''],
   phoneNumber: '',
   userName: null,
-  pub_date: null
+  published: null
 }
 
 const itemReducer = (state = initialState, action) => {
