@@ -16,13 +16,7 @@ const mapStateToProps = state => ({
 })
 
 class Item extends Component {
-  constructor (props) {
-    super(props)
-
-    this.fetchData = this.fetchData.bind(this)
-  }
-
-  fetchData () {
+  fetchData = () => {
     const getUrl = this.props.match.params.url
     const url = `/api/item.php?url=${getUrl}`
 

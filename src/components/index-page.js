@@ -11,13 +11,7 @@ const mapStateToProps = state => ({
 })
 
 class IndexPage extends Component {
-  constructor (props) {
-    super(props)
-
-    this.fetchData = this.fetchData.bind(this)
-  }
-
-  fetchData () {
+  fetchData = () => {
     window.fetch('/api/')
       .then(res => res.json())
       .then(data => {

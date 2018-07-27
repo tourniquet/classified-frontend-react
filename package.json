@@ -14,10 +14,14 @@
       "^.+\\.(css|less|scss)$": "babel-jest"
     }
   },
+  "standard": {
+    "parser": "babel-eslint"
+  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.6",
     "babel-jest": "^23.0.1",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
