@@ -4,12 +4,16 @@ import React from 'react'
 import './Label.scss'
 
 const Label = props => {
+  const { className, htmlFor, title, style, children } = props
+
   return (
     <label
-      className={props.className || 'label'}
-      htmlFor={props.htmlFor}
+      className={className || 'label'}
+      htmlFor={htmlFor}
+      style={style}
     >
-      {props.title}
+      {title}
+      {children}
     </label>
   )
 }

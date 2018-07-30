@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
   title: state.itemReducer.title,
   description: state.itemReducer.description,
   price: state.itemReducer.price,
-  pub_date: state.itemReducer.pub_date
+  published: state.itemReducer.published
 })
 
 class Item extends Component {
@@ -20,7 +20,8 @@ class Item extends Component {
     const getUrl = this.props.match.params.url
     const url = `/api/item.php?url=${getUrl}`
 
-    window.fetch(url)
+    window
+      .fetch(url)
       .then(res => res.json())
       .then(data => {
         this.props.dispatch({
@@ -40,7 +41,7 @@ class Item extends Component {
       title,
       description,
       price,
-      pub_date
+      published
     } = this.props
     const dateOptions = {
       year: 'numeric',
@@ -74,7 +75,7 @@ class Item extends Component {
 
           <div className='posting-date-and-views'>
             <span className='date'>
-              {new Date(pub_date).toLocaleDateString('en-GB', dateOptions)}
+              {new Date(published).toLocaleDateString('en-GB', dateOptions)}
             </span>
             <span className='views'>Vizualizări: views</span>
           </div>
@@ -128,12 +129,3 @@ class Item extends Component {
 }
 
 export default connect(mapStateToProps)(Item)
-
-// description: "Labour"
-// enabled: "1"
-// id: "4"
-// image: "DSCF1004.JPG"
-// name: "ionprodan"
-// price: "25"
-// pub_date: "2018-03-16 21:29:11"
-// title: "Macasine de primavara"

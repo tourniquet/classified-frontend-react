@@ -122,11 +122,11 @@ const ItemNew = props => {
       price: props.price
     }
 
-    window.fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(item)
-    })
-      // .then(res => console.log(res))
+    window
+      .fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(item)
+      })
       .then(() => { window.location = `/item/${item.url}` })
       .catch(err => console.error(err))
 
@@ -245,8 +245,10 @@ const ItemNew = props => {
                   onClick={() => props.dispatch(removeImage(id))}
                 />
                 {/* TODO: Render this element only if images array length === 0 && < 6 */}
-                {/* TODO: Change this label with Label component */}
-                <label className='label-for-images' style={{ backgroundImage: `url(${el})` }}>
+                <Label
+                  className='label-for-images'
+                  style={{ backgroundImage: `url(${el})` }}
+                >
                   <span src='/img/remove.png' style={{ display: !el.length ? 'inline-block' : 'none' }}>+</span>
                   <Input
                     className='input-file'
@@ -254,7 +256,7 @@ const ItemNew = props => {
                     type='file'
                     onChange={el => props.dispatch(handleImages(el))}
                   />
-                </label>
+                </Label>
               </div>
             ))}
           </div>

@@ -87,7 +87,7 @@ const newItemReducer = (state = initialState, action) => {
         showCategories: false,
         showSubcategories: false,
         showRegions: false,
-        images: [...state.item.images.splice(state.item.images.length - 1, 0, action.image), ...state.item.images],
+        images: [...state.images.splice(state.images.length - 1, 0, action.image), ...state.images],
         showCurrencies: false
       })
     case 'REMOVE_IMAGE':
@@ -95,7 +95,7 @@ const newItemReducer = (state = initialState, action) => {
         showCategories: false,
         showSubcategories: false,
         showRegions: false,
-        images: state.images.filter(el => el !== state.item.images[action.id]),
+        images: state.images.filter(el => el !== state.images[action.id]),
         showCurrencies: false
       })
     case 'SET_PHONE_NUMBER':
