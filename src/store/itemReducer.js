@@ -16,17 +16,17 @@ const itemReducer = (state = initialState, action) => {
   switch (action.type) {
     // data for item page
     case 'FETCH_ITEM_DATA':
-      const item = action.data
+      const { title, description, price, published } = action.result
 
       return Object.assign({}, state, {
-        title: item.title,
-        description: item.description,
+        title,
+        description,
         // images: state.item.images,
         // phoneNumber: state.item.phoneNumber,
         // userName: item.name,
-        price: item.price,
+        price,
         // currency: state.item.currency,
-        pub_date: item.pub_date
+        published
       })
     default:
       return state

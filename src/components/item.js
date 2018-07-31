@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+// API host config
+import { apiHost } from '../config'
+
 // components
 import Header from './Header/Header'
 import Footer from './Footer/Footer'
@@ -18,15 +21,15 @@ const mapStateToProps = state => ({
 class Item extends Component {
   fetchData = () => {
     const getUrl = this.props.match.params.url
-    const url = `/api/item.php?url=${getUrl}`
+    const url = `${apiHost}/item.php?url=${getUrl}`
 
     window
       .fetch(url)
-      .then(res => res.json())
-      .then(data => {
+      .then(response => response.json())
+      .then(result => {
         this.props.dispatch({
           type: 'FETCH_ITEM_DATA',
-          data
+          result
         })
       })
       .catch(err => console.error(err))

@@ -7,7 +7,7 @@ const itemsReducer = (state = initialState, action) => {
     // data for index page
     case 'FETCH_DATA':
       return Object.assign({}, state, {
-        items: action.data
+        items: action.result
       })
     default:
       return state

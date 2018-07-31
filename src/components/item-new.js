@@ -1,6 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+// API host config
+import { apiHost } from '../config'
+
 // components
 import Button from './Button/Button'
 import Footer from './Footer/Footer'
@@ -113,7 +116,7 @@ const ItemNew = props => {
   })
 
   const handleSubmit = event => {
-    const url = '/api/item-posted.php'
+    const url = `${apiHost}/item-posted.php`
     const item = {
       url: new Date().getTime().toString().slice(5),
       title: props.title,

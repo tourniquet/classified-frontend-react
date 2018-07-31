@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+// API host config
+import { apiHost } from '../config'
+
 // components
 import Header from './Header/Header'
 import Footer from './Footer/Footer'
@@ -12,15 +15,16 @@ const mapStateToProps = state => ({
 
 class IndexPage extends Component {
   fetchData = () => {
-    window.fetch('/api/')
-      .then(res => res.json())
-      .then(data => {
+    window
+      .fetch(`${apiHost}`)
+      .then(response => response.json())
+      .then(result => {
         this.props.dispatch({
           type: 'FETCH_DATA',
-          data
+          result
         })
       })
-      .catch(err => console.log(err))
+      .catch(err => console.error(err))
   }
 
   componentDidMount () {
