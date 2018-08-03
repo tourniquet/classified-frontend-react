@@ -99,6 +99,57 @@ table {
   }
 }
 
+.latest-ads {
+  .latest-ads-item {
+    span.star {
+      padding-left: 15px;
+      position: relative;
+      vertical-align: middle;
+    }
+
+    img.thumbnail {
+      height: 16px;
+      padding-left: 15px;
+      vertical-align: middle;
+      width: 16px;
+    }
+
+    .ad-title {
+      color: #000;
+      display: inline-block;
+      padding-left: 15px;
+      text-decoration: none;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .latest-ads {
+    .latest-ads-item {
+      background: #FFF;
+      box-sizing: border-box;
+      border: 0;
+      border-bottom: 1px solid #F5F5F5;
+      clear: both;
+      display: list-item;
+      height: 33px;
+      line-height: 32px;
+      margin: 0;
+      position: relative;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 100%;
+      transition: .5s background;
+
+      .ad-category,
+      .ad-date {
+        display: none;
+      }
+    }
+  }
+}
+
 @media (min-width: 1200px) {
   .latest-ads {
     margin: 0 auto;

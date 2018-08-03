@@ -8,7 +8,7 @@ const initialState = {
   currency: null,
   images: [''],
   phoneNumber: '',
-  userName: null,
+  name: null,
   published: null
 }
 
@@ -16,14 +16,14 @@ const itemReducer = (state = initialState, action) => {
   switch (action.type) {
     // data for item page
     case 'FETCH_ITEM_DATA':
-      const { title, description, price, published } = action.result
+      const { title, description, name, price, published } = action.result
 
       return Object.assign({}, state, {
         title,
         description,
         // images: state.item.images,
         // phoneNumber: state.item.phoneNumber,
-        // userName: item.name,
+        name,
         price,
         // currency: state.item.currency,
         published

@@ -7,6 +7,7 @@ import { apiHost } from '../config'
 // components
 import Header from './Header/Header'
 import Footer from './Footer/Footer'
+import Textarea from './Textarea/Textarea'
 
 // styles
 import './item.scss'
@@ -14,6 +15,7 @@ import './item.scss'
 const mapStateToProps = state => ({
   title: state.itemReducer.title,
   description: state.itemReducer.description,
+  name: state.itemReducer.name,
   price: state.itemReducer.price,
   published: state.itemReducer.published
 })
@@ -43,6 +45,7 @@ class Item extends Component {
     const {
       title,
       description,
+      name,
       price,
       published
     } = this.props
@@ -115,11 +118,11 @@ class Item extends Component {
             </div>
             <div className='contacts'>
               <span className='label'>Posted by:&nbsp;</span>
-              <span>079357745, Eugen</span>
+              <span>079357745, {name}</span>
             </div>
           </div>
 
-          <textarea
+          <Textarea
             className='send-a-message'
             placeholder='Lăsaţi un mesaj'
           />

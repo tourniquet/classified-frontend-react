@@ -52,15 +52,20 @@ class IndexPage extends Component {
               key={i.toString()}
             >
               <span className='star'>S</span>
-              <span className='image'>I</span>
-              <span className='ad-title'>
-                <Link
-                  key={el.id}
-                  to={{ pathname: `/item/${el.url}` }}
-                >
-                  {el.title}
-                </Link>
-              </span>
+              {/* <span className='image'>I</span> */}
+              <img
+                className='thumbnail'
+                src='/img/camera.png'
+                title=''
+                alt=''
+              />
+              <Link
+                key={el.id}
+                to={{ pathname: `/item/${el.url}` }}
+                className='ad-title'
+              >
+                {el.title}
+              </Link>
               <span className='ad-category'>category</span>
               <span className='ad-date'>
                 {new Date(el.published).toLocaleDateString('en-GB', dateOptions)}
