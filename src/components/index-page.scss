@@ -101,10 +101,12 @@ table {
 
 .latest-ads {
   .latest-ads-item {
-    span.star {
+    img.favourite-ad {
+      height: 16px;
       padding-left: 15px;
       position: relative;
       vertical-align: middle;
+      width: 16px;
     }
 
     img.thumbnail {
@@ -125,6 +127,9 @@ table {
 
 @media (max-width: 480px) {
   .latest-ads {
+    margin: 0 auto;
+    width: 95%;
+
     .latest-ads-item {
       background: #FFF;
       box-sizing: border-box;

@@ -6,8 +6,10 @@ import { Link } from 'react-router-dom'
 import { apiHost } from '../config'
 
 // components
-import Header from './Header/Header'
-import Footer from './Footer/Footer'
+import { Header } from './Header/Header'
+import { Footer } from './Footer/Footer'
+import { Image } from './Image/Image'
+import Search from './Search/Search'
 
 const mapStateToProps = state => ({
   items: state.itemsReducer.items
@@ -45,15 +47,21 @@ class IndexPage extends Component {
       <div>
         <Header />
 
+        <Search />
+
         <ul className='latest-ads'>
           {items.map((el, i) => (
             <li
               className='latest-ads-item'
               key={i.toString()}
             >
-              <span className='star'>S</span>
-              {/* <span className='image'>I</span> */}
-              <img
+              <Image
+                className='favourite-ad'
+                src='/img/star.png'
+                title=''
+                alt=''
+              />
+              <Image
                 className='thumbnail'
                 src='/img/camera.png'
                 title=''

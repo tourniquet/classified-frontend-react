@@ -3,7 +3,7 @@ import React from 'react'
 // styles
 import './Textarea.scss'
 
-const Textarea = props =>
+export const Textarea = props =>
   <textarea
     className={props.className}
     name={props.name}
@@ -11,5 +11,3 @@ const Textarea = props =>
     value={props.value}
     onChange={props.onChange}
   />
-
-export default Textarea

@@ -1,135 +1,146 @@
-.form {
-  padding: 0 30px;
+.page-body {
+  display: flex;
+  flex-direction: column;
 
-  .images {
-    display: flex;
-    justify-content: space-between;
-
-    .label-for-images {
-      background-size: cover;
-      display: inline-block;
-      height: 94px;
-      width: 94px;
-      border: 2px solid #F6F6F6;
-      border-radius: 6px;
-      text-align: center;
-      line-height: 96px;
-      color: #E26636;
-      font-size: 32px;
-    }
-
-    .hidden-label {
-      visibility: hidden;
-    }
-      
-    .remove-image {
-      height: 20px;
-      width: 20px;
-      margin: -10px 0 -22px 0;
-      position: relative;
-      float: right;
-      margin-left: -12px;
-      margin-top: -9px;
-    }
-  }
-
-  .input-file {
-    display: none;
-  }
-
-  .label-for-price {
-    display: block;
-  }
-
-  .price {
-    display: inline-block;
-    width: 64%;
-  }
-
-  .currency {
-    display: inline-block;
-    float: right;
-    width: 33%;
-  }
-
-  .post-button {
-    display: table;
-    background: #DF6C40;
-    border: 0px none;
-    border-radius: 22px;
-    color: #FFF;
-    cursor: pointer;
-    margin: 20px auto 0px;
-    width: 182px;
-    height: 42px;
-  }
-}  
-
-@media (min-width: 1200px) {
   .form {
-    width: 1200px;
-    margin: 0 auto;
-
-    .left-side {
-      float: left;
-      width: 30%;
-    }
-
-    .right-side {
-      float: right;
-      width: 67%;
-      margin-bottom: 135px;
-    }
-
-    .input {
-      width: 70%;
-    }
+    padding: 0 30px;
 
     .description {
       padding: 15px 0 0 20px;
-      width: 70%;
+      width: calc(100% - 20px);
     }
-
+  
     .images {
-      width: 73%;
-      margin-bottom: 10px;
-
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 26px;
+  
       .label-for-images {
-        height: 167px;
-        width: 167px;
-        line-height: 164px;
-      }
-    }
-
-    .contacts-block {
-      width: 70%;
-      
-      .phone, .contact-name {
+        background-size: cover;
         display: inline-block;
-        width: 48%;
+        height: 94px;
+        width: 94px;
+        border: 2px solid #F6F6F6;
+        border-radius: 6px;
+        text-align: center;
+        line-height: 96px;
+        color: #E26636;
+        font-size: 32px;
       }
-
-      .contact-name {
+  
+      .hidden-label {
+        visibility: hidden;
+      }
+        
+      .remove-image {
+        height: 20px;
+        width: 20px;
+        margin: -10px 0 -22px 0;
+        position: relative;
         float: right;
+        margin-left: -12px;
+        margin-top: -9px;
       }
     }
-
-    .price-block {
-      width: 38%;
-
-      .price {
-        width: 145px;
-      }
-
-      .currency {
-        width: 143px;
-        margin: 0;
-      }
+  
+    .input-file {
+      display: none;
     }
-
-    .post-button {
+  
+    .label-for-price {
       display: block;
-      float: left;
+    }
+  
+    .price {
+      display: inline-block;
+      width: 64%;
+    }
+  
+    .currency {
+      float: right;
+      width: 33%;
+    }
+  
+    .post-button {
+      display: table;
+      background: #DF6C40;
+      border: 0px none;
+      border-radius: 22px;
+      color: #FFF;
+      cursor: pointer;
+      margin: 20px auto 0px;
+      width: 182px;
+      height: 42px;
+    }
+  }  
+  
+  @media (min-width: 1200px) {
+    .form {
+      width: 1200px;
+      margin: 0 auto;
+  
+      .left-side {
+        float: left;
+        width: 30%;
+      }
+  
+      .right-side {
+        float: right;
+        width: 67%;
+        margin-bottom: 135px;
+      }
+  
+      .input {
+        width: 70%;
+      }
+  
+      .description {
+        padding: 15px 0 0 20px;
+        width: 70%;
+      }
+  
+      .images {
+        width: 73%;
+        margin-bottom: 10px;
+  
+        .label-for-images {
+          height: 167px;
+          width: 167px;
+          line-height: 164px;
+        }
+      }
+  
+      .contacts-block {
+        width: 70%;
+        
+        .phone, .contact-name {
+          display: inline-block;
+          width: 48%;
+        }
+  
+        .contact-name {
+          float: right;
+        }
+      }
+  
+      .price-block {
+        width: 38%;
+  
+        .price {
+          width: 145px;
+        }
+  
+        .currency {
+          width: 143px;
+          margin: 0;
+        }
+      }
+  
+      .post-button {
+        display: block;
+        float: left;
+      }
     }
   }
 }
+

@@ -3,7 +3,7 @@ import React from 'react'
 // styles
 import './Footer.scss'
 
-const Footer = () =>
+export const Footer = () =>
   <footer>
     <div className='copyright'>
       © {/* This website is proudly using the classifieds scripts software SCRIPT_NAME */}
@@ -15,5 +15,3 @@ const Footer = () =>
       <a className='skype' href='skype:SKYPE' />
     </nav>
   </footer>
-
-export default Footer

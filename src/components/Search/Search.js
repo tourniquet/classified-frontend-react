@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 // components
-import Input from '../Input/Input'
+import { Input } from '../Input/Input'
 
 // styles
 import './Search.scss'

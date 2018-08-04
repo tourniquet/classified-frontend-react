@@ -3,7 +3,7 @@ import React from 'react'
 // styles
 import './Button.scss'
 
-const Button = props =>
+export const Button = props =>
   <button
     className={props.className}
     name={props.name}
@@ -13,5 +13,3 @@ const Button = props =>
   >
     {props.title}
   </button>
-
-export default Button

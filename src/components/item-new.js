@@ -5,13 +5,13 @@ import { connect } from 'react-redux'
 import { apiHost } from '../config'
 
 // components
-import Button from './Button/Button'
-import Footer from './Footer/Footer'
-import Header from './Header/Header'
-import Input from './Input/Input'
-import Label from './Label/Label'
+import { Button } from './Button/Button'
+import { Footer } from './Footer/Footer'
+import { Header } from './Header/Header'
+import { Input } from './Input/Input'
+import { Label } from './Label/Label'
 import Search from './Search/Search'
-import Textarea from './Textarea/Textarea'
+import { Textarea } from './Textarea/Textarea'
 
 // styles
 import './item-new.scss'
@@ -137,7 +137,7 @@ const ItemNew = props => {
   }
 
   return (
-    <div>
+    <div className='page-body'>
       <Header />
 
       <Search />
@@ -214,6 +214,7 @@ const ItemNew = props => {
             title='Title'
           />
           <Input
+            className='title input'
             name='title'
             placeholder='Title'
             type='text'
@@ -236,7 +237,7 @@ const ItemNew = props => {
 
           <Label
             htmlFor='title'
-            title='Adaugă fotografii'
+            title='Add images'
           />
           <div className='images'>
             {props.images.map((el, id) => (
@@ -266,7 +267,7 @@ const ItemNew = props => {
 
           <Label
             className='label contacts'
-            title='Contacte'
+            title='Contact details'
           />
           <div className='contacts-block'>
             <Input

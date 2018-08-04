@@ -3,7 +3,7 @@ import React from 'react'
 // styles
 import './Label.scss'
 
-const Label = props => {
+export const Label = props => {
   const { className, htmlFor, title, style, children } = props
 
   return (
@@ -17,5 +17,3 @@ const Label = props => {
     </label>
   )
 }
-
-export default Label

@@ -3,7 +3,7 @@ import React from 'react'
 // styles
 import './Input.scss'
 
-const Input = props =>
+export const Input = props =>
   <input
     className={props.className || 'input'}
     name={props.name}
@@ -15,5 +15,3 @@ const Input = props =>
     aria-label={props['aria-label'] || ''}
     onChange={props.onChange}
   />
-
-export default Input

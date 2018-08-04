@@ -5,9 +5,9 @@ import { connect } from 'react-redux'
 import { apiHost } from '../config'
 
 // components
-import Header from './Header/Header'
-import Footer from './Footer/Footer'
-import Textarea from './Textarea/Textarea'
+import { Header } from './Header/Header'
+import { Footer } from './Footer/Footer'
+import { Textarea } from './Textarea/Textarea'
 
 // styles
 import './item.scss'
@@ -73,7 +73,7 @@ class Item extends Component {
           </div>
 
           <div className='ad-info'>
-            <span>Anunţ postat de</span>
+            <span>Posted by</span>
             <span className='posted-by'>&nbsp;OnlyAppleXXX</span>
           </div>
 
@@ -83,7 +83,7 @@ class Item extends Component {
             <span className='date'>
               {new Date(published).toLocaleDateString('en-GB', dateOptions)}
             </span>
-            <span className='views'>Vizualizări: views</span>
+            <span className='views'>Views: views</span>
           </div>
 
           <hr className='under-posting-date' />
@@ -124,7 +124,7 @@ class Item extends Component {
 
           <Textarea
             className='send-a-message'
-            placeholder='Lăsaţi un mesaj'
+            placeholder='Ask question'
           />
         </div>
 
