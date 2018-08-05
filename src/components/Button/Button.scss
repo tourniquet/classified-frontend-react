@@ -19,6 +19,8 @@
 .active-tab {
   background: url('/img/arrow_up.png') no-repeat #F6F6F6;
   background-position: 92%;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
 }
 
 .inactive-tab {
@@ -31,16 +33,26 @@
 }
 
 .show-ul-menu {
-  @extend .button;
-  position: absolute;
-  background: #FFF;
+  @include button;
   box-sizing: border-box;
   height: auto;
-  max-width: 270px;
+  position: absolute;
 
   & li {
     height: 58px;
     line-height: 58px;
+  }
+}
+
+@media (max-width: 480px) {
+  .show-ul-menu {
+    @include button;
+    border-radius: 0;
+    height: auto;
+    margin-top: -18px;
+    max-width: 100%;
+    position: inherit;
+    width: 100%;
   }
 }
 
@@ -54,8 +66,6 @@
   .active-tab {
     background: url('/img/arrow_up.png') no-repeat #F6F6F6;
     background-position: 92%;
-    border-bottom-left-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
   }
 
   .inactive-tab {
@@ -69,12 +79,10 @@
 
   .show-ul-menu {
     @include button;
-    background: #FFF;
     border-radius: 0;
-    box-sizing: border-box;
     height: auto;
-    position: absolute;
     margin-top: -25px;
+    max-width: 270px;
   }
 
   .currencies {

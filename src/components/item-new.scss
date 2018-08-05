@@ -72,7 +72,7 @@
       width: 182px;
       height: 42px;
     }
-  }  
+  }
   
   @media (min-width: 1200px) {
     .form {
@@ -88,59 +88,58 @@
         float: right;
         width: 67%;
         margin-bottom: 135px;
-      }
-  
-      .input {
-        width: 70%;
-      }
-  
-      .description {
-        padding: 15px 0 0 20px;
-        width: 70%;
-      }
-  
-      .images {
-        width: 73%;
-        margin-bottom: 10px;
-  
-        .label-for-images {
-          height: 167px;
-          width: 167px;
-          line-height: 164px;
+
+        .input {
+          width: 70%;
         }
-      }
-  
-      .contacts-block {
-        width: 70%;
-        
-        .phone, .contact-name {
-          display: inline-block;
-          width: 48%;
+    
+        .description {
+          padding: 15px 0 0 20px;
+          width: 70%;
         }
-  
-        .contact-name {
-          float: right;
+    
+        .images {
+          width: 73%;
+          margin-bottom: 10px;
+    
+          .label-for-images {
+            height: 167px;
+            width: 167px;
+            line-height: 164px;
+          }
         }
-      }
-  
-      .price-block {
-        width: 38%;
-  
-        .price {
-          width: 145px;
+    
+        .contacts-block {
+          width: 70%;
+          
+          .phone, .contact-name {
+            display: inline-block;
+            width: 48%;
+          }
+    
+          .contact-name {
+            float: right;
+          }
         }
-  
-        .currency {
-          width: 143px;
-          margin: 0;
+    
+        .price-block {
+          width: 38%;
+    
+          .price {
+            width: 145px;
+          }
+    
+          .currency {
+            width: 143px;
+            margin: 0;
+          }
         }
-      }
-  
-      .post-button {
-        display: block;
-        float: left;
+    
+        .post-button {
+          display: block;
+          float: left;
+        }
       }
     }
   }
 }
-
