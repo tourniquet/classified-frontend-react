@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 // API host config
 import { apiHost } from '../config'
 
 // components
+import { Button } from './Button/Button'
 import { Header } from './Header/Header'
 import { Footer } from './Footer/Footer'
 import { Textarea } from './Textarea/Textarea'
@@ -129,6 +131,16 @@ class Item extends Component {
         </div>
 
         <Footer />
+
+        <Link
+          className='publish-item-button-link'
+          to={{ pathname: '/item/add' }}
+        >
+          <Button
+            className='publish-item-button'
+            title='Post an ad'
+          />
+        </Link>
       </div>
     )
   }

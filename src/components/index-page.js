@@ -10,6 +10,7 @@ import { Header } from './Header/Header'
 import { Footer } from './Footer/Footer'
 import { Image } from './Image/Image'
 import Search from './Search/Search'
+import { Button } from './Button/Button'
 
 const mapStateToProps = state => ({
   items: state.itemsReducer.items
@@ -83,6 +84,16 @@ class IndexPage extends Component {
         </ul>
 
         <Footer />
+
+        <Link
+          className='publish-item-button-link'
+          to={{ pathname: '/item/add' }}
+        >
+          <Button
+            className='publish-item-button'
+            title='Post an ad'
+          />
+        </Link>
       </div>
     )
   }

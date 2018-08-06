@@ -45,6 +45,10 @@ footer {
   }
 }
 
+@media (max-width: 480px) {
+  footer {}
+}
+
 @media (min-width: 1200px) {
   footer {
     align-items: center;
