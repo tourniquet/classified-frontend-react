@@ -19,7 +19,8 @@ const mapStateToProps = state => ({
   description: state.itemReducer.description,
   name: state.itemReducer.name,
   price: state.itemReducer.price,
-  published: state.itemReducer.published
+  published: state.itemReducer.published,
+  views: state.itemReducer.views
 })
 
 class Item extends Component {
@@ -49,7 +50,8 @@ class Item extends Component {
       description,
       name,
       price,
-      published
+      published,
+      views
     } = this.props
     const dateOptions = {
       year: 'numeric',
@@ -85,7 +87,7 @@ class Item extends Component {
             <span className='date'>
               {new Date(published).toLocaleDateString('en-GB', dateOptions)}
             </span>
-            <span className='views'>Views: views</span>
+            <span className='views'>Views: {views}</span>
           </div>
 
           <hr className='under-posting-date' />
