@@ -1,15 +1,17 @@
-import initialState from './initialState'
+const initialState = {
+  value: ''
+}
 
-const reducer = (state = initialState, action) => {
+const searchReducer = (state = initialState, action) => {
   switch (action.type) {
     // input value for search input
     case 'SET_SEARCH_TEXT':
       return Object.assign({}, state, {
-        search: action.search
+        value: action.search
       })
     default:
       return state
   }
 }
 
-export default reducer
+export default searchReducer

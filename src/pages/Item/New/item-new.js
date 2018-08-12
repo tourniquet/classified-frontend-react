@@ -2,16 +2,16 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 // API host config
-import { apiHost } from '../config'
+import { apiHost } from '../../../config'
 
 // components
-import { Button } from './Button/Button'
-import { Footer } from './Footer/Footer'
-import { Header } from './Header/Header'
-import { Input } from './Input/Input'
-import { Label } from './Label/Label'
-import Search from './Search/Search'
-import { Textarea } from './Textarea/Textarea'
+import { Button } from '../../../components/Button/Button'
+import { Footer } from '../../../components/Footer/Footer'
+import { Header } from '../../../components/Header/Header'
+import { Input } from '../../../components/Input/Input'
+import { Label } from '../../../components/Label/Label'
+import Search from '../../../components/Search/Search'
+import { Textarea } from '../../../components/Textarea/Textarea'
 
 // styles
 import './item-new.scss'

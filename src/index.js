@@ -9,18 +9,20 @@ import './components/index-page.scss'
 
 // components
 import IndexPage from './components/index-page'
-import ItemNew from './components/item-new'
+import ItemNew from './pages/Item/New/item-new'
 import Item from './components/item'
 
 // reducer
-import itemReducer from './store/itemReducer'
-import itemsReducer from './store/itemsReducer'
-import newItemReducer from './store/newItemReducer'
+import itemReducer from './reducers/itemReducer'
+import itemsReducer from './reducers/itemsReducer'
+import newItemReducer from './reducers/newItemReducer'
+import searchReducer from './reducers/searchReducer'
 
 const rootReducer = combineReducers({
   itemReducer,
   itemsReducer,
-  newItemReducer
+  newItemReducer,
+  searchReducer
 })
 
 const store = createStore(
