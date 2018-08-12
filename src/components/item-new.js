@@ -142,10 +142,13 @@ const ItemNew = props => {
 
       <Search />
 
-      <div className='form'>
+      <form
+        className='form'
+        onSubmit={event => handleSubmit(event)}
+      >
         <div className='left-side'>
           <Label
-            className='label mandatory'
+            className='mandatory'
             htmlFor='category'
             title='Category'
           />
@@ -166,7 +169,7 @@ const ItemNew = props => {
           </ul>
 
           <Label
-            className='label mandatory'
+            className='mandatory'
             htmlFor='subcategory'
             title='Subcategory'
           />
@@ -209,7 +212,7 @@ const ItemNew = props => {
 
         <div className='right-side'>
           <Label
-            className='label mandatory'
+            className='mandatory'
             htmlFor='title'
             title='Title'
           />
@@ -219,11 +222,12 @@ const ItemNew = props => {
             placeholder='Title'
             type='text'
             value={props.title}
+            required
             onChange={el => props.dispatch(setItemTitle(el))}
           />
 
           <Label
-            className='label mandatory'
+            className='mandatory'
             htmlFor='description'
             title='Description'
           />
@@ -232,6 +236,7 @@ const ItemNew = props => {
             name='description'
             placeholder='Description'
             value={props.description}
+            required
             onChange={el => props.dispatch(setItemDescription(el))}
           />
 
@@ -266,26 +271,53 @@ const ItemNew = props => {
           </div>
 
           <Label
-            className='label contacts'
+            className='contacts'
             title='Contact details'
           />
           <div className='contacts-block'>
+            <Label
+              className='mandatory display-block'
+              htmlFor='phone'
+              title='Phone'
+            />
             <Input
+              id='phone'
               className='input phone'
               name='phone'
-              type='text'
               inputmode='numeric'
               pattern='[0-9]*'
               placeholder='Phone number'
               value={props.phone}
+              required
               onChange={el => props.dispatch(setPhoneNumber(el))}
             />
+
+            <Label
+              className='mandatory display-block'
+              htmlFor='contact-name'
+              title='Name'
+            />
             <Input
+              id='contact-name'
               className='input contact-name'
-              type='text'
               name='contact-name'
               placeholder='Contact name'
+              required
               onChange={el => props.dispatch(setUserName(el))}
+            />
+
+            <Label
+              className='display-block'
+              htmlFor='contact-email'
+              title='Email'
+            />
+            <Input
+              id='contact-email'
+              className='input contact-email'
+              type='email'
+              name='contact-email'
+              placeholder='Email'
+              pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
             />
           </div>
 
@@ -297,7 +329,6 @@ const ItemNew = props => {
           <div className='price-block'>
             <Input
               className='input price'
-              type='text'
               inputmode='numeric'
               pattern='[0-9]*'
               name='price'
@@ -327,10 +358,10 @@ const ItemNew = props => {
             className='post-button'
             name='submit'
             title='Submit'
-            onClick={handleSubmit}
+            type='submit'
           />
         </div>
-      </div>
+      </form>
 
       <Footer />
     </div>

@@ -9,7 +9,7 @@ export const Button = props =>
     name={props.name}
     onBlur={props.onBlur}
     onClick={props.onClick}
-    type='button'
+    type={props.type || 'button'}
   >
     {props.title}
   </button>

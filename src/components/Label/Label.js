@@ -8,7 +8,7 @@ export const Label = props => {
 
   return (
     <label
-      className={className || 'label'}
+      className={`label ${className}`}
       htmlFor={htmlFor}
       style={style}
     >

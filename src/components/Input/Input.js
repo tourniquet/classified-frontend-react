@@ -8,10 +8,12 @@ export const Input = props =>
     className={props.className || 'input'}
     name={props.name}
     placeholder={props.placeholder}
-    inputmode={props.inputmode || ''}
+    inputmode={props.inputmode}
     type={props.type || 'text'}
-    accept={props.accept || ''}
+    accept={props.accept}
     value={props.value}
-    aria-label={props['aria-label'] || ''}
+    aria-label={props['aria-label']}
+    pattern={props.pattern}
+    required={props.required}
     onChange={props.onChange}
   />

@@ -112,13 +112,9 @@
         .contacts-block {
           width: 70%;
           
-          .phone, .contact-name {
-            display: inline-block;
-            width: 48%;
-          }
-    
+          .phone,
           .contact-name {
-            float: right;
+            display: inline-block;
           }
         }
     

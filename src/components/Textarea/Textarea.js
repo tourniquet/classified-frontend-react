@@ -9,5 +9,6 @@ export const Textarea = props =>
     name={props.name}
     placeholder={props.placeholder}
     value={props.value}
+    required={props.required}
     onChange={props.onChange}
   />

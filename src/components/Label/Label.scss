@@ -8,5 +8,9 @@
   &.mandatory::after {
     content: "*";
     color: red;
-  }  
+  }
+
+  &.display-block {
+    display: block;
+  }
 }
