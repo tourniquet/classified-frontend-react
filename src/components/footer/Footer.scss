@@ -3,62 +3,64 @@ body {
 }
 
 footer {
-  background: #262626;
-  height: 117px;
-  margin-top: 40px;
-  padding-top: 40px;
-  width: 100%;
+  .footer-container {
+    background: #262626;
+    height: 117px;
+    margin-top: 40px;
+    padding-top: 40px;
+    width: 100%;
 
-  .copyright {
-    color: white;
-    margin-bottom: 30px;
-    font-size: 12px;
-    letter-spacing: .02em;
-    text-align: center;
-  }
-
-  .social {
-    text-align: center;
-
-    a.fb {
-      display: inline-block;
-      background-image: url('/img/fb.png');
-      background-repeat: no-repeat;
-      background-size: 20px 20px;
-      background-position: 6px 6px;
-      border: 1px solid #3C3C3C;
-      border-radius: 22px;
-      height: 33px;
-      width: 33px;
+    .copyright {
+      color: white;
+      margin-bottom: 30px;
+      font-size: 12px;
+      letter-spacing: .02em;
+      text-align: center;
     }
 
-    a.ok {
-      @extend a.fb;
-      background-image: url('/img/ok.png');
-      margin: 0 22px;
-    }
+    .social {
+      text-align: center;
 
-    a.skype {
-      @extend a.fb;
-      background-image: url('/img/skype.png');
+      a.fb {
+        display: inline-block;
+        background-image: url('/img/fb.png');
+        background-repeat: no-repeat;
+        background-size: 20px 20px;
+        background-position: 6px 6px;
+        border: 1px solid #3C3C3C;
+        border-radius: 22px;
+        height: 33px;
+        width: 33px;
+      }
+
+      a.ok {
+        @extend a.fb;
+        background-image: url('/img/ok.png');
+        margin: 0 22px;
+      }
+
+      a.skype {
+        @extend a.fb;
+        background-image: url('/img/skype.png');
+      }
     }
   }
 }
 
-@media (max-width: 480px) {
-  footer {}
-}
+@media (max-width: 480px) {}
 
 @media (min-width: 1200px) {
   footer {
-    align-items: center;
-    display: flex;
-    justify-content: space-around;
-    height: 130px;
-    padding-top: 0;
+    .footer-container {
+      align-items: center;
+      display: flex;
+      justify-content: space-around;
+      height: 130px;
+      padding-top: 0;
 
-    .copyright {
-      margin-bottom: 0;
+      .copyright {
+        margin-bottom: 0;
+      }
     }
   }
 }

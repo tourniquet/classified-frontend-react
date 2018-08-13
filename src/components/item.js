@@ -62,7 +62,7 @@ class Item extends Component {
     }
 
     return (
-      <div>
+      <div className='item-page'>
         <Header />
 
         <div className='ad'>
@@ -90,7 +90,7 @@ class Item extends Component {
             <span className='views'>Views: {views}</span>
           </div>
 
-          <hr className='under-posting-date' />
+            <hr className='under-posting-date' />
 
           <div className='ad-details'>
             <div className='ad-title'>
@@ -110,7 +110,7 @@ class Item extends Component {
 
           <hr />
 
-          <div className='container'>
+          <div className='contacts-container'>
             <div className='price'>
               <span className='label'>Price:&nbsp;</span>
               <span>{price}</span>

@@ -156,48 +156,58 @@ table {
 }
 
 @media (min-width: 1200px) {
-  .latest-ads {
-    margin: 0 auto;
-    margin-top: 51px;
-    margin-bottom: 92px;
-    width: 1268px;
-    font-size: 13px;
+  .index-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 
-    .latest-ads-item {
-      height: 50px;
-      line-height: 50px;
-      padding-left: 32px;
-      border-top: 2px solid #F6F6F6;
-      
-      span {
-        display: inline-block;
-      }
-
-      .star {
-        width: 32px;
-      }
-
-      .image {
-        width: 30px;
-      }
-
-      .ad-title {
-        width: 852px;
-        
-        a:link, a:visited, a:active {
-          text-decoration: none;
-          color: black;
+    .items-list {
+      flex: 1 0 auto;
+ 
+      .latest-ads {
+        margin: 0 auto;
+        margin-top: 51px;
+        margin-bottom: 92px;
+        width: 1268px;
+        font-size: 13px;
+    
+        .latest-ads-item {
+          height: 50px;
+          line-height: 50px;
+          padding-left: 32px;
+          border-top: 2px solid #F6F6F6;
+          
+          span {
+            display: inline-block;
+          }
+    
+          .star {
+            width: 32px;
+          }
+    
+          .image {
+            width: 30px;
+          }
+    
+          .ad-title {
+            width: 852px;
+            
+            a:link, a:visited, a:active {
+              text-decoration: none;
+              color: black;
+            }
+          }
+    
+          .ad-category {
+            color: #E26433;
+            width: 125px;
+          }
+    
+          .ad-date {
+            width: 135px;
+            text-align: right;
+          }
         }
-      }
-
-      .ad-category {
-        color: #E26433;
-        width: 125px;
-      }
-
-      .ad-date {
-        width: 135px;
-        text-align: right;
       }
     }
   }

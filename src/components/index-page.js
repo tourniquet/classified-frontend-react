@@ -45,43 +45,45 @@ class IndexPage extends Component {
     }
 
     return (
-      <div>
+      <div className='index-page'>
         <Header />
 
         <Search />
 
-        <ul className='latest-ads'>
-          {items.map((el, i) => (
-            <li
-              className='latest-ads-item'
-              key={i.toString()}
-            >
-              <Image
-                className='favourite-ad'
-                src='/img/star.png'
-                title=''
-                alt=''
-              />
-              <Image
-                className='thumbnail'
-                src='/img/camera.png'
-                title=''
-                alt=''
-              />
-              <Link
-                key={el.id}
-                to={{ pathname: `/item/${el.url}` }}
-                className='ad-title'
+        <div className='items-list'>
+          <ul className='latest-ads'>
+            {items.map((el, i) => (
+              <li
+                className='latest-ads-item'
+                key={i.toString()}
               >
-                {el.title}
-              </Link>
-              <span className='ad-category'>category</span>
-              <span className='ad-date'>
-                {new Date(el.published).toLocaleDateString('en-GB', dateOptions)}
-              </span>
-            </li>
-          ))}
-        </ul>
+                <Image
+                  className='favourite-ad'
+                  src='/img/star.png'
+                  title=''
+                  alt=''
+                />
+                <Image
+                  className='thumbnail'
+                  src='/img/camera.png'
+                  title=''
+                  alt=''
+                />
+                <Link
+                  key={el.id}
+                  to={{ pathname: `/item/${el.url}` }}
+                  className='ad-title'
+                >
+                  {el.title}
+                </Link>
+                <span className='ad-category'>category</span>
+                <span className='ad-date'>
+                  {new Date(el.published).toLocaleDateString('en-GB', dateOptions)}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
 
         <Footer />
 
