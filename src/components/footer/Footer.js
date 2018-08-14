@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { socials } from '../../config'
+
 // styles
 import './Footer.scss'
 
@@ -11,9 +13,9 @@ export const Footer = () =>
       </div>
 
       <nav className='social'>
-        <a className='fb' href='FB_LINK' />
-        <a className='ok' href='OK_LINK' />
-        <a className='skype' href='skype:SKYPE' />
+        <a className='fb' href={socials.facebook} />
+        <a className='ok' href={socials.ok} />
+        <a className='skype' href={socials.skype} />
       </nav>
     </div>
   </footer>
