@@ -15,7 +15,7 @@ export const Footer = () =>
       <nav className='social'>
         <a className='fb' href={socials.facebook} />
         <a className='ok' href={socials.ok} />
-        <a className='skype' href={socials.skype} />
+        <a className='skype' href={`skype:${socials.skype}?chat`} />
       </nav>
     </div>
   </footer>
