@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 // styles
 import './Input.scss'
@@ -17,3 +18,17 @@ export const Input = props =>
     required={props.required}
     onChange={props.onChange}
   />
+
+Input.propTypes = {
+  className: PropTypes.string,
+  name: PropTypes.string,
+  placeholder: PropTypes.string,
+  inputmode: PropTypes.string,
+  type: PropTypes.string,
+  accept: PropTypes.string,
+  value: PropTypes.string,
+  'aria-label': PropTypes.string,
+  pattern: PropTypes.string,
+  required: PropTypes.string,
+  onChange: PropTypes.func.isRequired
+}

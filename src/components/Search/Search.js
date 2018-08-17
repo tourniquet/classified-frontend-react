@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 // components
 import { Input } from '../Input/Input'
@@ -27,6 +28,15 @@ const Search = props => {
       onChange={el => props.dispatch(setSearchText(el))}
     />
   )
+}
+
+Search.propTypes = {
+  className: PropTypes.string,
+  placeholder: PropTypes.string,
+  value: PropTypes.string,
+  type: PropTypes.string,
+  'aria-label': PropTypes.string,
+  onChange: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps)(Search)

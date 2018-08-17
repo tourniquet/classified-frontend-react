@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 // styles
 import './Label.scss'
@@ -16,4 +17,11 @@ export const Label = props => {
       {children}
     </label>
   )
+}
+
+Label.propTypes = {
+  className: PropTypes.string,
+  htmlFor: PropTypes.string.isRequired,
+  style: PropTypes.object,
+  children: PropTypes.element
 }
