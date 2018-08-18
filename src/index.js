@@ -10,7 +10,7 @@ import './reset.scss'
 // components
 import IndexPage from './pages/index-page'
 import ItemNew from './pages/Item/New/item-new'
-import Item from './components/item'
+import Item from './pages/Item/item'
 
 // reducer
 import itemReducer from './reducers/itemReducer'

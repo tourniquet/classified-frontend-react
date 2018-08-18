@@ -70,7 +70,7 @@ class IndexPage extends Component {
                   className='thumbnail'
                   src='/img/camera.png'
                   title=''
-                  alt=''
+                  alt='Particular lists thumbnail'
                 />
                 <Link
                   key={el.id}

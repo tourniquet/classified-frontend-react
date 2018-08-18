@@ -3,13 +3,13 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 // API host config
-import { apiHost } from '../config'
+import { apiHost } from '../../config'
 
 // components
-import { Button } from './Button/Button'
-import { Header } from './Header/Header'
-import { Footer } from './Footer/Footer'
-import { Textarea } from './Textarea/Textarea'
+import { Button } from '../../components/Button/Button'
+import { Header } from '../../components/Header/Header'
+import { Footer } from '../../components/Footer/Footer'
+import { Textarea } from '../../components/Textarea/Textarea'
 
 // styles
 import './item.scss'
@@ -24,7 +24,7 @@ const mapStateToProps = state => ({
 })
 
 class Item extends Component {
-  fetchData = () => {
+  fetchData () {
     const getUrl = this.props.match.params.url
     const url = `${apiHost}/item.php?url=${getUrl}`
 
@@ -90,7 +90,7 @@ class Item extends Component {
             <span className='views'>Views: {views}</span>
           </div>
 
-            <hr className='under-posting-date' />
+          <hr className='under-posting-date' />
 
           <div className='ad-details'>
             <div className='ad-title'>
