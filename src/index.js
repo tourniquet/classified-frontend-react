@@ -5,10 +5,10 @@ import { combineReducers, createStore } from 'redux'
 import { Provider } from 'react-redux'
 
 // reset standard browser styles
-import './components/index-page.scss'
+import './reset.scss'
 
 // components
-import IndexPage from './components/index-page'
+import IndexPage from './pages/index-page'
 import ItemNew from './pages/Item/New/item-new'
 import Item from './components/item'
 

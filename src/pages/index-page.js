@@ -6,18 +6,21 @@ import { Link } from 'react-router-dom'
 import { apiHost } from '../config'
 
 // components
-import { Header } from './Header/Header'
-import { Footer } from './Footer/Footer'
-import { Image } from './Image/Image'
-import Search from './Search/Search'
-import { Button } from './Button/Button'
+import { Header } from '../components/Header/Header'
+import { Footer } from '../components/Footer/Footer'
+import { Image } from '../components/Image/Image'
+import Search from '../components/Search/Search'
+import { Button } from '../components/Button/Button'
+
+// styles
+import './index-page.scss'
 
 const mapStateToProps = state => ({
   items: state.itemsReducer.items
 })
 
 class IndexPage extends Component {
-  fetchData = () => {
+  fetchData () {
     window
       .fetch(`${apiHost}`)
       .then(response => response.json())
