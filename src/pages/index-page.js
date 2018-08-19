@@ -6,11 +6,12 @@ import { Link } from 'react-router-dom'
 import { apiHost } from '../config'
 
 // components
+import { Button } from '../components/Button/Button'
+import { Category } from '../components/Category/Category'
 import { Header } from '../components/Header/Header'
 import { Footer } from '../components/Footer/Footer'
 import { Image } from '../components/Image/Image'
 import Search from '../components/Search/Search'
-import { Button } from '../components/Button/Button'
 
 // styles
 import './index-page.scss'
@@ -52,6 +53,13 @@ class IndexPage extends Component {
         <Header />
 
         <Search />
+
+        <div className='categories'>
+          <Category />
+          <Category />
+          <Category />
+          <Category />
+        </div>
 
         <div className='items-list'>
           <ul className='latest-ads'>
