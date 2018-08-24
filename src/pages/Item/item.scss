@@ -126,7 +126,7 @@
   .item-page {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
     
     .ad {
       flex: 1 0 auto;

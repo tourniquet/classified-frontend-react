@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
 // API host config
 import { apiHost } from '../config'
@@ -15,6 +16,14 @@ import Search from '../components/Search/Search'
 
 // styles
 import './index-page.scss'
+
+const StyledIndexPage = styled.div`
+  @media (min-width: 1200px) {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+`
 
 const mapStateToProps = state => ({
   items: state.itemsReducer.items
@@ -49,7 +58,7 @@ class IndexPage extends Component {
     }
 
     return (
-      <div className='index-page'>
+      <StyledIndexPage>
         <Header />
 
         <Search />
@@ -107,7 +116,7 @@ class IndexPage extends Component {
             title='Post an ad'
           />
         </Link>
-      </div>
+      </StyledIndexPage>
     )
   }
 }

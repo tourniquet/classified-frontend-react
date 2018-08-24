@@ -6,7 +6,7 @@ import './Input.scss'
 
 export const Input = props =>
   <input
-    className={props.className || 'input'}
+    className={`input ${props.className}`}
     name={props.name}
     placeholder={props.placeholder}
     inputmode={props.inputmode}

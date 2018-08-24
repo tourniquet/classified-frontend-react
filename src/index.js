@@ -11,6 +11,8 @@ import './reset.scss'
 import IndexPage from './pages/index-page'
 import ItemNew from './pages/Item/New/item-new'
 import Item from './pages/Item/item'
+import UserLogin from './pages/User/Login/user-login'
+import UserRegistration from './pages/User/Registration/user-registration'
 
 // reducer
 import itemReducer from './reducers/itemReducer'
@@ -37,6 +39,8 @@ const App = () => (
         <Route path='/' exact component={IndexPage} />
         <Route path='/item/add' component={ItemNew} />
         <Route path='/item/:url(\d+)' component={Item} />
+        <Route path='/user/login' component={UserLogin} />
+        <Route path='/user/registration' component={UserRegistration} />
       </Switch>
     </div>
   </Provider>

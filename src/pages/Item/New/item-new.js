@@ -220,7 +220,6 @@ const ItemNew = props => {
             className='title input'
             name='title'
             placeholder='Title'
-            type='text'
             value={props.title}
             required
             onChange={el => props.dispatch(setItemTitle(el))}
@@ -270,10 +269,6 @@ const ItemNew = props => {
             ))}
           </div>
 
-          <Label
-            className='contacts'
-            title='Contact details'
-          />
           <div className='contacts-block'>
             <Label
               className='mandatory display-block'
@@ -322,7 +317,7 @@ const ItemNew = props => {
           </div>
 
           <Label
-            className='label label-for-price'
+            className='label-for-price'
             htmlFor='price'
             title='Price'
           />
