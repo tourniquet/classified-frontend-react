@@ -46,31 +46,36 @@
 // }
 
 // .index-page {
-  .latest-ads {
-    .latest-ads-item {
-      img.favourite-ad {
-        height: 16px;
-        padding-left: 15px;
-        position: relative;
-        vertical-align: middle;
-        width: 16px;
-      }
-  
-      img.thumbnail {
-        height: 16px;
-        padding-left: 15px;
-        vertical-align: middle;
-        width: 16px;
-      }
-  
-      .ad-title {
-        color: #000;
-        display: inline-block;
-        padding-left: 15px;
-        text-decoration: none;
+  .items-list {
+    flex: 1 0 auto;
+
+    .latest-ads {
+      .latest-ads-item {
+        img.favourite-ad {
+          height: 16px;
+          padding-left: 15px;
+          position: relative;
+          vertical-align: middle;
+          width: 16px;
+        }
+    
+        img.thumbnail {
+          height: 16px;
+          padding-left: 15px;
+          vertical-align: middle;
+          width: 16px;
+        }
+    
+        .ad-title {
+          color: #000;
+          display: inline-block;
+          padding-left: 15px;
+          text-decoration: none;
+        }
       }
     }
   }
+
 // }
 
 @media (max-width: 480px) {
@@ -79,33 +84,36 @@
       margin-bottom: 40px;
     }
 
-    .latest-ads {
-      margin: 0 auto;
-      width: 95%;
+    .items-list {
+      .latest-ads {
+        margin: 0 auto;
+        width: 95%;
 
-      .latest-ads-item {
-        background: #FFF;
-        box-sizing: border-box;
-        border: 0;
-        border-bottom: 1px solid #F5F5F5;
-        clear: both;
-        display: list-item;
-        height: 33px;
-        line-height: 32px;
-        margin: 0;
-        position: relative;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        width: 100%;
-        transition: .5s background;
+        .latest-ads-item {
+          background: #FFF;
+          box-sizing: border-box;
+          border: 0;
+          border-bottom: 1px solid #F5F5F5;
+          clear: both;
+          display: list-item;
+          height: 33px;
+          line-height: 32px;
+          margin: 0;
+          position: relative;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          width: 100%;
+          transition: .5s background;
 
-        .ad-category,
-        .ad-date {
-          display: none;
+          .ad-category,
+          .ad-date {
+            display: none;
+          }
         }
       }
     }
+
   // }
 }
 
@@ -124,8 +132,6 @@
   }
 
     .items-list {
-      flex: 1 0 auto;
- 
       .latest-ads {
         margin: 0 auto;
         margin-top: 51px;

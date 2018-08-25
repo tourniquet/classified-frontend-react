@@ -6,24 +6,30 @@ import styled from 'styled-components'
 import { apiHost } from '../../../config'
 
 // components
-import { Button } from '../../../components/Button/Button'
-import { Footer } from '../../../components/Footer/Footer'
-import { Header } from '../../../components/Header/Header'
-import { Input } from '../../../components/Input/Input'
-import { Label } from '../../../components/Label/Label'
+import Button from '../../../components/Button/Button'
+import Footer from '../../../components/Footer/Footer'
+import Header from '../../../components/Header/Header'
+import Input from '../../../components/Input/Input'
+import Label from '../../../components/Label/Label'
 
 // styles
 const UserLoginPage = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-`
 
-const UserLoginForm = styled.form`
-  flex: 1 0 auto;
-  margin: 0 auto;
-  margin-top: 40px;
-  width: 20%;
+  > form {
+    flex: 1 0 auto;
+    margin: 0 auto;
+    margin-top: 40px;
+    width: 20%;
+  }
+
+  @media (max-width: 480px) {
+    > form {
+      width: 80%;
+    }
+  }
 `
 
 const mapStateToProps = state => ({
@@ -54,7 +60,7 @@ const UserLogin = props => {
     <UserLoginPage>
       <Header />
 
-      <UserLoginForm onSubmit={event => handleSubmit(event)}>
+      <form onSubmit={event => handleSubmit(event)}>
         <Label
           className='login-form-user-name'
           htmlFor='username-login-input'
@@ -85,11 +91,10 @@ const UserLogin = props => {
 
         <Button
           className='login-button'
-          name='submit'
           title='Login'
           type='submit'
         />
-      </UserLoginForm>
+      </form>
 
       <Footer />
     </UserLoginPage>

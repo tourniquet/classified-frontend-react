@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 // styles
 import './Textarea.scss'
 
-export const Textarea = props =>
+const Textarea = props =>
   <textarea
     className={props.className}
     name={props.name}
@@ -21,3 +21,5 @@ Textarea.propTypes = {
   required: PropTypes.string,
   onChange: PropTypes.func.isRequired
 }
+
+export default Textarea

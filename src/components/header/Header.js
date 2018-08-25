@@ -2,12 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 // components
-import { Button } from '../Button/Button'
+import Button from '../Button/Button'
 
 // styles
 import './Header.scss'
 
-export const Header = () =>
+const Header = () =>
   <header>
     {/* modal
     registration
@@ -29,8 +29,13 @@ export const Header = () =>
     </button>
 
     <ul className='desktop-screen'>
-      <li style={{ display: 'none' }}>
-        Înregistrare
+      <li>
+        <Link
+          to={{ pathname: '/user/registration' }}
+          style={{ color: '#FFF' }}
+        >
+          Registration
+        </Link>
       </li>
       <li style={{ display: 'none' }}>
         Contul meu
@@ -45,3 +50,5 @@ export const Header = () =>
       </li>
     </ul>
   </header>
+
+export default Header

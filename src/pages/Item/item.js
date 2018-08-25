@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom'
 import { apiHost } from '../../config'
 
 // components
-import { Button } from '../../components/Button/Button'
-import { Header } from '../../components/Header/Header'
-import { Footer } from '../../components/Footer/Footer'
-import { Textarea } from '../../components/Textarea/Textarea'
+import Button from '../../components/Button/Button'
+import Header from '../../components/Header/Header'
+import Footer from '../../components/Footer/Footer'
+import Textarea from '../../components/Textarea/Textarea'
 
 // styles
 import './item.scss'

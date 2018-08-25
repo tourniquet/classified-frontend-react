@@ -14,17 +14,19 @@ import Item from './pages/Item/item'
 import UserLogin from './pages/User/Login/user-login'
 import UserRegistration from './pages/User/Registration/user-registration'
 
-// reducer
+// reducers
 import itemReducer from './reducers/itemReducer'
 import itemsReducer from './reducers/itemsReducer'
 import newItemReducer from './reducers/newItemReducer'
 import searchReducer from './reducers/searchReducer'
+import registrationReducer from './reducers/registrationReducer'
 
 const rootReducer = combineReducers({
   itemReducer,
   itemsReducer,
   newItemReducer,
-  searchReducer
+  searchReducer,
+  registrationReducer
 })
 
 const store = createStore(
@@ -34,15 +36,13 @@ const store = createStore(
 
 const App = () => (
   <Provider store={store}>
-    <div className='container'>
-      <Switch>
-        <Route path='/' exact component={IndexPage} />
-        <Route path='/item/add' component={ItemNew} />
-        <Route path='/item/:url(\d+)' component={Item} />
-        <Route path='/user/login' component={UserLogin} />
-        <Route path='/user/registration' component={UserRegistration} />
-      </Switch>
-    </div>
+    <Switch>
+      <Route path='/' exact component={IndexPage} />
+      <Route path='/item/add' component={ItemNew} />
+      <Route path='/item/:url(\d+)' component={Item} />
+      <Route path='/user/login' component={UserLogin} />
+      <Route path='/user/registration' component={UserRegistration} />
+    </Switch>
   </Provider>
 )
 

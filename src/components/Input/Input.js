@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 // styles
 import './Input.scss'
 
-export const Input = props =>
+const Input = props =>
   <input
     className={`input ${props.className}`}
     name={props.name}
@@ -32,3 +32,5 @@ Input.propTypes = {
   required: PropTypes.string,
   onChange: PropTypes.func.isRequired
 }
+
+export default Input

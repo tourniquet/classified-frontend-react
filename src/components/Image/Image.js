@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 // styles
 import './Image.scss'
 
-export const Image = props =>
+const Image = props =>
   <img
     className={props.className}
     src={props.src}
@@ -16,3 +16,5 @@ Image.propTypes = {
   src: PropTypes.string,
   style: PropTypes.object
 }
+
+export default Image

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 // styles
 import './Label.scss'
 
-export const Label = props => {
+const Label = props => {
   const { className, htmlFor, title, style, children } = props
 
   return (
@@ -25,3 +25,5 @@ Label.propTypes = {
   style: PropTypes.object,
   children: PropTypes.element
 }
+
+export default Label

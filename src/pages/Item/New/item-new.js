@@ -5,13 +5,13 @@ import { connect } from 'react-redux'
 import { apiHost } from '../../../config'
 
 // components
-import { Button } from '../../../components/Button/Button'
-import { Footer } from '../../../components/Footer/Footer'
-import { Header } from '../../../components/Header/Header'
-import { Input } from '../../../components/Input/Input'
-import { Label } from '../../../components/Label/Label'
+import Button from '../../../components/Button/Button'
+import Footer from '../../../components/Footer/Footer'
+import Header from '../../../components/Header/Header'
+import Input from '../../../components/Input/Input'
+import Label from '../../../components/Label/Label'
 import Search from '../../../components/Search/Search'
-import { Textarea } from '../../../components/Textarea/Textarea'
+import Textarea from '../../../components/Textarea/Textarea'
 
 // styles
 import './item-new.scss'

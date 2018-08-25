@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 // components
-import { Input } from '../Input/Input'
+import Input from '../Input/Input'
 
 // styles
 import './Search.scss'

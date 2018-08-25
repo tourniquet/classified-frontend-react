@@ -5,7 +5,7 @@ import { socials } from '../../config'
 // styles
 import './Footer.scss'
 
-export const Footer = () =>
+const Footer = () =>
   <footer>
     <div className='footer-container'>
       <div className='copyright'>
@@ -19,3 +19,5 @@ export const Footer = () =>
       </nav>
     </div>
   </footer>
+
+export default Footer
