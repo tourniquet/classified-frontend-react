@@ -7,7 +7,6 @@ import './Input.scss'
 const Input = props =>
   <input
     className={`input ${props.className}`}
-    name={props.name}
     placeholder={props.placeholder}
     inputmode={props.inputmode}
     type={props.type || 'text'}
@@ -21,7 +20,6 @@ const Input = props =>
 
 Input.propTypes = {
   className: PropTypes.string,
-  name: PropTypes.string,
   placeholder: PropTypes.string,
   inputmode: PropTypes.string,
   type: PropTypes.string,

@@ -1,12 +1,11 @@
 const initialState = {
   email: '',
   password: '',
-  passwordConfirmation: '',
-  emailIsTaken: false,
-  passwordNotMatch: false
+  emailPasswordError: false,
+  emailUndefined: false
 }
 
-const registrationReducer = (state = initialState, action) => {
+const loginReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'USER_EMAIL':
       return Object.assign({}, state, {
@@ -16,26 +15,22 @@ const registrationReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         password: action.password
       })
-    case 'USER_PASSWORD_CONFIRMATION':
-      return Object.assign({}, state, {
-        passwordConfirmation: action.passwordConfirmation
-      })
     case 'SET_INITIAL_STATE':
       return Object.assign({}, state, {
-        emailIsTaken: false,
-        passwordNotMatch: false
+        emailPasswordError: false,
+        emailUndefined: false
       })
-    case 'EMAIL_IS_TAKEN':
+    case 'EMAIL_PASSWORD_ERROR':
       return Object.assign({}, state, {
-        emailIsTaken: true
+        emailPasswordError: true
       })
-    case 'PASSWORD_NOT_MATCH':
+    case 'EMAIL_UNDEFINED':
       return Object.assign({}, state, {
-        passwordNotMatch: true
+        emailUndefined: true
       })
     default:
       return state
   }
 }
 
-export default registrationReducer
+export default loginReducer

@@ -12,7 +12,6 @@ import Header from '../../../components/Header/Header'
 import Input from '../../../components/Input/Input'
 import Label from '../../../components/Label/Label'
 
-// styles
 const UserRegistrationPage = styled.div`
   display: flex;
   flex-direction: column;
@@ -32,10 +31,17 @@ const UserRegistrationPage = styled.div`
   }
 `
 
+const ErrorMessage = styled.p`
+  color: red;
+  margin-bottom: 18px;
+`
+
 const mapStateToProps = state => ({
   email: state.registrationReducer.email,
   password: state.registrationReducer.password,
-  passwordConfirmation: state.registrationReducer.passwordConfirmation
+  passwordConfirmation: state.registrationReducer.passwordConfirmation,
+  emailIsTaken: state.registrationReducer.emailIsTaken,
+  passwordNotMatch: state.registrationReducer.passwordNotMatch
 })
 
 const UserRegistration = props => {
@@ -54,14 +60,23 @@ const UserRegistration = props => {
     passwordConfirmation: event.target.value
   })
 
+  const setInitialState = () => ({ type: 'SET_INITIAL_STATE' })
+
+  const emailIsTaken = () => ({ type: 'EMAIL_IS_TAKEN' })
+
+  const passwordUnmatch = () => ({ type: 'PASSWORD_NOT_MATCH' })
+
   const handleSubmit = event => {
     event.preventDefault()
 
-    const url = `${apiHost}/register.php`
+    // set initial state after user set new email and change password
+    props.dispatch(setInitialState())
+
+    const url = `${apiHost}/registration.php`
     const data = {
       email: props.email,
       password: props.password,
-      passwordConfirmation: props.passwordConfirmation // passwordConfirmation ?
+      passwordConfirmation: props.passwordConfirmation
     }
 
     window
@@ -69,7 +84,12 @@ const UserRegistration = props => {
         method: 'POST',
         body: JSON.stringify(data)
       })
-      .then(() => {}) //* { window.location = `` })*/)
+      .then(response => response.json())
+      .then(result => {
+        if (result === 'Success!') window.location = `/user/login`
+        else if (result === 'Existing!') props.dispatch(emailIsTaken())
+        else if (result === 'Unmatch!') props.dispatch(passwordUnmatch())
+      })
       .catch(error => console.error(error))
   }
 
@@ -89,9 +109,15 @@ const UserRegistration = props => {
           placeholder='Email'
           value={props.email}
           type='email'
+          pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
           required
           onChange={event => props.dispatch(setUserEmail(event))}
         />
+        { props.emailIsTaken &&
+          <ErrorMessage>
+            Email is already taken!
+          </ErrorMessage>
+        }
 
         <Label
           className='registration-form-password'
@@ -122,6 +148,11 @@ const UserRegistration = props => {
           required
           onChange={event => props.dispatch(confirmUserPassword(event))}
         />
+        { props.passwordNotMatch &&
+          <ErrorMessage>
+            Passwords did not match!
+          </ErrorMessage>
+        }
 
         <Button
           className='user-registration-submit-button'

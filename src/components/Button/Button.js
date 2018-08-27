@@ -16,7 +16,6 @@ const Button = props =>
 
 Button.propTypes = {
   className: PropTypes.string,
-  name: PropTypes.string,
   onBlur: PropTypes.func,
   onClick: PropTypes.func,
   type: PropTypes.string

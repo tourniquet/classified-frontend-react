@@ -20,13 +20,15 @@ import itemsReducer from './reducers/itemsReducer'
 import newItemReducer from './reducers/newItemReducer'
 import searchReducer from './reducers/searchReducer'
 import registrationReducer from './reducers/registrationReducer'
+import loginReducer from './reducers/loginReducer'
 
 const rootReducer = combineReducers({
   itemReducer,
   itemsReducer,
   newItemReducer,
   searchReducer,
-  registrationReducer
+  registrationReducer,
+  loginReducer
 })
 
 const store = createStore(

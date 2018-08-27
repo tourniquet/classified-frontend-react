@@ -116,8 +116,9 @@ const ItemNew = props => {
   })
 
   const handleSubmit = event => {
-    const url = `${apiHost}/item-posted.php`
-    const item = {
+    event.preventDefault()
+
+    const data = {
       url: new Date().getTime().toString().slice(5),
       title: props.title,
       description: props.description,
@@ -125,15 +126,14 @@ const ItemNew = props => {
       price: props.price
     }
 
+    const url = `${apiHost}/item-posted.php`
     window
       .fetch(url, {
         method: 'POST',
-        body: JSON.stringify(item)
+        body: JSON.stringify(data)
       })
-      .then(() => { window.location = `/item/${item.url}` })
+      .then(() => { window.location = `/item/${data.url}` })
       .catch(err => console.error(err))
-
-    event.preventDefault()
   }
 
   return (
@@ -144,7 +144,7 @@ const ItemNew = props => {
 
       <form
         className='form'
-        onSubmit={event => handleSubmit(event)}
+        onSubmit={handleSubmit}
       >
         <div className='left-side'>
           <Label
@@ -218,7 +218,6 @@ const ItemNew = props => {
           />
           <Input
             className='title input'
-            name='title'
             placeholder='Title'
             value={props.title}
             required
@@ -278,7 +277,6 @@ const ItemNew = props => {
             <Input
               id='phone'
               className='input phone'
-              name='phone'
               inputmode='numeric'
               pattern='[0-9]*'
               placeholder='Phone number'
@@ -295,7 +293,6 @@ const ItemNew = props => {
             <Input
               id='contact-name'
               className='input contact-name'
-              name='contact-name'
               placeholder='Contact name'
               required
               onChange={el => props.dispatch(setUserName(el))}
@@ -310,7 +307,6 @@ const ItemNew = props => {
               id='contact-email'
               className='input contact-email'
               type='email'
-              name='contact-email'
               placeholder='Email'
               pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
             />
@@ -326,7 +322,6 @@ const ItemNew = props => {
               className='input price'
               inputmode='numeric'
               pattern='[0-9]*'
-              name='price'
               placeholder='Price'
               onChange={el => props.dispatch(setItemPrice(el))}
             />
@@ -351,7 +346,6 @@ const ItemNew = props => {
 
           <Button
             className='post-button'
-            name='submit'
             title='Submit'
             type='submit'
           />
