@@ -17,15 +17,30 @@
 }
 
 .active-tab {
-  background: url('/img/arrow_up.png') no-repeat #F6F6F6;
-  background-position: 92%;
+  background: #F6F6F6;
   border-bottom-left-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
+  position: relative;
+
+  img.arrow {
+    display: inline-block;
+    position: absolute;
+    right: 20px;
+    top: 22px;
+    transform: rotate(-90deg);
+  }
 }
 
 .inactive-tab {
-  background: url('/img/arrow_down.png') no-repeat;
-  background-position: 92%;
+  position: relative;
+
+  img.arrow {
+    display: inline-block;
+    position: absolute;
+    right: 20px;
+    top: 22px;
+    transform: rotate(90deg);
+  }
 }
 
 .hide-ul-menu {
@@ -37,6 +52,7 @@
   box-sizing: border-box;
   height: auto;
   position: absolute;
+  z-index: 1;
 
   & li {
     height: 58px;
@@ -64,13 +80,7 @@
   }
 
   .active-tab {
-    background: url('/img/arrow_up.png') no-repeat #F6F6F6;
-    background-position: 92%;
-  }
-
-  .inactive-tab {
-    background: url('/img/arrow_down.png') no-repeat;
-    background-position: 92%;
+    background: #F6F6F6;
   }
 
   .hide-ul-menu {
@@ -81,7 +91,7 @@
     @include button;
     border-radius: 0;
     height: auto;
-    margin-top: -25px;
+    margin-top: -27px;
     max-width: 270px;
   }
 

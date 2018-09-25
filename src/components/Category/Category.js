@@ -48,7 +48,6 @@ const CategoryBlock = styled.div`
         display: inline-block;
         position: absolute;
         right: 20px;
-        transform: rotate(90deg);
       }
     }
 
@@ -62,7 +61,7 @@ const Category = () =>
   <CategoryBlock>
     <a>
       Category name
-      <img src='/img/arrow_up.png' />
+      <img src='/img/arrow.png' />
     </a>
 
     <ul>

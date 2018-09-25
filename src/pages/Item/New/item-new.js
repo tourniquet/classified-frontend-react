@@ -156,7 +156,12 @@ const ItemNew = props => {
             className={props.showCategories ? 'button desktop-button active-tab' : 'button desktop-button inactive-tab'}
             title={props.category}
             onClick={() => props.dispatch(toggleCategoriesList())}
-          />
+          >
+            <img
+              className='arrow'
+              src='/img/arrow.png'
+            />
+          </Button>
           <ul className={props.showCategories ? 'show-ul-menu' : 'hide-ul-menu'}>
             {props.categories.map((el, id) => (
               <li
@@ -177,7 +182,12 @@ const ItemNew = props => {
             className={props.showSubcategories ? 'button desktop-button active-tab' : 'button desktop-button inactive-tab'}
             title={props.subcategory}
             onClick={() => props.dispatch(toggleSubcategoriesList())}
-          />
+          >
+            <img
+              className='arrow'
+              src='/img/arrow.png'
+            />
+          </Button>
           <ul className={props.showSubcategories ? 'show-ul-menu' : 'show-ul-menu hide-ul-menu'}>
             {props.subcategories.map((el, id) => (
               <li
@@ -197,7 +207,12 @@ const ItemNew = props => {
             className={props.showRegions ? 'button desktop-button active-tab' : 'button desktop-button inactive-tab'}
             title={props.region}
             onClick={() => props.dispatch(toggleRegionsList())}
-          />
+          >
+            <img
+              className='arrow'
+              src='/img/arrow.png'
+            />
+          </Button>
           <ul className={props.showRegions ? 'show-ul-menu' : 'show-ul-menu hide-ul-menu'}>
             {props.regions.map((el, id) => (
               <li
@@ -330,7 +345,12 @@ const ItemNew = props => {
                 className={props.showCurrencies ? 'button desktop-button active-tab' : 'button desktop-button inactive-tab'}
                 title={props.currency}
                 onClick={() => props.dispatch(toggleCurrencies())}
-              />
+              >
+                <img
+                  className='arrow'
+                  src='/img/arrow.png'
+                />
+              </Button>
               <ul className={props.showCurrencies ? 'currencies show-ul-menu' : 'hide-ul-menu'}>
                 {props.currencies.map((el, id) => (
                   <li

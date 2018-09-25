@@ -12,6 +12,9 @@ const Button = props =>
     type={props.type || 'button'}
   >
     {props.title}
+    { props.children &&
+      props.children
+    }
   </button>
 
 Button.propTypes = {
