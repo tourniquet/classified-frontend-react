@@ -78,7 +78,7 @@ class Item extends Component {
 
           <div className='ad-info'>
             <span>Posted by</span>
-            <span className='posted-by'>&nbsp;OnlyAppleXXX</span>
+            <span className='posted-by'>&nbsp;{name}</span>
           </div>
 
           <hr className='under-ad-info' />
