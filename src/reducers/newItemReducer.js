@@ -10,12 +10,12 @@ const initialState = {
   showRegions: false,
   title: '',
   description: '',
+  images: [''],
+  phone: '',
   price: '',
   currencies: ['$', '£'],
   currency: null,
   showCurrencies: false,
-  images: [''],
-  phoneNumber: '',
   userName: ''
 }
 
@@ -103,7 +103,7 @@ const newItemReducer = (state = initialState, action) => {
         showCategories: false,
         showSubcategories: false,
         showRegions: false,
-        phoneNumber: action.phoneNumber,
+        phone: action.phone,
         showCurrencies: false
       })
     case 'SET_USER_NAME':

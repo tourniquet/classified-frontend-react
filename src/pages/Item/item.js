@@ -17,6 +17,7 @@ import './item.scss'
 const mapStateToProps = state => ({
   title: state.itemReducer.title,
   description: state.itemReducer.description,
+  phone: state.itemReducer.phone,
   name: state.itemReducer.name,
   price: state.itemReducer.price,
   published: state.itemReducer.published,
@@ -48,6 +49,7 @@ class Item extends Component {
     const {
       title,
       description,
+      phone,
       name,
       price,
       published,
@@ -122,7 +124,7 @@ class Item extends Component {
             </div>
             <div className='contacts'>
               <span className='label'>Posted by:&nbsp;</span>
-              <span>079357745, {name}</span>
+              <span>{phone}, {name}</span>
             </div>
           </div>
 

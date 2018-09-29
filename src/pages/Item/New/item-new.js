@@ -28,12 +28,12 @@ const mapStateToProps = state => ({
   showRegions: state.newItemReducer.showRegions,
   title: state.newItemReducer.title,
   description: state.newItemReducer.description,
+  images: state.newItemReducer.images,
+  phone: state.newItemReducer.phone,
   price: state.newItemReducer.price,
   currency: state.newItemReducer.currency,
   currencies: state.newItemReducer.currencies,
   showCurrencies: state.newItemReducer.showCurrencies,
-  images: state.newItemReducer.images,
-  phoneNumber: state.newItemReducer.phoneNumber,
   userName: state.newItemReducer.userName
 })
 
@@ -98,7 +98,7 @@ const ItemNew = props => {
 
   const setPhoneNumber = el => ({
     type: 'SET_PHONE_NUMBER',
-    phoneNumber: el.target.value
+    phone: el.target.value
   })
 
   const setUserName = el => ({
@@ -122,6 +122,7 @@ const ItemNew = props => {
       url: new Date().getTime().toString().slice(5),
       title: props.title,
       description: props.description,
+      phone: props.phone,
       name: props.userName,
       price: props.price
     }
