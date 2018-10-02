@@ -86,7 +86,7 @@ const ItemNew = props => {
     const imageURL = window.URL.createObjectURL(blob)
 
     return {
-      type: 'UPLOAD_IMAGE',
+      type: 'SET_IMAGE_THUMBNAIL',
       image: imageURL
     }
   }
@@ -118,23 +118,40 @@ const ItemNew = props => {
   const handleSubmit = event => {
     event.preventDefault()
 
-    const data = {
-      url: new Date().getTime().toString().slice(5),
-      title: props.title,
-      description: props.description,
-      phone: props.phone,
-      name: props.userName,
-      price: props.price
-    }
+    const form = document.getElementById('form')
+    const formData = new window.FormData(form)
+
+    const date = new Date().getTime().toString().slice(5)
+    formData.append('url', date)
 
     const url = `${apiHost}/item-posted.php`
     window
       .fetch(url, {
         method: 'POST',
-        body: JSON.stringify(data)
+        body: formData
       })
-      .then(() => { window.location = `/item/${data.url}` })
+      .then(res => console.log('some'))
+      // .then(() => { window.location = `/item/${data.url}` })
       .catch(err => console.error(err))
+
+    // const data = {
+    //   url: new Date().getTime().toString().slice(5),
+    //   title: props.title,
+    //   description: props.description,
+    //   images: props.images,
+    //   phone: props.phone,
+    //   name: props.userName,
+    //   price: props.price
+    // }
+
+    // const url = `${apiHost}/item-posted.php`
+    // window
+    //   .fetch(url, {
+    //     method: 'POST',
+    //     body: JSON.stringify(data)
+    //   })
+    //   .then(() => { window.location = `/item/${data.url}` })
+    //   .catch(err => console.error(err))
   }
 
   return (
@@ -144,6 +161,7 @@ const ItemNew = props => {
       <Search />
 
       <form
+        id='form'
         className='form'
         onSubmit={handleSubmit}
       >
@@ -236,6 +254,7 @@ const ItemNew = props => {
             className='title input'
             placeholder='Title'
             value={props.title}
+            name='title'
             required
             onChange={el => props.dispatch(setItemTitle(el))}
           />
@@ -275,8 +294,10 @@ const ItemNew = props => {
                   <span src='/img/remove.png' style={{ display: !el.length ? 'inline-block' : 'none' }}>+</span>
                   <Input
                     className='input-file'
+                    name='image[]'
                     accept='image/jpeg,image/png,image/gif'
                     type='file'
+                    multiple='multiple'
                     onChange={el => props.dispatch(handleImages(el))}
                   />
                 </Label>
@@ -293,6 +314,7 @@ const ItemNew = props => {
             <Input
               id='phone'
               className='input phone'
+              name='phone'
               inputmode='numeric'
               pattern='[0-9]*'
               placeholder='Phone number'
@@ -309,6 +331,7 @@ const ItemNew = props => {
             <Input
               id='contact-name'
               className='input contact-name'
+              name='name'
               placeholder='Contact name'
               required
               onChange={el => props.dispatch(setUserName(el))}
@@ -322,6 +345,7 @@ const ItemNew = props => {
             <Input
               id='contact-email'
               className='input contact-email'
+              name='email'
               type='email'
               placeholder='Email'
               pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
@@ -336,6 +360,7 @@ const ItemNew = props => {
           <div className='price-block'>
             <Input
               className='input price'
+              name='price'
               inputmode='numeric'
               pattern='[0-9]*'
               placeholder='Price'

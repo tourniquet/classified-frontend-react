@@ -82,7 +82,7 @@ const newItemReducer = (state = initialState, action) => {
         description: action.description,
         showCurrencies: false
       })
-    case 'UPLOAD_IMAGE':
+    case 'SET_IMAGE_THUMBNAIL':
       return Object.assign({}, state, {
         showCategories: false,
         showSubcategories: false,

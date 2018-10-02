@@ -7,9 +7,11 @@ import './Input.scss'
 const Input = props =>
   <input
     className={`input ${props.className}`}
+    name={props.name}
     placeholder={props.placeholder}
     inputmode={props.inputmode}
     type={props.type || 'text'}
+    multiple={props.multiple}
     accept={props.accept}
     value={props.value}
     aria-label={props['aria-label']}
