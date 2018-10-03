@@ -8,15 +8,10 @@ const initialState = {
   regions: ['London', 'Manchester', 'Oxford'],
   region: null,
   showRegions: false,
-  title: '',
-  description: '',
   images: [''],
-  phone: '',
-  price: '',
   currencies: ['$', '£'],
   currency: null,
-  showCurrencies: false,
-  userName: ''
+  showCurrencies: false
 }
 
 const newItemReducer = (state = initialState, action) => {
@@ -66,22 +61,6 @@ const newItemReducer = (state = initialState, action) => {
         showRegions: false,
         showCurrencies: false
       })
-    case 'SET_ITEM_TITLE':
-      return Object.assign({}, state, {
-        showCategories: false,
-        showSubcategories: false,
-        showRegions: false,
-        title: action.title,
-        showCurrencies: false
-      })
-    case 'SET_ITEM_DESCRIPTION':
-      return Object.assign({}, state, {
-        showCategories: false,
-        showSubcategories: false,
-        showRegions: false,
-        description: action.description,
-        showCurrencies: false
-      })
     case 'SET_IMAGE_THUMBNAIL':
       return Object.assign({}, state, {
         showCategories: false,
@@ -96,30 +75,6 @@ const newItemReducer = (state = initialState, action) => {
         showSubcategories: false,
         showRegions: false,
         images: state.images.filter(el => el !== state.images[action.id]),
-        showCurrencies: false
-      })
-    case 'SET_PHONE_NUMBER':
-      return Object.assign({}, state, {
-        showCategories: false,
-        showSubcategories: false,
-        showRegions: false,
-        phone: action.phone,
-        showCurrencies: false
-      })
-    case 'SET_USER_NAME':
-      return Object.assign({}, state, {
-        showCategories: false,
-        showSubcategories: false,
-        showRegions: false,
-        userName: action.userName,
-        showCurrencies: false
-      })
-    case 'SET_ITEM_PRICE':
-      return Object.assign({}, state, {
-        showCategories: false,
-        showSubcategories: false,
-        showRegions: false,
-        price: action.price,
         showCurrencies: false
       })
     case 'TOGGLE_CURRENCIES':

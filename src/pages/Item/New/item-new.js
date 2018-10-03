@@ -26,15 +26,10 @@ const mapStateToProps = state => ({
   regions: state.newItemReducer.regions,
   region: state.newItemReducer.region,
   showRegions: state.newItemReducer.showRegions,
-  title: state.newItemReducer.title,
-  description: state.newItemReducer.description,
   images: state.newItemReducer.images,
-  phone: state.newItemReducer.phone,
-  price: state.newItemReducer.price,
   currency: state.newItemReducer.currency,
   currencies: state.newItemReducer.currencies,
-  showCurrencies: state.newItemReducer.showCurrencies,
-  userName: state.newItemReducer.userName
+  showCurrencies: state.newItemReducer.showCurrencies
 })
 
 const ItemNew = props => {
@@ -65,21 +60,6 @@ const ItemNew = props => {
     id
   })
 
-  const setItemTitle = el => ({
-    type: 'SET_ITEM_TITLE',
-    title: el.target.value
-  })
-
-  const setItemDescription = el => ({
-    type: 'SET_ITEM_DESCRIPTION',
-    description: el.target.value
-  })
-
-  const setItemPrice = el => ({
-    type: 'SET_ITEM_PRICE',
-    price: el.target.value
-  })
-
   const handleImages = el => {
     const image = el.target.files[0]
     const blob = new window.Blob([image], { type: 'image/*' })
@@ -94,16 +74,6 @@ const ItemNew = props => {
   const removeImage = id => ({
     type: 'REMOVE_IMAGE',
     id
-  })
-
-  const setPhoneNumber = el => ({
-    type: 'SET_PHONE_NUMBER',
-    phone: el.target.value
-  })
-
-  const setUserName = el => ({
-    type: 'SET_USER_NAME',
-    userName: el.target.value
   })
 
   const toggleCurrencies = () => ({
@@ -133,16 +103,6 @@ const ItemNew = props => {
       .then(res => console.log('some'))
       // .then(() => { window.location = `/item/${data.url}` })
       .catch(err => console.error(err))
-
-    // const data = {
-    //   url: new Date().getTime().toString().slice(5),
-    //   title: props.title,
-    //   description: props.description,
-    //   images: props.images,
-    //   phone: props.phone,
-    //   name: props.userName,
-    //   price: props.price
-    // }
 
     // const url = `${apiHost}/item-posted.php`
     // window
@@ -253,10 +213,8 @@ const ItemNew = props => {
           <Input
             className='title input'
             placeholder='Title'
-            value={props.title}
             name='title'
             required
-            onChange={el => props.dispatch(setItemTitle(el))}
           />
 
           <Label
@@ -268,9 +226,7 @@ const ItemNew = props => {
             className='description'
             name='description'
             placeholder='Description'
-            value={props.description}
             required
-            onChange={el => props.dispatch(setItemDescription(el))}
           />
 
           <Label
@@ -318,9 +274,7 @@ const ItemNew = props => {
               inputmode='numeric'
               pattern='[0-9]*'
               placeholder='Phone number'
-              value={props.phone}
               required
-              onChange={el => props.dispatch(setPhoneNumber(el))}
             />
 
             <Label
@@ -334,7 +288,6 @@ const ItemNew = props => {
               name='name'
               placeholder='Contact name'
               required
-              onChange={el => props.dispatch(setUserName(el))}
             />
 
             <Label
@@ -364,7 +317,6 @@ const ItemNew = props => {
               inputmode='numeric'
               pattern='[0-9]*'
               placeholder='Price'
-              onChange={el => props.dispatch(setItemPrice(el))}
             />
             <div className='currency'>
               <Button
