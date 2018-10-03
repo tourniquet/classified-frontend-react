@@ -294,7 +294,7 @@ const ItemNew = props => {
                   <span src='/img/remove.png' style={{ display: !el.length ? 'inline-block' : 'none' }}>+</span>
                   <Input
                     className='input-file'
-                    name='image[]'
+                    name='images[]'
                     accept='image/jpeg,image/png,image/gif'
                     type='file'
                     multiple='multiple'
