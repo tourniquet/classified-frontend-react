@@ -1,14 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-// styles
-import './Image.scss'
-
 const Image = props =>
   <img
     className={props.className}
     src={props.src}
     style={props.style}
+    onClick={props.onClick}
   />
 
 Image.propTypes = {

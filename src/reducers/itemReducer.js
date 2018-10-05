@@ -7,6 +7,7 @@ const initialState = {
   price: null,
   currency: null,
   images: [''],
+  image: null,
   phone: '',
   name: null,
   published: null
@@ -19,6 +20,7 @@ const itemReducer = (state = initialState, action) => {
       const {
         title,
         description,
+        image,
         phone,
         name,
         price,
@@ -30,6 +32,7 @@ const itemReducer = (state = initialState, action) => {
         title,
         description,
         // images: state.item.images,
+        image,
         phone,
         name,
         price,

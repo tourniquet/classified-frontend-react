@@ -8,6 +8,7 @@ import { apiHost } from '../../../config'
 import Button from '../../../components/Button/Button'
 import Footer from '../../../components/Footer/Footer'
 import Header from '../../../components/Header/Header'
+import Image from '../../../components/Image/Image'
 import Input from '../../../components/Input/Input'
 import Label from '../../../components/Label/Label'
 import Search from '../../../components/Search/Search'
@@ -136,7 +137,7 @@ const ItemNew = props => {
             title={props.category}
             onClick={() => props.dispatch(toggleCategoriesList())}
           >
-            <img
+            <Image
               className='arrow'
               src='/img/arrow.png'
             />
@@ -162,7 +163,7 @@ const ItemNew = props => {
             title={props.subcategory}
             onClick={() => props.dispatch(toggleSubcategoriesList())}
           >
-            <img
+            <Image
               className='arrow'
               src='/img/arrow.png'
             />
@@ -187,7 +188,7 @@ const ItemNew = props => {
             title={props.region}
             onClick={() => props.dispatch(toggleRegionsList())}
           >
-            <img
+            <Image
               className='arrow'
               src='/img/arrow.png'
             />
@@ -236,7 +237,7 @@ const ItemNew = props => {
           <div className='images'>
             {props.images.map((el, id) => (
               <div className='image-block'>
-                <img
+                <Image
                   className='remove-image'
                   src='/img/remove.png'
                   style={{ display: el.length ? 'inline-block' : 'none' }}
@@ -324,7 +325,7 @@ const ItemNew = props => {
                 title={props.currency}
                 onClick={() => props.dispatch(toggleCurrencies())}
               >
-                <img
+                <Image
                   className='arrow'
                   src='/img/arrow.png'
                 />

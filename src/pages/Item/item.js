@@ -8,6 +8,7 @@ import { apiHost } from '../../config'
 // components
 import Button from '../../components/Button/Button'
 import Header from '../../components/Header/Header'
+import Image from '../../components/Image/Image'
 import Footer from '../../components/Footer/Footer'
 import Textarea from '../../components/Textarea/Textarea'
 
@@ -17,6 +18,7 @@ import './item.scss'
 const mapStateToProps = state => ({
   title: state.itemReducer.title,
   description: state.itemReducer.description,
+  image: state.itemReducer.image,
   phone: state.itemReducer.phone,
   name: state.itemReducer.name,
   price: state.itemReducer.price,
@@ -49,6 +51,7 @@ class Item extends Component {
     const {
       title,
       description,
+      image,
       phone,
       name,
       price,
@@ -62,6 +65,8 @@ class Item extends Component {
       hour: 'numeric',
       minute: 'numeric'
     }
+
+    const imageUrl = `${apiHost}uploads/${image}`
 
     return (
       <div className='item-page'>
@@ -104,6 +109,10 @@ class Item extends Component {
             </div>
 
             <div className='images'>
+              <Image
+                src={imageUrl}
+              />
+
               {/* img(v-bind:src="firstImage.thumbnail")
               img(v-bind:src="secondImage.thumbnail")
               img(v-bind:src="thirdImage.thumbnail") */}
