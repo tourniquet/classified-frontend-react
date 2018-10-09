@@ -18,7 +18,7 @@ import './item.scss'
 const mapStateToProps = state => ({
   title: state.itemReducer.title,
   description: state.itemReducer.description,
-  image: state.itemReducer.image,
+  images: state.itemReducer.images,
   phone: state.itemReducer.phone,
   name: state.itemReducer.name,
   price: state.itemReducer.price,
@@ -51,7 +51,7 @@ class Item extends Component {
     const {
       title,
       description,
-      image,
+      images,
       phone,
       name,
       price,
@@ -66,7 +66,7 @@ class Item extends Component {
       minute: 'numeric'
     }
 
-    const imageUrl = `${apiHost}uploads/${image}`
+    const imageUrl = `${apiHost}uploads/thumb_`
 
     return (
       <div className='item-page'>
@@ -109,13 +109,13 @@ class Item extends Component {
             </div>
 
             <div className='images'>
-              <Image
-                src={imageUrl}
-              />
-
-              {/* img(v-bind:src="firstImage.thumbnail")
-              img(v-bind:src="secondImage.thumbnail")
-              img(v-bind:src="thirdImage.thumbnail") */}
+              {images.map(el => (
+                <div className='image-block'>
+                  <Image
+                    src={`${imageUrl}${el}`}
+                  />
+                </div>
+              ))}
             </div>
           </div>
 

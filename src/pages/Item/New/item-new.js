@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
 
 // API host config
 import { apiHost } from '../../../config'
@@ -16,6 +17,13 @@ import Textarea from '../../../components/Textarea/Textarea'
 
 // styles
 import './item-new.scss'
+
+const ImageBlock = styled.div`
+  &:last-child {
+    /* Render this element only if images array length <= 3 */
+    display: ${props => props.images.length <= 3 ? 'block' : 'none'}
+  }
+`
 
 const mapStateToProps = state => ({
   categories: state.newItemReducer.categories,
@@ -101,18 +109,9 @@ const ItemNew = props => {
         method: 'POST',
         body: formData
       })
-      .then(res => console.log('some'))
-      // .then(() => { window.location = `/item/${data.url}` })
+      .then(response => response.json())
+      .then(result => { window.location = `/item/${result}` })
       .catch(err => console.error(err))
-
-    // const url = `${apiHost}/item-posted.php`
-    // window
-    //   .fetch(url, {
-    //     method: 'POST',
-    //     body: JSON.stringify(data)
-    //   })
-    //   .then(() => { window.location = `/item/${data.url}` })
-    //   .catch(err => console.error(err))
   }
 
   return (
@@ -231,19 +230,18 @@ const ItemNew = props => {
           />
 
           <Label
-            htmlFor='title'
+            htmlFor='images'
             title='Add images'
           />
           <div className='images'>
             {props.images.map((el, id) => (
-              <div className='image-block'>
+              <ImageBlock images={props.images}>
                 <Image
                   className='remove-image'
                   src='/img/remove.png'
                   style={{ display: el.length ? 'inline-block' : 'none' }}
                   onClick={() => props.dispatch(removeImage(id))}
                 />
-                {/* TODO: Render this element only if images array length === 0 && < 6 */}
                 <Label
                   className='label-for-images'
                   style={{ backgroundImage: `url(${el})` }}
@@ -258,7 +256,7 @@ const ItemNew = props => {
                     onChange={el => props.dispatch(handleImages(el))}
                   />
                 </Label>
-              </div>
+              </ImageBlock>
             ))}
           </div>
 

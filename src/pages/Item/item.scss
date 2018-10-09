@@ -244,17 +244,26 @@
         .images {
           margin-top: 64px;
           display: flex;
-          justify-content: space-between;
+          justify-content: flex-start;
           flex-flow: row wrap;
           margin: 0;
           margin-bottom: -5px;
           width: 50%;
           float: right;
-          
-          img {
-            margin-bottom: 20px;
-            border-radius: 6px;
+
+          .image-block {
+            display: flex;
+            height: 170px;
+            justify-content: center;
+            margin-right: 10px;
+            width: 170px;
+
+            img {
+              align-self: center;
+              border-radius: 6px;
+            }
           }
+          
         }
       }
   
