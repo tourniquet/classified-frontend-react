@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 // components
-import Button from '../Button/Button'
+import RoundedButton from '../Buttons/RoundedButton'
 
 // styles
 import './Header.scss'
@@ -42,9 +42,12 @@ const Header = () =>
       </li>
       <li>
         <Link to={{ pathname: '/item/add' }}>
-          <Button
-            className='post-ad-button'
+          <RoundedButton
+            className='post-ad-button' // do I need this class name?
             title='Post an ad'
+            style={{
+              margin: '5px auto 0'
+            }}
           />
         </Link>
       </li>

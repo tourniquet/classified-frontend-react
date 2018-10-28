@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import { apiHost } from '../config'
 
 // components
-import Button from '../components/Button/Button'
+import CallToActionButton from '../components/Buttons/CallToActionButton'
 import Category from '../components/Category/Category'
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
@@ -109,8 +109,7 @@ class IndexPage extends Component {
           className='publish-item-button-link'
           to={{ pathname: '/item/add' }}
         >
-          <Button
-            className='publish-item-button'
+          <CallToActionButton
             title='Post an ad'
           />
         </Link>

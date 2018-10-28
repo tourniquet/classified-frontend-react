@@ -4,17 +4,16 @@ import PropTypes from 'prop-types'
 // styles
 import './Button.scss'
 
-const Button = props =>
+const Button = ({ className, onBlur, onClick, type, style, title, children }) =>
   <button
-    className={props.className}
-    onBlur={props.onBlur}
-    onClick={props.onClick}
-    type={props.type || 'button'}
+    className={className}
+    onBlur={onBlur}
+    onClick={onClick}
+    type={type || 'button'}
+    style={style}
   >
-    {props.title}
-    { props.children &&
-      props.children
-    }
+    {title}
+    { children && children }
   </button>
 
 Button.propTypes = {

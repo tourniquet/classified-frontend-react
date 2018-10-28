@@ -16,33 +16,6 @@
   @include button;
 }
 
-.active-tab {
-  background: #F6F6F6;
-  border-bottom-left-radius: 0 !important;
-  border-bottom-right-radius: 0 !important;
-  position: relative;
-
-  img.arrow {
-    display: inline-block;
-    position: absolute;
-    right: 20px;
-    top: 22px;
-    transform: rotate(-90deg);
-  }
-}
-
-.inactive-tab {
-  position: relative;
-
-  img.arrow {
-    display: inline-block;
-    position: absolute;
-    right: 20px;
-    top: 22px;
-    transform: rotate(90deg);
-  }
-}
-
 .hide-ul-menu {
   display: none !important;
 }
@@ -97,33 +70,5 @@
 
   .currencies {
     width: 107px;
-  }
-}
-
-/* --- Styles for fixed "post an ad" button */
-.publish-item-button-link {
-  display: none;
-}
-
-@media (max-width: 480px) {
-  .publish-item-button-link {
-    display: block;
-    height: 40px;
-
-    .publish-item-button {
-      background-color: #E7774A;
-      border: 0;
-      bottom: 0;
-      color: white;
-      font-size: 16px;
-      height: 40px;
-      left: 0;
-      line-height: 40px;
-      position: fixed;
-      text-align: center;
-      text-decoration: none;
-      width: 100%;
-      z-index: 1;
-    }
   }
 }

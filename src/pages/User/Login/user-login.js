@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import { apiHost } from '../../../config'
 
 // components
-import Button from '../../../components/Button/Button'
+import RoundedButton from '../../../components/Buttons/RoundedButton'
 import Footer from '../../../components/Footer/Footer'
 import Header from '../../../components/Header/Header'
 import Input from '../../../components/Input/Input'
@@ -134,7 +134,7 @@ const UserLogin = props => {
           </ErrorMessage>
         }
 
-        <Button
+        <RoundedButton
           className='login-button'
           title='Login'
           type='submit'
