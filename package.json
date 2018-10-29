@@ -9,7 +9,8 @@
     "build": "webpack --mode=production"
   },
   "standard": {
-    "parser": "babel-eslint"
+    "parser": "babel-eslint",
+    "globals": ["describe", "test", "expect"]
   },
   "author": "",
   "license": "ISC",
