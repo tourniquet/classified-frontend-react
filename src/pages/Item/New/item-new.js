@@ -6,14 +6,15 @@ import styled from 'styled-components'
 import { apiHost } from '../../../config'
 
 // components
-import RoundedButton from '../../../components/Buttons/RoundedButton'
 import DropDownButton from '../../../components/Buttons/DropDownButton'
 import Footer from '../../../components/Footer/Footer'
 import Header from '../../../components/Header/Header'
 import Image from '../../../components/Image/Image'
 import Input from '../../../components/Input/Input'
 import Label from '../../../components/Label/Label'
+import RoundedButton from '../../../components/Buttons/RoundedButton'
 import Search from '../../../components/Search/Search'
+import UnorderedList from '../../../components/UnorderedList'
 import Textarea from '../../../components/Textarea/Textarea'
 
 // styles
@@ -144,7 +145,9 @@ const ItemNew = props => {
             <i /> {/* arrow icon */}
           </DropDownButton>
 
-          <ul className={props.showCategories ? 'show-ul-menu' : 'hide-ul-menu'}>
+          <UnorderedList
+            className={props.showCategories ? 'show-ul-menu' : 'hide-ul-menu'}
+          >
             {props.categories.map((el, id) => (
               <li
                 key={id}
@@ -153,7 +156,7 @@ const ItemNew = props => {
                 {el}
               </li>
             ))}
-          </ul>
+          </UnorderedList>
 
           <Label
             className='mandatory'
@@ -171,12 +174,9 @@ const ItemNew = props => {
           >
             <i /> {/* arrow icon */}
           </DropDownButton>
-          <ul
-            className={
-              props.showSubcategories
-              ? 'show-ul-menu'
-              : 'show-ul-menu hide-ul-menu'
-            }>
+          <UnorderedList
+            className={props.showSubcategories ? 'show-ul-menu' : 'hide-ul-menu'}
+          >
             {props.subcategories.map((el, id) => (
               <li
                 key={id}
@@ -185,7 +185,7 @@ const ItemNew = props => {
                 {el}
               </li>
             ))}
-          </ul>
+          </UnorderedList>
 
           <Label
             htmlFor='region'
@@ -202,11 +202,9 @@ const ItemNew = props => {
           >
             <i /> {/* arrow icon */}
           </DropDownButton>
-          <ul className={
-            props.showRegions
-            ? 'show-ul-menu'
-            : 'show-ul-menu hide-ul-menu'
-          }>
+          <UnorderedList
+            className={props.showRegions ? 'show-ul-menu' : 'hide-ul-menu'}
+          >
             {props.regions.map((el, id) => (
               <li
                 key={id}
@@ -215,7 +213,7 @@ const ItemNew = props => {
                 {el}
               </li>
             ))}
-          </ul>
+          </UnorderedList>
         </div>
 
         <div className='right-side'>
@@ -347,7 +345,13 @@ const ItemNew = props => {
               >
                 <i /> {/* arrow icon */}
               </DropDownButton>
-              <ul className={props.showCurrencies ? 'currencies show-ul-menu' : 'hide-ul-menu'}>
+              <UnorderedList
+                className={
+                  `currencies ${props.showCurrencies}`
+                  ? 'show-ul-menu'
+                  : 'hide-ul-menu'
+                }
+              >
                 {props.currencies.map((el, id) => (
                   <li
                     key={id}
@@ -356,7 +360,7 @@ const ItemNew = props => {
                     {el}
                   </li>
                 ))}
-              </ul>
+              </UnorderedList>
             </div>
           </div>
 

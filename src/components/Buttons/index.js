@@ -1,9 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-// styles
-import './Button.scss'
-
 const Button = ({ className, onBlur, onClick, type, style, title, children }) =>
   <button
     className={className}

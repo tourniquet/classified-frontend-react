@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import Button from '../Button'
+import Button from '..'
 
 const RoundedButton = styled(Button)`
   background: transparent linear-gradient(#E7774A, #DF5B27) repeat scroll 0% 0%;
