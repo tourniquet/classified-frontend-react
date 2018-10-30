@@ -136,8 +136,8 @@ const ItemNew = props => {
           <DropDownButton
             className={
               props.showCategories
-              ? 'button desktop-button active-tab'
-              : 'button desktop-button inactive-tab'
+                ? 'button desktop-button active-tab'
+                : 'button desktop-button inactive-tab'
             }
             title={props.category}
             onClick={() => props.dispatch(toggleCategoriesList())}
@@ -166,8 +166,8 @@ const ItemNew = props => {
           <DropDownButton
             className={
               props.showSubcategories
-              ? 'button desktop-button active-tab'
-              : 'button desktop-button inactive-tab'
+                ? 'button desktop-button active-tab'
+                : 'button desktop-button inactive-tab'
             }
             title={props.subcategory}
             onClick={() => props.dispatch(toggleSubcategoriesList())}
@@ -194,8 +194,8 @@ const ItemNew = props => {
           <DropDownButton
             className={
               props.showRegions
-              ? 'button desktop-button active-tab'
-              : 'button desktop-button inactive-tab'
+                ? 'button desktop-button active-tab'
+                : 'button desktop-button inactive-tab'
             }
             title={props.region}
             onClick={() => props.dispatch(toggleRegionsList())}
@@ -262,7 +262,7 @@ const ItemNew = props => {
                     src='/img/remove.png'
                     style={{ display: !el.length ? 'inline-block' : 'none' }}>
                       +
-                    </span>
+                  </span>
                   <Input
                     className='input-file'
                     name='images[]'
@@ -337,8 +337,8 @@ const ItemNew = props => {
               <DropDownButton
                 className={
                   props.showCurrencies
-                  ? 'button desktop-button active-tab'
-                  : 'button desktop-button inactive-tab'
+                    ? 'button desktop-button active-tab'
+                    : 'button desktop-button inactive-tab'
                 }
                 title={props.currency}
                 onClick={() => props.dispatch(toggleCurrencies())}
@@ -347,9 +347,9 @@ const ItemNew = props => {
               </DropDownButton>
               <UnorderedList
                 className={
-                  `currencies ${props.showCurrencies}`
-                  ? 'show-ul-menu'
-                  : 'hide-ul-menu'
+                  props.showCurrencies
+                    ? 'currencies show-ul-menu'
+                    : 'hide-ul-menu'
                 }
               >
                 {props.currencies.map((el, id) => (
