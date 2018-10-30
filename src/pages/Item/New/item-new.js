@@ -6,13 +6,15 @@ import styled from 'styled-components'
 import { apiHost } from '../../../config'
 
 // components
-import Button from '../../../components/Button/Button'
+import DropDownButton from '../../../components/Buttons/DropDownButton'
 import Footer from '../../../components/Footer/Footer'
 import Header from '../../../components/Header/Header'
 import Image from '../../../components/Image/Image'
 import Input from '../../../components/Input/Input'
 import Label from '../../../components/Label/Label'
+import RoundedButton from '../../../components/Buttons/RoundedButton'
 import Search from '../../../components/Search/Search'
+import UnorderedList from '../../../components/UnorderedList'
 import Textarea from '../../../components/Textarea/Textarea'
 
 // styles
@@ -131,17 +133,21 @@ const ItemNew = props => {
             htmlFor='category'
             title='Category'
           />
-          <Button
-            className={props.showCategories ? 'button desktop-button active-tab' : 'button desktop-button inactive-tab'}
+          <DropDownButton
+            className={
+              props.showCategories
+                ? 'button desktop-button active-tab'
+                : 'button desktop-button inactive-tab'
+            }
             title={props.category}
             onClick={() => props.dispatch(toggleCategoriesList())}
           >
-            <Image
-              className='arrow'
-              src='/img/arrow.png'
-            />
-          </Button>
-          <ul className={props.showCategories ? 'show-ul-menu' : 'hide-ul-menu'}>
+            <i /> {/* arrow icon */}
+          </DropDownButton>
+
+          <UnorderedList
+            className={props.showCategories ? 'show-ul-menu' : 'hide-ul-menu'}
+          >
             {props.categories.map((el, id) => (
               <li
                 key={id}
@@ -150,24 +156,27 @@ const ItemNew = props => {
                 {el}
               </li>
             ))}
-          </ul>
+          </UnorderedList>
 
           <Label
             className='mandatory'
             htmlFor='subcategory'
             title='Subcategory'
           />
-          <Button
-            className={props.showSubcategories ? 'button desktop-button active-tab' : 'button desktop-button inactive-tab'}
+          <DropDownButton
+            className={
+              props.showSubcategories
+                ? 'button desktop-button active-tab'
+                : 'button desktop-button inactive-tab'
+            }
             title={props.subcategory}
             onClick={() => props.dispatch(toggleSubcategoriesList())}
           >
-            <Image
-              className='arrow'
-              src='/img/arrow.png'
-            />
-          </Button>
-          <ul className={props.showSubcategories ? 'show-ul-menu' : 'show-ul-menu hide-ul-menu'}>
+            <i /> {/* arrow icon */}
+          </DropDownButton>
+          <UnorderedList
+            className={props.showSubcategories ? 'show-ul-menu' : 'hide-ul-menu'}
+          >
             {props.subcategories.map((el, id) => (
               <li
                 key={id}
@@ -176,23 +185,26 @@ const ItemNew = props => {
                 {el}
               </li>
             ))}
-          </ul>
+          </UnorderedList>
 
           <Label
             htmlFor='region'
             title='Region'
           />
-          <Button
-            className={props.showRegions ? 'button desktop-button active-tab' : 'button desktop-button inactive-tab'}
+          <DropDownButton
+            className={
+              props.showRegions
+                ? 'button desktop-button active-tab'
+                : 'button desktop-button inactive-tab'
+            }
             title={props.region}
             onClick={() => props.dispatch(toggleRegionsList())}
           >
-            <Image
-              className='arrow'
-              src='/img/arrow.png'
-            />
-          </Button>
-          <ul className={props.showRegions ? 'show-ul-menu' : 'show-ul-menu hide-ul-menu'}>
+            <i /> {/* arrow icon */}
+          </DropDownButton>
+          <UnorderedList
+            className={props.showRegions ? 'show-ul-menu' : 'hide-ul-menu'}
+          >
             {props.regions.map((el, id) => (
               <li
                 key={id}
@@ -201,7 +213,7 @@ const ItemNew = props => {
                 {el}
               </li>
             ))}
-          </ul>
+          </UnorderedList>
         </div>
 
         <div className='right-side'>
@@ -246,7 +258,11 @@ const ItemNew = props => {
                   className='label-for-images'
                   style={{ backgroundImage: `url(${el})` }}
                 >
-                  <span src='/img/remove.png' style={{ display: !el.length ? 'inline-block' : 'none' }}>+</span>
+                  <span
+                    src='/img/remove.png'
+                    style={{ display: !el.length ? 'inline-block' : 'none' }}>
+                      +
+                  </span>
                   <Input
                     className='input-file'
                     name='images[]'
@@ -318,17 +334,24 @@ const ItemNew = props => {
               placeholder='Price'
             />
             <div className='currency'>
-              <Button
-                className={props.showCurrencies ? 'button desktop-button active-tab' : 'button desktop-button inactive-tab'}
+              <DropDownButton
+                className={
+                  props.showCurrencies
+                    ? 'button desktop-button active-tab'
+                    : 'button desktop-button inactive-tab'
+                }
                 title={props.currency}
                 onClick={() => props.dispatch(toggleCurrencies())}
               >
-                <Image
-                  className='arrow'
-                  src='/img/arrow.png'
-                />
-              </Button>
-              <ul className={props.showCurrencies ? 'currencies show-ul-menu' : 'hide-ul-menu'}>
+                <i /> {/* arrow icon */}
+              </DropDownButton>
+              <UnorderedList
+                className={
+                  props.showCurrencies
+                    ? 'currencies show-ul-menu'
+                    : 'hide-ul-menu'
+                }
+              >
                 {props.currencies.map((el, id) => (
                   <li
                     key={id}
@@ -337,11 +360,11 @@ const ItemNew = props => {
                     {el}
                   </li>
                 ))}
-              </ul>
+              </UnorderedList>
             </div>
           </div>
 
-          <Button
+          <RoundedButton
             className='post-button'
             title='Submit'
             type='submit'

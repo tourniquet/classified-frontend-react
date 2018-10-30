@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 
 // reset standard browser styles
 import './reset.scss'
+import './index.scss'
 
 // components
 import IndexPage from './pages/index-page'

@@ -60,18 +60,6 @@
       float: right;
       width: 33%;
     }
-  
-    .post-button {
-      display: table;
-      background: #DF6C40;
-      border: 0px none;
-      border-radius: 22px;
-      color: #FFF;
-      cursor: pointer;
-      margin: 20px auto 0px;
-      width: 182px;
-      height: 42px;
-    }
   }
 }
 
@@ -143,7 +131,6 @@
       }
   
       .post-button {
-        display: block;
         float: left;
       }
     }

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import { apiHost } from '../../config'
 
 // components
-import Button from '../../components/Button/Button'
+import CallToActionButton from '../../components/Buttons/CallToActionButton'
 import Header from '../../components/Header/Header'
 import Image from '../../components/Image/Image'
 import Footer from '../../components/Footer/Footer'
@@ -149,8 +149,7 @@ class Item extends Component {
           className='publish-item-button-link'
           to={{ pathname: '/item/add' }}
         >
-          <Button
-            className='publish-item-button'
+          <CallToActionButton
             title='Post an ad'
           />
         </Link>
