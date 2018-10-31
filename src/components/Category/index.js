@@ -17,8 +17,15 @@ const CategoryBlock = styled.div`
     padding-left: 20px;
     position: relative;
     
-    > img {
+    & i {
+      border: solid black;
+      border-width: 0 2px 2px 0;
+      border-radius: 1px;
       display: none;
+      padding: 3px;
+      position: absolute;
+      right: 20px;
+      top: 24px;
     }
   }
 
@@ -44,10 +51,9 @@ const CategoryBlock = styled.div`
       border-bottom: 1px solid #F6F6F6;
       border-radius: 0;
 
-      > img {
-        display: inline-block;
-        position: absolute;
-        right: 20px;
+      > i {
+        display: block;
+        transform: rotate(-45deg);
       }
     }
 
@@ -61,7 +67,7 @@ const Category = () =>
   <CategoryBlock>
     <a>
       Category name
-      <img src='/img/arrow.png' />
+      <i />
     </a>
 
     <ul>
