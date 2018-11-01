@@ -9,7 +9,7 @@ import { apiHost } from '../../config'
 import CallToActionButton from '../../components/Buttons/CallToActionButton'
 import Header from '../../components/Header/Header'
 import Image from '../../components/Image/Image'
-import Footer from '../../components/Footer/Footer'
+import Footer from '../../components/Footer'
 import Textarea from '../../components/Textarea/Textarea'
 
 // styles

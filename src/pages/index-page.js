@@ -10,7 +10,7 @@ import { apiHost } from '../config'
 import CallToActionButton from '../components/Buttons/CallToActionButton'
 import Category from '../components/Category'
 import Header from '../components/Header/Header'
-import Footer from '../components/Footer/Footer'
+import Footer from '../components/Footer'
 import Image from '../components/Image/Image'
 import Search from '../components/Search/Search'
 
