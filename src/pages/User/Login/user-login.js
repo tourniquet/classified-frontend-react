@@ -9,7 +9,7 @@ import { apiHost } from '../../../config'
 import RoundedButton from '../../../components/Buttons/RoundedButton'
 import Footer from '../../../components/Footer'
 import Header from '../../../components/Header'
-import Input from '../../../components/Input/Input'
+import Input from '../../../components/Input'
 import Label from '../../../components/Label/Label'
 
 const UserLoginPage = styled.div`

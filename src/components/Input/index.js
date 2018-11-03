@@ -1,11 +1,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
-// styles
-import './Input.scss'
+const StyledInput = styled.input`
+  display: block;
+  background: #FFF;
+  border: 2px solid #F6F6F6;
+  border-radius: 8px;
+  height: 58px;
+  width: 100%;
+  padding-left: 15px;
+  margin-bottom: 18px;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-align: left;
+  box-sizing: border-box;
+`
 
 const Input = props =>
-  <input
+  <StyledInput
     className={`input ${props.className}`}
     name={props.name}
     placeholder={props.placeholder}
