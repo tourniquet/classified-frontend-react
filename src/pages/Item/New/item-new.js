@@ -15,7 +15,7 @@ import Label from '../../../components/Label/Label'
 import RoundedButton from '../../../components/Buttons/RoundedButton'
 import Search from '../../../components/Search/Search'
 import UnorderedList from '../../../components/UnorderedList'
-import Textarea from '../../../components/Textarea/Textarea'
+import Textarea from '../../../components/Textarea'
 
 // styles
 import './item-new.scss'

@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import Textarea from './Textarea'
+import Textarea from '..'
 
 const wrapper = shallow(
   <Textarea />
