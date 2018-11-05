@@ -10,7 +10,7 @@ import RoundedButton from '../../../components/Buttons/RoundedButton'
 import Footer from '../../../components/Footer'
 import Header from '../../../components/Header'
 import Input from '../../../components/Input'
-import Label from '../../../components/Label/Label'
+import Label from '../../../components/Label'
 
 const UserRegistrationPage = styled.div`
   display: flex;
