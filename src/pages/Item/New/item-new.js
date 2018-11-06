@@ -13,7 +13,7 @@ import Image from '../../../components/Image/Image'
 import Input from '../../../components/Input'
 import Label from '../../../components/Label'
 import RoundedButton from '../../../components/Buttons/RoundedButton'
-import Search from '../../../components/Search/Search'
+import Search from '../../../components/Search'
 import UnorderedList from '../../../components/UnorderedList'
 import Textarea from '../../../components/Textarea'
 

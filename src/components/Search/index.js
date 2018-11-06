@@ -1,12 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
 // components
 import Input from '../Input'
 
-// styles
-import './Search.scss'
+const StyledInput = styled(Input)`
+  box-sizing: border-box;
+  border: 0;
+  border-bottom: 1px solid #F6F6F6;
+  height: 76px;
+  width: 100%;
+  padding: 0 30px;
+  margin-bottom: 40px;
+`
 
 const mapStateToProps = state => ({
   search: state.search
@@ -19,7 +27,7 @@ const Search = props => {
   })
 
   return (
-    <Input
+    <StyledInput
       className='search'
       placeholder='Im looking for...'
       value={props.search}
