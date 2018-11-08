@@ -70,10 +70,10 @@ class IndexPage extends Component {
 
         <div className='items-list'>
           <ul className='latest-ads'>
-            {items.map((el, i) => (
+            {items.map(el => (
               <li
                 className='latest-ads-item'
-                key={i.toString()}
+                key={el.id.toString()}
               >
                 <Image
                   className='favourite-ad'
