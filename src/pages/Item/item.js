@@ -8,7 +8,7 @@ import { apiHost } from '../../config'
 // components
 import CallToActionButton from '../../components/Buttons/CallToActionButton'
 import Header from '../../components/Header'
-import Image from '../../components/Image/Image'
+import Image from '../../components/Image'
 import Footer from '../../components/Footer'
 import Textarea from '../../components/Textarea'
 
