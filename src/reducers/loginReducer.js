@@ -2,7 +2,8 @@ const initialState = {
   email: '',
   password: '',
   emailPasswordError: false,
-  emailUndefined: false
+  emailUndefined: false,
+  wrongPassword: false
 }
 
 const loginReducer = (state = initialState, action) => {
@@ -27,6 +28,10 @@ const loginReducer = (state = initialState, action) => {
     case 'EMAIL_UNDEFINED':
       return Object.assign({}, state, {
         emailUndefined: true
+      })
+    case 'WRONG_PASSWORD':
+      return Object.assign({}, state, {
+        wrongPassword: true
       })
     default:
       return state

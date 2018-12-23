@@ -39,7 +39,8 @@ const mapStateToProps = state => ({
   email: state.loginReducer.email,
   password: state.loginReducer.password,
   emailPasswordError: state.loginReducer.emailPasswordError,
-  emailUndefined: state.loginReducer.emailUndefined
+  emailUndefined: state.loginReducer.emailUndefined,
+  wrongPassword: state.loginReducer.wrongPassword
 })
 
 const UserLogin = props => {
@@ -58,6 +59,8 @@ const UserLogin = props => {
   const emailPasswordError = () => ({ type: 'EMAIL_PASSWORD_ERROR' })
 
   const emailUndefined = () => ({ type: 'EMAIL_UNDEFINED' })
+
+  const wrongPassword = () => ({ type: 'WRONG_PASSWORD' })
 
   const handleSubmit = event => {
     event.preventDefault()
@@ -81,6 +84,7 @@ const UserLogin = props => {
         if (result === 'Success!') window.location = `/`
         else if (result === 'Unsuccess!') props.dispatch(emailPasswordError())
         else if (result === 'Undefined!') props.dispatch(emailUndefined())
+        else if (result === 'Wrong password!') props.dispatch(wrongPassword())
       })
       .catch(error => console.error(error))
   }
@@ -131,6 +135,13 @@ const UserLogin = props => {
           props.emailUndefined &&
           <ErrorMessage>
             Use valid email and password
+          </ErrorMessage>
+        }
+
+        {
+          props.wrongPassword &&
+          <ErrorMessage>
+            Password is wrong
           </ErrorMessage>
         }
 
