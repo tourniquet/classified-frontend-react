@@ -12,6 +12,7 @@ import './index.scss'
 import IndexPage from './pages/index-page'
 import ItemNew from './pages/Item/New/item-new'
 import Item from './pages/Item/item'
+import SearchResults from './pages/SearchResults'
 import UserLogin from './pages/User/Login/user-login'
 import UserRegistration from './pages/User/Registration/user-registration'
 
@@ -20,6 +21,7 @@ import itemReducer from './reducers/itemReducer'
 import itemsReducer from './reducers/itemsReducer'
 import newItemReducer from './reducers/newItemReducer'
 import searchReducer from './reducers/searchReducer'
+import searchResultsReducer from './reducers/searchResultsReducer'
 import registrationReducer from './reducers/registrationReducer'
 import loginReducer from './reducers/loginReducer'
 
@@ -28,6 +30,7 @@ const rootReducer = combineReducers({
   itemsReducer,
   newItemReducer,
   searchReducer,
+  searchResultsReducer,
   registrationReducer,
   loginReducer
 })
@@ -45,6 +48,7 @@ const App = () => (
       <Route path='/item/:url(\d+)' component={Item} />
       <Route path='/user/login' component={UserLogin} />
       <Route path='/user/registration' component={UserRegistration} />
+      <Route path='/search' component={SearchResults} />
     </Switch>
   </Provider>
 )
