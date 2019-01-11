@@ -4,7 +4,7 @@ const initialState = {
 
 const searchResultsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'FETCH_DATA':
+    case 'FETCH_RESULTS':
       return Object.assign({}, state, {
         items: action.result
       })

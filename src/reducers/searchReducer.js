@@ -7,7 +7,7 @@ const searchReducer = (state = initialState, action) => {
     // input value for search input
     case 'SET_SEARCH_TEXT':
       return Object.assign({}, state, {
-        value: action.search
+        value: action.text
       })
     default:
       return state

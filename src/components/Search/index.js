@@ -17,7 +17,7 @@ const StyledInput = styled(Input)`
 `
 
 const mapStateToProps = state => ({
-  search: state.search
+  search: state.searchReducer.value
 })
 
 const Search = props => {
@@ -25,6 +25,13 @@ const Search = props => {
     type: 'SET_SEARCH_TEXT',
     text: el.target.value
   })
+
+  const redirectToResults = () => {
+    const query = props.search.replace(/,/g, '').replace(/\s+/g, ',')
+    const url = `/search/${query}`
+
+    if (query.length) window.location = url
+  }
 
   return (
     <StyledInput
@@ -34,6 +41,9 @@ const Search = props => {
       type='search'
       aria-label='Search through site content'
       onChange={el => props.dispatch(setSearchText(el))}
+      onKeyDown={el => {
+        if (el.keyCode === 13 && el.target.value) redirectToResults()
+      }}
     />
   )
 }

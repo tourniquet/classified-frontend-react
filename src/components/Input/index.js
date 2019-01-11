@@ -30,6 +30,7 @@ const Input = props =>
     pattern={props.pattern}
     required={props.required}
     onChange={props.onChange}
+    onKeyDown={props.onKeyDown}
   />
 
 Input.propTypes = {
@@ -42,7 +43,8 @@ Input.propTypes = {
   'aria-label': PropTypes.string,
   pattern: PropTypes.string,
   required: PropTypes.string,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  onKeyDown: PropTypes.func
 }
 
 export default Input

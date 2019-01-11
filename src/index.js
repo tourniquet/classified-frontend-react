@@ -48,7 +48,7 @@ const App = () => (
       <Route path='/item/:url(\d+)' component={Item} />
       <Route path='/user/login' component={UserLogin} />
       <Route path='/user/registration' component={UserRegistration} />
-      <Route path='/search' component={SearchResults} />
+      <Route path='/search/:query' component={SearchResults} />
     </Switch>
   </Provider>
 )

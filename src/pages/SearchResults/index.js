@@ -6,34 +6,40 @@ import { connect } from 'react-redux'
 import { apiHost } from '../../config'
 
 // components
-// import Search from '../../components/Search'
+import Search from '../../components/Search'
 
 const mapStateToProps = state => ({
   items: state.searchResultsReducer.items
 })
 
 class SearchResult extends Component {
-  fetchData () {
+  fetchResults () {
     const url = `${apiHost}/search.php`
 
-    window.fetch(url)
+    window.fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(this.props.match.params.query)
+    })
       .then(response => response.json(response))
       .then(result => {
+        console.log(result)
+
         this.props.dispatch({
-          type: 'FETCH_DATA',
+          type: 'FETCH_RESULTS',
           result
         })
       })
   }
 
   componentDidMount () {
-    this.fetchData()
+    this.fetchResults()
   }
 
   render () {
     return (
       <div>
-        <p>{this.props.items}</p>
+        <Search />
+        <p>this.props.items</p>
       </div>
     )
   }
