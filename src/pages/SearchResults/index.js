@@ -1,16 +1,27 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// import styled from 'styled-components'
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
 // API host config
 import { apiHost } from '../../config'
 
 // components
+import CallToActionButton from '../../components/Buttons/CallToActionButton'
+import Footer from '../../components/Footer'
+import Header from '../../components/Header'
+import Image from '../../components/Image'
 import Search from '../../components/Search'
 
 const mapStateToProps = state => ({
   items: state.searchResultsReducer.items
 })
+
+const StyledSearchPage = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`
 
 class SearchResult extends Component {
   fetchResults () {
@@ -22,8 +33,6 @@ class SearchResult extends Component {
     })
       .then(response => response.json(response))
       .then(result => {
-        console.log(result)
-
         this.props.dispatch({
           type: 'FETCH_RESULTS',
           result
@@ -36,11 +45,66 @@ class SearchResult extends Component {
   }
 
   render () {
+    const items = this.props.items
+    const dateOptions = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric'
+    }
+
     return (
-      <div>
+      <StyledSearchPage>
+        <Header />
         <Search />
-        <p>this.props.items</p>
-      </div>
+
+        <div className='items-list'>
+          <ul className='latest-ads'>
+            {items.map(el => (
+              <li
+                className='latest-ads-item'
+                key={el.id.toString()}
+              >
+                <Image
+                  className='favourite-ad'
+                  src='/img/star.png'
+                  title=''
+                  alt=''
+                />
+                <Image
+                  className='thumbnail'
+                  src='/img/camera.png'
+                  title=''
+                  alt='Particular lists thumbnail'
+                />
+                <Link
+                  key={el.id}
+                  to={{ pathname: `/item/${el.url}` }}
+                  className='ad-title'
+                >
+                  {el.title}
+                </Link>
+                <span className='ad-category'>category</span>
+                <span className='ad-date'>
+                  {new Date(el.published).toLocaleDateString('en-GB', dateOptions)}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <Footer />
+
+        <Link
+          className='publish-item-button-link'
+          to={{ pathname: '/item/add' }}
+        >
+          <CallToActionButton
+            title='Post an ad'
+          />
+        </Link>
+      </StyledSearchPage>
     )
   }
 }

@@ -5,15 +5,25 @@ import styled from 'styled-components'
 
 // components
 import Input from '../Input'
+import SearchButton from '../Buttons/SearchButton'
+
+const StyledContainer = styled.div``
 
 const StyledInput = styled(Input)`
   box-sizing: border-box;
   border: 0;
   border-bottom: 1px solid #F6F6F6;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  display: inline-block;
   height: 76px;
-  width: 100%;
-  padding: 0 30px;
   margin-bottom: 40px;
+  padding: 0 30px;
+  width: calc(100% - 100px);
+
+  @media (max-width: 480px) {
+    width: 100%;
+  }
 `
 
 const mapStateToProps = state => ({
@@ -34,17 +44,30 @@ const Search = props => {
   }
 
   return (
-    <StyledInput
-      className='search'
-      placeholder='Im looking for...'
-      value={props.search}
-      type='search'
-      aria-label='Search through site content'
-      onChange={el => props.dispatch(setSearchText(el))}
-      onKeyDown={el => {
-        if (el.keyCode === 13 && el.target.value) redirectToResults()
-      }}
-    />
+    <StyledContainer>
+      <StyledInput
+        className='search'
+        placeholder='Im looking for...'
+        value={props.search}
+        type='search'
+        aria-label='Search through site content'
+        onChange={el => props.dispatch(setSearchText(el))}
+        onKeyDown={el => {
+          if (el.keyCode === 13 && el.target.value) redirectToResults()
+        }}
+      />
+
+      <SearchButton
+        className={
+          props.search.length
+            ? 'active'
+            : 'inactive'
+        }
+        onClick={redirectToResults}
+      >
+        Search
+      </SearchButton>
+    </StyledContainer>
   )
 }
 
