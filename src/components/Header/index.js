@@ -1,17 +1,18 @@
-import React from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import React, { Component } from 'react'
 import styled from 'styled-components'
 
 // components
 import RoundedButton from '../Buttons/RoundedButton'
 
 const StyledHeader = styled.header`
+  align-items: center;
+  background: #262626;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  background: #262626;
   height: 93px;
+  justify-content: space-between;
   padding-left: 30px;
 
   .logo {
@@ -21,25 +22,25 @@ const StyledHeader = styled.header`
   }
 
   .navbar-toggle {
-    position: relative;
-    float: right;
-    padding: 9px 10px;
-    margin-top: 8px;
-    margin-right: 15px;
-    margin-bottom: 8px;
     background-color: transparent;
     background-image: none;
-    border: 1px solid transparent;
     border-radius: 4px;
+    border: 1px solid transparent;
+    float: right;
+    margin-bottom: 8px;
+    margin-right: 15px;
+    margin-top: 8px;
+    padding: 9px 10px;
+    position: relative;
   }
   
   .icon-bar {
     background-color: #FFF;
-    display: block;
-    width: 26px;
-    height: 2px;
     border-radius: 1px;
+    display: block;
+    height: 2px;
     margin-bottom: 5px;
+    width: 26px;
   }
 
   @media (max-width: 1199px) {
@@ -73,51 +74,114 @@ const StyledHeader = styled.header`
   }
 `
 
-const Header = () =>
-  <StyledHeader>
-    {/* modal
-    registration
-    login */}
+const mapStateToProps = state => ({
+  email: state.userReducer.email
+})
 
-    <a
-      className='logo'
-      href='/'
-    />
+class Header extends Component {
+  checkIfUserIsLogged () {
+    const cookies = window.document.cookie
 
-    <button
-      className='navbar-toggle collapsed'
-      type='button'
-      // @click="openModal")
-    >
-      <span className='icon-bar'>&nbsp;</span>
-      <span className='icon-bar'>&nbsp;</span>
-      <span className='icon-bar'>&nbsp;</span>
-    </button>
+    if (cookies.startsWith('email')) {
+      this.props.dispatch({
+        type: 'LOGIN_USER',
+        email: cookies.split('=')[1]
+      })
+    }
+  }
 
-    <ul className='desktop-screen'>
-      <li>
-        <Link
-          to={{ pathname: '/user/registration' }}
-          style={{ color: '#FFF' }}
+  logOutUser () {
+    // remove email from cookies
+    window.document.cookie = 'email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+    // redirect user to index page after logout
+    window.location = '/'
+  }
+
+  componentDidMount () {
+    this.checkIfUserIsLogged()
+
+    const email = this.props.email
+    console.log(email)
+  }
+
+  render () {
+    return (
+      <StyledHeader>
+        {/* modal
+        registration
+        login */}
+
+        <a
+          className='logo'
+          href='/'
+        />
+
+        <button
+          className='navbar-toggle collapsed'
+          type='button'
+          // @click="openModal")
         >
-          Registration
-        </Link>
-      </li>
-      <li style={{ display: 'none' }}>
-        Contul meu
-      </li>
-      <li>
-        <Link to={{ pathname: '/item/add' }}>
-          <RoundedButton
-            className='post-ad-button' // do I need this class name?
-            title='Post an ad'
-            style={{
-              margin: '5px auto 0'
-            }}
-          />
-        </Link>
-      </li>
-    </ul>
-  </StyledHeader>
+          <span className='icon-bar'>&nbsp;</span>
+          <span className='icon-bar'>&nbsp;</span>
+          <span className='icon-bar'>&nbsp;</span>
+        </button>
 
-export default Header
+        <ul className='desktop-screen'>
+          <li>
+            { !this.props.email &&
+              <Link
+                to={{ pathname: '/user/registration' }}
+                style={{ color: '#FFF' }}
+              >
+                Registration
+              </Link>
+            }
+          </li>
+          <li>
+            { !this.props.email &&
+              <Link
+                to={{ pathname: '/user/login' }}
+                style={{ color: '#FFF' }}
+              >
+                Login
+              </Link>
+            }
+          </li>
+          <li>
+            {
+              this.props.email &&
+              <Link
+                to={{ pathname: '/user/profile' }}
+                style={{ color: '#FFF' }}
+              >
+               Profile
+              </Link>
+            }
+          </li>
+          <li>
+            {
+              this.props.email &&
+              <p
+                onClick={this.logOutUser}
+                style={{ cursor: 'pointer' }}
+              >
+                Logout
+              </p>
+            }
+          </li>
+          <li>
+            <Link to={{ pathname: '/item/add' }}>
+              <RoundedButton
+                className='post-ad-button' // do I need this class name?
+                title='Post an ad'
+                style={{ margin: '5px auto 0' }}
+              />
+            </Link>
+          </li>
+        </ul>
+      </StyledHeader>
+    )
+  }
+}
+
+export default connect(mapStateToProps)(Header)
