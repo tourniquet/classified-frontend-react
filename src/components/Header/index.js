@@ -75,33 +75,38 @@ const StyledHeader = styled.header`
 `
 
 const mapStateToProps = state => ({
-  email: state.userReducer.email
+  email: state.userReducer.email,
+  id: state.userReducer.id
 })
 
 class Header extends Component {
   checkIfUserIsLogged () {
-    const cookies = window.document.cookie
+    const cookies = window.document.cookie.split('; ')
 
-    if (cookies.startsWith('email')) {
+    const getCookies = name => cookies.filter(el => el.split('=')[0] === name)
+    const email = getCookies('email').toString().replace('email=', '')
+    const id = getCookies('id').toString().replace('id=', '')
+
+    if (email) {
       this.props.dispatch({
         type: 'LOGIN_USER',
-        email: cookies.split('=')[1]
+        email,
+        id
       })
     }
   }
 
   logOutUser () {
-    // remove email from cookies
+    // remove email and id from cookies
     window.document.cookie = 'email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+    window.document.cookie = 'id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
     // redirect user to index page after logout
+    // this.props.history.push('/')
     window.location = '/'
   }
 
   componentDidMount () {
     this.checkIfUserIsLogged()
-
-    const email = this.props.email
-    console.log(email)
   }
 
   render () {
@@ -111,9 +116,9 @@ class Header extends Component {
         registration
         login */}
 
-        <a
+        <Link
           className='logo'
-          href='/'
+          to={{ pathname: '/' }}
         />
 
         <button

@@ -76,11 +76,13 @@ class UserLogin extends Component {
   }
 
   checkIfUserIsLogged () {
-    const cookies = window.document.cookie
+    const cookies = window.document.cookie.split('; ')
 
-    if (cookies.startsWith('email')) {
-      window.location = '/'
-    }
+    const getCookies = name => cookies.filter(el => el.split('=')[0] === name)
+    const email = getCookies('email').toString().replace('email=', '')
+    const id = getCookies('id').toString().replace('id=', '')
+
+    if (email && id) this.props.history.push('/')
   }
 
   handleSubmit (event) {
@@ -102,12 +104,13 @@ class UserLogin extends Component {
       })
       .then(response => response.json())
       .then(result => {
-        if (result === 'Success!') {
+        if (result.email) {
           const month = new Date(new Date().setDate(new Date().getDate() + 30)).toGMTString()
-          // save user email in cookies
-          window.document.cookie = `email=${data.email}; expires=${month}; path='/'`
+          // save user email and user id in cookies
+          window.document.cookie = `email=${result.email}; expires=${month}; path='/'`
+          window.document.cookie = `id=${result.id}; expires=${month}; path='/'`
           // redirect user to index page
-          window.location = '/'
+          this.props.history.push('/')
         } else if (result === 'Unsuccess!') {
           this.props.dispatch(this.emailPasswordError())
         } else if (result === 'Undefined!') {

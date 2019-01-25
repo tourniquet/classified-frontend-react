@@ -86,7 +86,7 @@ const UserRegistration = props => {
       })
       .then(response => response.json())
       .then(result => {
-        if (result === 'Success!') window.location = `/user/login`
+        if (result === 'Success!') this.props.history.push('/user/login')
         else if (result === 'Existing!') props.dispatch(emailIsTaken())
         else if (result === 'Unmatch!') props.dispatch(passwordUnmatch())
       })
