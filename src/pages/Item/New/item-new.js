@@ -29,6 +29,7 @@ const ImageBlock = styled.div`
 
 const mapStateToProps = state => ({
   userId: state.userReducer.id,
+  userEmail: state.userReducer.email,
   categories: state.newItemReducer.categories,
   category: state.newItemReducer.category,
   showCategories: state.newItemReducer.showCategories,
@@ -106,6 +107,7 @@ const ItemNew = props => {
     const date = new Date().getTime().toString().slice(5)
     formData.append('url', date)
     formData.append('userId', props.userId)
+    formData.append('userEmail', props.userEmail)
 
     const url = `${apiHost}/item-posted.php`
     window
