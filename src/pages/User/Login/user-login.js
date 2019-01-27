@@ -1,16 +1,16 @@
-import React from 'react'
 import { connect } from 'react-redux'
+import React, { Component } from 'react'
 import styled from 'styled-components'
 
 // API host config
 import { apiHost } from '../../../config'
 
 // components
-import RoundedButton from '../../../components/Buttons/RoundedButton'
 import Footer from '../../../components/Footer'
 import Header from '../../../components/Header'
 import Input from '../../../components/Input'
 import Label from '../../../components/Label'
+import RoundedButton from '../../../components/Buttons/RoundedButton'
 
 const UserLoginPage = styled.div`
   display: flex;
@@ -37,37 +37,63 @@ const ErrorMessage = styled.p`
 
 const mapStateToProps = state => ({
   email: state.loginReducer.email,
-  password: state.loginReducer.password,
   emailPasswordError: state.loginReducer.emailPasswordError,
-  emailUndefined: state.loginReducer.emailUndefined
+  emailUndefined: state.loginReducer.emailUndefined,
+  password: state.loginReducer.password
 })
 
-const UserLogin = props => {
-  const setUserEmail = event => ({
-    type: 'USER_EMAIL',
-    email: event.target.value
-  })
+class UserLogin extends Component {
+  setUserEmail (event) {
+    return ({
+      type: 'USER_EMAIL',
+      email: event.target.value
+    })
+  }
 
-  const setUserPassword = event => ({
-    type: 'USER_PASSWORD',
-    password: event.target.value
-  })
+  setUserPassword (event) {
+    return ({
+      type: 'USER_PASSWORD',
+      password: event.target.value
+    })
+  }
 
-  const setInitialState = () => ({ type: 'SET_INITIAL_STATE' })
+  setInitialState () {
+    return ({
+      type: 'SET_INITIAL_STATE'
+    })
+  }
 
-  const emailPasswordError = () => ({ type: 'EMAIL_PASSWORD_ERROR' })
+  emailPasswordError () {
+    return ({
+      type: 'EMAIL_PASSWORD_ERROR'
+    })
+  }
 
-  const emailUndefined = () => ({ type: 'EMAIL_UNDEFINED' })
+  emailUndefined () {
+    return ({
+      type: 'EMAIL_UNDEFINED'
+    })
+  }
 
-  const handleSubmit = event => {
+  checkIfUserIsLogged () {
+    const cookies = window.document.cookie.split('; ')
+
+    const getCookies = name => cookies.filter(el => el.split('=')[0] === name)
+    const email = getCookies('email').toString().replace('email=', '')
+    const id = getCookies('id').toString().replace('id=', '')
+
+    if (email && id) this.props.history.push('/')
+  }
+
+  handleSubmit (event) {
     event.preventDefault()
 
     // set initial state
-    props.dispatch(setInitialState())
+    this.props.dispatch(this.setInitialState())
 
     const data = {
-      email: props.email,
-      password: props.password
+      email: this.props.email,
+      password: this.props.password
     }
 
     const url = `${apiHost}/login.php`
@@ -78,72 +104,87 @@ const UserLogin = props => {
       })
       .then(response => response.json())
       .then(result => {
-        if (result === 'Success!') window.location = `/`
-        else if (result === 'Unsuccess!') props.dispatch(emailPasswordError())
-        else if (result === 'Undefined!') props.dispatch(emailUndefined())
+        if (result.email) {
+          const month = new Date(new Date().setDate(new Date().getDate() + 30)).toGMTString()
+          // save user email and user id in cookies
+          window.document.cookie = `email=${result.email}; expires=${month}; path='/'`
+          window.document.cookie = `id=${result.id}; expires=${month}; path='/'`
+          // redirect user to index page
+          this.props.history.push('/')
+        } else if (result === 'Unsuccess!') {
+          this.props.dispatch(this.emailPasswordError())
+        } else if (result === 'Undefined!') {
+          this.props.dispatch(this.emailUndefined())
+        }
       })
       .catch(error => console.error(error))
   }
 
-  return (
-    <UserLoginPage>
-      <Header />
+  componentDidMount () {
+    this.checkIfUserIsLogged()
+  }
 
-      <form onSubmit={handleSubmit}>
-        <Label
-          className='login-form-user-name'
-          htmlFor='username-login-input'
-          title='Email'
-        />
-        <Input
-          id='username-login-input'
-          className='username-login-input'
-          placeholder='Email'
-          value={props.username}
-          pattern='[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$'
-          required
-          onChange={event => props.dispatch(setUserEmail(event))}
-        />
+  render () {
+    return (
+      <UserLoginPage>
+        <Header />
 
-        <Label
-          className='login-form-user-password'
-          htmlFor='user-password-login-input'
-          title='Password'
-        />
-        <Input
-          id='user-password-login-input'
-          className='user-password-login-input'
-          placeholder='Password'
-          value={props.password}
-          type='password'
-          required
-          onChange={event => props.dispatch(setUserPassword(event))}
-        />
+        <form onSubmit={event => this.handleSubmit(event)}>
+          <Label
+            className='login-form-user-name'
+            htmlFor='username-login-input'
+            title='Email'
+          />
+          <Input
+            id='username-login-input'
+            className='username-login-input'
+            placeholder='Email'
+            value={this.props.username}
+            pattern='[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$'
+            required
+            onChange={event => this.props.dispatch(this.setUserEmail(event))}
+          />
 
-        {
-          props.emailPasswordError &&
-          <ErrorMessage>
-            Email or password did not match
-          </ErrorMessage>
-        }
+          <Label
+            className='login-form-user-password'
+            htmlFor='user-password-login-input'
+            title='Password'
+          />
+          <Input
+            id='user-password-login-input'
+            className='user-password-login-input'
+            placeholder='Password'
+            value={this.props.password}
+            type='password'
+            required
+            onChange={event => this.props.dispatch(this.setUserPassword(event))}
+          />
 
-        {
-          props.emailUndefined &&
-          <ErrorMessage>
-            Use valid email and password
-          </ErrorMessage>
-        }
+          {
+            this.props.emailPasswordError &&
+            <ErrorMessage>
+              Email or password did not match
+            </ErrorMessage>
+          }
 
-        <RoundedButton
-          className='login-button'
-          title='Login'
-          type='submit'
-        />
-      </form>
+          {
+            this.props.emailUndefined &&
+            <ErrorMessage>
+              Use valid email and password
+            </ErrorMessage>
+          }
 
-      <Footer />
-    </UserLoginPage>
-  )
+          <RoundedButton
+            className='login-button'
+            title='Login'
+            type='submit'
+          />
+        </form>
+
+        <Footer />
+      </UserLoginPage>
+    )
+  }
 }
 
 export default connect(mapStateToProps)(UserLogin)

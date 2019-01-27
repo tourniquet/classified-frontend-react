@@ -40,7 +40,7 @@ const Search = props => {
     const query = props.search.replace(/,/g, '').replace(/\s+/g, ',')
     const url = `/search/${query}`
 
-    if (query.length) window.location = url
+    if (query.length) props.history.push(url)
   }
 
   return (
