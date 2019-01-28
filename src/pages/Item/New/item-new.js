@@ -116,7 +116,7 @@ const ItemNew = props => {
         body: formData
       })
       .then(response => response.json())
-      .then(result => props.history.push(`/item/${result}`))
+      .then(result => props.history.push(`/item/${result.url}`))
       .catch(err => console.error(err))
   }
 
