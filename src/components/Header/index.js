@@ -32,20 +32,86 @@ const StyledHeader = styled.header`
     margin-top: 8px;
     padding: 9px 10px;
     position: relative;
+    width: 26px;
   }
   
-  .icon-bar {
+  .icon-bar-1,
+  .icon-bar-2,
+  .icon-bar-3 {
     background-color: #FFF;
     border-radius: 1px;
-    display: block;
     height: 2px;
     margin-bottom: 5px;
     width: 26px;
+    transition: .4s ease;
+  }
+
+  .toggle .icon-bar-1 {
+    transform: rotate(-45deg) translate(-9px, 0);
+  }
+
+  .toggle .icon-bar-2 {
+    opacity: 0;
+  }
+
+  .toggle .icon-bar-3 {
+    transform: rotate(45deg) translate(-9px, -1px);
   }
 
   @media (max-width: 1199px) {
-    .desktop-screen {
-      display: none;
+    justify-content: center;
+
+    &.toggle {
+      margin-left: 250px;
+
+      .logo {
+        display: none;
+      }
+    }
+
+    .navbar-toggle {
+      left: 10px;
+      position: absolute;
+
+      &.toggle {
+        transform: translate(250px);
+        transition: .4s ease;
+      }
+    }
+
+    .menu-items {
+      background: #262626;
+      height: 100vh;
+      left: -250px;
+      position: absolute;
+      top: 0;
+      width: 250px;
+      z-index: 1;
+      transition: .4s ease;
+
+      &.toggle {
+        transform: translate(250px);
+
+        li {
+          border-bottom: 1px solid #E7774A;
+          width: 250px;
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          a {
+            display: block;
+            padding: 12.5px 15px 12.5px 20px;
+            position: relative;
+            text-decoration: none;
+          }
+        }
+      }
+
+      .post-ad-button {
+        display: none;
+      }
     }
   }
 
@@ -58,7 +124,7 @@ const StyledHeader = styled.header`
       display: none;
     }
 
-    .desktop-screen {
+    .menu-items {
       color: #FFF;
       font-size: smaller;
       
@@ -105,75 +171,84 @@ class Header extends Component {
     window.location = '/'
   }
 
+  toggleMenu () {
+    // document.querySelector('.container').classList.toggle('toggle')
+    // add className toggle to .navbar-toggle div
+    document.querySelector('.navbar-toggle').classList.toggle('toggle')
+
+    document.querySelector('.menu-items').classList.toggle('toggle')
+  }
+
   componentDidMount () {
     this.checkIfUserIsLogged()
   }
 
   render () {
     return (
-      <StyledHeader>
-        {/* modal
-        registration
-        login */}
-
+      <StyledHeader className='container'>
         <Link
           className='logo'
           to={{ pathname: '/' }}
         />
 
-        <button
-          className='navbar-toggle collapsed'
-          type='button'
-          // @click="openModal")
+        <div
+          className='navbar-toggle'
+          onClick={this.toggleMenu}
         >
-          <span className='icon-bar'>&nbsp;</span>
-          <span className='icon-bar'>&nbsp;</span>
-          <span className='icon-bar'>&nbsp;</span>
-        </button>
+          <div className='icon-bar-1'>&nbsp;</div>
+          <div className='icon-bar-2'>&nbsp;</div>
+          <div className='icon-bar-3'>&nbsp;</div>
+        </div>
 
-        <ul className='desktop-screen'>
-          <li>
-            { !this.props.email &&
-              <Link
-                to={{ pathname: '/user/registration' }}
-                style={{ color: '#FFF' }}
-              >
-                Registration
-              </Link>
-            }
-          </li>
-          <li>
-            { !this.props.email &&
-              <Link
-                to={{ pathname: '/user/login' }}
-                style={{ color: '#FFF' }}
-              >
-                Login
-              </Link>
-            }
-          </li>
-          <li>
-            {
-              this.props.email &&
-              <Link
-                to={{ pathname: '/user/profile' }}
-                style={{ color: '#FFF' }}
-              >
-               Profile
-              </Link>
-            }
-          </li>
-          <li>
-            {
-              this.props.email &&
-              <p
-                onClick={this.logOutUser}
-                style={{ cursor: 'pointer' }}
-              >
-                Logout
-              </p>
-            }
-          </li>
+        <ul className='menu-items'>
+          { !this.props.email &&
+            <div style={{ display: 'inline-block' }}>
+              <li>
+                <Link
+                  to={{ pathname: '/' }}
+                  style={{ color: '#FFF' }}
+                >
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to={{ pathname: '/user/registration' }}
+                  style={{ color: '#FFF' }}
+                >
+                  Registration
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to={{ pathname: '/user/login' }}
+                  style={{ color: '#FFF' }}
+                >
+                  Login
+                </Link>
+              </li>
+            </div>
+          }
+          { this.props.email &&
+            <div style={{ display: 'inline-block' }}>
+              <li>
+                <Link
+                  to={{ pathname: '/user/profile' }}
+                  style={{ color: '#FFF' }}
+                >
+                  Profile
+                </Link>
+              </li>
+              <li>
+                <p
+                  onClick={this.logOutUser}
+                  style={{ cursor: 'pointer' }}
+                >
+                  Logout
+                </p>
+              </li>
+            </div>
+          }
           <li>
             <Link to={{ pathname: '/item/add' }}>
               <RoundedButton
