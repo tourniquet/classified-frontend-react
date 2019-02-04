@@ -13,7 +13,7 @@ import IndexPage from './pages/index-page'
 import Item from './pages/Item/item'
 import ItemNew from './pages/Item/New/item-new'
 import SearchResults from './pages/SearchResults'
-import UserLogin from './pages/User/Login/user-login'
+import UserLogin from './pages/User/Login'
 import UserRegistration from './pages/User/Registration/user-registration'
 
 // reducers
