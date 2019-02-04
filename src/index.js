@@ -13,6 +13,7 @@ import IndexPage from './pages/index-page'
 import Item from './pages/Item/item'
 import ItemNew from './pages/Item/New/item-new'
 import SearchResults from './pages/SearchResults'
+import UserAds from './pages/User/Ads'
 import UserLogin from './pages/User/Login'
 import UserRegistration from './pages/User/Registration/user-registration'
 
@@ -49,6 +50,7 @@ const App = () => (
       <Route path='/item/:url(\d+)' component={Item} />
       <Route path='/item/add' component={ItemNew} />
       <Route path='/search/:query' component={SearchResults} />
+      <Route path='/user/ads' component={UserAds} />
       <Route path='/user/login' component={UserLogin} />
       <Route path='/user/registration' component={UserRegistration} />
     </Switch>
