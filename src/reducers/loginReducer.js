@@ -1,33 +1,34 @@
 const initialState = {
   email: '',
   password: '',
-  emailPasswordError: false,
-  emailUndefined: false,
-  wrongPassword: false
+  wrongEmail: false,
+  wrongPassword: false,
+  emailUndefined: false
 }
 
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'USER_EMAIL':
+    case 'LOGIN_USER_EMAIL':
       return Object.assign({}, state, {
         email: action.email
       })
-    case 'USER_PASSWORD':
+    case 'LOGIN_USER_PASSWORD':
       return Object.assign({}, state, {
         password: action.password
       })
     case 'SET_INITIAL_STATE':
       return Object.assign({}, state, {
-        emailPasswordError: false,
+        wrongEmail: false,
+        wrongPassword: false,
         emailUndefined: false
       })
-    case 'EMAIL_PASSWORD_ERROR':
+    case 'LOGIN_WRONG_EMAIL':
       return Object.assign({}, state, {
-        emailPasswordError: true
+        wrongEmail: true
       })
-    case 'EMAIL_UNDEFINED':
+    case 'LOGIN_WRONG_PASSWORD':
       return Object.assign({}, state, {
-        emailUndefined: true
+        wrongPassword: true
       })
     case 'WRONG_PASSWORD':
       return Object.assign({}, state, {

@@ -37,23 +37,22 @@ const ErrorMessage = styled.p`
 
 const mapStateToProps = state => ({
   email: state.loginReducer.email,
-  password: state.loginReducer.password,
-  emailPasswordError: state.loginReducer.emailPasswordError,
-  emailUndefined: state.loginReducer.emailUndefined,
-  wrongPassword: state.loginReducer.wrongPassword
+  wrongEmail: state.loginReducer.wrongEmail,
+  wrongPassword: state.loginReducer.wrongPassword,
+  emailUndefined: state.loginReducer.emailUndefined
 })
 
 class UserLogin extends Component {
   setUserEmail (event) {
     return ({
-      type: 'USER_EMAIL',
+      type: 'LOGIN_USER_EMAIL',
       email: event.target.value
     })
   }
 
   setUserPassword (event) {
     return ({
-      type: 'USER_PASSWORD',
+      type: 'LOGIN_USER_PASSWORD',
       password: event.target.value
     })
   }
@@ -64,15 +63,15 @@ class UserLogin extends Component {
     })
   }
 
-  emailPasswordError () {
+  wrongPassword () {
     return ({
-      type: 'EMAIL_PASSWORD_ERROR'
+      type: 'LOGIN_WRONG_PASSWORD'
     })
   }
 
-  emailUndefined () {
+  wrongEmail () {
     return ({
-      type: 'EMAIL_UNDEFINED'
+      type: 'LOGIN_WRONG_EMAIL'
     })
   }
 
@@ -112,10 +111,10 @@ class UserLogin extends Component {
           window.document.cookie = `id=${result.id}; expires=${month}; path='/'`
           // redirect user to index page
           this.props.history.push('/')
-        } else if (result === 'Unsuccess!') {
-          this.props.dispatch(this.emailPasswordError())
-        } else if (result === 'Undefined!') {
-          this.props.dispatch(this.emailUndefined())
+        } else if (result.message === 'Password!') {
+          this.props.dispatch(this.wrongPassword())
+        } else if (result.message === 'Unsuccess!') {
+          this.props.dispatch(this.wrongEmail())
         }
       })
       .catch(error => console.error(error))
@@ -161,17 +160,15 @@ class UserLogin extends Component {
             onChange={event => this.props.dispatch(this.setUserPassword(event))}
           />
 
-          {
-            this.props.emailPasswordError &&
+          { this.props.wrongEmail &&
             <ErrorMessage>
-              Email or password did not match
+              Email did not match
             </ErrorMessage>
           }
 
-          {
-            this.props.emailUndefined &&
+          { this.props.wrongPassword &&
             <ErrorMessage>
-              Use valid email and password
+              Password did not match
             </ErrorMessage>
           }
 
