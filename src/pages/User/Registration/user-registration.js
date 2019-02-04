@@ -86,9 +86,11 @@ const UserRegistration = props => {
       })
       .then(response => response.json())
       .then(result => {
-        if (result === 'Success!') this.props.history.push('/user/login')
-        else if (result === 'Existing!') props.dispatch(emailIsTaken())
-        else if (result === 'Unmatch!') props.dispatch(passwordUnmatch())
+        const { message } = result
+
+        if (message === 'Success!') props.history.push('/user/login')
+        else if (message === 'Existing!') props.dispatch(emailIsTaken())
+        else if (message === 'Unmatch!') props.dispatch(passwordUnmatch())
       })
       .catch(error => console.error(error))
   }
