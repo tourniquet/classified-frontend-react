@@ -37,10 +37,10 @@ const ErrorMessage = styled.p`
 
 const mapStateToProps = state => ({
   email: state.loginReducer.email,
+  password: state.loginReducer.password,
   wrongEmail: state.loginReducer.wrongEmail,
   wrongPassword: state.loginReducer.wrongPassword,
-  emailUndefined: state.loginReducer.emailUndefined,
-  password: state.loginReducer.password
+  emailUndefined: state.loginReducer.emailUndefined
 })
 
 class UserLogin extends Component {
