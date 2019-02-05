@@ -1,32 +1,34 @@
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import React, { Component } from 'react'
-import styled from 'styled-components'
+// import styled from 'styled-components'
 
 // API host config
 import { apiHost } from '../../../config'
 
 // components
 import Header from '../../../components/Header'
+import Image from '../../../components/Image'
 import Footer from '../../../components/Footer'
 import Search from '../../../components/Search'
 
 const mapStateToProps = state => ({
-  email: state.userReducer.email,
-  id: state.userReducer.id
+  items: state.itemsReducer.items
 })
 
 class UserAds extends Component {
   fetchData () {
-    // const data = {
-    //   email: this.props.email,
-    //   password: this.props.password
-    // }
+    const cookies = window.document.cookie.split('; ')
+    const getCookies = name => cookies.filter(el => el.split('=')[0] === name)
 
-    const url = `${apiHost}/`
-    // method: 'POST',
-    // body: JSON.stringify(data)
-    window.fetch(url)
+    const userEmail = getCookies('email').toString().replace('email=', '')
+    const userId = getCookies('id').toString().replace('id=', '')
+
+    const url = `${apiHost}/user/items.php`
+    window.fetch(url, {
+      method: 'POST',
+      body: JSON.stringify({ userEmail, userId })
+    })
       .then(response => response.json())
       .then(result => {
         this.props.dispatch({
@@ -64,12 +66,6 @@ class UserAds extends Component {
                 className='latest-ads-item'
                 key={el.id.toString()}
               >
-                <Image
-                  className='favourite-ad'
-                  src='/img/star.png'
-                  title=''
-                  alt=''
-                />
                 <Image
                   className='thumbnail'
                   src='/img/camera.png'
