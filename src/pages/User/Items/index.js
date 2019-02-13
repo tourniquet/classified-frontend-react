@@ -16,7 +16,7 @@ const mapStateToProps = state => ({
   items: state.itemsReducer.items
 })
 
-class UserAds extends Component {
+class UserItems extends Component {
   fetchData () {
     const cookies = window.document.cookie.split('; ')
     const getCookies = name => cookies.filter(el => el.split('=')[0] === name)
@@ -94,4 +94,4 @@ class UserAds extends Component {
   }
 }
 
-export default connect(mapStateToProps)(UserAds)
+export default connect(mapStateToProps)(UserItems)
