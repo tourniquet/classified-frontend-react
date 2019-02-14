@@ -5,57 +5,25 @@ import styled from 'styled-components'
 
 // components
 import RoundedButton from '../Buttons/RoundedButton'
+import SidebarToggle from '../Buttons/SidebarToggle'
 
 const StyledHeader = styled.header`
   align-items: center;
   background: #262626;
   display: flex;
-  flex-direction: row;
   height: 93px;
-  justify-content: space-between;
-  padding-left: 30px;
+  justify-content: center;
+  line-height: 93px;
+  position: relative;
+  text-align: center;
+  width: 100%;
 
   .logo {
     background: #FFF;
+    display: inline-block;
+    flex-grow: 0;
     height: 34px;
     width: 85px;
-  }
-
-  .navbar-toggle {
-    background-color: transparent;
-    background-image: none;
-    border-radius: 4px;
-    border: 1px solid transparent;
-    float: right;
-    margin-bottom: 8px;
-    margin-right: 15px;
-    margin-top: 8px;
-    padding: 9px 10px;
-    position: relative;
-    width: 26px;
-  }
-  
-  .icon-bar-1,
-  .icon-bar-2,
-  .icon-bar-3 {
-    background-color: #FFF;
-    border-radius: 1px;
-    height: 2px;
-    margin-bottom: 5px;
-    width: 26px;
-    transition: .4s ease;
-  }
-
-  .toggle .icon-bar-1 {
-    transform: rotate(-45deg) translate(-9px, 0);
-  }
-
-  .toggle .icon-bar-2 {
-    opacity: 0;
-  }
-
-  .toggle .icon-bar-3 {
-    transform: rotate(45deg) translate(-9px, -1px);
   }
 
   @media (max-width: 1199px) {
@@ -69,32 +37,22 @@ const StyledHeader = styled.header`
       }
     }
 
-    .navbar-toggle {
-      left: 10px;
-      position: absolute;
-
-      &.toggle {
-        transform: translate(250px);
-        transition: .4s ease;
-      }
-    }
-
     .menu-items {
       background: #262626;
       height: 100vh;
-      left: -250px;
-      position: absolute;
+      left: -200px;
+      position: fixed;
       top: 0;
-      width: 250px;
-      z-index: 1;
-      transition: .4s ease;
+      transition: .35s ease;
+      width: 200px;
 
       &.toggle {
-        transform: translate(250px);
+        left: 0;
+        /* transform: translate(0); */
 
         li {
           border-bottom: 1px solid #E7774A;
-          width: 250px;
+          width: 200px;
 
           &:last-child {
             border-bottom: none;
@@ -174,9 +132,11 @@ class Header extends Component {
   toggleMenu () {
     // document.querySelector('.container').classList.toggle('toggle')
     // add className toggle to .navbar-toggle div
-    document.querySelector('.navbar-toggle').classList.toggle('toggle')
+    // document.querySelector('.navbar-toggle').classList.toggle('toggle')
 
     document.querySelector('.menu-items').classList.toggle('toggle')
+
+    document.getElementById('container').classList.toggle('toggle')
   }
 
   componentDidMount () {
@@ -186,19 +146,14 @@ class Header extends Component {
   render () {
     return (
       <StyledHeader className='container'>
+        <SidebarToggle
+          className='navbar-toggle'
+          onClick={this.toggleMenu}
+        />
         <Link
           className='logo'
           to={{ pathname: '/' }}
         />
-
-        <div
-          className='navbar-toggle'
-          onClick={this.toggleMenu}
-        >
-          <div className='icon-bar-1'>&nbsp;</div>
-          <div className='icon-bar-2'>&nbsp;</div>
-          <div className='icon-bar-3'>&nbsp;</div>
-        </div>
 
         <ul className='menu-items'>
           { !this.props.email &&
