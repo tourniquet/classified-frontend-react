@@ -7,6 +7,7 @@ const CallToActionButton = styled(Button)`
   border: 0;
   bottom: 0;
   color: white;
+  display: block;
   font-size: 16px;
   height: 40px;
   left: 0;
@@ -16,6 +17,10 @@ const CallToActionButton = styled(Button)`
   text-decoration: none;
   width: 100%;
   z-index: 1;
+
+  @media (min-width: 481px) {
+    display: none;
+  }
 `
 
 export default CallToActionButton
