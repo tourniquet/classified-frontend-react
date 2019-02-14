@@ -21,6 +21,12 @@ const StyledIndexPage = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  transition: .35s ease;
+
+  &.toggle {
+    left: 200px;
+    position: fixed;
+  }
 `
 
 const mapStateToProps = state => ({
@@ -56,7 +62,9 @@ class IndexPage extends Component {
     }
 
     return (
-      <StyledIndexPage>
+      <StyledIndexPage
+        id='wrapper'
+      >
         <Header />
 
         <Search />

@@ -48,7 +48,7 @@ const StyledHeader = styled.header`
 
       &.toggle {
         left: 0;
-        /* transform: translate(0); */
+        position: fixed;
 
         li {
           border-bottom: 1px solid #E7774A;
@@ -136,7 +136,7 @@ class Header extends Component {
 
     document.querySelector('.menu-items').classList.toggle('toggle')
 
-    document.getElementById('container').classList.toggle('toggle')
+    document.getElementById('wrapper').classList.toggle('toggle')
   }
 
   componentDidMount () {
