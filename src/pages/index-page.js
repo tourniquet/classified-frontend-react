@@ -20,11 +20,16 @@ import './index-page.scss'
 const StyledIndexPage = styled.div`
   display: flex;
   flex-direction: column;
+  left: 0;
   min-height: 100vh;
+  position: absolute;
   transition: .35s ease;
+  width: 100%;
 
   &.toggle {
     left: 200px;
+    overflow: hidden;
+    /* min-height: 100vh; */
     position: fixed;
   }
 `
@@ -118,6 +123,7 @@ class IndexPage extends Component {
           to={{ pathname: '/item/add' }}
         >
           <CallToActionButton
+            id='call-to-action'
             title='Post an ad'
           />
         </Link>

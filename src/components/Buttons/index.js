@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Button = ({ className, onBlur, onClick, type, style, title, children }) =>
+const Button = ({ className, id, onBlur, onClick, type, style, title, children }) =>
   <button
     className={className}
+    id={id}
     onBlur={onBlur}
     onClick={onClick}
     type={type || 'button'}

@@ -18,6 +18,10 @@ const StyledHeader = styled.header`
   text-align: center;
   width: 100%;
 
+  &.toggle-header {
+    /* position: fixed; */
+  }
+
   .logo {
     background: #FFF;
     display: inline-block;
@@ -46,11 +50,7 @@ const StyledHeader = styled.header`
       transition: .35s ease;
       width: 200px;
 
-      &.toggle {
-        left: 0;
-        position: fixed;
-
-        li {
+      li {
           border-bottom: 1px solid #E7774A;
           width: 200px;
 
@@ -58,13 +58,17 @@ const StyledHeader = styled.header`
             border-bottom: none;
           }
 
-          a {
-            display: block;
-            padding: 12.5px 15px 12.5px 20px;
-            position: relative;
-            text-decoration: none;
-          }
+        a {
+          display: block;
+          padding: 12.5px 15px 12.5px 20px;
+          position: relative;
+          text-decoration: none;
         }
+      }
+
+      &.toggle {
+        left: 0;
+        position: fixed;
       }
 
       .post-ad-button {
@@ -134,9 +138,13 @@ class Header extends Component {
     // add className toggle to .navbar-toggle div
     // document.querySelector('.navbar-toggle').classList.toggle('toggle')
 
+    document.getElementById('header').classList.toggle('toggle-header')
+
     document.querySelector('.menu-items').classList.toggle('toggle')
 
     document.getElementById('wrapper').classList.toggle('toggle')
+
+    document.getElementById('call-to-action').classList.toggle('toggle-side-menu')
   }
 
   componentDidMount () {
@@ -145,7 +153,7 @@ class Header extends Component {
 
   render () {
     return (
-      <StyledHeader className='container'>
+      <StyledHeader id='header'>
         <SidebarToggle
           className='navbar-toggle'
           onClick={this.toggleMenu}

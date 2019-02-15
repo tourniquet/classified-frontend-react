@@ -20,7 +20,7 @@ const SidebarToggle = styled.div`
 `
 
 const IconBar = styled.div`
-  background-color: red;
+  background-color: #E7775C;
   border-radius: 1px;
   height: 2px;
   margin-bottom: 5px;
