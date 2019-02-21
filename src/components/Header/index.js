@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 
 // components
+import Image from '../Image'
 import RoundedButton from '../Buttons/RoundedButton'
 import SidebarToggle from '../Buttons/SidebarToggle'
 
@@ -18,16 +19,20 @@ const StyledHeader = styled.header`
   text-align: center;
   width: 100%;
 
-  &.toggle-header {
-    /* position: fixed; */
-  }
-
   .logo {
     background: #FFF;
     display: inline-block;
     flex-grow: 0;
     height: 34px;
     width: 85px;
+  }
+
+  .menu-items {
+    li {
+      a {
+        color: #FFF;
+      }
+    }
   }
 
   @media (max-width: 1199px) {
@@ -50,19 +55,42 @@ const StyledHeader = styled.header`
       transition: .35s ease;
       width: 200px;
 
+      .menu-links-block {
+        display: inline-block;
+        width: 100%;
+      }
+
       li {
           border-bottom: 1px solid #E7774A;
-          width: 200px;
+          height: 44px;
+          line-height: 44px;
+
+          &.avatar-li {
+            height: 120px;
+          }
+
+          &:first-child {
+            margin-top: 20px;
+          }
 
           &:last-child {
             border-bottom: none;
           }
 
+          .profile-avatar {
+            border-radius: 50%;
+            width: 50%;
+          }
+
         a {
           display: block;
-          padding: 12.5px 15px 12.5px 20px;
-          position: relative;
+          color: #FFF;
+          left: 0;
+          padding-left: 20px;
+          position: absolute;
+          text-align: left;
           text-decoration: none;
+          width: calc(100% - 20px);
         }
       }
 
@@ -89,10 +117,18 @@ const StyledHeader = styled.header`
     .menu-items {
       color: #FFF;
       font-size: smaller;
-      
+
+      .menu-links-block {
+        display: inline-block;
+      }
+
       li {
         display: inline-block;
         padding: 16px;
+
+        .profile-avatar {
+          display: none;
+        }
 
         a {
           text-decoration: none;
@@ -129,15 +165,10 @@ class Header extends Component {
     window.document.cookie = 'email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
     window.document.cookie = 'id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
     // redirect user to index page after logout
-    // this.props.history.push('/')
     window.location = '/'
   }
 
   toggleMenu () {
-    // document.querySelector('.container').classList.toggle('toggle')
-    // add className toggle to .navbar-toggle div
-    // document.querySelector('.navbar-toggle').classList.toggle('toggle')
-
     document.getElementById('header').classList.toggle('toggle-header')
 
     document.querySelector('.menu-items').classList.toggle('toggle')
@@ -163,13 +194,12 @@ class Header extends Component {
           to={{ pathname: '/' }}
         />
 
-        <ul className='menu-items'>
+        <ul className='menu-items'> {/* TODO: This one should be <aside> */}
           { !this.props.email &&
-            <div style={{ display: 'inline-block' }}>
+            <div className='menu-links-block'> {/* TODO: Remove inline styles */}
               <li>
                 <Link
                   to={{ pathname: '/' }}
-                  style={{ color: '#FFF' }}
                 >
                   Home
                 </Link>
@@ -177,7 +207,6 @@ class Header extends Component {
               <li>
                 <Link
                   to={{ pathname: '/user/registration' }}
-                  style={{ color: '#FFF' }}
                 >
                   Registration
                 </Link>
@@ -185,7 +214,6 @@ class Header extends Component {
               <li>
                 <Link
                   to={{ pathname: '/user/login' }}
-                  style={{ color: '#FFF' }}
                 >
                   Login
                 </Link>
@@ -193,29 +221,34 @@ class Header extends Component {
             </div>
           }
           { this.props.email &&
-            <div style={{ display: 'inline-block' }}>
+            <div className='menu-links-block'>
+              <li className='avatar-li'>
+                <Image
+                  className='profile-avatar'
+                  src={'/img/avatar.jpg'}
+                />
+              </li>
               <li>
                 <Link
                   to={{ pathname: '/user/profile' }}
-                  style={{ color: '#FFF' }}
                 >
                   Profile
                 </Link>
               </li>
               <li>
-                <p
+                <a
                   onClick={this.logOutUser}
                   style={{ cursor: 'pointer' }}
                 >
                   Logout
-                </p>
+                </a>
               </li>
             </div>
           }
           <li>
             <Link to={{ pathname: '/item/add' }}>
               <RoundedButton
-                className='post-ad-button' // do I need this class name?
+                className='post-ad-button' // TODO: do I need this class name?
                 title='Post an ad'
                 style={{ margin: '5px auto 0' }}
               />

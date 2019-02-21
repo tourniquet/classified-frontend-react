@@ -15,13 +15,12 @@ const CallToActionButton = styled(Button)`
   position: fixed;
   text-align: center;
   text-decoration: none;
-  transition: 0;
+  top: calc(100vh - 40px);
   width: 100%;
   z-index: 1;
 
   &.toggle-side-menu {
-    position: absolute;
-    top: calc(100vh - 40px);
+    display: none;
   }
 
   @media (min-width: 481px) {
