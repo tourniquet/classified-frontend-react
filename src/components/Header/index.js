@@ -38,9 +38,7 @@ const StyledHeader = styled.header`
   @media (max-width: 1199px) {
     justify-content: center;
 
-    &.toggle {
-      margin-left: 250px;
-
+    &.toggle-header {
       .logo {
         display: none;
       }
@@ -140,7 +138,8 @@ const StyledHeader = styled.header`
 
 const mapStateToProps = state => ({
   email: state.userReducer.email,
-  id: state.userReducer.id
+  id: state.userReducer.id,
+  toggleSideMenu: state.sideMenuReducer.toggleSideMenu
 })
 
 class Header extends Component {
@@ -168,14 +167,8 @@ class Header extends Component {
     window.location = '/'
   }
 
-  toggleMenu () {
-    document.getElementById('header').classList.toggle('toggle-header')
-
-    document.querySelector('.menu-items').classList.toggle('toggle')
-
-    document.getElementById('wrapper').classList.toggle('toggle')
-
-    document.getElementById('call-to-action').classList.toggle('toggle-side-menu')
+  toggleSideMenu () {
+    return ({ type: 'TOGGLE_SIDE_MENU' })
   }
 
   componentDidMount () {
@@ -184,21 +177,24 @@ class Header extends Component {
 
   render () {
     return (
-      <StyledHeader id='header'>
+      <StyledHeader
+        className={this.props.toggleSideMenu ? 'toggle-header' : null}
+      >
         <SidebarToggle
           className='navbar-toggle'
-          onClick={this.toggleMenu}
+          onClick={() => this.props.dispatch(this.toggleSideMenu())}
         />
         <Link
           className='logo'
           to={{ pathname: '/' }}
         />
 
-        <ul className='menu-items'> {/* TODO: This one should be <aside> */}
+        <ul className={`menu-items ${this.props.toggleSideMenu ? 'toggle' : null}`}> {/* TODO: This one should be <aside> */}
           { !this.props.email &&
-            <div className='menu-links-block'> {/* TODO: Remove inline styles */}
+            <div className='menu-links-block'>
               <li>
                 <Link
+                  onClick={() => this.props.dispatch(this.toggleSideMenu())}
                   to={{ pathname: '/' }}
                 >
                   Home
@@ -206,6 +202,7 @@ class Header extends Component {
               </li>
               <li>
                 <Link
+                  onClick={() => this.props.dispatch(this.toggleSideMenu())}
                   to={{ pathname: '/user/registration' }}
                 >
                   Registration
@@ -213,6 +210,7 @@ class Header extends Component {
               </li>
               <li>
                 <Link
+                  onClick={() => this.props.dispatch(this.toggleSideMenu())}
                   to={{ pathname: '/user/login' }}
                 >
                   Login

@@ -3,7 +3,6 @@ import { render } from 'react-dom'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { combineReducers, createStore } from 'redux'
 import { Provider } from 'react-redux'
-import styled from 'styled-components'
 
 // reset standard browser styles
 import './reset.scss'
@@ -15,6 +14,7 @@ import ItemNew from './pages/Item/New/item-new'
 import SearchResults from './pages/SearchResults'
 import UserLogin from './pages/User/Login/user-login'
 import UserRegistration from './pages/User/Registration/user-registration'
+import Wrapper from './components/Wrapper'
 
 // reducers
 import itemReducer from './reducers/itemReducer'
@@ -24,6 +24,7 @@ import newItemReducer from './reducers/newItemReducer'
 import registrationReducer from './reducers/registrationReducer'
 import searchReducer from './reducers/searchReducer'
 import searchResultsReducer from './reducers/searchResultsReducer'
+import sideMenuReducer from './reducers/sideMenuReducer'
 import userReducer from './reducers/userReducer'
 
 const rootReducer = combineReducers({
@@ -34,6 +35,7 @@ const rootReducer = combineReducers({
   registrationReducer,
   searchReducer,
   searchResultsReducer,
+  sideMenuReducer,
   userReducer
 })
 
@@ -42,26 +44,9 @@ const store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  left: 0;
-  min-height: 100vh;
-  position: absolute;
-  transition: .35s ease;
-  width: 100%;
-
-  &.toggle {
-    left: 200px;
-    overflow: hidden;
-    /* min-height: 100vh; */
-    position: fixed;
-  }
-`
-
 const App = () => (
-  <Wrapper id='wrapper'>
-    <Provider store={store}>
+  <Provider store={store}>
+    <Wrapper>
       <Switch>
         <Route path='/' exact component={IndexPage} />
         <Route path='/item/:url(\d+)' component={Item} />
@@ -70,8 +55,8 @@ const App = () => (
         <Route path='/user/login' component={UserLogin} />
         <Route path='/user/registration' component={UserRegistration} />
       </Switch>
-    </Provider>
-  </Wrapper>
+    </Wrapper>
+  </Provider>
 )
 
 render(
