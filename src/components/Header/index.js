@@ -99,7 +99,7 @@ const StyledHeader = styled.header`
         position: fixed;
       }
 
-      .post-ad-button {
+      ${RoundedButton} {
         display: none;
       }
     }
@@ -248,7 +248,6 @@ class Header extends Component {
           <li>
             <Link to={{ pathname: '/item/add' }}>
               <RoundedButton
-                className='post-ad-button' // TODO: do I need this class name?
                 title='Post an ad'
                 style={{ margin: '5px auto 0' }}
               />

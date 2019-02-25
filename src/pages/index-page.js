@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import React, { Component } from 'react'
-import styled from 'styled-components'
+import React, { Component, Fragment } from 'react'
 
 // API host config
 import { apiHost } from '../config'
@@ -16,23 +15,6 @@ import Search from '../components/Search'
 
 // styles
 import './index-page.scss'
-
-const StyledIndexPage = styled.div`
-  display: flex;
-  flex-direction: column;
-  left: 0;
-  min-height: 100vh;
-  position: absolute;
-  transition: .35s ease;
-  width: 100%;
-
-  &.toggle {
-    left: 200px;
-    overflow: hidden;
-    /* min-height: 100vh; */
-    position: fixed;
-  }
-`
 
 const mapStateToProps = state => ({
   items: state.itemsReducer.items
@@ -67,9 +49,10 @@ class IndexPage extends Component {
     }
 
     return (
-      <StyledIndexPage
-        id='wrapper'
-      >
+      // <StyledIndexPage
+      //   // id='wrapper'
+      // >
+      <Fragment>
         <Header />
 
         <Search />
@@ -127,7 +110,8 @@ class IndexPage extends Component {
             title='Post an ad'
           />
         </Link>
-      </StyledIndexPage>
+      </Fragment>
+      // </StyledIndexPage>
     )
   }
 }

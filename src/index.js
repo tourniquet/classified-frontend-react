@@ -3,6 +3,7 @@ import { render } from 'react-dom'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { combineReducers, createStore } from 'redux'
 import { Provider } from 'react-redux'
+import styled from 'styled-components'
 
 // reset standard browser styles
 import './reset.scss'
@@ -41,17 +42,36 @@ const store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  min-height: 100vh;
+  position: absolute;
+  transition: .35s ease;
+  width: 100%;
+
+  &.toggle {
+    left: 200px;
+    overflow: hidden;
+    /* min-height: 100vh; */
+    position: fixed;
+  }
+`
+
 const App = () => (
-  <Provider store={store}>
-    <Switch>
-      <Route path='/' exact component={IndexPage} />
-      <Route path='/item/:url(\d+)' component={Item} />
-      <Route path='/item/add' component={ItemNew} />
-      <Route path='/search/:query' component={SearchResults} />
-      <Route path='/user/login' component={UserLogin} />
-      <Route path='/user/registration' component={UserRegistration} />
-    </Switch>
-  </Provider>
+  <Wrapper id='wrapper'>
+    <Provider store={store}>
+      <Switch>
+        <Route path='/' exact component={IndexPage} />
+        <Route path='/item/:url(\d+)' component={Item} />
+        <Route path='/item/add' component={ItemNew} />
+        <Route path='/search/:query' component={SearchResults} />
+        <Route path='/user/login' component={UserLogin} />
+        <Route path='/user/registration' component={UserRegistration} />
+      </Switch>
+    </Provider>
+  </Wrapper>
 )
 
 render(
