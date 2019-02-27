@@ -14,7 +14,7 @@ import ItemNew from './pages/Item/New/item-new'
 import SearchResults from './pages/SearchResults'
 import UserLogin from './pages/User/Login/user-login'
 import UserRegistration from './pages/User/Registration/user-registration'
-import Wrapper from './components/Wrapper'
+import Wrapper from './components/Wrapper/Wrapper'
 
 // reducers
 import itemReducer from './reducers/itemReducer'

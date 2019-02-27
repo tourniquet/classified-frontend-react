@@ -1,3 +1,7 @@
+/**
+ * Wrapper is used to wrap entire application in src/index.js
+ */
+
 import { connect } from 'react-redux'
 import React from 'react'
 import styled from 'styled-components'
@@ -11,10 +15,9 @@ const StyledWrapper = styled.div`
   transition: .35s ease;
   width: 100%;
 
-  &.toggle {
+  &.toggle-container {
     left: 200px;
     overflow: hidden;
-    /* min-height: 100vh; */
     position: fixed;
   }
 `
@@ -25,7 +28,7 @@ const mapStateToProps = state => ({
 
 const Wrapper = props => (
   <StyledWrapper
-    className={props.toggleSideMenu ? 'toggle' : null}
+    className={props.toggleSideMenu ? 'toggle-container' : null}
   >
     {props.children}
   </StyledWrapper>

@@ -92,7 +92,7 @@ const StyledHeader = styled.header`
         }
       }
 
-      &.toggle {
+      &.toggle-side-menu {
         left: 0;
         position: fixed;
       }
@@ -189,7 +189,7 @@ class Header extends Component {
           to={{ pathname: '/' }}
         />
 
-        <ul className={`menu-items ${this.props.toggleSideMenu ? 'toggle' : null}`}> {/* TODO: This one should be <aside> */}
+        <ul className={`menu-items ${this.props.toggleSideMenu ? 'toggle-side-menu' : null}`}> {/* TODO: This one should be <aside> */}
           { !this.props.email &&
             <div className='menu-links-block'>
               <li>
