@@ -6,7 +6,6 @@ import { Provider } from 'react-redux'
 
 // reset standard browser styles
 import './reset.scss'
-import './index.scss'
 
 // components
 import IndexPage from './pages/index-page'
@@ -16,6 +15,7 @@ import SearchResults from './pages/SearchResults'
 import UserItems from './pages/User/Items'
 import UserLogin from './pages/User/Login'
 import UserRegistration from './pages/User/Registration/user-registration'
+import Wrapper from './components/Wrapper/Wrapper'
 
 // reducers
 import itemReducer from './reducers/itemReducer'
@@ -25,6 +25,7 @@ import newItemReducer from './reducers/newItemReducer'
 import registrationReducer from './reducers/registrationReducer'
 import searchReducer from './reducers/searchReducer'
 import searchResultsReducer from './reducers/searchResultsReducer'
+import sideMenuReducer from './reducers/sideMenuReducer'
 import userReducer from './reducers/userReducer'
 
 const rootReducer = combineReducers({
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   registrationReducer,
   searchReducer,
   searchResultsReducer,
+  sideMenuReducer,
   userReducer
 })
 
@@ -45,15 +47,16 @@ const store = createStore(
 
 const App = () => (
   <Provider store={store}>
-    <Switch>
-      <Route path='/' exact component={IndexPage} />
-      <Route path='/item/:url(\d+)' component={Item} />
-      <Route path='/item/add' component={ItemNew} />
-      <Route path='/search/:query' component={SearchResults} />
-      <Route path='/user/ads' component={UserItems} />
-      <Route path='/user/login' component={UserLogin} />
-      <Route path='/user/registration' component={UserRegistration} />
-    </Switch>
+    <Wrapper>
+      <Switch>
+        <Route path='/' exact component={IndexPage} />
+        <Route path='/item/:url(\d+)' component={Item} />
+        <Route path='/item/add' component={ItemNew} />
+        <Route path='/search/:query' component={SearchResults} />
+        <Route path='/user/login' component={UserLogin} />
+        <Route path='/user/registration' component={UserRegistration} />
+      </Switch>
+    </Wrapper>
   </Provider>
 )
 

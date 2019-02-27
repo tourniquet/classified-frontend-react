@@ -1,7 +1,6 @@
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import React, { Component } from 'react'
-import styled from 'styled-components'
+import React, { Component, Fragment } from 'react'
 
 // API host config
 import { apiHost } from '../config'
@@ -9,19 +8,13 @@ import { apiHost } from '../config'
 // components
 import CallToActionButton from '../components/Buttons/CallToActionButton'
 import Category from '../components/Category'
-import Header from '../components/Header'
+import Header from '../components/Header/Header'
 import Footer from '../components/Footer'
 import Image from '../components/Image'
 import Search from '../components/Search'
 
 // styles
 import './index-page.scss'
-
-const StyledIndexPage = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-`
 
 const mapStateToProps = state => ({
   items: state.itemsReducer.items
@@ -56,7 +49,10 @@ class IndexPage extends Component {
     }
 
     return (
-      <StyledIndexPage>
+      // <StyledIndexPage
+      //   // id='wrapper'
+      // >
+      <Fragment>
         <Header />
 
         <Search />
@@ -110,10 +106,12 @@ class IndexPage extends Component {
           to={{ pathname: '/item/add' }}
         >
           <CallToActionButton
+            id='call-to-action'
             title='Post an ad'
           />
         </Link>
-      </StyledIndexPage>
+      </Fragment>
+      // </StyledIndexPage>
     )
   }
 }

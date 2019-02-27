@@ -8,7 +8,7 @@ import { apiHost } from '../../../config'
 // components
 import RoundedButton from '../../../components/Buttons/RoundedButton'
 import Footer from '../../../components/Footer'
-import Header from '../../../components/Header'
+import Header from '../../../components/Header/Header'
 import Input from '../../../components/Input'
 import Label from '../../../components/Label'
 
