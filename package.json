@@ -29,7 +29,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^0.28.7",
     "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-adapter-react-16": "^1.10.0",
     "jest": "^23.5.0",
     "jest-enzyme": "^6.1.2",
     "node-sass": "^4.9.0",
