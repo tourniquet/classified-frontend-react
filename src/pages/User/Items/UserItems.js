@@ -7,7 +7,7 @@ import React, { Component } from 'react'
 import { apiHost } from '../../../config'
 
 // components
-import Header from '../../../components/Header'
+import Header from '../../../components/Header/Header'
 import Image from '../../../components/Image'
 import Footer from '../../../components/Footer'
 import Search from '../../../components/Search'

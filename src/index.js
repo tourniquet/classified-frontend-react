@@ -12,7 +12,7 @@ import IndexPage from './pages/index-page'
 import Item from './pages/Item/item'
 import ItemNew from './pages/Item/New/item-new'
 import SearchResults from './pages/SearchResults'
-import UserItems from './pages/User/Items'
+import UserItems from './pages/User/Items/UserItems'
 import UserLogin from './pages/User/Login'
 import UserRegistration from './pages/User/Registration/user-registration'
 import Wrapper from './components/Wrapper/Wrapper'
@@ -55,6 +55,7 @@ const App = () => (
         <Route path='/search/:query' component={SearchResults} />
         <Route path='/user/login' component={UserLogin} />
         <Route path='/user/registration' component={UserRegistration} />
+        <Route path='/user/items' component={UserItems} />
       </Switch>
     </Wrapper>
   </Provider>
