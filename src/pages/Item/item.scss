@@ -112,7 +112,12 @@
           right: 0;
         }
 
-        .image-block {
+        // hide images block for desktop on mobile
+        #desktop-version {
+          display: none;
+        }
+
+        #mobile-version.image-block {
           display: flex;
           justify-content: center;
           margin-right: 10px;
@@ -271,7 +276,12 @@
           width: 50%;
           float: right;
 
-          .image-block {
+          // hide images block for mobile on desktop
+          #mobile-version {
+            display: none;
+          }
+
+          #desktop-version.image-block {
             display: flex;
             height: 170px;
             justify-content: center;
@@ -281,6 +291,8 @@
             img {
               align-self: center;
               border-radius: 6px;
+              max-height: 170px;
+              max-width: 170px;
             }
           }
           
