@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
@@ -33,7 +33,8 @@ class Item extends Component {
     super(props)
 
     this.state = {
-      currentImage: 2
+      currentImage: 2,
+      zoomedImage: null
     }
   }
 
@@ -66,6 +67,38 @@ class Item extends Component {
     }
   }
 
+  zoomImage (img) {
+    this.setState({ zoomedImage: img })
+  }
+
+  unzoomImage () {
+    this.setState({ zoomedImage: null })
+  }
+
+  slideZoomedImages (direction) {
+    const zoomedImage = this.state.zoomedImage
+    const imageExtension = zoomedImage.split('.')[1]
+    const imageName = zoomedImage.split('.')[0].split('')
+    const imageIndex = Number(imageName.pop())
+
+    if (direction === 'next') {
+      if (imageIndex < 2) {
+        const newImageIndex = imageIndex + 1
+        imageName.splice(imageName.length, 0, newImageIndex)
+        console.log(imageName)
+        const newImageName = imageName.join('')
+
+        console.log(newImageName)
+        console.log(`${newImageName}.${imageExtension}`)
+
+        this.setState({ zoomedImage: `${newImageName}.${imageExtension}` })
+      } else if (imageIndex === 2) {
+        const newImageName = imageName.pop().push(0)
+        this.setState({ zoomedImage: `${newImageName}.${imageExtension}` })
+      }
+    } else if (direction === 'prev') {}
+  }
+
   componentDidMount () {
     this.fetchData()
   }
@@ -82,6 +115,9 @@ class Item extends Component {
       views
     } = this.props
     const currentImage = this.state.currentImage
+    const imgUrl = `${apiHost}uploads/`
+    const thumbUrl = `${apiHost}uploads/thumb_`
+    const zoomedImage = this.state.zoomedImage
     const dateOptions = {
       year: 'numeric',
       month: 'long',
@@ -89,8 +125,6 @@ class Item extends Component {
       hour: 'numeric',
       minute: 'numeric'
     }
-
-    const imageUrl = `${apiHost}uploads/thumb_`
 
     return (
       <div className='item-page'>
@@ -135,16 +169,95 @@ class Item extends Component {
             </div>
 
             <div className='images'>
-              {/* {images.map(el => (
-                <div className='image-block'>
+              {images.map(el => (
+                <div
+                  className='image-block'
+                  id='desktop-version'
+                >
                   <Image
-                    src={`${imageUrl}${el}`}
+                    onClick={() => this.zoomImage(el)}
+                    src={`${thumbUrl}${el}`}
                   />
                 </div>
-              ))} */}
+              ))}
+
+              { zoomedImage &&
+                <Fragment>
+                  {/*  */}
+                  <div
+                    onClick={() => this.unzoomImage()}
+                    style={{
+                      position: 'fixed',
+                      width: '100vw',
+                      height: '100vh',
+                      background: '#000000b8',
+                      left: 0,
+                      top: 0
+                    }}
+                  />
+
+                  <div
+                    style={{
+                      position: 'fixed',
+                      margin: 'auto',
+                      top: '50%',
+                      left: '50%',
+                      marginTop: '-300px',
+                      marginLeft: '-400px'
+                    }}
+                  >
+                    <div
+                      className='arrow-left'
+                      onClick={() => this.slideZoomedImages('prev')}
+                      style={{
+                        background: 'red',
+                        height: '50px',
+                        marginTop: '-25px',
+                        position: 'absolute',
+                        top: '50%',
+                        width: '50px'
+                      }}
+                    />
+
+                    <div
+                      className='arrow-right'
+                      onClick={() => this.slideZoomedImages('next')}
+                      style={{
+                        background: 'red',
+                        height: '50px',
+                        marginTop: '-25px',
+                        position: 'absolute',
+                        right: 0,
+                        top: '50%',
+                        width: '50px'
+                      }}
+                    />
+
+                    <Image
+                      onClick={() => this.unzoomImage()}
+                      src='/img/remove.png'
+                      style={{
+                        position: 'absolute',
+                        right: '-10px',
+                        top: '-10px'
+                      }}
+                    />
+
+                    <Image
+                      className='zoomed-image'
+                      src={`${imgUrl}${this.state.zoomedImage}`}
+                      style={{
+                        borderRadius: '10px'
+                      }}
+                    />
+                  </div>
+
+                </Fragment>
+              }
 
               <div
                 className='image-block'
+                id='mobile-version'
                 style={{
                   alignItems: 'center',
                   minHeight: '280px'
@@ -161,7 +274,7 @@ class Item extends Component {
                 />
 
                 <Image
-                  src={`${imageUrl}${images[currentImage]}`}
+                  src={`${thumbUrl}${images[currentImage]}`}
                   style={{
                     height: '100%'
                   }}
