@@ -21,6 +21,7 @@ const Textarea = props =>
     value={props.value}
     required={props.required}
     onChange={props.onChange}
+    style={props.style}
   />
 
 Textarea.propTypes = {

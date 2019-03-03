@@ -89,16 +89,36 @@
       }
   
       .images {
-        margin-top: 64px;
+        align-items: center;
         display: flex;
-        justify-content: space-between;
         flex-flow: row wrap;
+        justify-content: space-between;
         margin-bottom: -5px;
-        
-        img {
-          margin-bottom: 20px;
-          border-radius: 6px;
+        margin-top: 64px;
+
+        .arrow-left {
+          height: 210px;
+          width: 25px;
+          background: red;
+          position: absolute;
+          left: 0;
         }
+
+        .arrow-right {
+          height: 210px;
+          width: 25px;
+          background: red;
+          position: absolute;
+          right: 0;
+        }
+
+        .image-block {
+          display: flex;
+          justify-content: center;
+          margin-right: 10px;
+          width: 100%;
+        }
+        
       }
   
       .price {
