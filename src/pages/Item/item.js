@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 
 // API host config
 import { apiHost } from '../../config'
@@ -28,6 +29,14 @@ const mapStateToProps = state => ({
 })
 
 class Item extends Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      currentImage: 2
+    }
+  }
+
   fetchData () {
     const getUrl = this.props.match.params.url
     const url = `${apiHost}/item.php?url=${getUrl}`
@@ -42,6 +51,19 @@ class Item extends Component {
         })
       })
       .catch(err => console.error(err))
+  }
+
+  slideImages (direction) {
+    const currentImage = this.state.currentImage
+    const imagesCount = this.props.images.length - 1
+
+    if (direction === 'next') {
+      if (currentImage === imagesCount) this.setState({ currentImage: 0 })
+      else this.setState({ currentImage: currentImage + 1 })
+    } else if (direction === 'prev') {
+      if (currentImage === 0) this.setState({ currentImage: 2 })
+      else this.setState({ currentImage: currentImage - 1 })
+    }
   }
 
   componentDidMount () {
@@ -59,6 +81,7 @@ class Item extends Component {
       published,
       views
     } = this.props
+    const currentImage = this.state.currentImage
     const dateOptions = {
       year: 'numeric',
       month: 'long',
@@ -71,6 +94,10 @@ class Item extends Component {
 
     return (
       <div className='item-page'>
+        <Helmet>
+          <title>{title}</title>
+        </Helmet>
+
         <Header />
 
         <div className='ad'>
@@ -103,20 +130,51 @@ class Item extends Component {
 
             <div className='ad-description'>
               <span>{description}</span>
+              <br />
+              <span>Current image: {currentImage}</span>
             </div>
 
             <div className='images'>
-              {images.map(el => (
+              {/* {images.map(el => (
                 <div className='image-block'>
                   <Image
                     src={`${imageUrl}${el}`}
                   />
                 </div>
-              ))}
+              ))} */}
+
+              <div
+                className='image-block'
+                style={{
+                  alignItems: 'center',
+                  minHeight: '280px'
+                }}
+              >
+                <div
+                  className='arrow-left'
+                  onClick={() => this.slideImages('prev')}
+                />
+
+                <div
+                  className='arrow-right'
+                  onClick={() => this.slideImages('next')}
+                />
+
+                <Image
+                  src={`${imageUrl}${images[currentImage]}`}
+                  style={{
+                    height: '100%'
+                  }}
+                />
+              </div>
             </div>
           </div>
 
-          <hr />
+          <hr
+            style={{
+              marginTop: '35px'
+            }}
+          />
 
           <div className='contacts-container'>
             <div className='price'>
@@ -135,6 +193,8 @@ class Item extends Component {
           </div>
 
           <Textarea
+            // TODO: Hide comment text area until is done on backend
+            style={{ display: 'none' }}
             className='send-a-message'
             placeholder='Ask question'
           />
