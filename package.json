@@ -21,7 +21,7 @@
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-eslint": "^9.0.0",
-    "babel-jest": "^23.0.1",
+    "babel-jest": "^24.1.0",
     "babel-loader": "^7.1.5",
     "babel-plugin-styled-components": "^1.5.1",
     "babel-preset-env": "^1.7.0",
