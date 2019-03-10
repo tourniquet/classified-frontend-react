@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { apiHost } from '../../config'
 
 // components
+import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs'
 import CallToActionButton from '../../components/Buttons/CallToActionButton'
 import Header from '../../components/Header/Header'
 import Image from '../../components/Image'
@@ -73,15 +74,11 @@ class Item extends Component {
         <Header />
 
         <div className='ad'>
-          <div className='ad-breadcrumb'>
-            <span><a href='/'>Home </a></span>
-            <span className='slash'>/ </span>
-            <span><a href='/category/{{category}}/'>Category </a></span>
-            <span className='slash'>/ </span>
-            <span><a href='/{{category}}/{{subcategory}}'>Subcategory </a></span>
-            <span className='slash'>/ </span>
-            <span className='breadcrumb-ad-title'>{title}</span>
-          </div>
+          <Breadcrumbs
+            category='category'
+            subcategory='subcategory'
+            title={title}
+          />
 
           <div className='ad-info'>
             <span>Posted by</span>
