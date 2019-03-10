@@ -7,6 +7,7 @@ const Image = props =>
     src={props.src}
     style={props.style}
     onClick={props.onClick}
+    onKeyDown={props.onKeyDown}
   />
 
 Image.propTypes = {

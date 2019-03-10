@@ -12,6 +12,7 @@ import CallToActionButton from '../../components/Buttons/CallToActionButton'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header/Header'
 import Image from '../../components/Image'
+import ImageWrapper from '../../components/Image/imageWrapper'
 import SlideButton from '../../components/Buttons/SlideButton/SlideButton'
 import Textarea from '../../components/Textarea'
 
@@ -57,10 +58,10 @@ class Item extends Component {
 
   slideImages (direction) {
     const currentImage = this.state.currentImage
-    const imagesCount = this.props.images.length - 1
+    const imgCount = this.props.images.length - 1
 
     if (direction === 'next') {
-      if (currentImage === imagesCount) this.setState({ currentImage: 0 })
+      if (currentImage === imgCount) this.setState({ currentImage: 0 })
       else this.setState({ currentImage: currentImage + 1 })
     } else if (direction === 'prev') {
       if (currentImage === 0) this.setState({ currentImage: 2 })
@@ -78,25 +79,26 @@ class Item extends Component {
 
   slideZoomedImages (direction) {
     const images = this.props.images
-    const imagesCount = images.length - 1
+    const imgCount = images.length - 1
     const zoomedImage = this.state.zoomedImage
-    const imageIndex = images.findIndex(img => img === zoomedImage)
+    const imgIndex = images.findIndex(img => img === zoomedImage)
 
     if (direction === 'next') {
-      if (imageIndex < imagesCount) {
-        const newImageIndex = imageIndex + 1
-        this.setState({ zoomedImage: images[newImageIndex] })
-      } else if (imageIndex === imagesCount) {
-        this.setState({ zoomedImage: images[0] })
-      }
+      if (imgIndex < imgCount) this.setState({ zoomedImage: images[imgIndex + 1] })
+      else if (imgIndex === imgCount) this.setState({ zoomedImage: images[0] })
     } else if (direction === 'prev') {
-      if (imageIndex > 0) {
-        const newImageIndex = imageIndex - 1
-        this.setState({ zoomedImage: images[newImageIndex] })
-      } else if (imageIndex === 0) {
-        this.setState({ zoomedImage: images[imagesCount] })
-      }
+      if (imgIndex > 0) this.setState({ zoomedImage: images[imgIndex - 1] })
+      else if (imgIndex === 0) this.setState({ zoomedImage: images[imgCount] })
     }
+  }
+
+  manageZoomedImage (e) {
+    // ESC button
+    if (e.keyCode === 27) this.setState({ zoomedImage: null })
+    // right arrow button
+    if (e.keyCode === 39) this.slideZoomedImages('next')
+    // left arrow button
+    if (e.keyCode === 37) this.slideZoomedImages('prev')
   }
 
   componentDidMount () {
@@ -196,22 +198,28 @@ class Item extends Component {
 
                   <div
                     style={{
-                      position: 'fixed',
+                      position: 'relative',
                       margin: 'auto',
-                      top: '50%',
-                      left: '50%',
                       marginTop: '-300px',
-                      marginLeft: '-400px'
+                      marginLeft: '-400px',
+                      minHeight: '600px',
+                      textAlign: 'center',
+                      lineHeight: '600px'
                     }}
+                    ref={this.activeImage}
                   >
+                    {/* left arrow - previous image */}
                     <SlideButton
-                      className='arrow-left'
-                      onClick={() => this.slideZoomedImages('prev')}
+                      // TODO: Make div stay focuse even when mouse is used
+                      // to slide images
+                      // onClick={() => this.slideZoomedImages('prev')}
                     />
 
+                    {/* right arrow - next image */}
                     <SlideButton
-                      className='arrow-right'
-                      onClick={() => this.slideZoomedImages('next')}
+                      // TODO: Make div stay focuse even when mouse is used
+                      // to slide images
+                      // onClick={() => this.slideZoomedImages('next')}
                       style={{ right: 0 }}
                     />
 
@@ -225,13 +233,17 @@ class Item extends Component {
                       }}
                     />
 
-                    <Image
-                      className='zoomed-image'
-                      src={`${imgUrl}${this.state.zoomedImage}`}
-                      style={{
-                        borderRadius: '10px'
-                      }}
-                    />
+                    <ImageWrapper onKeyDown={e => this.manageZoomedImage(e)}>
+                      <Image
+                        className='zoomed-image'
+                        src={`${imgUrl}${this.state.zoomedImage}`}
+                        style={{
+                          borderRadius: '10px',
+                          display: 'inline-block',
+                          verticalAlign: 'middle'
+                        }}
+                      />
+                    </ImageWrapper>
                   </div>
 
                 </Fragment>
@@ -247,19 +259,11 @@ class Item extends Component {
                 <SlideButton
                   className='arrow-left'
                   onClick={() => this.slideImages('prev')}
-                  style={{
-                    marginTop: 'unset',
-                    top: 'unset'
-                  }}
                 />
 
                 <SlideButton
                   className='arrow-right'
                   onClick={() => this.slideImages('next')}
-                  style={{
-                    marginTop: 'unset',
-                    top: 'unset'
-                  }}
                 />
 
                 <Image

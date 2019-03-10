@@ -8,6 +8,12 @@ const StyledSlideButton = styled.div`
   position: absolute;
   top: 50%;
   width: 50px;
+
+  &.arrow-left,
+  &.arrow-right {
+    margin-top: unset;
+    top: unset;
+  }
 `
 
 const SlideButton = ({ className, onClick, style }) => (
