@@ -7,18 +7,27 @@ class ImageWrapper extends React.Component {
     this.focusedImage = React.createRef()
   }
 
-  componentDidMount () {
-    this.focusedImage.current.addEventListener('keydown', this.props.onKeyDown)
-    this.focusedImage.current.focus()
-  }
+  // TODO:
+  // componentDidMount () {
+  //   this.focusedImage.current.addEventListener('keydown', this.props.onKeyDown)
+  //   this.focusedImage.current.focus()
+  // }
 
   render () {
+    const {
+      children,
+      className,
+      style
+    } = this.props
+
     return (
       <div
+        className={className}
         ref={this.focusedImage}
+        style={style}
         tabIndex='0'
       >
-        {this.props.children}
+        {children}
       </div>
     )
   }

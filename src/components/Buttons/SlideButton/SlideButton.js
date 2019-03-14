@@ -2,17 +2,35 @@ import React from 'react'
 import styled from 'styled-components'
 
 const StyledSlideButton = styled.div`
-  background: green;
-  height: 50px;
-  margin-top: -25px;
+  background: transparent;
+  border-color: white;
+  border-image: initial;
+  border-style: solid;
+  border-width: 4px 0 0 4px;
+  height: 25px;
+  left: -40px;
+  padding: 3px;
   position: absolute;
   top: 50%;
-  width: 50px;
+  transform: rotate(-45deg);
+  width: 25px;
 
-  &.arrow-left,
   &.arrow-right {
-    margin-top: unset;
-    top: unset;
+    border-width: 0 4px 4px 0;
+    left: unset;
+    right: -40px;
+  }
+
+  @media (max-width: 480px) {
+    &.mobile-arrow-left {
+      left: 15px;
+    }
+
+    &.mobile-arrow-right {
+      left: unset;
+      right: 15px;
+      transform: rotate(135deg);
+    }
   }
 `
 

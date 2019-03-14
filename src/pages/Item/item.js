@@ -9,6 +9,7 @@ import { apiHost } from '../../config'
 // components
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs'
 import CallToActionButton from '../../components/Buttons/CallToActionButton'
+import CloseButton from '../../components/Buttons/CloseButton/CloseButton'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header/Header'
 import Image from '../../components/Image'
@@ -35,7 +36,7 @@ class Item extends Component {
     super(props)
 
     this.state = {
-      currentImage: 1,
+      currentImgOnMobile: 1,
       zoomedImage: null
     }
   }
@@ -56,16 +57,16 @@ class Item extends Component {
       .catch(err => console.error(err))
   }
 
-  slideImages (direction) {
-    const currentImage = this.state.currentImage
+  slideImagesOnMobile (direction) {
+    const currentImgOnMobile = this.state.currentImgOnMobile
     const imgCount = this.props.images.length - 1
 
     if (direction === 'next') {
-      if (currentImage === imgCount) this.setState({ currentImage: 0 })
-      else this.setState({ currentImage: currentImage + 1 })
+      if (currentImgOnMobile === imgCount) this.setState({ currentImgOnMobile: 0 })
+      else this.setState({ currentImgOnMobile: currentImgOnMobile + 1 })
     } else if (direction === 'prev') {
-      if (currentImage === 0) this.setState({ currentImage: 2 })
-      else this.setState({ currentImage: currentImage - 1 })
+      if (currentImgOnMobile === 0) this.setState({ currentImgOnMobile: imgCount })
+      else this.setState({ currentImgOnMobile: currentImgOnMobile - 1 })
     }
   }
 
@@ -81,14 +82,14 @@ class Item extends Component {
     const images = this.props.images
     const imgCount = images.length - 1
     const zoomedImage = this.state.zoomedImage
-    const imgIndex = images.findIndex(img => img === zoomedImage)
+    const index = images.findIndex(img => img === zoomedImage)
 
     if (direction === 'next') {
-      if (imgIndex < imgCount) this.setState({ zoomedImage: images[imgIndex + 1] })
-      else if (imgIndex === imgCount) this.setState({ zoomedImage: images[0] })
+      if (index < imgCount) this.setState({ zoomedImage: images[index + 1] })
+      else if (index === imgCount) this.setState({ zoomedImage: images[0] })
     } else if (direction === 'prev') {
-      if (imgIndex > 0) this.setState({ zoomedImage: images[imgIndex - 1] })
-      else if (imgIndex === 0) this.setState({ zoomedImage: images[imgCount] })
+      if (index > 0) this.setState({ zoomedImage: images[index - 1] })
+      else if (index === 0) this.setState({ zoomedImage: images[imgCount] })
     }
   }
 
@@ -116,7 +117,7 @@ class Item extends Component {
       published,
       views
     } = this.props
-    const currentImage = this.state.currentImage
+    const currentImgOnMobile = this.state.currentImgOnMobile
     const imgUrl = `${apiHost}uploads/`
     const thumbUrl = `${apiHost}uploads/thumb_`
     const zoomedImage = this.state.zoomedImage
@@ -136,19 +137,19 @@ class Item extends Component {
 
         <Header />
 
-        <div className='ad'>
+        <div className='item'>
           <Breadcrumbs
             category='category'
             subcategory='subcategory'
             title={title}
           />
 
-          <div className='ad-info'>
+          <div className='item-info'>
             <span>Posted by</span>
             <span className='posted-by'>&nbsp;{name}</span>
           </div>
 
-          <hr className='under-ad-info' />
+          <hr className='under-item-info' />
 
           <div className='posting-date-and-views'>
             <span className='date'>
@@ -159,15 +160,14 @@ class Item extends Component {
 
           <hr className='under-posting-date' />
 
-          <div className='ad-details'>
-            <div className='ad-title'>
+          <div className='item-details'>
+            <div className='item-title'>
               <h2>{title}</h2>
             </div>
 
-            <div className='ad-description'>
+            <div className='item-description'>
               <span>{description}</span>
               <br />
-              <span>Current image: {currentImage}</span>
             </div>
 
             <div className='images'>
@@ -185,63 +185,41 @@ class Item extends Component {
               { zoomedImage &&
                 <Fragment>
                   <div
+                    className='overlay-content'
                     onClick={() => this.unzoomImage()}
-                    style={{
-                      position: 'fixed',
-                      width: '100vw',
-                      height: '100vh',
-                      background: '#000000b8',
-                      left: 0,
-                      top: 0
-                    }}
                   />
 
                   <div
-                    style={{
-                      position: 'relative',
-                      margin: 'auto',
-                      marginTop: '-300px',
-                      marginLeft: '-400px',
-                      minHeight: '600px',
-                      textAlign: 'center',
-                      lineHeight: '600px'
-                    }}
+                    className='zoomed-image-container'
                     ref={this.activeImage}
                   >
                     {/* left arrow - previous image */}
                     <SlideButton
                       // TODO: Make div stay focuse even when mouse is used
                       // to slide images
-                      // onClick={() => this.slideZoomedImages('prev')}
+                      className='arrow-left'
+                      onClick={() => this.slideZoomedImages('prev')}
                     />
 
                     {/* right arrow - next image */}
                     <SlideButton
                       // TODO: Make div stay focuse even when mouse is used
                       // to slide images
-                      // onClick={() => this.slideZoomedImages('next')}
-                      style={{ right: 0 }}
+                      className='arrow-right'
+                      onClick={() => this.slideZoomedImages('next')}
                     />
 
-                    <Image
+                    <CloseButton
                       onClick={() => this.unzoomImage()}
-                      src='/img/remove.png'
-                      style={{
-                        position: 'absolute',
-                        right: '-10px',
-                        top: '-10px'
-                      }}
                     />
 
-                    <ImageWrapper onKeyDown={e => this.manageZoomedImage(e)}>
+                    <ImageWrapper
+                      className='image-wrapper'
+                      onKeyDown={e => this.manageZoomedImage(e)}
+                    >
                       <Image
                         className='zoomed-image'
                         src={`${imgUrl}${this.state.zoomedImage}`}
-                        style={{
-                          borderRadius: '10px',
-                          display: 'inline-block',
-                          verticalAlign: 'middle'
-                        }}
                       />
                     </ImageWrapper>
                   </div>
@@ -251,27 +229,18 @@ class Item extends Component {
 
               <div
                 className='mobile-version image-block'
-                style={{
-                  alignItems: 'center',
-                  minHeight: '280px'
-                }}
               >
                 <SlideButton
-                  className='arrow-left'
-                  onClick={() => this.slideImages('prev')}
+                  className='mobile-arrow-left'
+                  onClick={() => this.slideImagesOnMobile('prev')}
                 />
 
                 <SlideButton
-                  className='arrow-right'
-                  onClick={() => this.slideImages('next')}
+                  className='mobile-arrow-right'
+                  onClick={() => this.slideImagesOnMobile('next')}
                 />
 
-                <Image
-                  src={`${thumbUrl}${images[currentImage]}`}
-                  style={{
-                    height: '100%'
-                  }}
-                />
+                <Image src={`${thumbUrl}${images[currentImgOnMobile]}`} />
               </div>
             </div>
           </div>
