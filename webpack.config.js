@@ -2,8 +2,6 @@ const path = require('path')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const webpack = require('webpack')
 
-// const settings = require('./config')
-
 module.exports = {
   mode: 'development',
   entry: './src/index.js',
@@ -44,7 +42,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loaders: ['style-loader', 'css-loader', 'resolve-url-loader', 'sass-loader?sourceMap']
+        loaders: ['style-loader', 'css-loader', 'sass-loader?sourceMap']
       },
       {
         test: /\.(png|jpg|gif|woff|woff2)$/,
