@@ -1,5 +1,5 @@
 const initialState = {
-  categories: ['Imobiliare', 'Automobile'],
+  categories: [],
   category: null,
   showCategories: false,
   subcategories: ['Apartamente', 'Camioane'],
@@ -16,6 +16,10 @@ const initialState = {
 
 const newItemReducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'POPULATE_CATEGORIES_ARRAY':
+      return Object.assign({}, state, {
+        categories: action.categories
+      })
     case 'TOGGLE_CATEGORIES_LIST':
       return Object.assign({}, state, {
         showCategories: !state.showCategories,

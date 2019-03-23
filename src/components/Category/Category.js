@@ -63,19 +63,18 @@ const CategoryBlock = styled.div`
   }
 `
 
-const Category = () =>
+const Category = ({ id, subcategories, title }) =>
   <CategoryBlock>
     <a>
-      Category name
+      {title}
       <i />
     </a>
 
     <ul>
-      <li className='category-block-item'>Apartamente</li>
-      <li className='category-block-item'>Case şi vile</li>
-      <li className='category-block-item'>Terenuri</li>
-      <li className='category-block-item'>Imobil comercial</li>
-      <li className='category-block-item'>Garajuri</li>
+      { subcategories
+          .filter(el => el.parent_id === id)
+          .map(el => <li key={el.id.toString()}>{el.title}</li>)
+      }
     </ul>
   </CategoryBlock>
 

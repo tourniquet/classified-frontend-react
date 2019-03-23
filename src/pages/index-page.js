@@ -7,7 +7,7 @@ import { apiHost } from '../config'
 
 // components
 import CallToActionButton from '../components/Buttons/CallToActionButton'
-import Category from '../components/Category'
+import Category from '../components/Category/Category'
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer'
 import Image from '../components/Image'
@@ -21,7 +21,37 @@ const mapStateToProps = state => ({
 })
 
 class IndexPage extends Component {
-  fetchData () {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      categories: [],
+      subcategories: []
+    }
+  }
+
+  fetchCategories () {
+    window
+      .fetch(`${apiHost}/categories.php`)
+      .then(response => response.json())
+      .then(result => {
+        this.setState({ categories: result })
+      })
+      .catch(err => console.error(err))
+  }
+
+  fetchSubcategories () {
+    window
+      .fetch(`${apiHost}/subcategories.php`)
+      .then(response => response.json())
+      .then(result => {
+        this.setState({ subcategories: result })
+      })
+      .then(() => console.log(this.state.subcategories))
+      .catch(err => console.error(err))
+  }
+
+  fetchItems () {
     window
       .fetch(`${apiHost}`)
       .then(response => response.json())
@@ -35,10 +65,16 @@ class IndexPage extends Component {
   }
 
   componentDidMount () {
-    this.fetchData()
+    this.fetchCategories()
+    this.fetchSubcategories()
+    this.fetchItems()
   }
 
   render () {
+    const {
+      categories,
+      subcategories
+    } = this.state
     const items = this.props.items
     const dateOptions = {
       year: 'numeric',
@@ -58,15 +94,20 @@ class IndexPage extends Component {
         <Search />
 
         <div className='categories'>
-          <Category />
-          <Category />
-          <Category />
-          <Category />
+          { categories && categories.map(el =>
+            <Category
+              key={el.id.toString()}
+              id={el.id}
+              subcategories={subcategories}
+              title={el.title}
+            />
+            )
+          }
         </div>
 
         <div className='items-list'>
           <ul className='latest-ads'>
-            {items.map(el => (
+            { items && items.map(el => (
               <li
                 className='latest-ads-item'
                 key={el.id.toString()}

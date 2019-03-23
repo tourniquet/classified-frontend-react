@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
@@ -45,35 +45,71 @@ const mapStateToProps = state => ({
   showCurrencies: state.newItemReducer.showCurrencies
 })
 
-const ItemNew = props => {
-  const toggleCategoriesList = () => ({
-    type: 'TOGGLE_CATEGORIES_LIST'
-  })
+class ItemNew extends Component {
+  fetchCategories () {
+    window
+      .fetch(`${apiHost}/categories.php`)
+      .then(response => response.json())
+      .then(result => {
+        this.props.dispatch({
+          type: 'POPULATE_CATEGORIES_ARRAY',
+          categories: result
+        })
+      })
+      .catch(err => console.error(err))
+  }
 
-  const setCategory = id => ({
-    type: 'SET_CATEGORY',
-    id
-  })
+  fetchSubcategories () {
+    window
+      .fetch(`${apiHost}/subcategories.php`)
+      .then(response => response.json())
+      .then(result => {
+        this.setState({ subcategories: result })
+      })
+      .then(() => console.log(this.state.subcategories))
+      .catch(err => console.error(err))
+  }
 
-  const toggleSubcategoriesList = () => ({
-    type: 'TOGGLE_SUBCATEGORIES_LIST'
-  })
+  toggleCategoriesList () {
+    return ({
+      type: 'TOGGLE_CATEGORIES_LIST'
+    })
+  }
 
-  const setSubcategory = id => ({
-    type: 'SET_SUBCATEGORY',
-    id
-  })
+  setCategory (id) {
+    return ({
+      type: 'SET_CATEGORY',
+      id
+    })
+  }
 
-  const toggleRegionsList = () => ({
-    type: 'TOGGLE_REGIONS_LIST'
-  })
+  toggleSubcategoriesList () {
+    return ({
+      type: 'TOGGLE_SUBCATEGORIES_LIST'
+    })
+  }
 
-  const setRegion = id => ({
-    type: 'SET_REGION',
-    id
-  })
+  setSubcategory (id) {
+    return ({
+      type: 'SET_SUBCATEGORY',
+      id
+    })
+  }
 
-  const handleImages = el => {
+  toggleRegionsList () {
+    return ({
+      type: 'TOGGLE_REGIONS_LIST'
+    })
+  }
+
+  setRegion (id) {
+    return ({
+      type: 'SET_REGION',
+      id
+    })
+  }
+
+  handleImages (el) {
     const image = el.target.files[0]
     const blob = new window.Blob([image], { type: 'image/*' })
     const imageURL = window.URL.createObjectURL(blob)
@@ -84,21 +120,27 @@ const ItemNew = props => {
     }
   }
 
-  const removeImage = id => ({
-    type: 'REMOVE_IMAGE',
-    id
-  })
+  removeImage (id) {
+    return ({
+      type: 'REMOVE_IMAGE',
+      id
+    })
+  }
 
-  const toggleCurrencies = () => ({
-    type: 'TOGGLE_CURRENCIES'
-  })
+  toggleCurrencies () {
+    return ({
+      type: 'TOGGLE_CURRENCIES'
+    })
+  }
 
-  const setCurrency = id => ({
-    type: 'SET_CURRENCY',
-    id
-  })
+  setCurrency (id) {
+    return ({
+      type: 'SET_CURRENCY',
+      id
+    })
+  }
 
-  const handleSubmit = event => {
+  handleSubmit (event) {
     event.preventDefault()
 
     const form = document.getElementById('form')
@@ -106,8 +148,8 @@ const ItemNew = props => {
 
     const date = new Date().getTime().toString().slice(5)
     formData.append('url', date)
-    formData.append('userId', props.userId)
-    formData.append('userEmail', props.userEmail)
+    formData.append('userId', this.props.userId)
+    formData.append('userEmail', this.props.userEmail)
 
     const url = `${apiHost}/item-posted.php`
     window
@@ -116,269 +158,281 @@ const ItemNew = props => {
         body: formData
       })
       .then(response => response.json())
-      .then(result => props.history.push(`/item/${result.url}`))
+      .then(result => this.props.history.push(`/item/${result.url}`))
       .catch(err => console.error(err))
   }
 
-  return (
-    <div className='page-body'>
-      <Header />
+  componentDidMount () {
+    this.fetchCategories()
+  }
 
-      <Search />
+  render () {
+    const { dispatch } = this.props
 
-      <form
-        id='form'
-        className='form'
-        onSubmit={handleSubmit}
-      >
-        <div className='left-side'>
-          <Label
-            className='mandatory'
-            htmlFor='category'
-            title='Category'
-          />
-          <DropDownButton
-            className={
-              props.showCategories
-                ? 'button desktop-button active-tab'
-                : 'button desktop-button inactive-tab'
-            }
-            title={props.category}
-            onClick={() => props.dispatch(toggleCategoriesList())}
-          >
-            <i /> {/* arrow icon */}
-          </DropDownButton>
+    return (
+      <div className='page-body'>
+        <Header />
 
-          <UnorderedList
-            className={props.showCategories ? 'show-ul-menu' : 'hide-ul-menu'}
-          >
-            {props.categories.map((el, id) => (
-              <li
-                key={id}
-                onClick={() => props.dispatch(setCategory(id))}
-              >
-                {el}
-              </li>
-            ))}
-          </UnorderedList>
+        <Search />
 
-          <Label
-            className='mandatory'
-            htmlFor='subcategory'
-            title='Subcategory'
-          />
-          <DropDownButton
-            className={
-              props.showSubcategories
-                ? 'button desktop-button active-tab'
-                : 'button desktop-button inactive-tab'
-            }
-            title={props.subcategory}
-            onClick={() => props.dispatch(toggleSubcategoriesList())}
-          >
-            <i /> {/* arrow icon */}
-          </DropDownButton>
-          <UnorderedList
-            className={props.showSubcategories ? 'show-ul-menu' : 'hide-ul-menu'}
-          >
-            {props.subcategories.map((el, id) => (
-              <li
-                key={id}
-                onClick={() => props.dispatch(setSubcategory(id))}
-              >
-                {el}
-              </li>
-            ))}
-          </UnorderedList>
+        <form
+          id='form'
+          className='form'
+          onSubmit={this.handleSubmit}
+        >
+          <div className='left-side'>
+            <Label
+              className='mandatory'
+              htmlFor='category'
+              title='Category'
+            />
+            <DropDownButton
+              className={
+                this.props.showCategories
+                  ? 'button desktop-button active-tab'
+                  : 'button desktop-button inactive-tab'
+              }
+              title={this.props.category}
+              onClick={() => dispatch(this.toggleCategoriesList())}
+            >
+              <i /> {/* arrow icon */}
+            </DropDownButton>
 
-          <Label
-            htmlFor='region'
-            title='Region'
-          />
-          <DropDownButton
-            className={
-              props.showRegions
-                ? 'button desktop-button active-tab'
-                : 'button desktop-button inactive-tab'
-            }
-            title={props.region}
-            onClick={() => props.dispatch(toggleRegionsList())}
-          >
-            <i /> {/* arrow icon */}
-          </DropDownButton>
-          <UnorderedList
-            className={props.showRegions ? 'show-ul-menu' : 'hide-ul-menu'}
-          >
-            {props.regions.map((el, id) => (
-              <li
-                key={id}
-                onClick={() => props.dispatch(setRegion(id))}
-              >
-                {el}
-              </li>
-            ))}
-          </UnorderedList>
-        </div>
-
-        <div className='right-side'>
-          <Label
-            className='mandatory'
-            htmlFor='title'
-            title='Title'
-          />
-          <Input
-            className='title input'
-            placeholder='Title'
-            name='title'
-            required
-          />
-
-          <Label
-            className='mandatory'
-            htmlFor='description'
-            title='Description'
-          />
-          <Textarea
-            className='description'
-            name='description'
-            placeholder='Description'
-            required
-          />
-
-          <Label
-            htmlFor='images'
-            title='Add images'
-          />
-          <div className='images'>
-            {props.images.map((el, id) => (
-              <ImageBlock images={props.images}>
-                <Image
-                  className='remove-image'
-                  src='/img/remove.png'
-                  style={{ display: el.length ? 'inline-block' : 'none' }}
-                  onClick={() => props.dispatch(removeImage(id))}
-                />
-                <Label
-                  className='label-for-images'
-                  style={{ backgroundImage: `url(${el})` }}
+            <UnorderedList
+              className={this.props.showCategories ? 'show-ul-menu' : 'hide-ul-menu'}
+            >
+              {this.props.categories.map((el, id) => (
+                <li
+                  key={id}
+                  onClick={() => dispatch(this.setCategory(id))}
                 >
-                  <span
+                  {el.title}
+                </li>
+              ))}
+            </UnorderedList>
+
+            <Label
+              className='mandatory'
+              htmlFor='subcategory'
+              title='Subcategory'
+            />
+            <DropDownButton
+              className={
+                this.props.showSubcategories
+                  ? 'button desktop-button active-tab'
+                  : 'button desktop-button inactive-tab'
+              }
+              title={this.props.subcategory}
+              onClick={() => this.props.dispatch(this.toggleSubcategoriesList())}
+            >
+              <i /> {/* arrow icon */}
+            </DropDownButton>
+            <UnorderedList
+              className={this.props.showSubcategories ? 'show-ul-menu' : 'hide-ul-menu'}
+            >
+              {this.props.subcategories.map((el, id) => (
+                <li
+                  key={id}
+                  onClick={() => dispatch(this.setSubcategory(id))}
+                >
+                  {el}
+                </li>
+              ))}
+            </UnorderedList>
+
+            <Label
+              htmlFor='region'
+              title='Region'
+            />
+            <DropDownButton
+              className={
+                this.props.showRegions
+                  ? 'button desktop-button active-tab'
+                  : 'button desktop-button inactive-tab'
+              }
+              title={this.props.region}
+              onClick={() => dispatch(this.toggleRegionsList())}
+            >
+              <i /> {/* arrow icon */}
+            </DropDownButton>
+            <UnorderedList
+              className={this.props.showRegions ? 'show-ul-menu' : 'hide-ul-menu'}
+            >
+              {this.props.regions.map((el, id) => (
+                <li
+                  key={id}
+                  onClick={() => dispatch(this.setRegion(id))}
+                >
+                  {el}
+                </li>
+              ))}
+            </UnorderedList>
+          </div>
+
+          <div className='right-side'>
+            <Label
+              className='mandatory'
+              htmlFor='title'
+              title='Title'
+            />
+            <Input
+              className='title input'
+              placeholder='Title'
+              name='title'
+              required
+            />
+
+            <Label
+              className='mandatory'
+              htmlFor='description'
+              title='Description'
+            />
+            <Textarea
+              className='description'
+              name='description'
+              placeholder='Description'
+              required
+            />
+
+            <Label
+              htmlFor='images'
+              title='Add images'
+            />
+            <div className='images'>
+              {this.props.images.map((el, id) => (
+                <ImageBlock
+                  key={id}
+                  images={this.props.images}
+                >
+                  <Image
+                    className='remove-image'
                     src='/img/remove.png'
-                    style={{ display: !el.length ? 'inline-block' : 'none' }}>
-                      +
-                  </span>
-                  <Input
-                    className='input-file'
-                    name='images[]'
-                    accept='image/jpeg,image/png,image/gif'
-                    type='file'
-                    multiple='multiple'
-                    onChange={el => props.dispatch(handleImages(el))}
+                    style={{ display: el.length ? 'inline-block' : 'none' }}
+                    onClick={() => dispatch(this.removeImage(id))}
                   />
-                </Label>
-              </ImageBlock>
-            ))}
-          </div>
-
-          <div className='contacts-block'>
-            <Label
-              className='mandatory display-block'
-              htmlFor='phone'
-              title='Phone'
-            />
-            <Input
-              id='phone'
-              className='input phone'
-              name='phone'
-              inputmode='numeric'
-              pattern='[0-9]*'
-              placeholder='Phone number'
-              required
-            />
-
-            <Label
-              className='mandatory display-block'
-              htmlFor='contact-name'
-              title='Name'
-            />
-            <Input
-              id='contact-name'
-              className='input contact-name'
-              name='name'
-              placeholder='Contact name'
-              required
-            />
-
-            <Label
-              className='display-block'
-              htmlFor='contact-email'
-              title='Email'
-            />
-            <Input
-              id='contact-email'
-              className='input contact-email'
-              name='email'
-              type='email'
-              placeholder='Email'
-              pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
-            />
-          </div>
-
-          <Label
-            className='label-for-price'
-            htmlFor='price'
-            title='Price'
-          />
-          <div className='price-block'>
-            <Input
-              className='input price'
-              name='price'
-              inputmode='numeric'
-              pattern='[0-9]*'
-              placeholder='Price'
-            />
-            <div className='currency'>
-              <DropDownButton
-                className={
-                  props.showCurrencies
-                    ? 'button desktop-button active-tab'
-                    : 'button desktop-button inactive-tab'
-                }
-                title={props.currency}
-                onClick={() => props.dispatch(toggleCurrencies())}
-              >
-                <i /> {/* arrow icon */}
-              </DropDownButton>
-              <UnorderedList
-                className={
-                  props.showCurrencies
-                    ? 'currencies show-ul-menu'
-                    : 'hide-ul-menu'
-                }
-              >
-                {props.currencies.map((el, id) => (
-                  <li
-                    key={id}
-                    onClick={() => props.dispatch(setCurrency(id))}
+                  <Label
+                    htmlFor='some-text-here'
+                    className='label-for-images'
+                    style={{ backgroundImage: `url(${el})` }}
                   >
-                    {el}
-                  </li>
-                ))}
-              </UnorderedList>
+                    <span
+                      src='/img/remove.png'
+                      style={{ display: !el.length ? 'inline-block' : 'none' }}>
+                        +
+                    </span>
+                    <Input
+                      className='input-file'
+                      name='images[]'
+                      accept='image/jpeg,image/png,image/gif'
+                      type='file'
+                      multiple='multiple'
+                      onChange={el => dispatch(this.handleImages(el))}
+                    />
+                  </Label>
+                </ImageBlock>
+              ))}
             </div>
+
+            <div className='contacts-block'>
+              <Label
+                className='mandatory display-block'
+                htmlFor='phone'
+                title='Phone'
+              />
+              <Input
+                id='phone'
+                className='input phone'
+                name='phone'
+                inputmode='numeric'
+                pattern='[0-9]*'
+                placeholder='Phone number'
+                required
+              />
+
+              <Label
+                className='mandatory display-block'
+                htmlFor='contact-name'
+                title='Name'
+              />
+              <Input
+                id='contact-name'
+                className='input contact-name'
+                name='name'
+                placeholder='Contact name'
+                required
+              />
+
+              <Label
+                className='display-block'
+                htmlFor='contact-email'
+                title='Email'
+              />
+              <Input
+                id='contact-email'
+                className='input contact-email'
+                name='email'
+                type='email'
+                placeholder='Email'
+                pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
+              />
+            </div>
+
+            <Label
+              className='label-for-price'
+              htmlFor='price'
+              title='Price'
+            />
+            <div className='price-block'>
+              <Input
+                className='input price'
+                name='price'
+                inputmode='numeric'
+                pattern='[0-9]*'
+                placeholder='Price'
+              />
+              <div className='currency'>
+                <DropDownButton
+                  className={
+                    this.props.showCurrencies
+                      ? 'button desktop-button active-tab'
+                      : 'button desktop-button inactive-tab'
+                  }
+                  title={this.props.currency}
+                  onClick={() => dispatch(this.toggleCurrencies())}
+                >
+                  <i /> {/* arrow icon */}
+                </DropDownButton>
+                <UnorderedList
+                  className={
+                    this.props.showCurrencies
+                      ? 'currencies show-ul-menu'
+                      : 'hide-ul-menu'
+                  }
+                >
+                  {this.props.currencies.map((el, id) => (
+                    <li
+                      key={id}
+                      onClick={() => dispatch(this.setCurrency(id))}
+                    >
+                      {el}
+                    </li>
+                  ))}
+                </UnorderedList>
+              </div>
+            </div>
+
+            <RoundedButton
+              className='post-button'
+              title='Submit'
+              type='submit'
+            />
           </div>
+        </form>
 
-          <RoundedButton
-            className='post-button'
-            title='Submit'
-            type='submit'
-          />
-        </div>
-      </form>
-
-      <Footer />
-    </div>
-  )
+        <Footer />
+      </div>
+    )
+  }
 }
 
 export default connect(mapStateToProps)(ItemNew)
