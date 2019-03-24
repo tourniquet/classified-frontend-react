@@ -35,6 +35,7 @@ const mapStateToProps = state => ({
   showCategories: state.newItemReducer.showCategories,
   subcategories: state.newItemReducer.subcategories,
   subcategory: state.newItemReducer.subcategory,
+  subcategoryId: state.newItemReducer.subcategoryId,
   showSubcategories: state.newItemReducer.showSubcategories,
   regions: state.newItemReducer.regions,
   region: state.newItemReducer.region,
@@ -50,23 +51,25 @@ class ItemNew extends Component {
     window
       .fetch(`${apiHost}/categories.php`)
       .then(response => response.json())
-      .then(result => {
+      .then(categories => {
         this.props.dispatch({
           type: 'POPULATE_CATEGORIES_ARRAY',
-          categories: result
+          categories
         })
       })
       .catch(err => console.error(err))
   }
 
-  fetchSubcategories () {
+  fetchSubcategories (id) {
     window
-      .fetch(`${apiHost}/subcategories.php`)
+      .fetch(`${apiHost}/subcategories.php?id=${id}`)
       .then(response => response.json())
-      .then(result => {
-        this.setState({ subcategories: result })
+      .then(subcategories => {
+        this.props.dispatch({
+          type: 'POPULATE_SUBCATEGORIES_ARRAY',
+          subcategories
+        })
       })
-      .then(() => console.log(this.state.subcategories))
       .catch(err => console.error(err))
   }
 
@@ -76,10 +79,12 @@ class ItemNew extends Component {
     })
   }
 
-  setCategory (id) {
+  setCategory (id, title) {
+    this.fetchSubcategories(id)
+
     return ({
       type: 'SET_CATEGORY',
-      id
+      title
     })
   }
 
@@ -89,10 +94,11 @@ class ItemNew extends Component {
     })
   }
 
-  setSubcategory (id) {
+  setSubcategory (id, title) {
     return ({
       type: 'SET_SUBCATEGORY',
-      id
+      id,
+      title
     })
   }
 
@@ -147,6 +153,7 @@ class ItemNew extends Component {
     const formData = new window.FormData(form)
 
     const date = new Date().getTime().toString().slice(5)
+    formData.append('subcategoryId', this.props.subcategoryId)
     formData.append('url', date)
     formData.append('userId', this.props.userId)
     formData.append('userEmail', this.props.userEmail)
@@ -178,7 +185,7 @@ class ItemNew extends Component {
         <form
           id='form'
           className='form'
-          onSubmit={this.handleSubmit}
+          onSubmit={event => this.handleSubmit(event)}
         >
           <div className='left-side'>
             <Label
@@ -201,10 +208,10 @@ class ItemNew extends Component {
             <UnorderedList
               className={this.props.showCategories ? 'show-ul-menu' : 'hide-ul-menu'}
             >
-              {this.props.categories.map((el, id) => (
+              {this.props.categories.map(el => (
                 <li
-                  key={id}
-                  onClick={() => dispatch(this.setCategory(id))}
+                  key={el.id.toString()}
+                  onClick={() => dispatch(this.setCategory(el.id, el.title))}
                 >
                   {el.title}
                 </li>
@@ -223,7 +230,7 @@ class ItemNew extends Component {
                   : 'button desktop-button inactive-tab'
               }
               title={this.props.subcategory}
-              onClick={() => this.props.dispatch(this.toggleSubcategoriesList())}
+              onClick={() => dispatch(this.toggleSubcategoriesList())}
             >
               <i /> {/* arrow icon */}
             </DropDownButton>
@@ -233,9 +240,9 @@ class ItemNew extends Component {
               {this.props.subcategories.map((el, id) => (
                 <li
                   key={id}
-                  onClick={() => dispatch(this.setSubcategory(id))}
+                  onClick={() => dispatch(this.setSubcategory(el.id, el.title))}
                 >
-                  {el}
+                  {el.title}
                 </li>
               ))}
             </UnorderedList>

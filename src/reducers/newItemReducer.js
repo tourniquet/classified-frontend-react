@@ -2,8 +2,9 @@ const initialState = {
   categories: [],
   category: null,
   showCategories: false,
-  subcategories: ['Apartamente', 'Camioane'],
+  subcategories: [],
   subcategory: null,
+  subcategoryId: null,
   showSubcategories: false,
   regions: ['London', 'Manchester', 'Oxford'],
   region: null,
@@ -29,11 +30,16 @@ const newItemReducer = (state = initialState, action) => {
       })
     case 'SET_CATEGORY':
       return Object.assign({}, state, {
-        category: state.categories[action.id],
+        category: action.title,
         showCategories: false,
+        subcategory: null,
         showSubcategories: false,
         showRegions: false,
         showCurrencies: false
+      })
+    case 'POPULATE_SUBCATEGORIES_ARRAY':
+      return Object.assign({}, state, {
+        subcategories: action.subcategories
       })
     case 'TOGGLE_SUBCATEGORIES_LIST':
       return Object.assign({}, state, {
@@ -45,7 +51,8 @@ const newItemReducer = (state = initialState, action) => {
     case 'SET_SUBCATEGORY':
       return Object.assign({}, state, {
         showCategories: false,
-        subcategory: state.subcategories[action.id],
+        subcategory: action.title,
+        subcategoryId: action.id,
         showSubcategories: false,
         showRegions: false,
         showCurrencies: false
