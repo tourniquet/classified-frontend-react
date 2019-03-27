@@ -17,6 +17,8 @@ const itemReducer = (state = initialState, action) => {
     // data for item page
     case 'FETCH_ITEM_DATA':
       const {
+        category,
+        subcategory,
         title,
         description,
         images,
@@ -28,6 +30,8 @@ const itemReducer = (state = initialState, action) => {
       } = action.result
 
       return Object.assign({}, state, {
+        category,
+        subcategory,
         title,
         description,
         // images: state.item.images,

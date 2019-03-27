@@ -30,9 +30,9 @@ const Breadcrumbs = ({ category, subcategory, title }) =>
   <RootDiv>
     <span><a href='/'>Home </a></span>
     <span className='slash'>/ </span>
-    <span><a href='/category/{{category}}/'>Category </a></span>
+    <span><a href={`/${category}/`}>{category} </a></span>
     <span className='slash'>/ </span>
-    <span><a href='/{{category}}/{{subcategory}}'>Subcategory </a></span>
+    <span><a href={`/${category}/${subcategory}`}>{subcategory}</a></span>
     <span className='slash'>/ </span>
     <span className='breadcrumb-ad-title'>{title}</span>
   </RootDiv>

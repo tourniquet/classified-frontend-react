@@ -15,12 +15,14 @@ import Header from '../../components/Header/Header'
 import Image from '../../components/Image'
 import ImageWrapper from '../../components/Image/imageWrapper'
 import SlideButton from '../../components/Buttons/SlideButton/SlideButton'
-import Textarea from '../../components/Textarea'
+// import Textarea from '../../components/Textarea'
 
 // styles
 import './item.scss'
 
 const mapStateToProps = state => ({
+  category: state.itemReducer.category,
+  subcategory: state.itemReducer.subcategory,
   title: state.itemReducer.title,
   description: state.itemReducer.description,
   images: state.itemReducer.images,
@@ -108,6 +110,8 @@ class Item extends Component {
 
   render () {
     const {
+      category,
+      subcategory,
       title,
       description,
       images,
@@ -139,8 +143,8 @@ class Item extends Component {
 
         <div className='item'>
           <Breadcrumbs
-            category='category'
-            subcategory='subcategory'
+            category={category}
+            subcategory={subcategory}
             title={title}
           />
 
@@ -176,6 +180,7 @@ class Item extends Component {
                   className='desktop-version image-block'
                 >
                   <Image
+                    key={el}
                     onClick={() => this.zoomImage(el)}
                     src={`${thumbUrl}${el}`}
                   />
@@ -267,12 +272,11 @@ class Item extends Component {
             </div>
           </div>
 
-          <Textarea
+          {/* <Textarea
             // TODO: Hide comment text area until is done on backend
-            style={{ display: 'none' }}
             className='send-a-message'
             placeholder='Ask question'
-          />
+          /> */}
         </div>
 
         <Footer />
