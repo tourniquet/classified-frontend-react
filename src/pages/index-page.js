@@ -35,7 +35,7 @@ class IndexPage extends Component {
       .fetch(`${apiHost}/categories.php`)
       .then(response => response.json())
       .then(result => {
-        this.setState({ categories: result })
+        this.setState({categories: result})
       })
       .catch(err => console.error(err))
   }
@@ -45,9 +45,8 @@ class IndexPage extends Component {
       .fetch(`${apiHost}/subcategories.php`)
       .then(response => response.json())
       .then(result => {
-        this.setState({ subcategories: result })
+        this.setState({subcategories: result})
       })
-      .then(() => console.log(this.state.subcategories))
       .catch(err => console.error(err))
   }
 
@@ -126,14 +125,21 @@ class IndexPage extends Component {
                 />
                 <Link
                   key={el.id}
-                  to={{ pathname: `/item/${el.url}` }}
+                  to={{pathname: `/item/${el.url}`}}
                   className='ad-title'
                 >
                   {el.title}
                 </Link>
-                <span className='ad-category'>category</span>
+                <span className='ad-category'>
+                  <a href={`/${el.category}/${el.subcategory}`}>
+                    {el.subcategory}
+                  </a>
+                </span>
                 <span className='ad-date'>
-                  {new Date(el.published).toLocaleDateString('en-GB', dateOptions)}
+                  {
+                    new Date(el.published)
+                      .toLocaleDateString('en-GB', dateOptions)
+                  }
                 </span>
               </li>
             ))}
@@ -144,7 +150,7 @@ class IndexPage extends Component {
 
         <Link
           className='publish-item-button-link'
-          to={{ pathname: '/item/add' }}
+          to={{pathname: '/item/add'}}
         >
           <CallToActionButton
             id='call-to-action'

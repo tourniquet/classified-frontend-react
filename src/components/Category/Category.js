@@ -10,12 +10,14 @@ const CategoryBlock = styled.div`
     background: #F6F6F6;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    color: #000;
     display: flex;
     font-weight: 600;
     height: 58px;
     line-height: 58px;
     padding-left: 20px;
     position: relative;
+    text-decoration: none;
     
     & i {
       border: solid black;
@@ -29,7 +31,7 @@ const CategoryBlock = styled.div`
     }
   }
 
-  > ul {
+  & ul {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     border: 2px solid #F6F6F6;
@@ -37,8 +39,13 @@ const CategoryBlock = styled.div`
     padding: 20px;
     padding-bottom: 0;
 
-    > li {
+    & li {
       padding-bottom: 12px;
+
+      a {
+        color: #515151;
+        text-decoration: none;
+      }
     }
   }
 
@@ -46,18 +53,18 @@ const CategoryBlock = styled.div`
     margin: 0 auto 10px;
     width: 100%;
 
-    > a {
+    & a {
       background: #FFF;
       border-bottom: 1px solid #F6F6F6;
       border-radius: 0;
 
-      > i {
+      & i {
         display: block;
         transform: rotate(-45deg);
       }
     }
 
-    > ul {
+    & ul {
       display: none;
     }
   }
@@ -65,16 +72,21 @@ const CategoryBlock = styled.div`
 
 const Category = ({ id, subcategories, title }) =>
   <CategoryBlock>
-    <a>
+    <a href={`/${title}`}>
       {title}
       <i />
     </a>
 
     <ul>
-      { subcategories
-          .filter(el => el.parent_id === id)
-          .map(el => <li key={el.id.toString()}>{el.title}</li>)
-      }
+      {subcategories
+        .filter(subcategory => subcategory.parent_id === id)
+        .map(subcategory => (
+          <li key={subcategory.id.toString()}>
+            <a href={`/${title}/${subcategory.title}`}>
+              {subcategory.title}
+            </a>
+          </li>
+        ))}
     </ul>
   </CategoryBlock>
 

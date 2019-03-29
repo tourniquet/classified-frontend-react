@@ -112,8 +112,12 @@
         }
   
         .ad-category {
-          color: #E26433;
           width: 125px;
+
+          a {
+            color: #E26433;
+            text-decoration: none;
+          }
         }
   
         .ad-date {
