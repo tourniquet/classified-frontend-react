@@ -1,13 +1,13 @@
 const initialState = {
   categories: [],
-  category: null,
+  category: '',
   showCategories: false,
   subcategories: [],
-  subcategory: null,
+  subcategory: '',
   subcategoryId: null,
   showSubcategories: false,
   regions: ['London', 'Manchester', 'Oxford'],
-  region: null,
+  region: '',
   showRegions: false,
   images: [''],
   currencies: ['$', '£'],
@@ -32,7 +32,7 @@ const newItemReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         category: action.title,
         showCategories: false,
-        subcategory: null,
+        subcategory: '',
         showSubcategories: false,
         showRegions: false,
         showCurrencies: false

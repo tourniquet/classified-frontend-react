@@ -46,6 +46,22 @@ const mapStateToProps = state => ({
   showCurrencies: state.newItemReducer.showCurrencies
 })
 
+const InputStyled = styled.input`
+  border: 1px solid #FFF1;
+  height: 0;
+  outline: 0;
+  outline-offset: 0;
+  width: 0;
+`
+
+// TODO: This must be a temporary solution! I'm serious!
+const RequiredInput = props =>
+  <InputStyled
+    required
+    type='text'
+    value={`${props.value}`}
+  />
+
 class ItemNew extends Component {
   fetchCategories () {
     window
@@ -203,6 +219,8 @@ class ItemNew extends Component {
               onClick={() => dispatch(this.toggleCategoriesList())}
             >
               <i /> {/* arrow icon */}
+
+              <RequiredInput value={`${this.props.category}`} />
             </DropDownButton>
 
             <UnorderedList
@@ -233,6 +251,8 @@ class ItemNew extends Component {
               onClick={() => dispatch(this.toggleSubcategoriesList())}
             >
               <i /> {/* arrow icon */}
+
+              <RequiredInput value={`${this.props.subcategory}`} />
             </DropDownButton>
             <UnorderedList
               className={this.props.showSubcategories ? 'show-ul-menu' : 'hide-ul-menu'}
@@ -261,6 +281,8 @@ class ItemNew extends Component {
               onClick={() => dispatch(this.toggleRegionsList())}
             >
               <i /> {/* arrow icon */}
+
+              <RequiredInput value={`${this.props.region}`} />
             </DropDownButton>
             <UnorderedList
               className={this.props.showRegions ? 'show-ul-menu' : 'hide-ul-menu'}
