@@ -1,31 +1,5 @@
 .items-list {
   flex: 1 0 auto;
-
-  .latest-ads {
-    .latest-ads-item {
-      img.favourite-ad {
-        height: 16px;
-        padding-left: 15px;
-        position: relative;
-        vertical-align: middle;
-        width: 16px;
-      }
-  
-      img.thumbnail {
-        height: 16px;
-        padding-left: 15px;
-        vertical-align: middle;
-        width: 16px;
-      }
-  
-      .ad-title {
-        color: #000;
-        display: inline-block;
-        padding-left: 15px;
-        text-decoration: none;
-      }
-    }
-  }
 }
 
 @media (max-width: 480px) {
@@ -37,29 +11,6 @@
     .latest-ads {
       margin: 0 auto;
       width: 95%;
-
-      .latest-ads-item {
-        background: #FFF;
-        box-sizing: border-box;
-        border: 0;
-        border-bottom: 1px solid #F5F5F5;
-        clear: both;
-        display: list-item;
-        height: 33px;
-        line-height: 32px;
-        margin: 0;
-        position: relative;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        width: 100%;
-        transition: .5s background;
-
-        .ad-category,
-        .ad-date {
-          display: none;
-        }
-      }
     }
   }
 }
@@ -80,51 +31,6 @@
       margin-bottom: 92px;
       width: 1268px;
       font-size: 13px;
-  
-      .latest-ads-item {
-        height: 50px;
-        line-height: 50px;
-        padding-left: 32px;
-        
-        &:not(:first-child) {
-          border-top: 2px solid #F6F6F6;
-        }
-        
-        span {
-          display: inline-block;
-        }
-  
-        .star {
-          width: 32px;
-        }
-  
-        .image {
-          width: 30px;
-        }
-  
-        .ad-title {
-          width: 852px;
-          
-          a:link, a:visited, a:active {
-            text-decoration: none;
-            color: black;
-          }
-        }
-  
-        .ad-category {
-          width: 125px;
-
-          a {
-            color: #E26433;
-            text-decoration: none;
-          }
-        }
-  
-        .ad-date {
-          width: 155px;
-          text-align: right;
-        }
-      }
     }
   }
 }

@@ -8,9 +8,9 @@ import { apiHost } from '../config'
 // components
 import CallToActionButton from '../components/Buttons/CallToActionButton'
 import Category from '../components/Category/Category'
+import ListItem from '../components/ListItem/ListItem'
 import Header from '../components/Header/Header'
 import Footer from '../components/Footer'
-import Image from '../components/Image'
 import Search from '../components/Search'
 
 // styles
@@ -75,18 +75,8 @@ class IndexPage extends Component {
       subcategories
     } = this.state
     const items = this.props.items
-    const dateOptions = {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric'
-    }
 
     return (
-      // <StyledIndexPage
-      //   // id='wrapper'
-      // >
       <Fragment>
         <Header />
 
@@ -106,43 +96,7 @@ class IndexPage extends Component {
 
         <div className='items-list'>
           <ul className='latest-ads'>
-            { items && items.map(el => (
-              <li
-                className='latest-ads-item'
-                key={el.id.toString()}
-              >
-                <Image
-                  className='favourite-ad'
-                  src='/img/star.png'
-                  title=''
-                  alt=''
-                />
-                <Image
-                  className='thumbnail'
-                  src='/img/camera.png'
-                  title=''
-                  alt='Particular lists thumbnail'
-                />
-                <Link
-                  key={el.id}
-                  to={{pathname: `/item/${el.url}`}}
-                  className='ad-title'
-                >
-                  {el.title}
-                </Link>
-                <span className='ad-category'>
-                  <a href={`/${el.category}/${el.subcategory}`}>
-                    {el.subcategory}
-                  </a>
-                </span>
-                <span className='ad-date'>
-                  {
-                    new Date(el.published)
-                      .toLocaleDateString('en-GB', dateOptions)
-                  }
-                </span>
-              </li>
-            ))}
+            {items && items.map(item => <ListItem item={item} />)}
           </ul>
         </div>
 
@@ -158,7 +112,6 @@ class IndexPage extends Component {
           />
         </Link>
       </Fragment>
-      // </StyledIndexPage>
     )
   }
 }

@@ -8,10 +8,12 @@ import { Provider } from 'react-redux'
 import './reset.scss'
 
 // components
+import Category from './pages/Category/Category'
 import IndexPage from './pages/index-page'
 import Item from './pages/Item/item'
 import ItemNew from './pages/Item/New/item-new'
 import SearchResults from './pages/SearchResults'
+import Subcategory from './pages/Subcategory/Subcategory'
 import UserItems from './pages/User/Items/UserItems'
 import UserLogin from './pages/User/Login'
 import UserRegistration from './pages/User/Registration/user-registration'
@@ -56,6 +58,8 @@ const App = () => (
         <Route path='/user/login' component={UserLogin} />
         <Route path='/user/registration' component={UserRegistration} />
         <Route path='/user/items' component={UserItems} />
+        <Route path='/:category/:subcategory' component={Subcategory} />
+        <Route path='/:category' component={Category} />
       </Switch>
     </Wrapper>
   </Provider>
