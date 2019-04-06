@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet'
 import React, { Component, Fragment } from 'react'
 
 // API host config
@@ -13,17 +14,25 @@ class Category extends Component {
   constructor (props) {
     super(props)
 
-    this.state = { items: [] }
+    this.state = {
+      category: null,
+      items: []
+    }
   }
 
   fetchItems () {
-    const getUrl = this.props.match.params.category
-    const url = `${apiHost}/category.php?url=${getUrl}`
+    const category = this.props.match.params.category
+    const url = `${apiHost}/category.php?url=${category}`
 
     window
       .fetch(url)
       .then(response => response.json())
-      .then(result => this.setState({ items: result }))
+      .then(result => {
+        this.setState({
+          category,
+          items: result
+        })
+      })
       .catch(err => console.error(err))
   }
 
@@ -32,10 +41,14 @@ class Category extends Component {
   }
 
   render () {
-    const items = this.state.items
+    const { category, items } = this.state
 
     return (
       <Fragment>
+        <Helmet>
+          <title>{category}</title>
+        </Helmet>
+
         <Header />
 
         <Search />
