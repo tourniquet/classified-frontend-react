@@ -63,6 +63,10 @@ const StyledHeader = styled.header`
           height: 44px;
           line-height: 44px;
 
+          &.desktop {
+            display: none;
+          }
+
           &.avatar-li {
             height: 120px;
           }
@@ -124,6 +128,10 @@ const StyledHeader = styled.header`
         display: inline-block;
         padding: 16px;
 
+        &.mobile {
+          display: none;
+        }
+
         .profile-avatar {
           display: none;
         }
@@ -176,13 +184,15 @@ class Header extends Component {
   }
 
   render () {
+    const { dispatch } = this.props
+
     return (
       <StyledHeader
         className={this.props.toggleSideMenu ? 'toggle-header' : null}
       >
         <SidebarToggle
           className='navbar-toggle'
-          onClick={() => this.props.dispatch(this.toggleSideMenu())}
+          onClick={() => dispatch(this.toggleSideMenu())}
         />
         <Link
           className='logo'
@@ -192,32 +202,50 @@ class Header extends Component {
         <ul className={`menu-items ${this.props.toggleSideMenu ? 'toggle-side-menu' : null}`}> {/* TODO: This one should be <aside> */}
           { !this.props.email &&
             <div className='menu-links-block'>
-              <li>
+              <li className='mobile'> {/* TODO: li elements must be inisde ul */}
                 <Link
-                  onClick={() => this.props.dispatch(this.toggleSideMenu())}
+                  onClick={() => dispatch(this.toggleSideMenu())}
                   to={{ pathname: '/' }}
                 >
                   Home
                 </Link>
               </li>
-              <li>
+              <li className='desktop'> {/* TODO: li elements must be inisde ul */}
+                <Link to={{ pathname: '/' }}>
+                  Home
+                </Link>
+              </li>
+
+              <li className='mobile'>
                 <Link
-                  onClick={() => this.props.dispatch(this.toggleSideMenu())}
+                  onClick={() => dispatch(this.toggleSideMenu())}
                   to={{ pathname: '/user/registration' }}
                 >
                   Registration
                 </Link>
               </li>
-              <li>
+              <li className='desktop'>
+                <Link to={{ pathname: '/user/registration' }}>
+                  Registration
+                </Link>
+              </li>
+
+              <li className='mobile'>
                 <Link
-                  onClick={() => this.props.dispatch(this.toggleSideMenu())}
+                  onClick={() => dispatch(this.toggleSideMenu())}
                   to={{ pathname: '/user/login' }}
                 >
                   Login
                 </Link>
               </li>
+              <li className='desktop'>
+                <Link to={{ pathname: '/user/login' }}>
+                  Login
+                </Link>
+              </li>
             </div>
           }
+
           { this.props.email &&
             <div className='menu-links-block'>
               <li className='avatar-li'>
