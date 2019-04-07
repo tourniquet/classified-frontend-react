@@ -1,7 +1,7 @@
-import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
+import { Link } from 'react-router-dom'
+import React, { Component, Fragment } from 'react'
 
 // API host config
 import { apiHost } from '../../config'
@@ -11,9 +11,9 @@ import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs'
 import CallToActionButton from '../../components/Buttons/CallToActionButton'
 import CloseButton from '../../components/Buttons/CloseButton/CloseButton'
 import Footer from '../../components/Footer'
-import Header from '../../components/Header/Header'
 import Image from '../../components/Image'
 import ImageWrapper from '../../components/Image/imageWrapper'
+import NavBar from '../../components/NavBar/NavBar'
 import SlideButton from '../../components/Buttons/SlideButton/SlideButton'
 // import Textarea from '../../components/Textarea'
 
@@ -139,7 +139,7 @@ class Item extends Component {
           <title>{title}</title>
         </Helmet>
 
-        <Header />
+        <NavBar />
 
         <div className='item'>
           <Breadcrumbs

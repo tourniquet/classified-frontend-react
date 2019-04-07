@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import React, { Component } from 'react'
 import styled from 'styled-components'
 
 // API host config
@@ -9,8 +9,8 @@ import { apiHost } from '../../config'
 // components
 import CallToActionButton from '../../components/Buttons/CallToActionButton'
 import Footer from '../../components/Footer'
-import Header from '../../components/Header/Header'
 import Image from '../../components/Image'
+import NavBar from '../../components/NavBar/NavBar'
 import Search from '../../components/Search'
 
 const mapStateToProps = state => ({
@@ -56,7 +56,7 @@ class SearchResult extends Component {
 
     return (
       <StyledSearchPage>
-        <Header />
+        <NavBar />
         <Search />
 
         <div className='items-list'>

@@ -7,9 +7,9 @@ import { apiHost } from '../../../config'
 
 // components
 import Footer from '../../../components/Footer'
-import Header from '../../../components/Header/Header'
 import Input from '../../../components/Input'
 import Label from '../../../components/Label'
+import NavBar from '../../../components/NavBar/NavBar'
 import RoundedButton from '../../../components/Buttons/RoundedButton'
 
 const UserLoginPage = styled.div`
@@ -128,7 +128,7 @@ class UserLogin extends Component {
   render () {
     return (
       <UserLoginPage>
-        <Header />
+        <NavBar />
 
         <form onSubmit={event => this.handleSubmit(event)}>
           <Label

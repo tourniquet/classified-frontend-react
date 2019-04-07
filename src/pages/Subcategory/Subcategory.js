@@ -5,9 +5,9 @@ import React, { Component, Fragment } from 'react'
 import { apiHost } from '../../config'
 
 // components
-import Header from '../../components/Header/Header'
 import Footer from '../../components/Footer/'
 import ListItem from '../../components/ListItem/ListItem'
+import NavBar from '../../components/NavBar/NavBar'
 import Search from '../../components/Search/'
 
 class Subcategory extends Component {
@@ -49,7 +49,7 @@ class Subcategory extends Component {
           <title>{subcategory}</title>
         </Helmet>
 
-        <Header />
+        <NavBar />
 
         <Search />
 

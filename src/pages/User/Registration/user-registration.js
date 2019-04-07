@@ -1,16 +1,16 @@
-import React from 'react'
 import { connect } from 'react-redux'
+import React from 'react'
 import styled from 'styled-components'
 
 // API host config
 import { apiHost } from '../../../config'
 
 // components
-import RoundedButton from '../../../components/Buttons/RoundedButton'
 import Footer from '../../../components/Footer'
-import Header from '../../../components/Header/Header'
 import Input from '../../../components/Input'
 import Label from '../../../components/Label'
+import NavBar from '../../../components/NavBar/NavBar'
+import RoundedButton from '../../../components/Buttons/RoundedButton'
 
 const UserRegistrationPage = styled.div`
   display: flex;
@@ -97,7 +97,7 @@ const UserRegistration = props => {
 
   return (
     <UserRegistrationPage>
-      <Header />
+      <NavBar />
 
       <form onSubmit={handleSubmit}>
         <Label

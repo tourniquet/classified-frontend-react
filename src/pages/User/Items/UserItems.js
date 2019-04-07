@@ -1,15 +1,14 @@
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import React, { Component } from 'react'
-// import styled from 'styled-components'
 
 // API host config
 import { apiHost } from '../../../config'
 
 // components
-import Header from '../../../components/Header/Header'
-import Image from '../../../components/Image'
 import Footer from '../../../components/Footer'
+import Image from '../../../components/Image'
+import NavBar from '../../../components/NavBar/NavBar'
 import Search from '../../../components/Search'
 
 const mapStateToProps = state => ({
@@ -55,7 +54,7 @@ class UserItems extends Component {
 
     return (
       <div>
-        <Header />
+        <NavBar />
 
         <Search />
 

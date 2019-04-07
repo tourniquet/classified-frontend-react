@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import React, { Component } from 'react'
 import styled from 'styled-components'
 
 // API host config
@@ -8,14 +8,14 @@ import { apiHost } from '../../../config'
 // components
 import DropDownButton from '../../../components/Buttons/DropDownButton'
 import Footer from '../../../components/Footer'
-import Header from '../../../components/Header/Header'
 import Image from '../../../components/Image'
 import Input from '../../../components/Input'
 import Label from '../../../components/Label'
+import NavBar from '../../../components/NavBar/NavBar'
 import RoundedButton from '../../../components/Buttons/RoundedButton'
 import Search from '../../../components/Search'
-import UnorderedList from '../../../components/UnorderedList'
 import Textarea from '../../../components/Textarea'
+import UnorderedList from '../../../components/UnorderedList'
 
 // styles
 import './item-new.scss'
@@ -194,7 +194,7 @@ class ItemNew extends Component {
 
     return (
       <div className='page-body'>
-        <Header />
+        <NavBar />
 
         <Search />
 
@@ -340,7 +340,6 @@ class ItemNew extends Component {
                     onClick={() => dispatch(this.removeImage(id))}
                   />
                   <Label
-                    htmlFor='some-text-here'
                     className='label-for-images'
                     style={{ backgroundImage: `url(${el})` }}
                   >
