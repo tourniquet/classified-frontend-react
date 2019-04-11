@@ -22,7 +22,7 @@ class Subcategory extends Component {
 
   fetchItems () {
     const subcategory = this.props.match.params.subcategory
-    const url = `${apiHost}/subcategory.php?url=${subcategory}`
+    const url = `${apiHost}/subcategory.php?subcategory=${subcategory}`
 
     window
       .fetch(url)
