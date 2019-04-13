@@ -29,6 +29,7 @@ const mapStateToProps = state => ({
   phone: state.itemReducer.phone,
   name: state.itemReducer.name,
   price: state.itemReducer.price,
+  currency: state.itemReducer.currency,
   published: state.itemReducer.published,
   views: state.itemReducer.views
 })
@@ -118,6 +119,7 @@ class Item extends Component {
       phone,
       name,
       price,
+      currency,
       published,
       views
     } = this.props
@@ -259,7 +261,7 @@ class Item extends Component {
           <div className='contacts-container'>
             <div className='price'>
               <span className='label'>Price:&nbsp;</span>
-              <span>{price}</span>
+              <span>{price} {currency}</span>
             </div>
             <br />
             <div className='region'>

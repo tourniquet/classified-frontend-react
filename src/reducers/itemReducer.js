@@ -14,7 +14,7 @@ const initialState = {
 
 const itemReducer = (state = initialState, action) => {
   switch (action.type) {
-    // data for item page
+    /** data for item page */
     case 'FETCH_ITEM_DATA':
       const {
         category,
@@ -25,6 +25,7 @@ const itemReducer = (state = initialState, action) => {
         phone,
         name,
         price,
+        currency,
         published,
         views
       } = action.result
@@ -34,12 +35,11 @@ const itemReducer = (state = initialState, action) => {
         subcategory,
         title,
         description,
-        // images: state.item.images,
         images,
         phone,
         name,
         price,
-        // currency: state.item.currency,
+        currency,
         published,
         views
       })
