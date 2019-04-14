@@ -20,6 +20,7 @@ const StyledInput = styled.input`
 const Input = props =>
   <StyledInput
     className={`input ${props.className}`}
+    id={props.id}
     name={props.name}
     placeholder={props.placeholder}
     inputmode={props.inputmode}
