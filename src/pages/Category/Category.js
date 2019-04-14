@@ -22,7 +22,7 @@ class Category extends Component {
 
   fetchItems () {
     const category = this.props.match.params.category
-    const url = `${apiHost}/category.php?url=${category}`
+    const url = `${apiHost}/category.php?category=${category}`
 
     window
       .fetch(url)

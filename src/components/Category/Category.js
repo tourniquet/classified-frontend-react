@@ -3,9 +3,10 @@ import styled from 'styled-components'
 
 const CategoryBlock = styled.div`
   font-size: 13px;
+  margin: 0 23px 10px;
   width: 270px;
 
-  > a {
+  > a.category-link {
     align-items: center;
     background: #F6F6F6;
     border-top-left-radius: 5px;
@@ -39,10 +40,10 @@ const CategoryBlock = styled.div`
     padding: 20px;
     padding-bottom: 0;
 
-    & li {
+    & li.subcategory-list-item {
       padding-bottom: 12px;
 
-      a {
+      a.subcategory-link {
         color: #515151;
         text-decoration: none;
       }
@@ -53,7 +54,7 @@ const CategoryBlock = styled.div`
     margin: 0 auto 10px;
     width: 100%;
 
-    & a {
+    & a.category-link {
       background: #FFF;
       border-bottom: 1px solid #F6F6F6;
       border-radius: 0;
@@ -72,7 +73,10 @@ const CategoryBlock = styled.div`
 
 const Category = ({ id, subcategories, title }) =>
   <CategoryBlock>
-    <a href={`/${title}`}>
+    <a
+      className='category-link'
+      href={`/${title}`}
+    >
       {title}
       <i />
     </a>
@@ -81,8 +85,14 @@ const Category = ({ id, subcategories, title }) =>
       {subcategories
         .filter(subcategory => subcategory.parent_id === id)
         .map(subcategory => (
-          <li key={subcategory.id.toString()}>
-            <a href={`/${title}/${subcategory.title}`}>
+          <li
+            className='subcategory-list-item'
+            key={subcategory.id.toString()}
+          >
+            <a
+              className='subcategory-link'
+              href={`/${title}/${subcategory.title}`}
+            >
               {subcategory.title}
             </a>
           </li>
