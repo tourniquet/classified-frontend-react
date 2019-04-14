@@ -63,6 +63,12 @@ const RequiredInput = props =>
   />
 
 class ItemNew extends Component {
+  constructor (props) {
+    super(props)
+
+    this.state = { price: false }
+  }
+
   fetchCategories () {
     window
       .fetch(`${apiHost}/categories.php`)
@@ -187,7 +193,7 @@ class ItemNew extends Component {
     formData.append('url', date)
     formData.append('userId', this.props.userId)
     formData.append('userEmail', this.props.userEmail)
-    formData.append('currencyId', this.props.currency.id)
+    formData.append('currencyId', (this.state.price ? this.props.currency.id : 1)) // TODO: here should be 0 when SQL query will be improved
 
     const url = `${apiHost}/item-posted.php`
     window
@@ -207,6 +213,7 @@ class ItemNew extends Component {
 
   render () {
     const { categories, currencies, dispatch, subcategories } = this.props
+    const price = document.getElementById('item-price')
 
     return (
       <div className='page-body'>
@@ -428,11 +435,13 @@ class ItemNew extends Component {
             />
             <div className='price-block'>
               <Input
+                id='item-price'
                 className='input price'
                 name='price'
                 inputmode='numeric'
                 pattern='[0-9]*'
                 placeholder='Price'
+                onChange={() => this.setState({ price: !this.state.price })}
               />
               <div className='currency'>
                 <DropDownButton
@@ -445,6 +454,10 @@ class ItemNew extends Component {
                   onClick={() => dispatch(this.toggleCurrencies())}
                 >
                   <i /> {/* arrow icon */}
+
+                  { (price && price.value) &&
+                    <RequiredInput value={`${this.props.currency.title}`} />
+                  }
                 </DropDownButton>
                 <UnorderedList
                   className={this.props.showCurrencies ? 'show-ul-menu' : 'hide-ul-menu'}
