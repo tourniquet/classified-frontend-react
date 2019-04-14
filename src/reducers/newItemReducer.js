@@ -10,8 +10,11 @@ const initialState = {
   region: '',
   showRegions: false,
   images: [''],
-  currencies: ['$', '£'],
-  currency: null,
+  currencies: [],
+  currency: {
+    id: '',
+    title: ''
+  },
   showCurrencies: false
 }
 
@@ -95,12 +98,19 @@ const newItemReducer = (state = initialState, action) => {
         showRegions: false,
         showCurrencies: !state.showCurrencies
       })
+    case 'POPULATE_CURRENCIES_ARRAY':
+      return Object.assign({}, state, {
+        currencies: action.currencies
+      })
     case 'SET_CURRENCY':
       return Object.assign({}, state, {
         showCategories: false,
         showSubcategories: false,
         showRegions: false,
-        currency: state.currencies[action.id],
+        currency: {
+          id: action.id,
+          title: action.title
+        },
         showCurrencies: false
       })
     default:
