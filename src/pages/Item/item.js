@@ -261,7 +261,10 @@ class Item extends Component {
           <div className='contacts-container'>
             <div className='price'>
               <span className='label'>Price:&nbsp;</span>
-              <span>{price} {currency}</span>
+              { price
+                ? <span>{price} {currency}</span>
+                : <span>Negotiable</span>
+              }
             </div>
             <br />
             <div className='region'>
