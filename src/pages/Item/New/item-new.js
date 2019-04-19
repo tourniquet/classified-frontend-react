@@ -124,16 +124,29 @@ class ItemNew extends Component {
     })
   }
 
+  fetchRegions () {
+    window
+      .fetch(`${apiHost}/regions.php`)
+      .then(response => response.json())
+      .then(regions => {
+        this.props.dispatch({
+          type: 'POPULATE_REGIONS_ARRAY',
+          regions
+        })
+      })
+      .then(err => console.error(err))
+  }
+
   toggleRegionsList () {
     return ({
       type: 'TOGGLE_REGIONS_LIST'
     })
   }
 
-  setRegion (id) {
+  setRegion (city) {
     return ({
       type: 'SET_REGION',
-      id
+      city
     })
   }
 
@@ -209,6 +222,7 @@ class ItemNew extends Component {
   componentDidMount () {
     this.fetchCategories()
     this.fetchCurrencies()
+    this.fetchRegions()
   }
 
   render () {
@@ -310,12 +324,12 @@ class ItemNew extends Component {
             <UnorderedList
               className={this.props.showRegions ? 'show-ul-menu' : 'hide-ul-menu'}
             >
-              {this.props.regions.map((el, id) => (
+              {this.props.regions.map(el => (
                 <li
-                  key={id}
-                  onClick={() => dispatch(this.setRegion(id))}
+                  key={el.id}
+                  onClick={() => dispatch(this.setRegion(el.title))}
                 >
-                  {el}
+                  {el.title}
                 </li>
               ))}
             </UnorderedList>

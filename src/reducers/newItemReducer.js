@@ -6,7 +6,7 @@ const initialState = {
   subcategory: '',
   subcategoryId: null,
   showSubcategories: false,
-  regions: ['London', 'Manchester', 'Oxford'],
+  regions: [],
   region: '',
   showRegions: false,
   images: [''],
@@ -60,6 +60,10 @@ const newItemReducer = (state = initialState, action) => {
         showRegions: false,
         showCurrencies: false
       })
+    case 'POPULATE_REGIONS_ARRAY':
+      return Object.assign({}, state, {
+        regions: action.regions
+      })
     case 'TOGGLE_REGIONS_LIST':
       return Object.assign({}, state, {
         showCategories: false,
@@ -71,7 +75,7 @@ const newItemReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         showCategories: false,
         showSubcategories: false,
-        region: state.regions[action.id],
+        region: action.city,
         showRegions: false,
         showCurrencies: false
       })
