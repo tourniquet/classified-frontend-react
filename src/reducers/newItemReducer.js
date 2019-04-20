@@ -9,6 +9,7 @@ const initialState = {
   regions: [],
   region: '',
   showRegions: false,
+  regionId: null,
   images: [''],
   currencies: [],
   currency: {
@@ -75,7 +76,10 @@ const newItemReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         showCategories: false,
         showSubcategories: false,
-        region: action.city,
+        region: {
+          id: action.id,
+          title: action.title
+        },
         showRegions: false,
         showCurrencies: false
       })

@@ -143,10 +143,11 @@ class ItemNew extends Component {
     })
   }
 
-  setRegion (city) {
+  setRegion (id, title) {
     return ({
       type: 'SET_REGION',
-      city
+      id,
+      title
     })
   }
 
@@ -203,6 +204,7 @@ class ItemNew extends Component {
 
     const date = new Date().getTime().toString().slice(5)
     formData.append('subcategoryId', this.props.subcategoryId)
+    formData.append('regionId', this.props.region.id)
     formData.append('url', date)
     formData.append('userId', this.props.userId)
     formData.append('userEmail', this.props.userEmail)
@@ -296,7 +298,7 @@ class ItemNew extends Component {
             >
               {subcategories.map((el, id) => (
                 <li
-                  key={id}
+                  key={el.id}
                   onClick={() => dispatch(this.setSubcategory(el.id, el.title))}
                 >
                   {el.title}
@@ -314,7 +316,7 @@ class ItemNew extends Component {
                   ? 'button desktop-button active-tab'
                   : 'button desktop-button inactive-tab'
               }
-              title={this.props.region}
+              title={this.props.region.title}
               onClick={() => dispatch(this.toggleRegionsList())}
             >
               <i /> {/* arrow icon */}
@@ -327,7 +329,7 @@ class ItemNew extends Component {
               {this.props.regions.map(el => (
                 <li
                   key={el.id}
-                  onClick={() => dispatch(this.setRegion(el.title))}
+                  onClick={() => dispatch(this.setRegion(el.id, el.title))}
                 >
                   {el.title}
                 </li>
