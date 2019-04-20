@@ -27,7 +27,8 @@ const itemReducer = (state = initialState, action) => {
         price,
         currency,
         published,
-        views
+        views,
+        region
       } = action.result
 
       return Object.assign({}, state, {
@@ -41,7 +42,8 @@ const itemReducer = (state = initialState, action) => {
         price,
         currency,
         published,
-        views
+        views,
+        region
       })
     default:
       return state

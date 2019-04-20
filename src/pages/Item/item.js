@@ -31,7 +31,8 @@ const mapStateToProps = state => ({
   price: state.itemReducer.price,
   currency: state.itemReducer.currency,
   published: state.itemReducer.published,
-  views: state.itemReducer.views
+  views: state.itemReducer.views,
+  region: state.itemReducer.region
 })
 
 class Item extends Component {
@@ -121,7 +122,8 @@ class Item extends Component {
       price,
       currency,
       published,
-      views
+      views,
+      region
     } = this.props
     const currentImgOnMobile = this.state.currentImgOnMobile
     const imgUrl = `${apiHost}uploads/`
@@ -269,7 +271,7 @@ class Item extends Component {
             <br />
             <div className='region'>
               <span className='label'>Region:&nbsp;</span>
-              <span>Orhei</span>
+              <span>{region}</span>
             </div>
             <div className='contacts'>
               <span className='label'>Posted by:&nbsp;</span>
