@@ -12,6 +12,7 @@ import Category from './pages/Category/Category'
 import IndexPage from './pages/index-page'
 import Item from './pages/Item/item'
 import ItemNew from './pages/Item/New/item-new'
+import Region from './pages/Region/Region'
 import SearchResults from './pages/SearchResults'
 import Subcategory from './pages/Subcategory/Subcategory'
 import UserItems from './pages/User/Items/UserItems'
@@ -58,6 +59,7 @@ const App = () => (
         <Route path='/user/login' component={UserLogin} />
         <Route path='/user/registration' component={UserRegistration} />
         <Route path='/user/items' component={UserItems} />
+        <Route path='/region/:region' component={Region} />
         <Route path='/:category/:subcategory' component={Subcategory} />
         <Route path='/:category' component={Category} />
       </Switch>
