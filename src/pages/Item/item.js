@@ -271,7 +271,13 @@ class Item extends Component {
             <br />
             <div className='region'>
               <span className='label'>Region:&nbsp;</span>
-              <span>{region}</span>
+              <span >
+                <a className='region-link'
+                  href={`/region/${region}`}
+                >
+                  {region}
+                </a>
+              </span>
             </div>
             <div className='contacts'>
               <span className='label'>Posted by:&nbsp;</span>

@@ -113,6 +113,10 @@
   
       .region {
         margin-bottom: 16px;
+
+        a.region-link {
+          text-decoration: none;
+        }
       }
   
       .send-a-message {
@@ -300,6 +304,11 @@
   
         .region {
           margin-bottom: 16px;
+
+          a.region-link {
+            color: #000;
+            text-decoration: none;
+          }
         }
       }
   
