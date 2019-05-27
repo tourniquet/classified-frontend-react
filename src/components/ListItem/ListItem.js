@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import Image from '../Image'
 
 const ListItemStyled = styled.li`
-  img.favourite-ad {
+  img.favourite-item {
     height: 16px;
     padding-left: 15px;
     position: relative;
@@ -21,7 +21,7 @@ const ListItemStyled = styled.li`
     width: 16px;
   }
 
-  .ad-title {
+  .item-tile {
     color: #000;
     display: inline-block;
     padding-left: 15px;
@@ -45,8 +45,8 @@ const ListItemStyled = styled.li`
     width: 100%;
     transition: .5s background;
 
-    .ad-category,
-    .ad-date {
+    .item-category,
+    .item-date {
       display: none;
     }
   }
@@ -72,7 +72,7 @@ const ListItemStyled = styled.li`
       width: 30px;
     }
 
-    .ad-title {
+    .item-tile {
       width: 852px;
       
       a:link, a:visited, a:active {
@@ -81,7 +81,7 @@ const ListItemStyled = styled.li`
       }
     }
 
-    .ad-category {
+    .item-category {
       width: 125px;
 
       a {
@@ -90,7 +90,7 @@ const ListItemStyled = styled.li`
       }
     }
 
-    .ad-date {
+    .item-date {
       width: 155px;
       text-align: right;
     }
@@ -112,7 +112,7 @@ class ItemList extends Component {
     return (
       <ListItemStyled key={id.toString()}>
         <Image
-          className='favourite-ad'
+          className='favourite-item'
           src='/img/star.png'
           title=''
           alt=''
@@ -126,16 +126,16 @@ class ItemList extends Component {
         <Link
           key={id}
           to={{pathname: `/item/${url}`}}
-          className='ad-title'
+          className='item-tile'
         >
           {title}
         </Link>
-        <span className='ad-category'>
+        <span className='item-category'>
           <a href={`/${category}/${subcategory}`}>
             {subcategory}
           </a>
         </span>
-        <span className='ad-date'>
+        <span className='item-date'>
           {new Date(published).toLocaleDateString('en-GB', dateOptions)}
         </span>
       </ListItemStyled>
