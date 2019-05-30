@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import { apiHost } from '../../config'
 
 // components
-import CallToActionButton from '../../components/Buttons/CallToActionButton'
+import CallToActionButton from '../../components/Buttons/CallToActionButton/CallToActionButton'
 import Footer from '../../components/Footer'
 import Image from '../../components/Image'
 import NavBar from '../../components/NavBar/NavBar'

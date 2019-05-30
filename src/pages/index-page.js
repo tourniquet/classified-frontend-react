@@ -6,7 +6,7 @@ import React, { Component, Fragment } from 'react'
 import { apiHost } from '../config'
 
 // components
-import CallToActionButton from '../components/Buttons/CallToActionButton'
+import CallToActionButton from '../components/Buttons/CallToActionButton/CallToActionButton'
 import Category from '../components/Category/Category'
 import Footer from '../components/Footer'
 import ListItem from '../components/ListItem/ListItem'
