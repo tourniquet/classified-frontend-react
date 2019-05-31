@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import { apiHost } from '../../../config'
 
 // components
-import DropDownButton from '../../../components/Buttons/DropDownButton'
+import DropDownButton from '../../../components/Buttons/DropDownButton/DropDownButton'
 import Footer from '../../../components/Footer'
 import Image from '../../../components/Image'
 import Input from '../../../components/Input'
