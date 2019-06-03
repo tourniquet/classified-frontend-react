@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 
 // components
-import Image from '../Image'
+import Image from '../Image/Image'
 
 const ListItemStyled = styled.li`
   img.favourite-item {

@@ -9,7 +9,7 @@ import { apiHost } from '../../config'
 // components
 import CallToActionButton from '../../components/Buttons/CallToActionButton/CallToActionButton'
 import Footer from '../../components/Footer/Footer'
-import Image from '../../components/Image'
+import Image from '../../components/Image/Image'
 import NavBar from '../../components/NavBar/NavBar'
 import Search from '../../components/Search'
 
