@@ -7,7 +7,7 @@ import { apiHost } from '../../../config'
 
 // components
 import DropDownButton from '../../../components/Buttons/DropDownButton/DropDownButton'
-import Footer from '../../../components/Footer'
+import Footer from '../../../components/Footer/Footer'
 import Image from '../../../components/Image'
 import Input from '../../../components/Input'
 import Label from '../../../components/Label'

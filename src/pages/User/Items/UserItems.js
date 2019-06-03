@@ -6,7 +6,7 @@ import React, { Component } from 'react'
 import { apiHost } from '../../../config'
 
 // components
-import Footer from '../../../components/Footer'
+import Footer from '../../../components/Footer/Footer'
 import Image from '../../../components/Image'
 import NavBar from '../../../components/NavBar/NavBar'
 import Search from '../../../components/Search'

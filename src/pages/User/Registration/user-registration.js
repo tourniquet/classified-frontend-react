@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import { apiHost } from '../../../config'
 
 // components
-import Footer from '../../../components/Footer'
+import Footer from '../../../components/Footer/Footer'
 import Input from '../../../components/Input'
 import Label from '../../../components/Label'
 import NavBar from '../../../components/NavBar/NavBar'
