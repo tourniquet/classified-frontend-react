@@ -7,7 +7,7 @@ import { apiHost } from '../../../config'
 
 // components
 import Footer from '../../../components/Footer/Footer'
-import Input from '../../../components/Input'
+import Input from '../../../components/Input/Input'
 import Label from '../../../components/Label'
 import NavBar from '../../../components/NavBar/NavBar'
 import RoundedButton from '../../../components/Buttons/RoundedButton/RoundedButton'
