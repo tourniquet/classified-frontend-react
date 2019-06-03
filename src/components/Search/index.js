@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 // components
 import Input from '../Input'
-import SearchButton from '../Buttons/SearchButton'
+import SearchButton from '../Buttons/SearchButton/SearchButton'
 
 const StyledContainer = styled.div``
 
