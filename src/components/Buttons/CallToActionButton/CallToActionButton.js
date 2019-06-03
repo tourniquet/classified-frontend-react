@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import React from 'react'
 import styled from 'styled-components'
 
-import Button from '..'
+import Button from '../Button'
 
 const CallToAction = styled(Button)`
   background-color: #E7774A;
