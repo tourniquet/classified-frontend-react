@@ -11,7 +11,7 @@ import Category from '../components/Category/Category'
 import Footer from '../components/Footer/Footer'
 import ListItem from '../components/ListItem/ListItem'
 import NavBar from '../components/NavBar/NavBar'
-import Search from '../components/Search'
+import Search from '../components/Search/Search'
 
 // styles
 import './index-page.scss'

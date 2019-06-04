@@ -8,7 +8,7 @@ import { apiHost } from '../../config'
 import Footer from '../../components/Footer/Footer'
 import ListItem from '../../components/ListItem/ListItem'
 import NavBar from '../../components/NavBar/NavBar'
-import Search from '../../components/Search'
+import Search from '../../components/Search/Search'
 
 class Category extends Component {
   constructor (props) {

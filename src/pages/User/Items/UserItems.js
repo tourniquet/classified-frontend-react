@@ -9,7 +9,7 @@ import { apiHost } from '../../../config'
 import Footer from '../../../components/Footer/Footer'
 import Image from '../../../components/Image/Image'
 import NavBar from '../../../components/NavBar/NavBar'
-import Search from '../../../components/Search'
+import Search from '../../../components/Search/Search'
 
 const mapStateToProps = state => ({
   items: state.itemsReducer.items
