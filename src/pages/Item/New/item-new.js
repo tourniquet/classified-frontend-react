@@ -14,7 +14,7 @@ import Label from '../../../components/Label/Label'
 import NavBar from '../../../components/NavBar/NavBar'
 import RoundedButton from '../../../components/Buttons/RoundedButton/RoundedButton'
 import Search from '../../../components/Search/Search'
-import Textarea from '../../../components/Textarea'
+import Textarea from '../../../components/Textarea/Textarea'
 import UnorderedList from '../../../components/UnorderedList'
 
 // styles
