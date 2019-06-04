@@ -15,7 +15,7 @@ import NavBar from '../../../components/NavBar/NavBar'
 import RoundedButton from '../../../components/Buttons/RoundedButton/RoundedButton'
 import Search from '../../../components/Search/Search'
 import Textarea from '../../../components/Textarea/Textarea'
-import UnorderedList from '../../../components/UnorderedList'
+import UnorderedList from '../../../components/UnorderedList/UnorderedList'
 
 // styles
 import './item-new.scss'
