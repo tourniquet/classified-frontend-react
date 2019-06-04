@@ -10,7 +10,7 @@ import DropDownButton from '../../../components/Buttons/DropDownButton/DropDownB
 import Footer from '../../../components/Footer/Footer'
 import Image from '../../../components/Image/Image'
 import Input from '../../../components/Input/Input'
-import Label from '../../../components/Label'
+import Label from '../../../components/Label/Label'
 import NavBar from '../../../components/NavBar/NavBar'
 import RoundedButton from '../../../components/Buttons/RoundedButton/RoundedButton'
 import Search from '../../../components/Search'
