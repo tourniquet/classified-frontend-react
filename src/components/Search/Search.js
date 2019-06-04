@@ -4,8 +4,8 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 // components
-import Input from '../Input'
-import SearchButton from '../Buttons/SearchButton'
+import Input from '../Input/Input'
+import SearchButton from '../Buttons/SearchButton/SearchButton'
 
 const StyledContainer = styled.div``
 

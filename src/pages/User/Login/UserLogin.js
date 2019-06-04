@@ -6,11 +6,11 @@ import styled from 'styled-components'
 import { apiHost } from '../../../config'
 
 // components
-import Footer from '../../../components/Footer'
-import Input from '../../../components/Input'
-import Label from '../../../components/Label'
+import Footer from '../../../components/Footer/Footer'
+import Input from '../../../components/Input/Input'
+import Label from '../../../components/Label/Label'
 import NavBar from '../../../components/NavBar/NavBar'
-import RoundedButton from '../../../components/Buttons/RoundedButton'
+import RoundedButton from '../../../components/Buttons/RoundedButton/RoundedButton'
 
 const UserLoginPage = styled.div`
   display: flex;

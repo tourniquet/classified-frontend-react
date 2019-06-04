@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import Button from '..'
+import Button from '../Button'
 
 const DropDownButton = styled(Button)`
   display: block;

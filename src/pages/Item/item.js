@@ -8,10 +8,10 @@ import { apiHost } from '../../config'
 
 // components
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs'
-import CallToActionButton from '../../components/Buttons/CallToActionButton'
+import CallToActionButton from '../../components/Buttons/CallToActionButton/CallToActionButton'
 import CloseButton from '../../components/Buttons/CloseButton/CloseButton'
-import Footer from '../../components/Footer'
-import Image from '../../components/Image'
+import Footer from '../../components/Footer/Footer'
+import Image from '../../components/Image/Image'
 import ImageWrapper from '../../components/Image/imageWrapper'
 import NavBar from '../../components/NavBar/NavBar'
 import SlideButton from '../../components/Buttons/SlideButton/SlideButton'

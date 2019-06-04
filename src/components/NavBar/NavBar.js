@@ -4,8 +4,8 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 
 // components
-import Image from '../Image'
-import RoundedButton from '../Buttons/RoundedButton'
+import Image from '../Image/Image'
+import RoundedButton from '../Buttons/RoundedButton/RoundedButton'
 import SidebarToggle from '../Buttons/SidebarToggle'
 
 const StyledHeader = styled.header`
