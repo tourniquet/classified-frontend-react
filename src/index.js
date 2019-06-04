@@ -16,7 +16,7 @@ import Region from './pages/Region/Region'
 import SearchResults from './pages/SearchResults/SearchResults'
 import Subcategory from './pages/Subcategory/Subcategory'
 import UserItems from './pages/User/Items/UserItems'
-import UserLogin from './pages/User/Login'
+import UserLogin from './pages/User/Login/UserLogin'
 import UserRegistration from './pages/User/Registration/user-registration'
 import Wrapper from './components/Wrapper/Wrapper'
 
