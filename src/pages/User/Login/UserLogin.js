@@ -1,4 +1,3 @@
-import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
@@ -19,8 +18,7 @@ const UserLoginPage = styled.div`
 
   > form {
     flex: 1 0 auto;
-    margin: 0 auto;
-    margin-top: 40px;
+    margin: 40px auto 0;
     width: 20%;
   }
 
@@ -35,45 +33,10 @@ const ErrorMessage = styled.p`
   color: red;
 `
 
-const mapStateToProps = state => ({
-  email: state.loginReducer.email,
-  password: state.loginReducer.password,
-  wrongEmail: state.loginReducer.wrongEmail,
-  wrongPassword: state.loginReducer.wrongPassword,
-  emailUndefined: state.loginReducer.emailUndefined
-})
-
 class UserLogin extends Component {
-  setUserEmail (event) {
-    return ({
-      type: 'LOGIN_USER_EMAIL',
-      email: event.target.value
-    })
-  }
-
-  setUserPassword (event) {
-    return ({
-      type: 'LOGIN_USER_PASSWORD',
-      password: event.target.value
-    })
-  }
-
-  setInitialState () {
-    return ({
-      type: 'SET_INITIAL_STATE'
-    })
-  }
-
-  wrongPassword () {
-    return ({
-      type: 'LOGIN_WRONG_PASSWORD'
-    })
-  }
-
-  wrongEmail () {
-    return ({
-      type: 'LOGIN_WRONG_EMAIL'
-    })
+  state = {
+    wrongEmail: false,
+    wrongPassword: false
   }
 
   checkIfUserIsLogged () {
@@ -86,36 +49,41 @@ class UserLogin extends Component {
     if (email && id) this.props.history.push('/')
   }
 
-  handleSubmit (event) {
+  handleSubmit = event => {
     event.preventDefault()
 
-    // set initial state
-    this.props.dispatch(this.setInitialState())
-
-    const data = {
-      email: this.props.email,
-      password: this.props.password
-    }
+    const form = document.getElementById('form')
+    const formData = new window.FormData(form)
 
     const url = `${apiHost}/login.php`
     window
       .fetch(url, {
         method: 'POST',
-        body: JSON.stringify(data)
+        body: formData
       })
       .then(response => response.json())
       .then(result => {
         if (result.email) {
           const month = new Date(new Date().setDate(new Date().getDate() + 30)).toGMTString()
+
           // save user email and user id in cookies
           window.document.cookie = `email=${result.email}; expires=${month}; path='/'`
           window.document.cookie = `id=${result.id}; expires=${month}; path='/'`
+
           // redirect user to index page
           this.props.history.push('/')
         } else if (result.message === 'Password!') {
-          this.props.dispatch(this.wrongPassword())
+          this.setState({
+            // reset wrong email message
+            wrongEmail: false,
+            wrongPassword: true
+          })
         } else if (result.message === 'Unsuccess!') {
-          this.props.dispatch(this.wrongEmail())
+          this.setState({
+            wrongEmail: true,
+            // reset wrong password message
+            wrongPassword: false
+          })
         }
       })
       .catch(error => console.error(error))
@@ -126,48 +94,47 @@ class UserLogin extends Component {
   }
 
   render () {
+    const { wrongEmail, wrongPassword } = this.state
+
     return (
       <UserLoginPage>
         <NavBar />
 
-        <form onSubmit={event => this.handleSubmit(event)}>
+        <form
+          id='form'
+          onSubmit={this.handleSubmit}
+        >
           <Label
-            className='login-form-user-name'
             htmlFor='username-login-input'
             title='Email'
           />
           <Input
             id='username-login-input'
-            className='username-login-input'
-            placeholder='Email'
-            value={this.props.username}
+            name='email'
             pattern='[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$'
+            placeholder='Email'
             required
-            onChange={event => this.props.dispatch(this.setUserEmail(event))}
           />
 
           <Label
-            className='login-form-user-password'
             htmlFor='user-password-login-input'
             title='Password'
           />
           <Input
             id='user-password-login-input'
-            className='user-password-login-input'
+            name='password'
             placeholder='Password'
-            value={this.props.password}
-            type='password'
             required
-            onChange={event => this.props.dispatch(this.setUserPassword(event))}
+            type='password'
           />
 
-          { this.props.wrongEmail &&
+          { wrongEmail &&
             <ErrorMessage>
               Email did not match
             </ErrorMessage>
           }
 
-          { this.props.wrongPassword &&
+          { wrongPassword &&
             <ErrorMessage>
               Password did not match
             </ErrorMessage>
@@ -186,4 +153,4 @@ class UserLogin extends Component {
   }
 }
 
-export default connect(mapStateToProps)(UserLogin)
+export default UserLogin
