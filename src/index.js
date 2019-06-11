@@ -22,7 +22,6 @@ import Wrapper from './components/Wrapper/Wrapper'
 
 // reducers
 import itemReducer from './reducers/itemReducer'
-import itemsReducer from './reducers/itemsReducer'
 import newItemReducer from './reducers/newItemReducer'
 import searchReducer from './reducers/searchReducer'
 import searchResultsReducer from './reducers/searchResultsReducer'
@@ -31,7 +30,6 @@ import userReducer from './reducers/userReducer'
 
 const rootReducer = combineReducers({
   itemReducer,
-  itemsReducer,
   newItemReducer,
   searchReducer,
   searchResultsReducer,
