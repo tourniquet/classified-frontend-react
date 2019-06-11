@@ -1,4 +1,3 @@
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import React, { Component } from 'react'
 import styled from 'styled-components'
@@ -13,10 +12,6 @@ import Image from '../../components/Image/Image'
 import NavBar from '../../components/NavBar/NavBar'
 import Search from '../../components/Search/Search'
 
-const mapStateToProps = state => ({
-  items: state.searchResultsReducer.items
-})
-
 const StyledSearchPage = styled.div`
   display: flex;
   flex-direction: column;
@@ -24,6 +19,10 @@ const StyledSearchPage = styled.div`
 `
 
 class SearchResult extends Component {
+  state = {
+    items: []
+  }
+
   fetchResults () {
     const url = `${apiHost}/search.php`
 
@@ -32,12 +31,7 @@ class SearchResult extends Component {
       body: JSON.stringify(this.props.match.params.query)
     })
       .then(response => response.json(response))
-      .then(result => {
-        this.props.dispatch({
-          type: 'FETCH_RESULTS',
-          result
-        })
-      })
+      .then(items => this.setState({ items }))
   }
 
   componentDidMount () {
@@ -45,7 +39,7 @@ class SearchResult extends Component {
   }
 
   render () {
-    const items = this.props.items
+    const { items } = this.state
     const dateOptions = {
       year: 'numeric',
       month: 'long',
@@ -57,14 +51,15 @@ class SearchResult extends Component {
     return (
       <StyledSearchPage>
         <NavBar />
+
         <Search />
 
         <div className='items-list'>
           <ul className='latest-ads'>
-            {items.map(el => (
+            {items.map(item => (
               <li
                 className='latest-ads-item'
-                key={el.id.toString()}
+                key={item.id.toString()}
               >
                 <Image
                   className='favourite-ad'
@@ -79,15 +74,15 @@ class SearchResult extends Component {
                   alt='Particular lists thumbnail'
                 />
                 <Link
-                  key={el.id}
-                  to={{ pathname: `/item/${el.url}` }}
+                  key={item.id}
+                  to={{ pathname: `/item/${item.url}` }}
                   className='ad-title'
                 >
-                  {el.title}
+                  {item.title}
                 </Link>
                 <span className='ad-category'>category</span>
                 <span className='ad-date'>
-                  {new Date(el.published).toLocaleDateString('en-GB', dateOptions)}
+                  {new Date(item.published).toLocaleDateString('en-GB', dateOptions)}
                 </span>
               </li>
             ))}
@@ -109,4 +104,4 @@ class SearchResult extends Component {
   }
 }
 
-export default connect(mapStateToProps)(SearchResult)
+export default SearchResult
