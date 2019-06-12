@@ -1,6 +1,6 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 import styled from 'styled-components'
 
 // components
@@ -19,56 +19,60 @@ const StyledInput = styled(Input)`
   height: 76px;
   margin-bottom: 40px;
   padding: 0 30px;
-  width: calc(100% - 100px);
+  width: 100%;
 
-  @media (max-width: 480px) {
-    width: 100%;
+  @media (min-width: 480px) {
+    width: calc(100% - 100px);
   }
 `
 
-const mapStateToProps = state => ({
-  search: state.searchReducer.value
-})
-
-const Search = props => {
-  const setSearchText = el => ({
-    type: 'SET_SEARCH_TEXT',
-    text: el.target.value
-  })
-
-  const redirectToResults = () => {
-    const query = props.search.replace(/,/g, '').replace(/\s+/g, ',')
-    const url = `/search/${query}`
-
-    if (query.length) props.history.push(url)
+class Search extends Component {
+  state = {
+    inputValue: ''
   }
 
-  return (
-    <StyledContainer>
-      <StyledInput
-        className='search'
-        placeholder='Im looking for...'
-        value={props.search}
-        type='search'
-        aria-label='Search through site content'
-        onChange={el => props.dispatch(setSearchText(el))}
-        onKeyDown={el => {
-          if (el.keyCode === 13 && el.target.value) redirectToResults()
-        }}
-      />
+  handleInputValue = el => {
+    this.setState({ inputValue: el.target.value })
+  }
 
-      <SearchButton
-        className={
-          props.search.length
-            ? 'active'
-            : 'inactive'
-        }
-        onClick={redirectToResults}
-      >
-        Search
-      </SearchButton>
-    </StyledContainer>
-  )
+  redirectToResults = () => {
+    const query = this.state.inputValue.replace(/,/g, '').replace(/\s+/g, ',')
+    const url = `/search/${query}`
+
+    if (query.length) this.props.history.push(url)
+  }
+
+  render () {
+    const { inputValue } = this.state
+
+    return (
+      <StyledContainer>
+        <StyledInput
+          className='search'
+          id='search'
+          placeholder='Im looking for...'
+          value={inputValue}
+          type='search'
+          aria-label='Search through site content'
+          onChange={this.handleInputValue}
+          onKeyDown={el => {
+            if (el.keyCode === 13 && el.target.value) this.redirectToResults()
+          }}
+        />
+
+        <SearchButton
+          className={
+            inputValue.length
+              ? 'active'
+              : 'inactive'
+          }
+          onClick={this.redirectToResults}
+        >
+          Search
+        </SearchButton>
+      </StyledContainer>
+    )
+  }
 }
 
 Search.propTypes = {
@@ -80,4 +84,4 @@ Search.propTypes = {
   onChange: PropTypes.func.isRequired
 }
 
-export default connect(mapStateToProps)(Search)
+export default withRouter(Search)
