@@ -21,13 +21,11 @@ import UserRegistration from './pages/User/Registration/user-registration'
 import Wrapper from './components/Wrapper/Wrapper'
 
 // reducers
-import itemReducer from './reducers/itemReducer'
 import newItemReducer from './reducers/newItemReducer'
 import sideMenuReducer from './reducers/sideMenuReducer'
 import userReducer from './reducers/userReducer'
 
 const rootReducer = combineReducers({
-  itemReducer,
   newItemReducer,
   sideMenuReducer,
   userReducer
