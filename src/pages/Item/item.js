@@ -1,4 +1,3 @@
-import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
 import { Link } from 'react-router-dom'
 import React, { Component, Fragment } from 'react'
@@ -20,29 +19,13 @@ import SlideButton from '../../components/Buttons/SlideButton/SlideButton'
 // styles
 import './item.scss'
 
-const mapStateToProps = state => ({
-  category: state.itemReducer.category,
-  subcategory: state.itemReducer.subcategory,
-  title: state.itemReducer.title,
-  description: state.itemReducer.description,
-  images: state.itemReducer.images,
-  phone: state.itemReducer.phone,
-  name: state.itemReducer.name,
-  price: state.itemReducer.price,
-  currency: state.itemReducer.currency,
-  published: state.itemReducer.published,
-  views: state.itemReducer.views,
-  region: state.itemReducer.region
-})
-
 class Item extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      currentImgOnMobile: 1,
-      zoomedImage: null
-    }
+  state = {
+    item: {
+      images: []
+    },
+    currentImgOnMobile: 1,
+    zoomedImage: null
   }
 
   fetchData () {
@@ -52,12 +35,7 @@ class Item extends Component {
     window
       .fetch(url)
       .then(response => response.json())
-      .then(result => {
-        this.props.dispatch({
-          type: 'FETCH_ITEM_DATA',
-          result
-        })
-      })
+      .then(item => this.setState({ item }))
       .catch(err => console.error(err))
   }
 
@@ -124,8 +102,8 @@ class Item extends Component {
       published,
       views,
       region
-    } = this.props
-    const currentImgOnMobile = this.state.currentImgOnMobile
+    } = this.state.item
+    // const currentImgOnMobile = this.state.currentImgOnMobile
     const imgUrl = `${apiHost}uploads/`
     const thumbUrl = `${apiHost}uploads/thumb_`
     const zoomedImage = this.state.zoomedImage
@@ -249,7 +227,8 @@ class Item extends Component {
                   onClick={() => this.slideImagesOnMobile('next')}
                 />
 
-                <Image src={`${thumbUrl}${images[currentImgOnMobile]}`} />
+                {/* TODO: This component must be rendered on mobile only when ad contain at leas one image */}
+                {/* <Image src={`${thumbUrl}${images[currentImgOnMobile]}`} /> */}
               </div>
             </div>
           </div>
@@ -307,4 +286,4 @@ class Item extends Component {
   }
 }
 
-export default connect(mapStateToProps)(Item)
+export default Item

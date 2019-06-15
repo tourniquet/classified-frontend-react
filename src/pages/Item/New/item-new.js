@@ -29,21 +29,7 @@ const ImageBlock = styled.div`
 
 const mapStateToProps = state => ({
   userId: state.userReducer.id,
-  userEmail: state.userReducer.email,
-  categories: state.newItemReducer.categories,
-  category: state.newItemReducer.category,
-  showCategories: state.newItemReducer.showCategories,
-  subcategories: state.newItemReducer.subcategories,
-  subcategory: state.newItemReducer.subcategory,
-  subcategoryId: state.newItemReducer.subcategoryId,
-  showSubcategories: state.newItemReducer.showSubcategories,
-  regions: state.newItemReducer.regions,
-  region: state.newItemReducer.region,
-  showRegions: state.newItemReducer.showRegions,
-  images: state.newItemReducer.images,
-  currency: state.newItemReducer.currency,
-  currencies: state.newItemReducer.currencies,
-  showCurrencies: state.newItemReducer.showCurrencies
+  userEmail: state.userReducer.email
 })
 
 const InputStyled = styled.input`
@@ -63,22 +49,37 @@ const RequiredInput = props =>
   />
 
 class ItemNew extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = { price: false }
+  state = {
+    categories: [],
+    showCategories: false,
+    category: '',
+    subcategories: [],
+    showSubcategories: false,
+    subcategory: {
+      id: '',
+      title: ''
+    },
+    images: [''],
+    regions: [],
+    showRegions: false,
+    region: {
+      id: '',
+      title: ''
+    },
+    currencies: [],
+    showCurrencies: false,
+    currency: {
+      id: '',
+      title: ''
+    },
+    price: false
   }
 
   fetchCategories () {
     window
       .fetch(`${apiHost}/categories.php`)
       .then(response => response.json())
-      .then(categories => {
-        this.props.dispatch({
-          type: 'POPULATE_CATEGORIES_ARRAY',
-          categories
-        })
-      })
+      .then(categories => this.setState({ categories }))
       .catch(err => console.error(err))
   }
 
@@ -86,129 +87,99 @@ class ItemNew extends Component {
     window
       .fetch(`${apiHost}/subcategories.php?id=${id}`)
       .then(response => response.json())
-      .then(subcategories => {
-        this.props.dispatch({
-          type: 'POPULATE_SUBCATEGORIES_ARRAY',
-          subcategories
-        })
-      })
+      .then(subcategories => this.setState({ subcategories }))
       .catch(err => console.error(err))
   }
 
-  toggleCategoriesList () {
-    return ({
-      type: 'TOGGLE_CATEGORIES_LIST'
-    })
+  toggleCategoriesList = () => {
+    this.setState(state => ({ showCategories: !state.showCategories }))
   }
 
-  setCategory (id, title) {
+  setCategory (id, category) {
+    // fetch subcategories of current category
     this.fetchSubcategories(id)
-
-    return ({
-      type: 'SET_CATEGORY',
-      title
-    })
+    // display or hide categories list
+    this.toggleCategoriesList()
+    // set category title
+    this.setState({ category })
   }
 
-  toggleSubcategoriesList () {
-    return ({
-      type: 'TOGGLE_SUBCATEGORIES_LIST'
-    })
+  toggleSubcategoriesList = () => {
+    this.setState(state => ({ showSubcategories: !state.showSubcategories }))
   }
 
   setSubcategory (id, title) {
-    return ({
-      type: 'SET_SUBCATEGORY',
-      id,
-      title
-    })
+    // display or hide subcategories list
+    this.toggleSubcategoriesList()
+    // set subcategory id & title
+    this.setState({ subcategory: { id, title } })
   }
 
   fetchRegions () {
     window
       .fetch(`${apiHost}/regions.php`)
       .then(response => response.json())
-      .then(regions => {
-        this.props.dispatch({
-          type: 'POPULATE_REGIONS_ARRAY',
-          regions
-        })
-      })
-      .then(err => console.error(err))
+      .then(regions => this.setState({ regions }))
+      .catch(err => console.error(err))
   }
 
-  toggleRegionsList () {
-    return ({
-      type: 'TOGGLE_REGIONS_LIST'
-    })
+  toggleRegionsList = () => {
+    this.setState(state => ({ showRegions: !state.showRegions }))
   }
 
   setRegion (id, title) {
-    return ({
-      type: 'SET_REGION',
-      id,
-      title
-    })
+    // display or hide regions list
+    this.toggleRegionsList()
+    // set region id & title
+    this.setState({ region: { id, title } })
   }
 
-  handleImages (el) {
+  handleImages = el => {
     const image = el.target.files[0]
     const blob = new window.Blob([image], { type: 'image/*' })
     const imageURL = window.URL.createObjectURL(blob)
 
-    return {
-      type: 'SET_IMAGE_THUMBNAIL',
-      image: imageURL
-    }
+    this.setState(state => ({ images: [...state.images.splice(state.images.length - 1, 0, imageURL), ...state.images] }))
   }
 
-  removeImage (id) {
-    return ({
-      type: 'REMOVE_IMAGE',
-      id
-    })
+  removeImage = id => {
+    this.setState(state => ({ images: state.images.filter(el => el !== state.images[id]) }))
   }
 
   fetchCurrencies () {
     window
       .fetch(`${apiHost}/currencies.php`)
       .then(response => response.json())
-      .then(currencies => {
-        this.props.dispatch({
-          type: 'POPULATE_CURRENCIES_ARRAY',
-          currencies
-        })
-      })
+      .then(currencies => this.setState({ currencies }))
       .catch(err => console.error(err))
   }
 
-  toggleCurrencies () {
-    return ({
-      type: 'TOGGLE_CURRENCIES'
-    })
+  toggleCurrencies = () => {
+    this.setState(state => ({ showCurrencies: !state.showCurrencies }))
   }
 
   setCurrency (id, title) {
-    return ({
-      type: 'SET_CURRENCY',
-      id,
-      title
-    })
+    // display or hide currencies list
+    this.toggleCurrencies()
+    // set currency id & title
+    this.setState({ currency: { id, title } })
   }
 
-  handleSubmit (event) {
+  handleSubmit = event => {
     event.preventDefault()
+
+    const { subcategory, region, currency } = this.state
 
     const form = document.getElementById('form')
     const formData = new window.FormData(form)
 
     const date = new Date().getTime().toString().slice(5)
-    formData.append('subcategoryId', this.props.subcategoryId)
-    formData.append('regionId', this.props.region.id)
+    formData.append('subcategoryId', subcategory.id)
+    formData.append('regionId', region.id)
     formData.append('url', date)
     formData.append('userId', this.props.userId)
     formData.append('userEmail', this.props.userEmail)
-    formData.append('currencyId', (this.state.price ? this.props.currency.id : 1)) // TODO: here should be 0 when SQL query will be improved
+    formData.append('currencyId', (this.state.price ? currency.id : 1)) // TODO: here should be 0 when SQL query will be improved
 
     const url = `${apiHost}/item-posted.php`
     window
@@ -228,7 +199,21 @@ class ItemNew extends Component {
   }
 
   render () {
-    const { categories, currencies, dispatch, subcategories } = this.props
+    const {
+      categories,
+      showCategories,
+      category,
+      subcategories,
+      showSubcategories,
+      subcategory,
+      images,
+      regions,
+      showRegions,
+      region,
+      currencies,
+      showCurrencies,
+      currency
+    } = this.state
     const price = document.getElementById('item-price')
 
     return (
@@ -240,7 +225,7 @@ class ItemNew extends Component {
         <form
           id='form'
           className='form'
-          onSubmit={event => this.handleSubmit(event)}
+          onSubmit={this.handleSubmit}
         >
           <div className='left-side'>
             <Label
@@ -250,27 +235,27 @@ class ItemNew extends Component {
             />
             <DropDownButton
               className={
-                this.props.showCategories
+                showCategories
                   ? 'button desktop-button active-tab'
                   : 'button desktop-button inactive-tab'
               }
-              title={this.props.category}
-              onClick={() => dispatch(this.toggleCategoriesList())}
+              title={category}
+              onClick={this.toggleCategoriesList}
             >
               <i /> {/* arrow icon */}
 
-              <RequiredInput value={`${this.props.category}`} />
+              <RequiredInput value={`${category}`} />
             </DropDownButton>
 
             <UnorderedList
-              className={this.props.showCategories ? 'show-ul-menu' : 'hide-ul-menu'}
+              className={showCategories ? 'show-ul-menu' : 'hide-ul-menu'}
             >
-              {categories.map(el => (
+              {categories.map(category => (
                 <li
-                  key={el.id.toString()}
-                  onClick={() => dispatch(this.setCategory(el.id, el.title))}
+                  key={category.id.toString()}
+                  onClick={() => this.setCategory(category.id, category.title)}
                 >
-                  {el.title}
+                  {category.title}
                 </li>
               ))}
             </UnorderedList>
@@ -282,26 +267,26 @@ class ItemNew extends Component {
             />
             <DropDownButton
               className={
-                this.props.showSubcategories
+                showSubcategories
                   ? 'button desktop-button active-tab'
                   : 'button desktop-button inactive-tab'
               }
-              title={this.props.subcategory}
-              onClick={() => dispatch(this.toggleSubcategoriesList())}
+              title={subcategory.title}
+              onClick={this.toggleSubcategoriesList}
             >
               <i /> {/* arrow icon */}
 
-              <RequiredInput value={`${this.props.subcategory}`} />
+              <RequiredInput value={`${subcategory.title}`} />
             </DropDownButton>
             <UnorderedList
-              className={this.props.showSubcategories ? 'show-ul-menu' : 'hide-ul-menu'}
+              className={showSubcategories ? 'show-ul-menu' : 'hide-ul-menu'}
             >
-              {subcategories.map((el, id) => (
+              {subcategories.map(subcategory => (
                 <li
-                  key={el.id}
-                  onClick={() => dispatch(this.setSubcategory(el.id, el.title))}
+                  key={subcategory.id}
+                  onClick={() => this.setSubcategory(subcategory.id, subcategory.title)}
                 >
-                  {el.title}
+                  {subcategory.title}
                 </li>
               ))}
             </UnorderedList>
@@ -312,26 +297,26 @@ class ItemNew extends Component {
             />
             <DropDownButton
               className={
-                this.props.showRegions
+                showRegions
                   ? 'button desktop-button active-tab'
                   : 'button desktop-button inactive-tab'
               }
-              title={this.props.region.title}
-              onClick={() => dispatch(this.toggleRegionsList())}
+              title={region.title}
+              onClick={this.toggleRegionsList}
             >
               <i /> {/* arrow icon */}
 
-              <RequiredInput value={`${this.props.region}`} />
+              <RequiredInput value={`${region.title}`} />
             </DropDownButton>
             <UnorderedList
-              className={this.props.showRegions ? 'show-ul-menu' : 'hide-ul-menu'}
+              className={showRegions ? 'show-ul-menu' : 'hide-ul-menu'}
             >
-              {this.props.regions.map(el => (
+              {regions.map(region => (
                 <li
-                  key={el.id}
-                  onClick={() => dispatch(this.setRegion(el.id, el.title))}
+                  key={region.id}
+                  onClick={() => this.setRegion(region.id, region.title)}
                 >
-                  {el.title}
+                  {region.title}
                 </li>
               ))}
             </UnorderedList>
@@ -367,16 +352,16 @@ class ItemNew extends Component {
               title='Add images'
             />
             <div className='images'>
-              {this.props.images.map((el, id) => (
+              {images.map((el, id) => (
                 <ImageBlock
                   key={id}
-                  images={this.props.images}
+                  images={images}
                 >
                   <Image
                     className='remove-image'
                     src='/img/remove.png'
                     style={{ display: el.length ? 'inline-block' : 'none' }}
-                    onClick={() => dispatch(this.removeImage(id))}
+                    onClick={() => this.removeImage(id)}
                   />
                   <Label
                     className='label-for-images'
@@ -393,7 +378,7 @@ class ItemNew extends Component {
                       accept='image/jpeg,image/png,image/gif'
                       type='file'
                       multiple='multiple'
-                      onChange={el => dispatch(this.handleImages(el))}
+                      onChange={this.handleImages}
                     />
                   </Label>
                 </ImageBlock>
@@ -457,31 +442,31 @@ class ItemNew extends Component {
                 inputmode='numeric'
                 pattern='[0-9]*'
                 placeholder='Price'
-                onChange={() => this.setState({ price: !this.state.price })}
+                onChange={() => this.setState(state => ({ price: !state.price }))}
               />
               <div className='currency'>
                 <DropDownButton
                   className={
-                    this.props.showCurrencies
+                    showCurrencies
                       ? 'button desktop-button active-tab'
                       : 'button desktop-button inactive-tab'
                   }
-                  title={this.props.currency.title}
-                  onClick={() => dispatch(this.toggleCurrencies())}
+                  title={currency.title}
+                  onClick={this.toggleCurrencies}
                 >
                   <i /> {/* arrow icon */}
 
                   { (price && price.value) &&
-                    <RequiredInput value={`${this.props.currency.title}`} />
+                    <RequiredInput value={`${currency.title}`} />
                   }
                 </DropDownButton>
                 <UnorderedList
-                  className={this.props.showCurrencies ? 'show-ul-menu' : 'hide-ul-menu'}
+                  className={showCurrencies ? 'show-ul-menu' : 'hide-ul-menu'}
                 >
                   {currencies.map(currency => (
                     <li
                       key={currency.id.toString()}
-                      onClick={() => dispatch(this.setCurrency(currency.id, currency.title))}
+                      onClick={() => this.setCurrency(currency.id, currency.title)}
                     >
                       {currency.title}
                     </li>

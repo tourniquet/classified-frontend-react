@@ -1,5 +1,4 @@
-import { connect } from 'react-redux'
-import React from 'react'
+import React, { Component } from 'react'
 import styled from 'styled-components'
 
 // API host config
@@ -19,8 +18,7 @@ const UserRegistrationPage = styled.div`
 
   > form {
     flex: 1 0 auto;
-    margin: 0 auto;
-    margin-top: 40px;
+    margin: 40px auto 0;
     width: 20%;
   }
 
@@ -36,136 +34,115 @@ const ErrorMessage = styled.p`
   margin-bottom: 18px;
 `
 
-const mapStateToProps = state => ({
-  email: state.registrationReducer.email,
-  password: state.registrationReducer.password,
-  passwordConfirmation: state.registrationReducer.passwordConfirmation,
-  emailIsTaken: state.registrationReducer.emailIsTaken,
-  passwordNotMatch: state.registrationReducer.passwordNotMatch
-})
+class UserRegistration extends Component {
+  state = {
+    emailIsTaken: false,
+    passwordNotMatch: false
+  }
 
-const UserRegistration = props => {
-  const setUserEmail = event => ({
-    type: 'USER_EMAIL',
-    email: event.target.value
-  })
-
-  const setUserPassword = event => ({
-    type: 'USER_PASSWORD',
-    password: event.target.value
-  })
-
-  const confirmUserPassword = event => ({
-    type: 'USER_PASSWORD_CONFIRMATION',
-    passwordConfirmation: event.target.value
-  })
-
-  const setInitialState = () => ({ type: 'SET_INITIAL_STATE' })
-
-  const emailIsTaken = () => ({ type: 'EMAIL_IS_TAKEN' })
-
-  const passwordUnmatch = () => ({ type: 'PASSWORD_NOT_MATCH' })
-
-  const handleSubmit = event => {
+  handleSubmit = event => {
     event.preventDefault()
 
-    // set initial state after user set new email and change password
-    props.dispatch(setInitialState())
+    const form = document.getElementById('form')
+    const formData = new window.FormData(form)
 
     const url = `${apiHost}/registration.php`
-    const data = {
-      email: props.email,
-      password: props.password,
-      passwordConfirmation: props.passwordConfirmation
-    }
-
     window
       .fetch(url, {
         method: 'POST',
-        body: JSON.stringify(data)
+        body: formData
       })
       .then(response => response.json())
       .then(result => {
         const { message } = result
 
-        if (message === 'Success!') props.history.push('/user/login')
-        else if (message === 'Existing!') props.dispatch(emailIsTaken())
-        else if (message === 'Unmatch!') props.dispatch(passwordUnmatch())
+        if (message === 'Success!') {
+          this.props.history.push('/user/login')
+        } else if (message === 'Existing!') {
+          this.setState({
+            emailIsTaken: true,
+            // reset password not match message
+            passwordNotMatch: false
+          })
+        } else if (message === 'Unmatch!') {
+          this.setState({
+            emailIsTaken: false,
+            // reset email is taken message
+            passwordNotMatch: true
+          })
+        }
       })
       .catch(error => console.error(error))
   }
 
-  return (
-    <UserRegistrationPage>
-      <NavBar />
+  render () {
+    const { emailIsTaken, passwordNotMatch } = this.state
 
-      <form onSubmit={handleSubmit}>
-        <Label
-          className='registration-form-username'
-          htmlFor='email-registration-input'
-          title='Email'
-        />
-        <Input
-          id='email-registration-input'
-          className='email-registration-input'
-          placeholder='Email'
-          value={props.email}
-          type='email'
-          pattern='[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$'
-          required
-          onChange={event => props.dispatch(setUserEmail(event))}
-        />
-        { props.emailIsTaken &&
-          <ErrorMessage>
-            Email is already taken!
-          </ErrorMessage>
-        }
+    return (
+      <UserRegistrationPage>
+        <NavBar />
 
-        <Label
-          className='registration-form-password'
-          htmlFor='password-registration-input'
-          title='Password'
-        />
-        <Input
-          id='password-registration-input'
-          className='password-registration-input'
-          placeholder='Password'
-          value={props.password}
-          type='password'
-          required
-          onChange={event => props.dispatch(setUserPassword(event))}
-        />
+        <form
+          id='form'
+          onSubmit={this.handleSubmit}
+        >
+          <Label
+            htmlFor='email-registration-input'
+            title='Email'
+          />
+          <Input
+            id='email-registration-input'
+            pattern='[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$'
+            name='email'
+            placeholder='Email'
+            required
+            type='email'
+          />
+          { emailIsTaken &&
+            <ErrorMessage>
+              Email is already taken!
+            </ErrorMessage>
+          }
 
-        <Label
-          className='registration-form-password'
-          htmlFor='confirm-password-registration-input'
-          title='Confirm password'
-        />
-        <Input
-          id='confirm-password-registration-input'
-          className='confirm-password-registration-input'
-          placeholder='Confirm password'
-          value={props.passwordConfirmation}
-          type='password'
-          required
-          onChange={event => props.dispatch(confirmUserPassword(event))}
-        />
-        { props.passwordNotMatch &&
-          <ErrorMessage>
-            Passwords did not match!
-          </ErrorMessage>
-        }
+          <Label
+            htmlFor='password-registration-input'
+            title='Password'
+          />
+          <Input
+            id='password-registration-input'
+            name='password'
+            placeholder='Password'
+            required
+            type='password'
+          />
 
-        <RoundedButton
-          className='user-registration-submit-button'
-          title='Register'
-          type='submit'
-        />
-      </form>
+          <Label
+            htmlFor='confirm-password-registration-input'
+            title='Confirm password'
+          />
+          <Input
+            id='confirm-password-registration-input'
+            name='passwordConfirmation'
+            placeholder='Confirm password'
+            required
+            type='password'
+          />
+          { passwordNotMatch &&
+            <ErrorMessage>
+              Passwords did not match!
+            </ErrorMessage>
+          }
 
-      <Footer />
-    </UserRegistrationPage>
-  )
+          <RoundedButton
+            title='Register'
+            type='submit'
+          />
+        </form>
+
+        <Footer />
+      </UserRegistrationPage>
+    )
+  }
 }
 
-export default connect(mapStateToProps)(UserRegistration)
+export default UserRegistration

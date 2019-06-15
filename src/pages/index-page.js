@@ -1,4 +1,3 @@
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import React, { Component, Fragment } from 'react'
 
@@ -16,27 +15,18 @@ import Search from '../components/Search/Search'
 // styles
 import './index-page.scss'
 
-const mapStateToProps = state => ({
-  items: state.itemsReducer.items
-})
-
 class IndexPage extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      categories: [],
-      subcategories: []
-    }
+  state = {
+    categories: [],
+    subcategories: [],
+    items: []
   }
 
   fetchCategories () {
     window
       .fetch(`${apiHost}/categories.php`)
       .then(response => response.json())
-      .then(result => {
-        this.setState({categories: result})
-      })
+      .then(categories => this.setState({ categories }))
       .catch(err => console.error(err))
   }
 
@@ -44,9 +34,7 @@ class IndexPage extends Component {
     window
       .fetch(`${apiHost}/subcategories.php`)
       .then(response => response.json())
-      .then(result => {
-        this.setState({subcategories: result})
-      })
+      .then(subcategories => this.setState({ subcategories }))
       .catch(err => console.error(err))
   }
 
@@ -54,12 +42,7 @@ class IndexPage extends Component {
     window
       .fetch(`${apiHost}`)
       .then(response => response.json())
-      .then(result => {
-        this.props.dispatch({
-          type: 'FETCH_DATA',
-          result
-        })
-      })
+      .then(items => this.setState({ items }))
       .catch(err => console.error(err))
   }
 
@@ -70,11 +53,7 @@ class IndexPage extends Component {
   }
 
   render () {
-    const {
-      categories,
-      subcategories
-    } = this.state
-    const items = this.props.items
+    const { categories, subcategories, items } = this.state
 
     return (
       <Fragment>
@@ -90,8 +69,7 @@ class IndexPage extends Component {
               subcategories={subcategories}
               title={el.title}
             />
-            )
-          }
+          )}
         </div>
 
         <div className='items-list'>
@@ -104,7 +82,7 @@ class IndexPage extends Component {
 
         <Link
           className='publish-item-button-link'
-          to={{pathname: '/item/add'}}
+          to={{ pathname: '/item/add' }}
         >
           <CallToActionButton
             id='call-to-action'
@@ -116,4 +94,4 @@ class IndexPage extends Component {
   }
 }
 
-export default connect(mapStateToProps)(IndexPage)
+export default IndexPage
