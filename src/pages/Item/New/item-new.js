@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import { apiHost } from '../../../config'
 
 // components
-import DropDownButton from '../../../components/Buttons/DropDownButton/DropDownButton'
+import Dropdown from '../components/Dropdown/Dropdown'
 import Footer from '../../../components/Footer/Footer'
 import Image from '../../../components/Image/Image'
 import Input from '../../../components/Input/Input'
@@ -15,7 +15,6 @@ import NavBar from '../../../components/NavBar/NavBar'
 import RoundedButton from '../../../components/Buttons/RoundedButton/RoundedButton'
 import Search from '../../../components/Search/Search'
 import Textarea from '../../../components/Textarea/Textarea'
-import UnorderedList from '../../../components/UnorderedList/UnorderedList'
 
 // styles
 import './item-new.scss'
@@ -31,22 +30,6 @@ const mapStateToProps = state => ({
   userId: state.userReducer.id,
   userEmail: state.userReducer.email
 })
-
-const InputStyled = styled.input`
-  border: 1px solid #FFF1;
-  height: 0;
-  outline: 0;
-  outline-offset: 0;
-  width: 0;
-`
-
-// TODO: This must be a temporary solution! I'm serious!
-const RequiredInput = props =>
-  <InputStyled
-    required
-    type='text'
-    value={`${props.value}`}
-  />
 
 class ItemNew extends Component {
   state = {
@@ -83,7 +66,7 @@ class ItemNew extends Component {
       .catch(err => console.error(err))
   }
 
-  fetchSubcategories (id) {
+  fetchSubcategories = id => {
     window
       .fetch(`${apiHost}/subcategories.php?id=${id}`)
       .then(response => response.json())
@@ -95,20 +78,23 @@ class ItemNew extends Component {
     this.setState(state => ({ showCategories: !state.showCategories }))
   }
 
-  setCategory (id, category) {
+  setCategory = (id, category) => {
     // fetch subcategories of current category
     this.fetchSubcategories(id)
     // display or hide categories list
     this.toggleCategoriesList()
     // set category title
-    this.setState({ category })
+    this.setState({
+      category,
+      subcategory: { id: '', title: '' }
+    })
   }
 
   toggleSubcategoriesList = () => {
     this.setState(state => ({ showSubcategories: !state.showSubcategories }))
   }
 
-  setSubcategory (id, title) {
+  setSubcategory = (id, title) => {
     // display or hide subcategories list
     this.toggleSubcategoriesList()
     // set subcategory id & title
@@ -127,7 +113,7 @@ class ItemNew extends Component {
     this.setState(state => ({ showRegions: !state.showRegions }))
   }
 
-  setRegion (id, title) {
+  setRegion = (id, title) => {
     // display or hide regions list
     this.toggleRegionsList()
     // set region id & title
@@ -158,7 +144,7 @@ class ItemNew extends Component {
     this.setState(state => ({ showCurrencies: !state.showCurrencies }))
   }
 
-  setCurrency (id, title) {
+  setCurrency = (id, title) => {
     // display or hide currencies list
     this.toggleCurrencies()
     // set currency id & title
@@ -168,7 +154,7 @@ class ItemNew extends Component {
   handleSubmit = event => {
     event.preventDefault()
 
-    const { subcategory, region, currency } = this.state
+    const { subcategory, region, currency, price } = this.state
 
     const form = document.getElementById('form')
     const formData = new window.FormData(form)
@@ -179,7 +165,7 @@ class ItemNew extends Component {
     formData.append('url', date)
     formData.append('userId', this.props.userId)
     formData.append('userEmail', this.props.userEmail)
-    formData.append('currencyId', (this.state.price ? currency.id : 1)) // TODO: here should be 0 when SQL query will be improved
+    formData.append('currencyId', price ? currency.id : 1) // TODO: here should be 0 when SQL query will be improved
 
     const url = `${apiHost}/item-posted.php`
     window
@@ -228,98 +214,44 @@ class ItemNew extends Component {
           onSubmit={this.handleSubmit}
         >
           <div className='left-side'>
-            <Label
-              className='mandatory'
-              htmlFor='category'
-              title='Category'
+            <Dropdown
+              labelFor='category'
+              labelTitle='Category'
+              dropDownButtonActive={showCategories}
+              dropDownButtonTitle={category}
+              dropDownButtonClickHandler={this.toggleCategoriesList}
+              required
+              requiredInputValue={category}
+              unorderedListActive={showCategories}
+              itemsArray={categories}
+              unorderedListClickHandler={this.setCategory}
             />
-            <DropDownButton
-              className={
-                showCategories
-                  ? 'button desktop-button active-tab'
-                  : 'button desktop-button inactive-tab'
-              }
-              title={category}
-              onClick={this.toggleCategoriesList}
-            >
-              <i /> {/* arrow icon */}
 
-              <RequiredInput value={`${category}`} />
-            </DropDownButton>
-
-            <UnorderedList
-              className={showCategories ? 'show-ul-menu' : 'hide-ul-menu'}
-            >
-              {categories.map(category => (
-                <li
-                  key={category.id.toString()}
-                  onClick={() => this.setCategory(category.id, category.title)}
-                >
-                  {category.title}
-                </li>
-              ))}
-            </UnorderedList>
-
-            <Label
-              className='mandatory'
-              htmlFor='subcategory'
-              title='Subcategory'
+            <Dropdown
+              labelFor='subcategory'
+              labelTitle='Subcategory'
+              dropDownButtonActive={showSubcategories}
+              dropDownButtonTitle={subcategory.title}
+              dropDownButtonClickHandler={this.toggleSubcategoriesList}
+              required
+              requiredInputValue={subcategory.title}
+              unorderedListActive={showSubcategories}
+              itemsArray={subcategories}
+              unorderedListClickHandler={this.setSubcategory}
             />
-            <DropDownButton
-              className={
-                showSubcategories
-                  ? 'button desktop-button active-tab'
-                  : 'button desktop-button inactive-tab'
-              }
-              title={subcategory.title}
-              onClick={this.toggleSubcategoriesList}
-            >
-              <i /> {/* arrow icon */}
 
-              <RequiredInput value={`${subcategory.title}`} />
-            </DropDownButton>
-            <UnorderedList
-              className={showSubcategories ? 'show-ul-menu' : 'hide-ul-menu'}
-            >
-              {subcategories.map(subcategory => (
-                <li
-                  key={subcategory.id}
-                  onClick={() => this.setSubcategory(subcategory.id, subcategory.title)}
-                >
-                  {subcategory.title}
-                </li>
-              ))}
-            </UnorderedList>
-
-            <Label
-              htmlFor='region'
-              title='Region'
+            <Dropdown
+              labelFor='region'
+              labelTitle='Region'
+              dropDownButtonActive={showRegions}
+              dropDownButtonTitle={region.title}
+              dropDownButtonClickHandler={this.toggleRegionsList}
+              required
+              requiredInputValue={region.title}
+              unorderedListActive={showRegions}
+              itemsArray={regions}
+              unorderedListClickHandler={this.setRegion}
             />
-            <DropDownButton
-              className={
-                showRegions
-                  ? 'button desktop-button active-tab'
-                  : 'button desktop-button inactive-tab'
-              }
-              title={region.title}
-              onClick={this.toggleRegionsList}
-            >
-              <i /> {/* arrow icon */}
-
-              <RequiredInput value={`${region.title}`} />
-            </DropDownButton>
-            <UnorderedList
-              className={showRegions ? 'show-ul-menu' : 'hide-ul-menu'}
-            >
-              {regions.map(region => (
-                <li
-                  key={region.id}
-                  onClick={() => this.setRegion(region.id, region.title)}
-                >
-                  {region.title}
-                </li>
-              ))}
-            </UnorderedList>
           </div>
 
           <div className='right-side'>
@@ -445,33 +377,16 @@ class ItemNew extends Component {
                 onChange={() => this.setState(state => ({ price: !state.price }))}
               />
               <div className='currency'>
-                <DropDownButton
-                  className={
-                    showCurrencies
-                      ? 'button desktop-button active-tab'
-                      : 'button desktop-button inactive-tab'
-                  }
-                  title={currency.title}
-                  onClick={this.toggleCurrencies}
-                >
-                  <i /> {/* arrow icon */}
-
-                  { (price && price.value) &&
-                    <RequiredInput value={`${currency.title}`} />
-                  }
-                </DropDownButton>
-                <UnorderedList
-                  className={showCurrencies ? 'show-ul-menu' : 'hide-ul-menu'}
-                >
-                  {currencies.map(currency => (
-                    <li
-                      key={currency.id.toString()}
-                      onClick={() => this.setCurrency(currency.id, currency.title)}
-                    >
-                      {currency.title}
-                    </li>
-                  ))}
-                </UnorderedList>
+                <Dropdown
+                  dropDownButtonActive={showCurrencies}
+                  dropDownButtonTitle={currency.title}
+                  dropDownButtonClickHandler={this.toggleCurrencies}
+                  required={price && price.value}
+                  requiredInputValue={currency.title}
+                  unorderedListActive={showCurrencies}
+                  itemsArray={currencies}
+                  unorderedListClickHandler={this.setCurrency}
+                />
               </div>
             </div>
 
