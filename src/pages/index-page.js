@@ -8,7 +8,7 @@ import { apiHost } from '../config'
 import CallToActionButton from '../components/Buttons/CallToActionButton/CallToActionButton'
 import Category from '../components/Category/Category'
 import Footer from '../components/Footer/Footer'
-import ListItem from '../components/ListItem/ListItem'
+import ItemsList from '../components/ItemsList/ItemsList'
 import NavBar from '../components/NavBar/NavBar'
 import Search from '../components/Search/Search'
 
@@ -72,11 +72,7 @@ class IndexPage extends Component {
           )}
         </div>
 
-        <div className='items-list'>
-          <ul className='latest-ads'>
-            {items && items.map(item => <ListItem item={item} />)}
-          </ul>
-        </div>
+        <ItemsList items={items} />
 
         <Footer />
 
