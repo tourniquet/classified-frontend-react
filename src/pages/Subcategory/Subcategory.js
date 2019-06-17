@@ -6,18 +6,14 @@ import { apiHost } from '../../config'
 
 // components
 import Footer from '../../components/Footer/Footer'
-import ListItem from '../../components/ListItem/ListItem'
+import ItemsList from '../../components/ItemsList/ItemsList'
 import NavBar from '../../components/NavBar/NavBar'
 import Search from '../../components/Search/Search'
 
 class Subcategory extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      items: [],
-      subcategory: null
-    }
+  state = {
+    items: [],
+    subcategory: null
   }
 
   fetchItems () {
@@ -27,12 +23,7 @@ class Subcategory extends Component {
     window
       .fetch(url)
       .then(response => response.json())
-      .then(result => {
-        this.setState({
-          items: result,
-          subcategory
-        })
-      })
+      .then(items => this.setState({ items, subcategory }))
       .catch(err => console.error(err))
   }
 
@@ -53,11 +44,7 @@ class Subcategory extends Component {
 
         <Search />
 
-        <div className='items-list'>
-          <ul className='latest-ads'>
-            {items && items.map(item => <ListItem item={item} />)}
-          </ul>
-        </div>
+        <ItemsList items={items} />
 
         <Footer />
       </Fragment>

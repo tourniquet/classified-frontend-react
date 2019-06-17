@@ -8,7 +8,7 @@ import { apiHost } from '../../config'
 // components
 import CallToActionButton from '../../components/Buttons/CallToActionButton/CallToActionButton'
 import Footer from '../../components/Footer/Footer'
-import Image from '../../components/Image/Image'
+import ItemsList from '../../components/ItemsList/ItemsList'
 import NavBar from '../../components/NavBar/NavBar'
 import Search from '../../components/Search/Search'
 
@@ -40,13 +40,6 @@ class SearchResult extends Component {
 
   render () {
     const { items } = this.state
-    const dateOptions = {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric'
-    }
 
     return (
       <StyledSearchPage>
@@ -54,40 +47,7 @@ class SearchResult extends Component {
 
         <Search />
 
-        <div className='items-list'>
-          <ul className='latest-ads'>
-            {items.map(item => (
-              <li
-                className='latest-ads-item'
-                key={item.id.toString()}
-              >
-                <Image
-                  className='favourite-ad'
-                  src='/img/star.png'
-                  title=''
-                  alt=''
-                />
-                <Image
-                  className='thumbnail'
-                  src='/img/camera.png'
-                  title=''
-                  alt='Particular lists thumbnail'
-                />
-                <Link
-                  key={item.id}
-                  to={{ pathname: `/item/${item.url}` }}
-                  className='ad-title'
-                >
-                  {item.title}
-                </Link>
-                <span className='ad-category'>category</span>
-                <span className='ad-date'>
-                  {new Date(item.published).toLocaleDateString('en-GB', dateOptions)}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ItemsList items={items} />
 
         <Footer />
 

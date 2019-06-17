@@ -1,5 +1,3 @@
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import React, { Component } from 'react'
 
 // API host config
@@ -7,15 +5,15 @@ import { apiHost } from '../../../config'
 
 // components
 import Footer from '../../../components/Footer/Footer'
-import Image from '../../../components/Image/Image'
+import ItemsList from '../../../components/ItemsList/ItemsList'
 import NavBar from '../../../components/NavBar/NavBar'
 import Search from '../../../components/Search/Search'
 
-const mapStateToProps = state => ({
-  items: state.itemsReducer.items
-})
-
 class UserItems extends Component {
+  state = {
+    items: []
+  }
+
   fetchData () {
     const cookies = window.document.cookie.split('; ')
     const getCookies = name => cookies.filter(el => el.split('=')[0] === name)
@@ -29,12 +27,7 @@ class UserItems extends Component {
       body: JSON.stringify({ userEmail, userId })
     })
       .then(response => response.json())
-      .then(result => {
-        this.props.dispatch({
-          type: 'FETCH_DATA',
-          result
-        })
-      })
+      .then(items => this.setState({ items }))
       .catch(err => console.error(err))
   }
 
@@ -43,14 +36,7 @@ class UserItems extends Component {
   }
 
   render () {
-    const items = this.props.items
-    const dateOptions = {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric'
-    }
+    const { items } = this.state
 
     return (
       <div>
@@ -58,34 +44,7 @@ class UserItems extends Component {
 
         <Search />
 
-        <div className='items-list'>
-          <ul className='latest-ads'>
-            {items.map(el => (
-              <li
-                className='latest-ads-item'
-                key={el.id.toString()}
-              >
-                <Image
-                  className='thumbnail'
-                  src='/img/camera.png'
-                  title=''
-                  alt='Particular lists thumbnail'
-                />
-                <Link
-                  key={el.id}
-                  to={{ pathname: `/item/${el.url}` }}
-                  className='ad-title'
-                >
-                  {el.title}
-                </Link>
-                <span className='ad-category'>category</span>
-                <span className='ad-date'>
-                  {new Date(el.published).toLocaleDateString('en-GB', dateOptions)}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ItemsList items={items} />
 
         <Footer />
       </div>
@@ -93,4 +52,4 @@ class UserItems extends Component {
   }
 }
 
-export default connect(mapStateToProps)(UserItems)
+export default UserItems
