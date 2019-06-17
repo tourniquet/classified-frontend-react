@@ -6,7 +6,7 @@ import { apiHost } from '../../config'
 
 /** components */
 import Footer from '../../components/Footer/Footer'
-import ListItem from '../../components/ListItem/ListItem'
+import ItemsList from '../../components/ItemsList/ItemsList'
 import NavBar from '../../components/NavBar/NavBar'
 import Search from '../../components/Search/Search'
 
@@ -52,11 +52,7 @@ class Region extends Component {
 
         <Search />
 
-        <div className='items-list'>
-          <ul className='latest-ads'>
-            {items && items.map(item => <ListItem item={item} />)}
-          </ul>
-        </div>
+        <ItemsList items={items} />
 
         <Footer />
       </Fragment>
