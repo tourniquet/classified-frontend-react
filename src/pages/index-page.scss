@@ -1,17 +1,6 @@
-.items-list {
-  flex: 1 0 auto;
-}
-
 @media (max-width: 480px) {
   .categories {
     margin-bottom: 40px;
-  }
-
-  .items-list {
-    .latest-ads {
-      margin: 0 auto;
-      width: 95%;
-    }
   }
 }
 
@@ -21,15 +10,5 @@
     flex-wrap: wrap;
     margin: 0 auto;
     width: 1268px;
-  }
-
-  .items-list {
-    .latest-ads {
-      margin: 0 auto;
-      margin-top: 51px;
-      margin-bottom: 92px;
-      width: 1268px;
-      font-size: 13px;
-    }
   }
 }
