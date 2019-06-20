@@ -4,9 +4,7 @@ import React, { Component } from 'react'
 import { apiHost } from '../../../config'
 
 // components
-import Footer from '../../../components/Footer/Footer'
 import ItemsList from '../../../components/ItemsList/ItemsList'
-import NavBar from '../../../components/NavBar/NavBar'
 import Search from '../../../components/Search/Search'
 
 class UserItems extends Component {
@@ -39,15 +37,11 @@ class UserItems extends Component {
     const { items } = this.state
 
     return (
-      <div>
-        <NavBar />
-
+      <>
         <Search />
 
         <ItemsList items={items} />
-
-        <Footer />
-      </div>
+      </>
     )
   }
 }
