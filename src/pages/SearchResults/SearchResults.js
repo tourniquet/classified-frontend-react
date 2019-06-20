@@ -7,9 +7,7 @@ import { apiHost } from '../../config'
 
 // components
 import CallToActionButton from '../../components/Buttons/CallToActionButton/CallToActionButton'
-import Footer from '../../components/Footer/Footer'
 import ItemsList from '../../components/ItemsList/ItemsList'
-import NavBar from '../../components/NavBar/NavBar'
 import Search from '../../components/Search/Search'
 
 const StyledSearchPage = styled.div`
@@ -43,13 +41,9 @@ class SearchResult extends Component {
 
     return (
       <StyledSearchPage>
-        <NavBar />
-
         <Search />
 
         <ItemsList items={items} />
-
-        <Footer />
 
         <Link
           className='publish-item-button-link'
