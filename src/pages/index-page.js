@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 
 // API host config
 import { apiHost } from '../config'
@@ -7,9 +7,7 @@ import { apiHost } from '../config'
 // components
 import CallToActionButton from '../components/Buttons/CallToActionButton/CallToActionButton'
 import Category from '../components/Category/Category'
-import Footer from '../components/Footer/Footer'
 import ItemsList from '../components/ItemsList/ItemsList'
-import NavBar from '../components/NavBar/NavBar'
 import Search from '../components/Search/Search'
 
 // styles
@@ -56,25 +54,21 @@ class IndexPage extends Component {
     const { categories, subcategories, items } = this.state
 
     return (
-      <Fragment>
-        <NavBar />
-
+      <>
         <Search />
 
         <div className='categories'>
-          { categories && categories.map(el =>
+          {categories && categories.map(category =>
             <Category
-              key={el.id.toString()}
-              id={el.id}
+              key={category.id.toString()}
+              id={category.id}
               subcategories={subcategories}
-              title={el.title}
+              title={category.title}
             />
           )}
         </div>
 
         <ItemsList items={items} />
-
-        <Footer />
 
         <Link
           className='publish-item-button-link'
@@ -85,7 +79,7 @@ class IndexPage extends Component {
             title='Post an ad'
           />
         </Link>
-      </Fragment>
+      </>
     )
   }
 }
