@@ -6,6 +6,10 @@ import { connect } from 'react-redux'
 import React from 'react'
 import styled from 'styled-components'
 
+// components
+import Footer from '../Footer/Footer'
+import NavBar from '../NavBar/NavBar'
+
 const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -30,7 +34,11 @@ const Wrapper = props => (
   <StyledWrapper
     className={props.toggleSideMenu ? 'toggle-container' : null}
   >
+    <NavBar />
+
     {props.children}
+
+    <Footer />
   </StyledWrapper>
 )
 

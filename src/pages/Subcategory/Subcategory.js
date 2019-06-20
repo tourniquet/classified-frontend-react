@@ -1,13 +1,11 @@
 import { Helmet } from 'react-helmet'
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 
 // API host config
 import { apiHost } from '../../config'
 
 // components
-import Footer from '../../components/Footer/Footer'
 import ItemsList from '../../components/ItemsList/ItemsList'
-import NavBar from '../../components/NavBar/NavBar'
 import Search from '../../components/Search/Search'
 
 class Subcategory extends Component {
@@ -35,19 +33,15 @@ class Subcategory extends Component {
     const { items, subcategory } = this.state
 
     return (
-      <Fragment>
+      <>
         <Helmet>
           <title>{subcategory}</title>
         </Helmet>
 
-        <NavBar />
-
         <Search />
 
         <ItemsList items={items} />
-
-        <Footer />
-      </Fragment>
+      </>
     )
   }
 }

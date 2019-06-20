@@ -9,10 +9,8 @@ import { apiHost } from '../../config'
 import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs'
 import CallToActionButton from '../../components/Buttons/CallToActionButton/CallToActionButton'
 import CloseButton from '../../components/Buttons/CloseButton/CloseButton'
-import Footer from '../../components/Footer/Footer'
 import Image from '../../components/Image/Image'
 import ImageWrapper from '../../components/Image/imageWrapper'
-import NavBar from '../../components/NavBar/NavBar'
 import SlideButton from '../../components/Buttons/SlideButton/SlideButton'
 // import Textarea from '../../components/Textarea'
 
@@ -120,8 +118,6 @@ class Item extends Component {
         <Helmet>
           <title>{title}</title>
         </Helmet>
-
-        <NavBar />
 
         <div className='item'>
           <Breadcrumbs
@@ -270,8 +266,6 @@ class Item extends Component {
             placeholder='Ask question'
           /> */}
         </div>
-
-        <Footer />
 
         <Link
           className='publish-item-button-link'
