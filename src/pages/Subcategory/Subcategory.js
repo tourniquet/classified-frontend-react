@@ -1,10 +1,10 @@
-import { Helmet } from 'react-helmet'
 import React, { Component } from 'react'
 
 // API host config
 import { apiHost } from '../../config'
 
 // components
+import BrowserMeta from '../../components/BrowserMeta/BrowserMeta'
 import ItemsList from '../../components/ItemsList/ItemsList'
 import Search from '../../components/Search/Search'
 
@@ -34,9 +34,7 @@ class Subcategory extends Component {
 
     return (
       <>
-        <Helmet>
-          <title>{subcategory}</title>
-        </Helmet>
+        <BrowserMeta title={subcategory} />
 
         <Search />
 
