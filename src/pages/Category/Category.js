@@ -1,21 +1,17 @@
-import { Helmet } from 'react-helmet'
 import React, { Component } from 'react'
 
 // API host config
 import { apiHost } from '../../config'
 
 // components
+import BrowserMeta from '../../components/BrowserMeta/BrowserMeta'
 import ItemsList from '../../components/ItemsList/ItemsList'
 import Search from '../../components/Search/Search'
 
 class Category extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      category: null,
-      items: []
-    }
+  state = {
+    category: null,
+    items: []
   }
 
   fetchItems () {
@@ -25,12 +21,7 @@ class Category extends Component {
     window
       .fetch(url)
       .then(response => response.json())
-      .then(result => {
-        this.setState({
-          category,
-          items: result
-        })
-      })
+      .then(items => this.setState({ category, items }))
       .catch(err => console.error(err))
   }
 
@@ -43,9 +34,7 @@ class Category extends Component {
 
     return (
       <>
-        <Helmet>
-          <title>{category}</title>
-        </Helmet>
+        <BrowserMeta title={category} />
 
         <Search />
 
