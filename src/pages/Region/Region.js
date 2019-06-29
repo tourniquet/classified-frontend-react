@@ -1,21 +1,17 @@
-import { Helmet } from 'react-helmet'
 import React, { Component } from 'react'
 
 /** API host config */
 import { apiHost } from '../../config'
 
 /** components */
+import BrowserMeta from '../../components/BrowserMeta/BrowserMeta'
 import ItemsList from '../../components/ItemsList/ItemsList'
 import Search from '../../components/Search/Search'
 
 class Region extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      region: null,
-      items: []
-    }
+  state = {
+    region: null,
+    items: []
   }
 
   fetchItems () {
@@ -25,12 +21,7 @@ class Region extends Component {
     window
       .fetch(url)
       .then(response => response.json())
-      .then(items => {
-        this.setState({
-          region,
-          items
-        })
-      })
+      .then(items => this.setState({ region, items }))
   }
 
   componentDidMount () {
@@ -42,9 +33,7 @@ class Region extends Component {
 
     return (
       <>
-        <Helmet>
-          <title>{region}</title>
-        </Helmet>
+        <BrowserMeta title={region} />
 
         <Search />
 
