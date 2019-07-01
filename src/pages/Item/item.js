@@ -6,7 +6,7 @@ import React, { Component, Fragment } from 'react'
 import { apiHost } from '../../config'
 
 // components
-import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs'
+import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs'
 import CallToActionButton from '../../components/Buttons/CallToActionButton/CallToActionButton'
 import CloseButton from '../../components/Buttons/CloseButton/CloseButton'
 import Image from '../../components/Image/Image'
