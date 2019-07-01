@@ -46,8 +46,10 @@
     "webpack-dev-server": "^3.2.1"
   },
   "dependencies": {
+    "history": "^4.9.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
+    "react-ga": "^2.6.0",
     "react-helmet": "^5.2.0",
     "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",

@@ -1,8 +1,13 @@
-import React from 'react'
-import { render } from 'react-dom'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { combineReducers, createStore } from 'redux'
+import { createBrowserHistory } from 'history'
 import { Provider } from 'react-redux'
+import { render } from 'react-dom'
+import { Route, Router, Switch } from 'react-router-dom'
+import React, { Component } from 'react'
+import ReactGA from 'react-ga'
+
+// import Google Analytics Tracking ID
+import { trackingID } from './config'
 
 // reset standard browser styles
 import './reset.scss'
@@ -34,28 +39,45 @@ const store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
-const App = () => (
-  <Provider store={store}>
-    <Wrapper>
-      <Switch>
-        <Route path='/' exact component={IndexPage} />
-        <Route path='/item/:url(\d+)' component={Item} />
-        <Route path='/item/add' component={ItemNew} />
-        <Route path='/search/:query' component={SearchResults} />
-        <Route path='/user/login' component={UserLogin} />
-        <Route path='/user/registration' component={UserRegistration} />
-        <Route path='/user/items' component={UserItems} />
-        <Route path='/region/:region' component={Region} />
-        <Route path='/:category/:subcategory' component={Subcategory} />
-        <Route path='/:category' component={Category} />
-      </Switch>
-    </Wrapper>
-  </Provider>
-)
+// initialize Google Analytics
+ReactGA.initialize(trackingID)
+
+const history = createBrowserHistory()
+history.listen(location => {
+  ReactGA.set({ page: location.pathname })
+  ReactGA.pageview(location.pathname)
+})
+
+class App extends Component {
+  componentDidMount () {
+    ReactGA.pageview(window.location.pathname)
+  }
+
+  render () {
+    return (
+      <Provider store={store}>
+        <Wrapper>
+          <Switch>
+            <Route path='/' exact component={IndexPage} />
+            <Route path='/item/:url(\d+)' component={Item} />
+            <Route path='/item/add' component={ItemNew} />
+            <Route path='/search/:query' component={SearchResults} />
+            <Route path='/user/login' component={UserLogin} />
+            <Route path='/user/registration' component={UserRegistration} />
+            <Route path='/user/items' component={UserItems} />
+            <Route path='/region/:region' component={Region} />
+            <Route path='/:category/:subcategory' component={Subcategory} />
+            <Route path='/:category' component={Category} />
+          </Switch>
+        </Wrapper>
+      </Provider>
+    )
+  }
+}
 
 render(
-  <BrowserRouter>
+  <Router history={history}>
     <App />
-  </BrowserRouter>,
+  </Router>,
   document.querySelector('#container')
 )
