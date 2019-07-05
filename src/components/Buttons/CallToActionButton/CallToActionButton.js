@@ -17,7 +17,6 @@ const CallToAction = styled(Button)`
   position: fixed;
   text-align: center;
   text-decoration: none;
-  top: calc(100vh - 40px);
   width: 100%;
   z-index: 1;
 
