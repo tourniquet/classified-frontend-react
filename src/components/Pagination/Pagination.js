@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -20,12 +20,19 @@ const UlStyled = styled.ul`
 
     > a {
       color: #000;
+      display: block;
       height: inherit;
       text-decoration: none;
       width: inherit;
 
       :hover {
         color: #E26433;
+      }
+
+      &.active-page {
+        background: #E26433;
+        border-radius: 4px;
+        color: #FFF;
       }
     }
 
@@ -37,16 +44,17 @@ const UlStyled = styled.ul`
     &.disabled {
       pointer-events: none;
     }
-
-    &.active-page {
-      background: #E26433;
-      border-radius: 4px;
-      color: #FFF;
-    }
   }
 `
 
-const Pagination = ({ pageNumber, totalItems }) => {
+const Pagination = props => {
+  const { location, pageNumber, totalItems } = props
+
+  // when user access home page, which usualy doesn't contain any page,
+  // location.pathname === /, in that case NavLink doesn't have any active page,
+  // so NavLink can't show which page is active at the moment
+  if (location.pathname === '/') location.pathname = '/page/1'
+
   const pages = Array.from(Array(Math.ceil(totalItems / 10)), (el, i) => ++i)
 
   const prevButtonDisabled = Number(pageNumber) === 1 ? 'disabled' : ''
@@ -55,33 +63,30 @@ const Pagination = ({ pageNumber, totalItems }) => {
   return (
     <UlStyled>
       <li className={`prev-button ${prevButtonDisabled}`}>
-        <Link to={{ pathname: `/page/${Number(pageNumber) - 1}` }}>
+        <NavLink to={{ pathname: `/page/${Number(pageNumber) - 1}` }}>
           Prev
-        </Link>
+        </NavLink>
       </li>
 
       {pages.map(page =>
-        Number(pageNumber) === Number(page) ? (
-          <li className='active-page'>{page}</li>
-        ) : (
-          <li>
-            <Link
-              key={page}
-              to={{ pathname: `/page/${page}` }}
-            >
-              {page}
-            </Link>
-          </li>
-        )
+        <li>
+          <NavLink
+            key={page}
+            to={{ pathname: `/page/${page}` }}
+            activeClassName='active-page'
+          >
+            {page}
+          </NavLink>
+        </li>
       )}
 
       <li className={`next-button ${nextButtonDisabled}`}>
-        <Link to={{ pathname: `/page/${Number(pageNumber) + 1}` }}>
+        <NavLink to={{ pathname: `/page/${Number(pageNumber) + 1}` }}>
           Next
-        </Link>
+        </NavLink>
       </li>
     </UlStyled>
   )
 }
 
-export default Pagination
+export default withRouter(Pagination)
