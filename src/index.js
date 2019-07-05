@@ -58,7 +58,7 @@ class App extends Component {
       <Provider store={store}>
         <Wrapper>
           <Switch>
-            <Route path='/' exact component={IndexPage} />
+            <Route path='/:page?/:page(\d+)?' component={IndexPage} />
             <Route path='/item/:url(\d+)' component={Item} />
             <Route path='/item/add' component={ItemNew} />
             <Route path='/search/:query' component={SearchResults} />

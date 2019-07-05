@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 const UlStyled = styled.ul`
   display: flex;
-  margin: 0 auto;
+  margin: 40px auto 0;
 
   > li {
     cursor: pointer;
