@@ -18,8 +18,7 @@ const FooterContainer = styled.footer`
   background: #262626;
   height: 117px;
   margin-top: 40px;
-  padding-bottom: 40px;
-  padding-top: 40px;
+  padding: 40px 0;
   width: 100%;
 
   & .social {
@@ -44,7 +43,7 @@ const FooterContainer = styled.footer`
     display: flex;
     justify-content: space-around;
     height: 130px;
-    padding-top: 0;
+    padding: 0;
   }
 `
 
