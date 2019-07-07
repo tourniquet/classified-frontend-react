@@ -40,7 +40,7 @@ class IndexPage extends Component {
   }
 
   fetchItems () {
-    const pageNumber = this.props.match.params.page || 1
+    const pageNumber = this.props.match.params.pageNumber || 1
 
     window
       .fetch(`${apiHost}/index.php?page=${pageNumber}`)

@@ -53,17 +53,20 @@ const Pagination = props => {
   // when user access home page, which usualy doesn't contain any page,
   // location.pathname === /, in that case NavLink doesn't have any active page,
   // so NavLink can't show which page is active at the moment
-  if (location.pathname === '/') location.pathname = '/page/1'
+  if (location.pathname === '/') location.pathname = '/home/page/1'
 
   const pages = Array.from(Array(Math.ceil(totalItems / 10)), (el, i) => ++i)
 
   const prevButtonDisabled = Number(pageNumber) === 1 ? 'disabled' : ''
   const nextButtonDisabled = Number(pageNumber) >= pages.length ? 'disabled' : ''
 
+  // I'm using .filter(Boolean) because first result is an empty string
+  const [pathFirstPart, pathSecondPart] = location.pathname.split('/').filter(Boolean)
+
   return (
     <UlStyled>
       <li className={`prev-button ${prevButtonDisabled}`}>
-        <NavLink to={{ pathname: `/page/${Number(pageNumber) - 1}` }}>
+        <NavLink to={{ pathname: `/${pathFirstPart}/${pathSecondPart}/${Number(pageNumber) - 1}` }}>
           Prev
         </NavLink>
       </li>
@@ -72,7 +75,7 @@ const Pagination = props => {
         <li>
           <NavLink
             key={page}
-            to={{ pathname: `/page/${page}` }}
+            to={{ pathname: `/${pathFirstPart}/${pathSecondPart}/${page}` }}
             activeClassName='active-page'
           >
             {page}
@@ -81,7 +84,7 @@ const Pagination = props => {
       )}
 
       <li className={`next-button ${nextButtonDisabled}`}>
-        <NavLink to={{ pathname: `/page/${Number(pageNumber) + 1}` }}>
+        <NavLink to={{ pathname: `/${pathFirstPart}/${pathSecondPart}/${Number(pageNumber) + 1}` }}>
           Next
         </NavLink>
       </li>

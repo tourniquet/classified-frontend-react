@@ -196,7 +196,7 @@ class Header extends Component {
         />
         <Link
           className='logo'
-          to={{ pathname: '/' }}
+          to={{ pathname: '/home/page/1' }}
         />
 
         <ul className={`menu-items ${this.props.toggleSideMenu ? 'toggle-side-menu' : null}`}> {/* TODO: This one should be <aside> */}
@@ -205,13 +205,13 @@ class Header extends Component {
               <li className='mobile'> {/* TODO: li elements must be inisde ul */}
                 <Link
                   onClick={() => dispatch(this.toggleSideMenu())}
-                  to={{ pathname: '/' }}
+                  to={{ pathname: '/home/page/1' }}
                 >
                   Home
                 </Link>
               </li>
               <li className='desktop'> {/* TODO: li elements must be inisde ul */}
-                <Link to={{ pathname: '/' }}>
+                <Link to={{ pathname: '/home/page/1' }}>
                   Home
                 </Link>
               </li>
