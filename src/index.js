@@ -68,8 +68,7 @@ class App extends Component {
             <Route path='/user/registration' component={UserRegistration} />
             <Route path='/user/items' component={UserItems} />
             <Route path='/region/:region' component={Region} />
-            <Route path='/:category/:subcategory' component={Subcategory} />
-            <Route path='/:category' component={Category} />
+            <Route path='/:category/:subcategory/:pageNumber(\d+)?' component={Subcategory} />
           </Switch>
         </Wrapper>
       </Provider>

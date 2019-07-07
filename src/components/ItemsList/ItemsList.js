@@ -150,7 +150,7 @@ const ItemList = ({ items }) =>
           </Link>
 
           <span className='item-category'>
-            <a href={`/${item.category}/${item.subcategory}`}>
+            <a href={`/${item.category}/${item.subcategory}/1`}>
               {item.subcategory}
             </a>
           </span>
