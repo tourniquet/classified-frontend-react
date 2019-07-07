@@ -60,6 +60,7 @@ class App extends Component {
           <Switch>
             <Redirect from='/' to='/home/page/1' exact />
             <Route path='/home/:page(page)?/:pageNumber(\d+)?' component={IndexPage} />
+            <Route path='/category/:category/:pageNumber(\d+)?' component={Category} />
             <Route path='/item/:url(\d+)' component={Item} />
             <Route path='/item/add' component={ItemNew} />
             <Route path='/search/:query' component={SearchResults} />

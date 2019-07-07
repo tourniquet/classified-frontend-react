@@ -75,7 +75,7 @@ const Category = ({ id, subcategories, title }) =>
   <CategoryBlock>
     <a
       className='category-link'
-      href={`/${title}`}
+      href={`/category/${title}/1`}
     >
       {title}
       <i />
