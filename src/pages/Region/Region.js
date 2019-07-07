@@ -6,29 +6,32 @@ import { apiHost } from '../../config'
 
 /** components */
 import ItemsList from '../../components/ItemsList/ItemsList'
+import Pagination from '../../components/Pagination/Pagination'
 import Search from '../../components/Search/Search'
 
 class Region extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      region: null,
-      items: []
-    }
+  state = {
+    items: [],
+    page: null,
+    region: null,
+    totalItems: null
   }
 
   fetchItems () {
-    const region = this.props.match.params.region
-    const url = `${apiHost}/region.php?region=${region}`
+    const { params } = this.props.match
+    const { region } = params
+    const pageNumber = params.pageNumber || 1
+    const url = `${apiHost}/region.php?region=${region}&page=${pageNumber}`
 
     window
       .fetch(url)
       .then(response => response.json())
-      .then(items => {
+      .then(result => {
         this.setState({
+          items: result.items,
           region,
-          items
+          page: result.page,
+          totalItems: result.total
         })
       })
   }
@@ -37,8 +40,14 @@ class Region extends Component {
     this.fetchItems()
   }
 
+  componentDidUpdate = prevProps => {
+    if (prevProps.location.key !== this.props.location.key) {
+      this.fetchItems()
+    }
+  }
+
   render () {
-    const { items, region } = this.state
+    const { items, page, region, totalItems } = this.state
 
     return (
       <>
@@ -49,6 +58,11 @@ class Region extends Component {
         <Search />
 
         <ItemsList items={items} />
+
+        <Pagination
+          pageNumber={page}
+          totalItems={totalItems}
+        />
       </>
     )
   }
