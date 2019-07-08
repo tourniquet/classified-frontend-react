@@ -53,6 +53,10 @@ const ItemListContainer = styled.div`
         white-space: nowrap;
         width: 100%;
         transition: .5s background;
+
+        &:last-child {
+          border-bottom: unset;
+        }
     
         .item-category,
         .item-date {
