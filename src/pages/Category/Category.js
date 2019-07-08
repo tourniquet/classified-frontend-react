@@ -6,22 +6,34 @@ import { apiHost } from '../../config'
 // components
 import BrowserMeta from '../../components/BrowserMeta/BrowserMeta'
 import ItemsList from '../../components/ItemsList/ItemsList'
+import Pagination from '../../components/Pagination/Pagination'
 import Search from '../../components/Search/Search'
 
 class Category extends Component {
   state = {
     category: null,
-    items: []
+    items: [],
+    page: null,
+    totalItems: null
   }
 
   fetchItems () {
-    const category = this.props.match.params.category
-    const url = `${apiHost}/category.php?category=${category}`
+    const { params } = this.props.match
+    const { category } = params
+    const pageNumber = params.pageNumber || 1
+    const url = `${apiHost}/category.php?category=${category}&page=${pageNumber}`
 
     window
       .fetch(url)
       .then(response => response.json())
-      .then(items => this.setState({ category, items }))
+      .then(result => {
+        this.setState({
+          category,
+          items: result.items,
+          page: result.page,
+          totalItems: result.total
+        })
+      })
       .catch(err => console.error(err))
   }
 
@@ -29,8 +41,14 @@ class Category extends Component {
     this.fetchItems()
   }
 
+  componentDidUpdate (prevProps) {
+    if (prevProps.location.key !== this.props.location.key) {
+      this.fetchItems()
+    }
+  }
+
   render () {
-    const { category, items } = this.state
+    const { category, items, page, totalItems } = this.state
 
     return (
       <>
@@ -39,6 +57,11 @@ class Category extends Component {
         <Search />
 
         <ItemsList items={items} />
+
+        <Pagination
+          pageNumber={page}
+          totalItems={totalItems}
+        />
       </>
     )
   }

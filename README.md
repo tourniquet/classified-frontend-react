@@ -1,3 +1,6 @@
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+
+
 **This is the documentation for CLASSIFIED front end**
 
 Check site preview on **http://classified.anuntorhei.md**

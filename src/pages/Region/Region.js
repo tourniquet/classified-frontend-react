@@ -6,30 +6,48 @@ import { apiHost } from '../../config'
 /** components */
 import BrowserMeta from '../../components/BrowserMeta/BrowserMeta'
 import ItemsList from '../../components/ItemsList/ItemsList'
+import Pagination from '../../components/Pagination/Pagination'
 import Search from '../../components/Search/Search'
 
 class Region extends Component {
   state = {
+    items: [],
+    page: null,
     region: null,
-    items: []
+    totalItems: null
   }
 
   fetchItems () {
-    const region = this.props.match.params.region
-    const url = `${apiHost}/region.php?region=${region}`
+    const { params } = this.props.match
+    const { region } = params
+    const pageNumber = params.pageNumber || 1
+    const url = `${apiHost}/region.php?region=${region}&page=${pageNumber}`
 
     window
       .fetch(url)
       .then(response => response.json())
-      .then(items => this.setState({ region, items }))
+      .then(result => {
+        this.setState({
+          items: result.items,
+          region,
+          page: result.page,
+          totalItems: result.total
+        })
+      })
   }
 
   componentDidMount () {
     this.fetchItems()
   }
 
+  componentDidUpdate = prevProps => {
+    if (prevProps.location.key !== this.props.location.key) {
+      this.fetchItems()
+    }
+  }
+
   render () {
-    const { items, region } = this.state
+    const { items, page, region, totalItems } = this.state
 
     return (
       <>
@@ -38,6 +56,11 @@ class Region extends Component {
         <Search />
 
         <ItemsList items={items} />
+
+        <Pagination
+          pageNumber={page}
+          totalItems={totalItems}
+        />
       </>
     )
   }

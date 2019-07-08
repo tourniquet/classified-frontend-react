@@ -2,7 +2,7 @@ import { combineReducers, createStore } from 'redux'
 import { createBrowserHistory } from 'history'
 import { Provider } from 'react-redux'
 import { render } from 'react-dom'
-import { Route, Router, Switch } from 'react-router-dom'
+import { Redirect, Route, Router, Switch } from 'react-router-dom'
 import React, { Component } from 'react'
 import ReactGA from 'react-ga'
 
@@ -58,16 +58,17 @@ class App extends Component {
       <Provider store={store}>
         <Wrapper>
           <Switch>
-            <Route path='/' exact component={IndexPage} />
+            <Redirect from='/' to='/home/page/1' exact />
+            <Route path='/home/:page(page)?/:pageNumber(\d+)?' component={IndexPage} />
+            <Route path='/category/:category/:pageNumber(\d+)?' component={Category} />
             <Route path='/item/:url(\d+)' component={Item} />
             <Route path='/item/add' component={ItemNew} />
-            <Route path='/search/:query' component={SearchResults} />
+            <Route path='/search/:query/:pageNumber(\d+)' component={SearchResults} />
             <Route path='/user/login' component={UserLogin} />
             <Route path='/user/registration' component={UserRegistration} />
-            <Route path='/user/items' component={UserItems} />
-            <Route path='/region/:region' component={Region} />
-            <Route path='/:category/:subcategory' component={Subcategory} />
-            <Route path='/:category' component={Category} />
+            <Route path='/user/items/:pageNumber(\d+)' component={UserItems} />
+            <Route path='/region/:region/:pageNumber(\d+)' component={Region} />
+            <Route path='/:category/:subcategory/:pageNumber(\d+)?' component={Subcategory} />
           </Switch>
         </Wrapper>
       </Provider>

@@ -75,7 +75,7 @@ const Category = ({ id, subcategories, title }) =>
   <CategoryBlock>
     <a
       className='category-link'
-      href={`/${title}`}
+      href={`/category/${title}/1`}
     >
       {title}
       <i />
@@ -91,7 +91,7 @@ const Category = ({ id, subcategories, title }) =>
           >
             <a
               className='subcategory-link'
-              href={`/${title}/${subcategory.title}`}
+              href={`/${title}/${subcategory.title}/1`}
             >
               {subcategory.title}
             </a>

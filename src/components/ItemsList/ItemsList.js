@@ -53,6 +53,10 @@ const ItemListContainer = styled.div`
         white-space: nowrap;
         width: 100%;
         transition: .5s background;
+
+        &:last-child {
+          border-bottom: unset;
+        }
     
         .item-category,
         .item-date {
@@ -150,7 +154,7 @@ const ItemList = ({ items }) =>
           </Link>
 
           <span className='item-category'>
-            <a href={`/${item.category}/${item.subcategory}`}>
+            <a href={`/${item.category}/${item.subcategory}/1`}>
               {item.subcategory}
             </a>
           </span>

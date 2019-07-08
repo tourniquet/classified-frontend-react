@@ -37,7 +37,7 @@ class Search extends Component {
 
   redirectToResults = () => {
     const query = this.state.inputValue.replace(/,/g, '').replace(/\s+/g, ',')
-    const url = `/search/${query}`
+    const url = `/search/${query}/1`
 
     if (query.length) this.props.history.push(url)
   }

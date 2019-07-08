@@ -8,6 +8,7 @@ import { apiHost } from '../config'
 import CallToActionButton from '../components/Buttons/CallToActionButton/CallToActionButton'
 import Category from '../components/Category/Category'
 import ItemsList from '../components/ItemsList/ItemsList'
+import Pagination from '../components/Pagination/Pagination'
 import Search from '../components/Search/Search'
 
 // styles
@@ -17,7 +18,9 @@ class IndexPage extends Component {
   state = {
     categories: [],
     subcategories: [],
-    items: []
+    items: [],
+    page: null,
+    totalItems: null
   }
 
   fetchCategories () {
@@ -37,10 +40,18 @@ class IndexPage extends Component {
   }
 
   fetchItems () {
+    const pageNumber = this.props.match.params.pageNumber || 1
+
     window
-      .fetch(`${apiHost}`)
+      .fetch(`${apiHost}/index.php?page=${pageNumber}`)
       .then(response => response.json())
-      .then(items => this.setState({ items }))
+      .then(data => {
+        this.setState({
+          items: data.items,
+          page: data.page,
+          totalItems: data.total
+        })
+      })
       .catch(err => console.error(err))
   }
 
@@ -50,8 +61,14 @@ class IndexPage extends Component {
     this.fetchItems()
   }
 
+  componentDidUpdate (prevProps) {
+    if (prevProps.location.key !== this.props.location.key) {
+      this.fetchItems()
+    }
+  }
+
   render () {
-    const { categories, subcategories, items } = this.state
+    const { categories, subcategories, items, page, totalItems } = this.state
 
     return (
       <>
@@ -69,6 +86,11 @@ class IndexPage extends Component {
         </div>
 
         <ItemsList items={items} />
+
+        <Pagination
+          pageNumber={page}
+          totalItems={totalItems}
+        />
 
         <Link
           className='publish-item-button-link'
