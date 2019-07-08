@@ -6,21 +6,22 @@ import { apiHost } from '../../config'
 
 // components
 import ItemsList from '../../components/ItemsList/ItemsList'
+import Pagination from '../../components/Pagination/Pagination'
 import Search from '../../components/Search/Search'
 
 class Category extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      category: null,
-      items: []
-    }
+  state = {
+    category: null,
+    items: [],
+    page: null,
+    totalItems: null
   }
 
   fetchItems () {
-    const category = this.props.match.params.category
-    const url = `${apiHost}/category.php?category=${category}`
+    const { params } = this.props.match
+    const { category } = params
+    const pageNumber = params.pageNumber || 1
+    const url = `${apiHost}/category.php?category=${category}&page=${pageNumber}`
 
     window
       .fetch(url)
@@ -28,7 +29,9 @@ class Category extends Component {
       .then(result => {
         this.setState({
           category,
-          items: result
+          items: result.items,
+          page: result.page,
+          totalItems: result.total
         })
       })
       .catch(err => console.error(err))
@@ -38,8 +41,14 @@ class Category extends Component {
     this.fetchItems()
   }
 
+  componentDidUpdate (prevProps) {
+    if (prevProps.location.key !== this.props.location.key) {
+      this.fetchItems()
+    }
+  }
+
   render () {
-    const { category, items } = this.state
+    const { category, items, page, totalItems } = this.state
 
     return (
       <>
@@ -50,6 +59,11 @@ class Category extends Component {
         <Search />
 
         <ItemsList items={items} />
+
+        <Pagination
+          pageNumber={page}
+          totalItems={totalItems}
+        />
       </>
     )
   }

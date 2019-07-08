@@ -8,6 +8,7 @@ import { apiHost } from '../../config'
 // components
 import CallToActionButton from '../../components/Buttons/CallToActionButton/CallToActionButton'
 import ItemsList from '../../components/ItemsList/ItemsList'
+import Pagination from '../../components/Pagination/Pagination'
 import Search from '../../components/Search/Search'
 
 const StyledSearchPage = styled.div`
@@ -18,32 +19,55 @@ const StyledSearchPage = styled.div`
 
 class SearchResult extends Component {
   state = {
-    items: []
+    items: [],
+    page: null,
+    totalItems: null
   }
 
   fetchResults () {
-    const url = `${apiHost}/search.php`
+    const { params } = this.props.match
+
+    const pageNumber = params.pageNumber || 1
+    const url = `${apiHost}/search.php?page=${pageNumber}`
 
     window.fetch(url, {
       method: 'POST',
-      body: JSON.stringify(this.props.match.params.query)
+      body: JSON.stringify(params.query)
     })
       .then(response => response.json(response))
-      .then(items => this.setState({ items }))
+      .then(result => {
+        this.setState({
+          items: result.items,
+          page: result.page,
+          totalItems: result.total
+        })
+      })
+      .catch(err => console.error(err))
   }
 
   componentDidMount () {
     this.fetchResults()
   }
 
+  componentDidUpdate = prevProps => {
+    if (prevProps.location.key !== this.props.location.key) {
+      this.fetchResults()
+    }
+  }
+
   render () {
-    const { items } = this.state
+    const { items, page, totalItems } = this.state
 
     return (
       <StyledSearchPage>
         <Search />
 
         <ItemsList items={items} />
+
+        <Pagination
+          pageNumber={page}
+          totalItems={totalItems}
+        />
 
         <Link
           className='publish-item-button-link'

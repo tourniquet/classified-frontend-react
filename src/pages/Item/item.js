@@ -248,7 +248,7 @@ class Item extends Component {
               <span className='label'>Region:&nbsp;</span>
               <span >
                 <a className='region-link'
-                  href={`/region/${region}`}
+                  href={`/region/${region}/1`}
                 >
                   {region}
                 </a>
