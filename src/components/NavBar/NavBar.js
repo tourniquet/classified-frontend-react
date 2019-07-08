@@ -256,7 +256,7 @@ class Header extends Component {
               </li>
               <li>
                 <Link
-                  to={{ pathname: '/user/profile' }}
+                  to={{ pathname: '/user/items/1' }}
                 >
                   Profile
                 </Link>
