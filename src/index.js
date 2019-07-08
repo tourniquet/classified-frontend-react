@@ -63,7 +63,7 @@ class App extends Component {
             <Route path='/category/:category/:pageNumber(\d+)?' component={Category} />
             <Route path='/item/:url(\d+)' component={Item} />
             <Route path='/item/add' component={ItemNew} />
-            <Route path='/search/:query' component={SearchResults} />
+            <Route path='/search/:query/:pageNumber(\d+)' component={SearchResults} />
             <Route path='/user/login' component={UserLogin} />
             <Route path='/user/registration' component={UserRegistration} />
             <Route path='/user/items/:pageNumber(\d+)' component={UserItems} />
