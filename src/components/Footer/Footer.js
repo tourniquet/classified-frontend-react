@@ -48,11 +48,36 @@ const FooterContainer = styled.footer`
 `
 
 const Copyright = styled.div`
+  align-items: center;
   color: white;
-  margin-bottom: 30px;
+  display: flex;
   font-size: 12px;
   letter-spacing: .02em;
+  margin-bottom: 30px;
   text-align: center;
+  
+  ${A}.github {
+    background: url('/img/github.png') no-repeat;
+    background-position-x: 1.2px;
+    background-position-y: 1.1px;
+    border: none;
+  }
+
+  .script-name {
+    margin: 4px 0 0 10px;
+
+    .link {
+      color: #FFF;
+    }
+  }
+
+  @media (max-width: 767px) {
+    padding: 0 10px 0;
+
+    ${A}.github {
+      min-width: 33px;
+    }
+  }
 
   @media (min-width: 1200px) {
     margin-bottom: 0;
@@ -62,7 +87,16 @@ const Copyright = styled.div`
 const Footer = () =>
   <FooterContainer>
     <Copyright>
-      © {/* This website is proudly using the classifieds scripts software SCRIPT_NAME */}
+      <A className='github' href='https://github.com/tourniquet/classified-frontend-react' target='_blank' />
+      <p className='script-name'>© This website is powered by the classifieds script software&nbsp;
+        <a
+          className='link'
+          href='https://github.com/tourniquet/classified-backend-php'
+          target='_blank'
+        >
+          MinClass
+        </a>
+      </p>
     </Copyright>
 
     <nav className='social'>
