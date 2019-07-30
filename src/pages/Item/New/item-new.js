@@ -142,6 +142,13 @@ class ItemNew extends Component {
     this.setState(state => ({ showCurrencies: !state.showCurrencies }))
   }
 
+  checkPriceInput = el => {
+    const price = el.target.value
+    price.length
+      ? this.setState({ price: true })
+      : this.setState({ price: false })
+  }
+
   setCurrency = (id, title) => {
     // display or hide currencies list
     this.toggleCurrencies()
@@ -370,7 +377,7 @@ class ItemNew extends Component {
                 inputmode='numeric'
                 pattern='[0-9]*'
                 placeholder='Price'
-                onChange={() => this.setState(state => ({ price: !state.price }))}
+                onChange={this.checkPriceInput}
               />
               <div className='currency'>
                 <Dropdown
