@@ -80,7 +80,7 @@ class IndexPage extends Component {
               key={category.id.toString()}
               id={category.id}
               subcategories={subcategories}
-              title={category.title}
+              name={category.name}
             />
           )}
         </div>

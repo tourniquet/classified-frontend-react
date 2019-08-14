@@ -38,20 +38,20 @@ class ItemNew extends Component {
     showSubcategories: false,
     subcategory: {
       id: '',
-      title: ''
+      name: ''
     },
     images: [''],
     regions: [],
     showRegions: false,
     region: {
       id: '',
-      title: ''
+      name: ''
     },
     currencies: [],
     showCurrencies: false,
     currency: {
       id: '',
-      title: ''
+      name: ''
     },
     price: false
   }
@@ -66,7 +66,7 @@ class ItemNew extends Component {
 
   fetchSubcategories = id => {
     window
-      .fetch(`${apiHost}/subcategories.php?id=${id}`)
+      .fetch(`${apiHost}/subcategories.php?parent_id=${id}`)
       .then(response => response.json())
       .then(subcategories => this.setState({ subcategories }))
       .catch(err => console.error(err))
@@ -81,10 +81,10 @@ class ItemNew extends Component {
     this.fetchSubcategories(id)
     // display or hide categories list
     this.toggleCategoriesList()
-    // set category title
+    // set category name
     this.setState({
       category,
-      subcategory: { id: '', title: '' }
+      subcategory: { id: '', name: '' }
     })
   }
 
@@ -92,11 +92,11 @@ class ItemNew extends Component {
     this.setState(state => ({ showSubcategories: !state.showSubcategories }))
   }
 
-  setSubcategory = (id, title) => {
+  setSubcategory = (id, name) => {
     // display or hide subcategories list
     this.toggleSubcategoriesList()
-    // set subcategory id & title
-    this.setState({ subcategory: { id, title } })
+    // set subcategory id & name
+    this.setState({ subcategory: { id, name } })
   }
 
   fetchRegions () {
@@ -111,11 +111,11 @@ class ItemNew extends Component {
     this.setState(state => ({ showRegions: !state.showRegions }))
   }
 
-  setRegion = (id, title) => {
+  setRegion = (id, name) => {
     // display or hide regions list
     this.toggleRegionsList()
-    // set region id & title
-    this.setState({ region: { id, title } })
+    // set region id & name
+    this.setState({ region: { id, name } })
   }
 
   handleImages = el => {
@@ -234,10 +234,10 @@ class ItemNew extends Component {
               labelFor='subcategory'
               labelTitle='Subcategory'
               dropDownButtonActive={showSubcategories}
-              dropDownButtonTitle={subcategory.title}
+              dropDownButtonTitle={subcategory.name}
               dropDownButtonClickHandler={this.toggleSubcategoriesList}
               required
-              requiredInputValue={subcategory.title}
+              requiredInputValue={subcategory.name}
               unorderedListActive={showSubcategories}
               itemsArray={subcategories}
               unorderedListClickHandler={this.setSubcategory}
@@ -247,10 +247,10 @@ class ItemNew extends Component {
               labelFor='region'
               labelTitle='Region'
               dropDownButtonActive={showRegions}
-              dropDownButtonTitle={region.title}
+              dropDownButtonTitle={region.name}
               dropDownButtonClickHandler={this.toggleRegionsList}
               required
-              requiredInputValue={region.title}
+              requiredInputValue={region.name}
               unorderedListActive={showRegions}
               itemsArray={regions}
               unorderedListClickHandler={this.setRegion}
@@ -344,7 +344,7 @@ class ItemNew extends Component {
               <Input
                 id='contact-name'
                 className='input contact-name'
-                name='name'
+                name='visitor-name'
                 placeholder='Contact name'
                 required
               />
