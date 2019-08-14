@@ -37,9 +37,9 @@ const Dropdown = props =>
       {props.itemsArray.map(item => (
         <li
           key={item.id.toString()}
-          onClick={() => props.unorderedListClickHandler(item.id, item.title)}
+          onClick={() => props.unorderedListClickHandler(item.id, item.name)}
         >
-          {item.title}
+          {item.name}
         </li>
       ))}
     </UnorderedList>

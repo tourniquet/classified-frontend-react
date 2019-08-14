@@ -71,13 +71,13 @@ const CategoryBlock = styled.div`
   }
 `
 
-const Category = ({ id, subcategories, title }) =>
+const Category = ({ id, subcategories, name }) =>
   <CategoryBlock>
     <a
       className='category-link'
-      href={`/category/${title}/1`}
+      href={`/category/${name}/1`}
     >
-      {title}
+      {name}
       <i />
     </a>
 
@@ -91,9 +91,9 @@ const Category = ({ id, subcategories, title }) =>
           >
             <a
               className='subcategory-link'
-              href={`/${title}/${subcategory.title}/1`}
+              href={`/${name}/${subcategory.name}/1`}
             >
-              {subcategory.title}
+              {subcategory.name}
             </a>
           </li>
         ))}
