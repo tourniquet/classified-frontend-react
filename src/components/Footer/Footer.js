@@ -94,7 +94,7 @@ const Footer = () =>
           href='https://github.com/tourniquet/classified-backend-php'
           target='_blank'
         >
-          MinClass
+          minClass
         </a>
       </p>
     </Copyright>
