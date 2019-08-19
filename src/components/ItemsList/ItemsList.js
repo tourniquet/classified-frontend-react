@@ -13,6 +13,11 @@ const ItemListContainer = styled.div`
     width: 95%;
   
     > li {
+      &:hover {
+        background: #F6F6F6;
+        transition: .5s background;
+      }
+
       img.favourite-item {
         height: 16px;
         padding-left: 15px;
