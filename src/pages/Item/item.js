@@ -143,13 +143,15 @@ class Item extends Component {
           <hr className='under-posting-date' />
 
           <div className='item-details'>
-            <div className='item-title'>
-              <h2>{title}</h2>
-            </div>
+            <div className='item-title-description'>
+              <div className='item-title'>
+                <h2>{title}</h2>
+              </div>
 
-            <div className='item-description'>
-              <span>{description}</span>
-              <br />
+              <div className='item-description'>
+                <span>{description}</span>
+                <br />
+              </div>
             </div>
 
             <div className='images'>
@@ -229,11 +231,7 @@ class Item extends Component {
             </div>
           </div>
 
-          <hr
-            style={{
-              marginTop: '35px'
-            }}
-          />
+          <hr className='under-item-hr' />
 
           <div className='contacts-container'>
             <div className='price'>

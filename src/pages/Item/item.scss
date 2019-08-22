@@ -1,4 +1,4 @@
-.item-page  {
+.item-page {
   .item {
     margin-top: 20px;
     padding: 0 30px;
@@ -91,6 +91,10 @@
       }
     }
 
+    .under-item-hr {
+      margin-top: 48px;
+    }
+
     .price {
       margin: 28px 0 30px;
     }
@@ -144,7 +148,7 @@
   .item-page {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    height: calc(100vh - 263px); // header - 93px, footer - 130px, footer margin top - 40px
 
     .item {
       flex: 1 0 auto;
@@ -177,22 +181,17 @@
       }
 
       .item-details {
-        margin: 56px 0 190px;
+        display: flex;
 
-        .item-title {
-          width: 50%;
-        }
-
-        .item-description {
-          float: left;
-          width: 40%;
+        .item-title-description {
+          width: calc(100% - 665px);
         }
 
         .images {
           float: right;
           justify-content: flex-start;
-          margin: 64px 0 0;
-          width: 50%;
+          margin: 48px 0 0;
+          width: 665px;
 
           // hide images block for mobile on desktop
           .mobile-version {
@@ -201,17 +200,18 @@
 
           .desktop-version.image-block {
             display: flex;
-            height: 170px;
             justify-content: center;
-            margin-right: 10px;
-            width: 170px;
+
+            &:not(:nth-child(3)) {
+              margin-right: 10px;
+            }
 
             img {
               align-self: center;
               border-radius: 6px;
               cursor: zoom-in;
-              max-height: 170px;
-              max-width: 170px;
+              height: 215px;
+              width: 215px;
             }
           }
 
@@ -223,12 +223,12 @@
             top: 0;
             width: 100vw;
           }
-          
+
           .zoomed-image-container {
             line-height: 600px;
-            margin: -300px auto 0 -400px;
+            margin: 0 auto 0 -400px;
             min-height: 600px;
-            position: relative;
+            position: fixed;
             text-align: center;
 
             .image-wrapper {
