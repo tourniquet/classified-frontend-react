@@ -120,6 +120,51 @@ class Item extends Component {
         </Helmet>
 
         <div className='item'>
+          { zoomedImage &&
+            <Fragment>
+              <div
+                className='overlay-content'
+                onClick={() => this.unzoomImage()}
+              />
+
+              <div
+                className='zoomed-image-container'
+                ref={this.activeImage}
+              >
+                {/* left arrow - previous image */}
+                {/* <SlideButton
+                  // TODO: Make div stay focuse even when mouse is used
+                  // to slide images
+                  className='arrow-left'
+                  onClick={() => this.slideZoomedImages('prev')}
+                /> */}
+
+                {/* right arrow - next image */}
+                {/* <SlideButton
+                  // TODO: Make div stay focuse even when mouse is used
+                  // to slide images
+                  className='arrow-right'
+                  onClick={() => this.slideZoomedImages('next')}
+                /> */}
+
+                <ImageWrapper
+                  className='image-wrapper'
+                  onKeyDown={e => this.manageZoomedImage(e)}
+                >
+                  <CloseButton
+                    onClick={() => this.unzoomImage()}
+                  />
+
+                  <Image
+                    className='zoomed-image'
+                    src={`${imgUrl}${this.state.zoomedImage}`}
+                  />
+                </ImageWrapper>
+              </div>
+
+            </Fragment>
+          }
+
           <Breadcrumbs
             category={category}
             subcategory={subcategory}
@@ -154,8 +199,7 @@ class Item extends Component {
               </div>
             </div>
 
-            {/* TODO: This component must be rendered on mobile only when ad contain at leas one image */}
-            { images.length &&
+            { !!images.length &&
               <div className='mobile-image-viewer'>
                 <SlideButton
                   className='mobile-arrow-left'
@@ -174,10 +218,10 @@ class Item extends Component {
               </div>
             }
 
-            <div className='images'>
+            <div className='thumbnails'>
               {images.map(el => (
                 <div
-                  className='desktop-version image-block'
+                  className='desktop-version thumbnail'
                 >
                   <Image
                     key={el}
@@ -186,51 +230,6 @@ class Item extends Component {
                   />
                 </div>
               ))}
-
-              { zoomedImage &&
-                <Fragment>
-                  <div
-                    className='overlay-content'
-                    onClick={() => this.unzoomImage()}
-                  />
-
-                  <div
-                    className='zoomed-image-container'
-                    ref={this.activeImage}
-                  >
-                    {/* left arrow - previous image */}
-                    <SlideButton
-                      // TODO: Make div stay focuse even when mouse is used
-                      // to slide images
-                      className='arrow-left'
-                      onClick={() => this.slideZoomedImages('prev')}
-                    />
-
-                    {/* right arrow - next image */}
-                    <SlideButton
-                      // TODO: Make div stay focuse even when mouse is used
-                      // to slide images
-                      className='arrow-right'
-                      onClick={() => this.slideZoomedImages('next')}
-                    />
-
-                    <CloseButton
-                      onClick={() => this.unzoomImage()}
-                    />
-
-                    <ImageWrapper
-                      className='image-wrapper'
-                      onKeyDown={e => this.manageZoomedImage(e)}
-                    >
-                      <Image
-                        className='zoomed-image'
-                        src={`${imgUrl}${this.state.zoomedImage}`}
-                      />
-                    </ImageWrapper>
-                  </div>
-
-                </Fragment>
-              }
             </div>
           </div>
 

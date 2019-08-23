@@ -56,20 +56,28 @@
       width: 100%;
     }
 
-    .item-title {
-      font-size: 24px;
-      letter-spacing: 0.013em;
-      margin-top: 48px;
+    .item-details {
+      .item-title-description {
+        .item-title {
+          font-size: 24px;
+          letter-spacing: 0.013em;
+          margin-top: 48px;
+        }
+
+        .item-description {
+          color: #505050;
+          font-size: small;
+          line-height: 1.16;
+          margin-top: 23px;
+        }
+      }
     }
 
-    .item-description {
-      color: #505050;
-      font-size: small;
-      line-height: 1.16;
-      margin-top: 23px;
+    .mobile-image-viewer {
+      display: none;
     }
 
-    .images {
+    .thumbnails {
       align-items: center;
       display: flex;
       flex-flow: row wrap;
@@ -89,10 +97,6 @@
         min-height: 280px;
         width: 100%;
       }
-    }
-
-    .under-item-hr {
-      margin-top: 48px;
     }
 
     .price {
@@ -179,8 +183,39 @@
 
     .item {
       flex: 1 0 auto;
+      position: relative;
       margin: 57px auto -33px;
       width: 1170px;
+
+      .overlay-content {
+        background: #000000B8;
+        height: 100vh;
+        left: 0;
+        position: fixed;
+        top: 0;
+        width: 100vw;
+      }
+
+      .zoomed-image-container {
+        margin: 0 auto;
+        position: absolute;
+        width: 100%;
+
+        .image-wrapper {
+          background: #FFF;
+          border-radius: 2px;
+          margin: 0 auto;
+          padding: 10px;
+          position: relative;
+          width: fit-content;
+
+          .zoomed-image {
+            border-radius: 2px;
+            display: inline-block;
+            vertical-align: middle;
+          }
+        }
+      }
 
       .label {
         font-weight: 600;
@@ -211,10 +246,11 @@
         display: flex;
 
         .item-title-description {
+          margin-bottom: 48px;
           width: calc(100% - 665px);
         }
 
-        .images {
+        .thumbnails {
           float: right;
           justify-content: flex-start;
           margin: 48px 0 0;
@@ -225,7 +261,7 @@
             display: none;
           }
 
-          .desktop-version.image-block {
+          .desktop-version.thumbnail {
             display: flex;
             justify-content: center;
 
@@ -241,36 +277,10 @@
               width: 215px;
             }
           }
+        }
 
-          .overlay-content {
-            background: #000000B8;
-            height: 100vh;
-            left: 0;
-            position: fixed;
-            top: 0;
-            width: 100vw;
-          }
-
-          .zoomed-image-container {
-            line-height: 600px;
-            margin: 0 auto 0 -400px;
-            min-height: 600px;
-            position: fixed;
-            text-align: center;
-
-            .image-wrapper {
-              background: #FFF;
-              border-radius: 2px;
-              height: 600px;
-              padding: 10px;
-
-              .zoomed-image {
-                border-radius: 2px;
-                display: inline-block;
-                vertical-align: middle;
-              }
-            }
-          }
+        .under-item-hr {
+          margin-top: 48px;
         }
       }
 
