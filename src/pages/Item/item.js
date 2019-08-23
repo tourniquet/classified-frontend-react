@@ -39,7 +39,7 @@ class Item extends Component {
 
   slideImagesOnMobile (direction) {
     const currentImgOnMobile = this.state.currentImgOnMobile
-    const imgCount = this.props.images.length - 1
+    const imgCount = this.state.item.images.length - 1
 
     if (direction === 'next') {
       if (currentImgOnMobile === imgCount) this.setState({ currentImgOnMobile: 0 })
@@ -101,7 +101,7 @@ class Item extends Component {
       views,
       region
     } = this.state.item
-    // const currentImgOnMobile = this.state.currentImgOnMobile
+    const currentImgOnMobile = this.state.currentImgOnMobile
     const imgUrl = `${apiHost}uploads/`
     const thumbUrl = `${apiHost}uploads/thumb_`
     const zoomedImage = this.state.zoomedImage
@@ -153,6 +153,26 @@ class Item extends Component {
                 <br />
               </div>
             </div>
+
+            {/* TODO: This component must be rendered on mobile only when ad contain at leas one image */}
+            { images.length &&
+              <div className='mobile-image-viewer'>
+                <SlideButton
+                  className='mobile-arrow-left'
+                  onClick={() => this.slideImagesOnMobile('prev')}
+                />
+
+                <Image
+                  className='zoomed-image-mobile'
+                  src={`${imgUrl}${images[currentImgOnMobile]}`}
+                />
+
+                <SlideButton
+                  className='mobile-arrow-right'
+                  onClick={() => this.slideImagesOnMobile('next')}
+                />
+              </div>
+            }
 
             <div className='images'>
               {images.map(el => (
@@ -211,23 +231,6 @@ class Item extends Component {
 
                 </Fragment>
               }
-
-              <div
-                className='mobile-version image-block'
-              >
-                <SlideButton
-                  className='mobile-arrow-left'
-                  onClick={() => this.slideImagesOnMobile('prev')}
-                />
-
-                <SlideButton
-                  className='mobile-arrow-right'
-                  onClick={() => this.slideImagesOnMobile('next')}
-                />
-
-                {/* TODO: This component must be rendered on mobile only when ad contain at leas one image */}
-                {/* <Image src={`${thumbUrl}${images[currentImgOnMobile]}`} /> */}
-              </div>
             </div>
           </div>
 
