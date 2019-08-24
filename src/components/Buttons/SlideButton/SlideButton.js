@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const StyledSlideButton = styled.div`
   background: transparent;
-  border-color: white;
+  border-color: #9D9D9D;
   border-image: initial;
   border-style: solid;
   border-width: 4px 0 0 4px;

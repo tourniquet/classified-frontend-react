@@ -39,7 +39,7 @@ class Item extends Component {
 
   slideImagesOnMobile (direction) {
     const currentImgOnMobile = this.state.currentImgOnMobile
-    const imgCount = this.props.images.length - 1
+    const imgCount = this.state.item.images.length - 1
 
     if (direction === 'next') {
       if (currentImgOnMobile === imgCount) this.setState({ currentImgOnMobile: 0 })
@@ -101,7 +101,7 @@ class Item extends Component {
       views,
       region
     } = this.state.item
-    // const currentImgOnMobile = this.state.currentImgOnMobile
+    const currentImgOnMobile = this.state.currentImgOnMobile
     const imgUrl = `${apiHost}uploads/`
     const thumbUrl = `${apiHost}uploads/thumb_`
     const zoomedImage = this.state.zoomedImage
@@ -120,6 +120,51 @@ class Item extends Component {
         </Helmet>
 
         <div className='item'>
+          { zoomedImage &&
+            <Fragment>
+              <div
+                className='overlay-content'
+                onClick={() => this.unzoomImage()}
+              />
+
+              <div
+                className='zoomed-image-container'
+                ref={this.activeImage}
+              >
+                {/* left arrow - previous image */}
+                {/* <SlideButton
+                  // TODO: Make div stay focuse even when mouse is used
+                  // to slide images
+                  className='arrow-left'
+                  onClick={() => this.slideZoomedImages('prev')}
+                /> */}
+
+                {/* right arrow - next image */}
+                {/* <SlideButton
+                  // TODO: Make div stay focuse even when mouse is used
+                  // to slide images
+                  className='arrow-right'
+                  onClick={() => this.slideZoomedImages('next')}
+                /> */}
+
+                <ImageWrapper
+                  className='image-wrapper'
+                  onKeyDown={e => this.manageZoomedImage(e)}
+                >
+                  <CloseButton
+                    onClick={() => this.unzoomImage()}
+                  />
+
+                  <Image
+                    className='zoomed-image'
+                    src={`${imgUrl}${this.state.zoomedImage}`}
+                  />
+                </ImageWrapper>
+              </div>
+
+            </Fragment>
+          }
+
           <Breadcrumbs
             category={category}
             subcategory={subcategory}
@@ -143,19 +188,40 @@ class Item extends Component {
           <hr className='under-posting-date' />
 
           <div className='item-details'>
-            <div className='item-title'>
-              <h2>{title}</h2>
+            <div className='item-title-description'>
+              <div className='item-title'>
+                <h2>{title}</h2>
+              </div>
+
+              <div className='item-description'>
+                <span>{description}</span>
+                <br />
+              </div>
             </div>
 
-            <div className='item-description'>
-              <span>{description}</span>
-              <br />
-            </div>
+            { !!images.length &&
+              <div className='mobile-image-viewer'>
+                <SlideButton
+                  className='mobile-arrow-left'
+                  onClick={() => this.slideImagesOnMobile('prev')}
+                />
 
-            <div className='images'>
+                <Image
+                  className='zoomed-image-mobile'
+                  src={`${imgUrl}${images[currentImgOnMobile]}`}
+                />
+
+                <SlideButton
+                  className='mobile-arrow-right'
+                  onClick={() => this.slideImagesOnMobile('next')}
+                />
+              </div>
+            }
+
+            <div className='thumbnails'>
               {images.map(el => (
                 <div
-                  className='desktop-version image-block'
+                  className='desktop-version thumbnail'
                 >
                   <Image
                     key={el}
@@ -164,76 +230,10 @@ class Item extends Component {
                   />
                 </div>
               ))}
-
-              { zoomedImage &&
-                <Fragment>
-                  <div
-                    className='overlay-content'
-                    onClick={() => this.unzoomImage()}
-                  />
-
-                  <div
-                    className='zoomed-image-container'
-                    ref={this.activeImage}
-                  >
-                    {/* left arrow - previous image */}
-                    <SlideButton
-                      // TODO: Make div stay focuse even when mouse is used
-                      // to slide images
-                      className='arrow-left'
-                      onClick={() => this.slideZoomedImages('prev')}
-                    />
-
-                    {/* right arrow - next image */}
-                    <SlideButton
-                      // TODO: Make div stay focuse even when mouse is used
-                      // to slide images
-                      className='arrow-right'
-                      onClick={() => this.slideZoomedImages('next')}
-                    />
-
-                    <CloseButton
-                      onClick={() => this.unzoomImage()}
-                    />
-
-                    <ImageWrapper
-                      className='image-wrapper'
-                      onKeyDown={e => this.manageZoomedImage(e)}
-                    >
-                      <Image
-                        className='zoomed-image'
-                        src={`${imgUrl}${this.state.zoomedImage}`}
-                      />
-                    </ImageWrapper>
-                  </div>
-
-                </Fragment>
-              }
-
-              <div
-                className='mobile-version image-block'
-              >
-                <SlideButton
-                  className='mobile-arrow-left'
-                  onClick={() => this.slideImagesOnMobile('prev')}
-                />
-
-                <SlideButton
-                  className='mobile-arrow-right'
-                  onClick={() => this.slideImagesOnMobile('next')}
-                />
-
-                {/* TODO: This component must be rendered on mobile only when ad contain at leas one image */}
-                {/* <Image src={`${thumbUrl}${images[currentImgOnMobile]}`} /> */}
-              </div>
             </div>
           </div>
 
-          <hr
-            style={{
-              marginTop: '35px'
-            }}
-          />
+          <hr className='under-item-hr' />
 
           <div className='contacts-container'>
             <div className='price'>
