@@ -94,7 +94,8 @@ class Item extends Component {
       description,
       images,
       phone,
-      name,
+      visitor_name,
+      user_id,
       price,
       currency,
       published,
@@ -173,7 +174,9 @@ class Item extends Component {
 
           <div className='item-info'>
             <span>Posted by</span>
-            <span className='posted-by'>&nbsp;{name}</span>
+            <a className='posted-by' href={`/profile/${user_id}/1`}>
+              &nbsp;{visitor_name}
+            </a>
           </div>
 
           <hr className='under-item-info' />
@@ -256,7 +259,7 @@ class Item extends Component {
             </div>
             <div className='contacts'>
               <span className='label'>Posted by:&nbsp;</span>
-              <span>{phone}, {name}</span>
+              <span>{phone}, {visitor_name}</span>
             </div>
           </div>
 
