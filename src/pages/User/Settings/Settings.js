@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
 
 // API host config
 import { apiHost } from '../../../config'
@@ -11,8 +12,22 @@ import RoundedButton from '../../../components/Buttons/RoundedButton/RoundedButt
 // styles
 import './Settings.scss'
 
+const ErrorMessage = styled.p`
+  color: red;
+  margin-bottom: 18px;
+`
+
+const SuccessMessage = styled.p`
+  color: green;
+  margin-bottom: 18px;
+`
+
 class Settings extends Component {
-  state = {}
+  state = {
+    wrongOldPassword: false,
+    wrongPasswordConfirmation: false,
+    passwordUpdated: false
+  }
 
   checkIfUserIsLogged () {
     const cookies = window.document.cookie.split('; ')
@@ -27,9 +42,13 @@ class Settings extends Component {
   handleSubmit = event => {
     event.preventDefault()
 
+    const cookies = window.document.cookie.split('; ')
+    const getCookies = name => cookies.filter(el => el.split('=')[0] === name)
+    const email = getCookies('email').toString().replace('email=', '')
+
     const form = document.getElementById('reset-password')
     const formData = new window.FormData(form)
-    formData.append('email', 'admyn3d@gmail.com')
+    formData.append('email', email)
 
     const url = `${apiHost}/user-settings.php`
     window
@@ -42,7 +61,23 @@ class Settings extends Component {
         const { message } = result
 
         if (message === 'Success!') {
-
+          this.setState({
+            wrongOldPassword: false,
+            wrongPasswordConfirmation: false,
+            passwordUpdated: true
+          })
+        } else if (message === 'Wrong password!') {
+          this.setState({
+            wrongOldPassword: true,
+            wrongPasswordConfirmation: false,
+            passwordUpdated: false
+          })
+        } else if (message === 'Unmatch!') {
+          this.setState({
+            wrongOldPassword: false,
+            wrongPasswordConfirmation: true,
+            passwordUpdated: false
+          })
         }
       })
       .catch(err => console.error(err))
@@ -53,6 +88,7 @@ class Settings extends Component {
   }
 
   render () {
+    const { wrongOldPassword, wrongPasswordConfirmation, passwordUpdated } = this.state
     return (
       <>
         <form
@@ -72,6 +108,11 @@ class Settings extends Component {
             required
             type='password'
           />
+          { wrongOldPassword &&
+            <ErrorMessage>
+              Old password did not match
+            </ErrorMessage>
+          }
 
           <Label
             className='mandatory'
@@ -98,6 +139,17 @@ class Settings extends Component {
             required
             type='password'
           />
+          { wrongPasswordConfirmation &&
+            <ErrorMessage>
+              Password did not match
+            </ErrorMessage>
+          }
+
+          { passwordUpdated &&
+            <SuccessMessage>
+              Password was updated
+            </SuccessMessage>
+          }
 
           <RoundedButton
             title='Reset password'
