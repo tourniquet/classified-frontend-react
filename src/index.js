@@ -19,6 +19,7 @@ import Item from './pages/Item/item'
 import ItemNew from './pages/Item/New/item-new'
 import Region from './pages/Region/Region'
 import SearchResults from './pages/SearchResults/SearchResults'
+import Setting from './pages/User/Settings/Settings'
 import Subcategory from './pages/Subcategory/Subcategory'
 import UserItems from './pages/User/Items/UserItems'
 import UserLogin from './pages/User/Login/UserLogin'
@@ -68,6 +69,7 @@ class App extends Component {
             <Route path='/user/login' component={UserLogin} />
             <Route path='/user/registration' component={UserRegistration} />
             <Route path='/user/items/:pageNumber(\d+)' component={UserItems} />
+            <Route path='/user/settings' component={Setting} />
             <Route path='/profile/:id(\d+)/:pageNumber(\d+)?' component={Profile} />
             <Route path='/region/:region/:pageNumber(\d+)' component={Region} />
             <Route path='/:category/:subcategory/:pageNumber(\d+)?' component={Subcategory} />
