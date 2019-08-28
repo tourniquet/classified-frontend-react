@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
 
 // API host config
 import { apiHost } from '../../../config'
@@ -7,20 +6,11 @@ import { apiHost } from '../../../config'
 // components
 import Input from '../../../components/Input/Input'
 import Label from '../../../components/Label/Label'
+import Message from '../../../components/Message/Message'
 import RoundedButton from '../../../components/Buttons/RoundedButton/RoundedButton'
 
 // styles
 import './Settings.scss'
-
-const ErrorMessage = styled.p`
-  color: red;
-  margin-bottom: 18px;
-`
-
-const SuccessMessage = styled.p`
-  color: green;
-  margin-bottom: 18px;
-`
 
 class Settings extends Component {
   state = {
@@ -109,9 +99,10 @@ class Settings extends Component {
             type='password'
           />
           { wrongOldPassword &&
-            <ErrorMessage>
-              Old password did not match
-            </ErrorMessage>
+            <Message
+              className='error-message'
+              message='Old password did not match'
+            />
           }
 
           <Label
@@ -140,15 +131,17 @@ class Settings extends Component {
             type='password'
           />
           { wrongPasswordConfirmation &&
-            <ErrorMessage>
-              Password did not match
-            </ErrorMessage>
+            <Message
+              className='error-message'
+              message='Password did not match'
+            />
           }
 
           { passwordUpdated &&
-            <SuccessMessage>
-              Password was updated
-            </SuccessMessage>
+            <Message
+              className='success-message'
+              message='Password was updated'
+            />
           }
 
           <RoundedButton

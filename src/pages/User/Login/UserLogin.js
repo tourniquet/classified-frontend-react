@@ -7,6 +7,7 @@ import { apiHost } from '../../../config'
 // components
 import Input from '../../../components/Input/Input'
 import Label from '../../../components/Label/Label'
+import Message from '../../../components/Message/Message'
 import RoundedButton from '../../../components/Buttons/RoundedButton/RoundedButton'
 
 const UserLoginPage = styled.div`
@@ -25,10 +26,6 @@ const UserLoginPage = styled.div`
       width: 80%;
     }
   }
-`
-
-const ErrorMessage = styled.p`
-  color: red;
 `
 
 class UserLogin extends Component {
@@ -125,15 +122,17 @@ class UserLogin extends Component {
           />
 
           { wrongEmail &&
-            <ErrorMessage>
-              Email did not match
-            </ErrorMessage>
+            <Message
+              className='error-message'
+              message='Email did not match'
+            />
           }
 
           { wrongPassword &&
-            <ErrorMessage>
-              Password did not match
-            </ErrorMessage>
+            <Message
+              className='error-message'
+              message='Password did not match'
+            />
           }
 
           <RoundedButton

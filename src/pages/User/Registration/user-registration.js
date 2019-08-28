@@ -7,6 +7,7 @@ import { apiHost } from '../../../config'
 // components
 import Input from '../../../components/Input/Input'
 import Label from '../../../components/Label/Label'
+import Message from '../../../components/Message/Message'
 import RoundedButton from '../../../components/Buttons/RoundedButton/RoundedButton'
 
 const UserRegistrationPage = styled.div`
@@ -25,11 +26,6 @@ const UserRegistrationPage = styled.div`
       width: 80%;
     }
   }
-`
-
-const ErrorMessage = styled.p`
-  color: red;
-  margin-bottom: 18px;
 `
 
 class UserRegistration extends Component {
@@ -95,9 +91,10 @@ class UserRegistration extends Component {
             type='email'
           />
           { emailIsTaken &&
-            <ErrorMessage>
-              Email is already taken!
-            </ErrorMessage>
+            <Message
+              className='Email is already taken!'
+              message='Password did not match'
+            />
           }
 
           <Label
@@ -124,9 +121,10 @@ class UserRegistration extends Component {
             type='password'
           />
           { passwordNotMatch &&
-            <ErrorMessage>
-              Passwords did not match!
-            </ErrorMessage>
+            <Message
+              className='Email is already taken!'
+              message='Passwords did not match!'
+            />
           }
 
           <RoundedButton
