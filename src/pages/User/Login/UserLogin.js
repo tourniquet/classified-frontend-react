@@ -10,6 +10,9 @@ import Label from '../../../components/Label/Label'
 import Message from '../../../components/Message/Message'
 import RoundedButton from '../../../components/Buttons/RoundedButton/RoundedButton'
 
+// utils
+import * as api from '../../../utils/cookieUtils'
+
 const UserLoginPage = styled.div`
   display: flex;
   flex-direction: column;
@@ -35,11 +38,8 @@ class UserLogin extends Component {
   }
 
   checkIfUserIsLogged () {
-    const cookies = window.document.cookie.split('; ')
-
-    const getCookies = name => cookies.filter(el => el.split('=')[0] === name)
-    const email = getCookies('email').toString().replace('email=', '')
-    const id = getCookies('id').toString().replace('id=', '')
+    const email = api.getCookies('email').toString().replace('email=', '')
+    const id = api.getCookies('id').toString().replace('id=', '')
 
     if (email && id) this.props.history.push('/')
   }

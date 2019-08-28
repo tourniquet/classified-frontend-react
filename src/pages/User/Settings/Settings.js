@@ -9,6 +9,9 @@ import Label from '../../../components/Label/Label'
 import Message from '../../../components/Message/Message'
 import RoundedButton from '../../../components/Buttons/RoundedButton/RoundedButton'
 
+// utils
+import * as api from '../../../utils/cookieUtils'
+
 // styles
 import './Settings.scss'
 
@@ -20,11 +23,8 @@ class Settings extends Component {
   }
 
   checkIfUserIsLogged () {
-    const cookies = window.document.cookie.split('; ')
-
-    const getCookies = name => cookies.filter(el => el.split('=')[0] === name)
-    const email = getCookies('email').toString().replace('email=', '')
-    const id = getCookies('id').toString().replace('id=', '')
+    const email = api.getCookies('email').toString().replace('email=', '')
+    const id = api.getCookies('id').toString().replace('id=', '')
 
     if (!email && !id) this.props.history.push('/user/login')
   }
@@ -32,9 +32,7 @@ class Settings extends Component {
   handleSubmit = event => {
     event.preventDefault()
 
-    const cookies = window.document.cookie.split('; ')
-    const getCookies = name => cookies.filter(el => el.split('=')[0] === name)
-    const email = getCookies('email').toString().replace('email=', '')
+    const email = api.getCookies('email').toString().replace('email=', '')
 
     const form = document.getElementById('reset-password')
     const formData = new window.FormData(form)
