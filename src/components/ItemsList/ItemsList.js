@@ -105,13 +105,11 @@ const ItemListContainer = styled.div`
           }
         }
     
-        .item-category {
+        a.item-category {
+          color: #E26433;
+          display: inline-block;
+          text-decoration: none;
           width: 125px;
-    
-          a {
-            color: #E26433;
-            text-decoration: none;
-          }
         }
     
         .item-date {
@@ -158,11 +156,12 @@ const ItemList = ({ items }) =>
             {item.title}
           </Link>
 
-          <span className='item-category'>
-            <a href={`/${item.category}/${item.subcategory}/1`}>
-              {item.subcategory}
-            </a>
-          </span>
+          <a
+            className='item-category'
+            href={`/${item.category}/${item.subcategory}/1`}
+          >
+            {item.subcategory}
+          </a>
 
           <span className='item-date'>
             {new Date(item.published).toLocaleDateString('en-GB', dateOptions)}
