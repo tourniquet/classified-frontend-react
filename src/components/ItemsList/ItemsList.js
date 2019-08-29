@@ -18,6 +18,21 @@ const ItemListContainer = styled.div`
         transition: .5s background;
       }
 
+      img.thumbnail {
+        height: 16px;
+        padding-left: 15px;
+        vertical-align: middle;
+        width: 16px;
+      }
+
+      span.no-thumbnail {
+        display: inline-block;
+        height: 16px;
+        padding-left: 15px;
+        vertical-align: middle;
+        width: 16px;
+      }
+
       img.favourite-item {
         height: 16px;
         padding-left: 15px;
@@ -25,14 +40,7 @@ const ItemListContainer = styled.div`
         vertical-align: middle;
         width: 16px;
       }
-    
-      img.thumbnail {
-        height: 16px;
-        padding-left: 15px;
-        vertical-align: middle;
-        width: 16px;
-      }
-    
+
       .item-tile {
         color: #000;
         display: inline-block;
@@ -134,18 +142,22 @@ const ItemList = ({ items }) =>
     <ul>
       {items && items.map(item => (
         <li key={item.id.toString()}>
+          { item.images ? (
+            <Image
+              className='thumbnail'
+              src='/img/camera.png'
+              title=''
+              alt='Particular lists thumbnail'
+            />
+          ) : (
+            <span className='no-thumbnail' />
+          )}
+
           <Image
             className='favourite-item'
             src='/img/star.png'
             title=''
             alt=''
-          />
-
-          <Image
-            className='thumbnail'
-            src='/img/camera.png'
-            title=''
-            alt='Particular lists thumbnail'
           />
 
           <Link
