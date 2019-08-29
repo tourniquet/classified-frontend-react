@@ -8,6 +8,8 @@ const Image = props =>
     style={props.style}
     onClick={props.onClick}
     onKeyDown={props.onKeyDown}
+    onMouseOver={props.onMouseOver}
+    onMouseOut={props.onMouseOut}
   />
 
 Image.propTypes = {
