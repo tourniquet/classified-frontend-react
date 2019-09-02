@@ -192,9 +192,7 @@ class Item extends Component {
 
           <div className='item-details'>
             <div className='item-title-description'>
-              <div className='item-title'>
-                <h2>{title}</h2>
-              </div>
+              <h2 className='item-title'>{title}</h2>
 
               <div className='item-description'>
                 <span>{description}</span>

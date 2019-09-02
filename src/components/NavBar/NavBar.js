@@ -8,6 +8,9 @@ import Image from '../Image/Image'
 import RoundedButton from '../Buttons/RoundedButton/RoundedButton'
 import SidebarToggle from '../Buttons/SidebarToggle'
 
+// utils
+import * as api from '../../utils/cookieUtils'
+
 const StyledHeader = styled.header`
   align-items: center;
   background: #262626;
@@ -152,11 +155,8 @@ const mapStateToProps = state => ({
 
 class Header extends Component {
   checkIfUserIsLogged () {
-    const cookies = window.document.cookie.split('; ')
-
-    const getCookies = name => cookies.filter(el => el.split('=')[0] === name)
-    const email = getCookies('email').toString().replace('email=', '')
-    const id = getCookies('id').toString().replace('id=', '')
+    const email = api.getCookies('email').toString().replace('email=', '')
+    const id = api.getCookies('id').toString().replace('id=', '')
 
     if (email) {
       this.props.dispatch({

@@ -8,6 +8,9 @@ import ItemsList from '../../../components/ItemsList/ItemsList'
 import Pagination from '../../../components/Pagination/Pagination'
 import Search from '../../../components/Search/Search'
 
+// utils
+import * as api from '../../../utils/cookieUtils'
+
 class UserItems extends Component {
   state = {
     items: [],
@@ -18,11 +21,8 @@ class UserItems extends Component {
   fetchData () {
     const { params } = this.props.match
 
-    const cookies = window.document.cookie.split('; ')
-    const getCookies = name => cookies.filter(el => el.split('=')[0] === name)
-
-    const userEmail = getCookies('email').toString().replace('email=', '')
-    const userId = getCookies('id').toString().replace('id=', '')
+    const userEmail = api.getCookies('email').toString().replace('email=', '')
+    const userId = api.getCookies('id').toString().replace('id=', '')
 
     const { pageNumber } = params || 1
     const url = `${apiHost}/user/items.php?page=${pageNumber}`

@@ -7,7 +7,11 @@ import { apiHost } from '../../../config'
 // components
 import Input from '../../../components/Input/Input'
 import Label from '../../../components/Label/Label'
+import Message from '../../../components/Message/Message'
 import RoundedButton from '../../../components/Buttons/RoundedButton/RoundedButton'
+
+// utils
+import * as api from '../../../utils/cookieUtils'
 
 const UserLoginPage = styled.div`
   display: flex;
@@ -27,10 +31,6 @@ const UserLoginPage = styled.div`
   }
 `
 
-const ErrorMessage = styled.p`
-  color: red;
-`
-
 class UserLogin extends Component {
   state = {
     wrongEmail: false,
@@ -38,11 +38,8 @@ class UserLogin extends Component {
   }
 
   checkIfUserIsLogged () {
-    const cookies = window.document.cookie.split('; ')
-
-    const getCookies = name => cookies.filter(el => el.split('=')[0] === name)
-    const email = getCookies('email').toString().replace('email=', '')
-    const id = getCookies('id').toString().replace('id=', '')
+    const email = api.getCookies('email').toString().replace('email=', '')
+    const id = api.getCookies('id').toString().replace('id=', '')
 
     if (email && id) this.props.history.push('/')
   }
@@ -125,15 +122,17 @@ class UserLogin extends Component {
           />
 
           { wrongEmail &&
-            <ErrorMessage>
-              Email did not match
-            </ErrorMessage>
+            <Message
+              className='error-message'
+              message='Email did not match'
+            />
           }
 
           { wrongPassword &&
-            <ErrorMessage>
-              Password did not match
-            </ErrorMessage>
+            <Message
+              className='error-message'
+              message='Password did not match'
+            />
           }
 
           <RoundedButton
