@@ -7,6 +7,7 @@ import { apiHost } from '../../../config'
 // components
 import ItemsList from '../../../components/ItemsList/ItemsList'
 import Pagination from '../../../components/Pagination/Pagination'
+import Search from '../../../components/Search/Search'
 
 class UserProfile extends Component {
   state = {
@@ -52,6 +53,8 @@ class UserProfile extends Component {
           {/* TODO: I think title should looks like user-name | site-name */}
           <title>title</title>
         </Helmet>
+
+        <Search />
 
         <ItemsList items={items} />
 
