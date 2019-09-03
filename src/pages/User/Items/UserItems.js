@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { apiHost } from '../../../config'
 
 // components
-import ItemsList from '../../../components/ItemsList/ItemsList'
+import ItemsList from '../components/ItemsList/ItemsList'
 import Pagination from '../../../components/Pagination/Pagination'
 import Search from '../../../components/Search/Search'
 
@@ -24,7 +24,7 @@ class UserItems extends Component {
     const userEmail = api.getCookies('email').toString().replace('email=', '')
     const userId = api.getCookies('id').toString().replace('id=', '')
 
-    const { pageNumber } = params || 1
+    const pageNumber = params.pageNumber || 1
     const url = `${apiHost}/user/items.php?page=${pageNumber}`
 
     window.fetch(url, {
