@@ -19,7 +19,7 @@ class UserProfile extends Component {
   fetchItems = () => {
     const id = this.props.match.params.id
     const pageNumber = this.props.match.params.pageNumber || 1
-    const url = `${apiHost}/profile.php?id=${id}&page=${pageNumber}`
+    const url = `${apiHost}/user/profile.php?id=${id}&page=${pageNumber}`
 
     window
       .fetch(url)

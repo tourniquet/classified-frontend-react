@@ -233,7 +233,14 @@ class ItemList extends Component {
                   <FontAwesomeIcon icon={faEyeSlash} />
                 </li>
                 <li>
-                  <FontAwesomeIcon icon={faTimesCircle} />
+                  <FontAwesomeIcon
+                    icon={faTimesCircle}
+                    onClick={() => {
+                      if (window.confirm('Are you sure you want to delte this item?')) {
+                        this.props.removeItem(item.id)
+                      }
+                    }}
+                  />
                 </li>
               </ul>
 
