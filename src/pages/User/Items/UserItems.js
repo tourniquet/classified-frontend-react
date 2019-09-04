@@ -42,10 +42,27 @@ class UserItems extends Component {
       .catch(err => console.error(err))
   }
 
-  removeItem = id => {
+  changeItemStatus = itemId => {
     const userEmail = api.getCookies('email').toString().replace('email=', '')
     const userId = api.getCookies('id').toString().replace('id=', '')
-    const itemId = id
+
+    const url = `${apiHost}/user/change-item-status.php`
+    window.fetch(url, {
+      method: 'POST',
+      body: JSON.stringify({ userEmail, userId, itemId })
+    })
+      .then(response => response.json())
+      .then(result => {
+        if (result.message === 'Success!') {
+          this.fetchData()
+        }
+      })
+      .catch(err => console.error(err))
+  }
+
+  removeItem = itemId => {
+    const userEmail = api.getCookies('email').toString().replace('email=', '')
+    const userId = api.getCookies('id').toString().replace('id=', '')
 
     const url = `${apiHost}/user/remove-item.php`
     window.fetch(url, {
@@ -81,6 +98,7 @@ class UserItems extends Component {
         <ItemsList
           items={items}
           removeItem={this.removeItem}
+          changeItemStatus={this.changeItemStatus}
         />
 
         <Pagination

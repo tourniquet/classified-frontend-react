@@ -40,11 +40,15 @@ const ItemListContainer = styled.div`
         width: 16px;
       }
 
-      .item-tile {
+      .item-title {
         color: #000;
         display: inline-block;
         margin-left: 15px;
         text-decoration: none;
+      }
+
+      .disabled {
+        color: #818181;
       }
 
       ul.action-buttons {
@@ -136,7 +140,7 @@ const ItemListContainer = styled.div`
           z-index: 2;
         }
 
-        .item-tile {
+        .item-title {
           width: 652px; 
           
           a:link, a:visited, a:active {
@@ -217,7 +221,7 @@ class ItemList extends Component {
               <Link
                 key={item.id}
                 to={{ pathname: `/item/${item.url}` }}
-                className='item-tile'
+                className={`item-title ${+item.enabled ? 'enabled' : 'disabled'}`}
               >
                 {item.title}
               </Link>
@@ -230,7 +234,10 @@ class ItemList extends Component {
                   <FontAwesomeIcon icon={faSyncAlt} />
                 </li>
                 <li>
-                  <FontAwesomeIcon icon={faEyeSlash} />
+                  <FontAwesomeIcon
+                    icon={faEyeSlash}
+                    onClick={() => this.props.changeItemStatus(item.id)}
+                  />
                 </li>
                 <li>
                   <FontAwesomeIcon
