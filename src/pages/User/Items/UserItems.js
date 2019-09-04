@@ -60,6 +60,24 @@ class UserItems extends Component {
       .catch(err => console.error(err))
   }
 
+  renewItem = itemId => {
+    const userEmail = api.getCookies('email').toString().replace('email=', '')
+    const userId = api.getCookies('id').toString().replace('id=', '')
+
+    const url = `${apiHost}/user/renew-item.php`
+    window.fetch(url, {
+      method: 'POST',
+      body: JSON.stringify({ userEmail, userId, itemId })
+    })
+      .then(response => response.json())
+      .then(result => {
+        if (result.message === 'Success!') {
+          this.fetchData()
+        }
+      })
+      .catch(err => console.error(err))
+  }
+
   removeItem = itemId => {
     const userEmail = api.getCookies('email').toString().replace('email=', '')
     const userId = api.getCookies('id').toString().replace('id=', '')
@@ -98,6 +116,7 @@ class UserItems extends Component {
         <ItemsList
           items={items}
           removeItem={this.removeItem}
+          renewItem={this.renewItem}
           changeItemStatus={this.changeItemStatus}
         />
 

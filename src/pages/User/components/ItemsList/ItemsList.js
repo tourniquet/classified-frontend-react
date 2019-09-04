@@ -101,6 +101,7 @@ const ItemListContainer = styled.div`
           border-bottom: unset;
         }
 
+        .thumbnail-image,
         .item-category,
         .item-date {
           display: none;
@@ -231,7 +232,10 @@ class ItemList extends Component {
                   <FontAwesomeIcon icon={faEdit} />
                 </li>
                 <li>
-                  <FontAwesomeIcon icon={faSyncAlt} />
+                  <FontAwesomeIcon
+                    icon={faSyncAlt}
+                    onClick={() => this.props.renewItem(item.id)}
+                  />
                 </li>
                 <li>
                   <FontAwesomeIcon

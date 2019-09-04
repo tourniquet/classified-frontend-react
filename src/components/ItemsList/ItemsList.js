@@ -71,6 +71,7 @@ const ItemListContainer = styled.div`
           border-bottom: unset;
         }
 
+        .thumbnail-image,
         .item-category,
         .item-date {
           display: none;
