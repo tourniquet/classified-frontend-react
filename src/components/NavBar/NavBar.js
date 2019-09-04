@@ -23,11 +23,11 @@ const StyledHeader = styled.header`
   width: 100%;
 
   .logo {
-    background: #FFF;
+    background: url('/img/logo.png');
     display: inline-block;
     flex-grow: 0;
-    height: 34px;
-    width: 85px;
+    height: 30px;
+    width: 105px;
   }
 
   .menu-items {
