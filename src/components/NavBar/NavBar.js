@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
@@ -155,8 +155,7 @@ const mapStateToProps = state => ({
 
 class Header extends Component {
   checkIfUserIsLogged () {
-    const email = api.getCookies('email').toString().replace('email=', '')
-    const id = api.getCookies('id').toString().replace('id=', '')
+    const { email, id } = api.checkIfUserIsLogged()
 
     if (email) {
       this.props.dispatch({
@@ -181,6 +180,12 @@ class Header extends Component {
 
   componentDidMount () {
     this.checkIfUserIsLogged()
+  }
+
+  componentDidUpdate (prevProps) {
+    if (prevProps.location.key !== this.props.location.key) {
+      this.checkIfUserIsLogged()
+    }
   }
 
   render () {
@@ -285,4 +290,4 @@ class Header extends Component {
   }
 }
 
-export default connect(mapStateToProps)(Header)
+export default withRouter(connect(mapStateToProps)(Header))
