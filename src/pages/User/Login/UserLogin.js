@@ -1,3 +1,4 @@
+import { connect } from 'react-redux'
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
@@ -30,6 +31,11 @@ const UserLoginPage = styled.div`
     }
   }
 `
+
+const mapStateToProps = state => ({
+  email: state.userReducer.email,
+  id: state.userReducer.id
+})
 
 class UserLogin extends Component {
   state = {
@@ -64,6 +70,12 @@ class UserLogin extends Component {
           // save user email and user id in cookies
           window.document.cookie = `email=${result.email}; expires=${month}; path='/'`
           window.document.cookie = `id=${result.id}; expires=${month}; path='/'`
+
+          this.props.dispatch({
+            type: 'LOGIN_USER',
+            email: result.email,
+            id: result.id
+          })
 
           // redirect user to index page
           this.props.history.push('/')
@@ -146,4 +158,4 @@ class UserLogin extends Component {
   }
 }
 
-export default UserLogin
+export default connect(mapStateToProps)(UserLogin)
