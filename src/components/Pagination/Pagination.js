@@ -47,6 +47,27 @@ const UlStyled = styled.ul`
   }
 `
 
+const range = (from, to) => Array(to - from + 1).fill().map((_, i) => from + i)
+
+const pagination = (totalPages, currentPage = 1, totalBlocks = 5) => {
+  const pageNeighbours = 1
+
+  if (totalPages > totalBlocks) {
+    const start = Math.max(2, currentPage - pageNeighbours)
+    const end = Math.min(totalPages, currentPage + pageNeighbours)
+
+    const pages = range(start, end)
+
+    if (currentPage === 1) return [...range(1, 3), totalPages]
+    if (currentPage > 1) pages.unshift(1)
+    if (end < totalPages) pages.push(totalPages)
+
+    return pages
+  }
+
+  return range(1, totalPages)
+}
+
 const Pagination = props => {
   const { location, pageNumber, totalItems } = props
 
@@ -55,10 +76,11 @@ const Pagination = props => {
   // so NavLink can't show which page is active at the moment
   if (location.pathname === '/') location.pathname = '/home/page/1'
 
-  const pages = Array.from(Array(Math.ceil(totalItems / 10)), (el, i) => ++i)
+  const totalPages = Math.ceil(totalItems / 10)
+  const pages = pagination(totalPages, parseInt(pageNumber))
 
   const prevButtonDisabled = Number(pageNumber) === 1 ? 'disabled' : ''
-  const nextButtonDisabled = Number(pageNumber) >= pages.length ? 'disabled' : ''
+  const nextButtonDisabled = Number(pageNumber) === totalPages ? 'disabled' : ''
 
   // I'm using .filter(Boolean) because first result is an empty string
   const [pathFirstPart, pathSecondPart] = location.pathname.split('/').filter(Boolean)

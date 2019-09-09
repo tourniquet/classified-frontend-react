@@ -205,6 +205,7 @@ class ItemNew extends Component {
       showCurrencies,
       currency
     } = this.state
+    const { userEmail } = this.props
     const price = document.getElementById('item-price')
 
     return (
@@ -361,6 +362,7 @@ class ItemNew extends Component {
                 type='email'
                 placeholder='Email'
                 pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
+                value={userEmail}
               />
             </div>
 

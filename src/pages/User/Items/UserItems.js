@@ -4,6 +4,9 @@ import React, { Component } from 'react'
 import { apiHost } from '../../../config'
 
 // components
+// UserItemsList is used to render personal items, so it will contains action buttons
+import UserItemsList from '../components/ItemsList/ItemsList'
+// ItemsList is used to render any other user items, and obviously, no action buttons here
 import ItemsList from '../../../components/ItemsList/ItemsList'
 import Pagination from '../../../components/Pagination/Pagination'
 import Search from '../../../components/Search/Search'
@@ -20,16 +23,23 @@ class UserItems extends Component {
 
   fetchData () {
     const { params } = this.props.match
+    const { email } = api.checkIfUserIsLogged()
+    const id = api.checkIfUserIsLogged().id
+      // if user is loged in, get its ID from cookies
+      ? api.checkIfUserIsLogged().id
+      // else, get ID from url params
+      : params.userId
 
-    const userEmail = api.getCookies('email').toString().replace('email=', '')
-    const userId = api.getCookies('id').toString().replace('id=', '')
-
-    const { pageNumber } = params || 1
-    const url = `${apiHost}/user/items.php?page=${pageNumber}`
+    const pageNumber = params.pageNumber || 1
+    const url = email
+      // if user is logged in, render its own items
+      ? `${apiHost}/user/items.php?page=${pageNumber}`
+      // else, fetch user enabled items by id
+      : `${apiHost}/user/profile.php?page=${pageNumber}`
 
     window.fetch(url, {
       method: 'POST',
-      body: JSON.stringify({ userEmail, userId })
+      body: JSON.stringify({ email, id })
     })
       .then(response => response.json())
       .then(result => {
@@ -38,6 +48,60 @@ class UserItems extends Component {
           page: result.page,
           totalItems: result.total
         })
+      })
+      .catch(err => console.error(err))
+  }
+
+  changeItemStatus = itemId => {
+    const userEmail = api.getCookies('email').toString().replace('email=', '')
+    const userId = api.getCookies('id').toString().replace('id=', '')
+
+    const url = `${apiHost}/user/change-item-status.php`
+    window.fetch(url, {
+      method: 'POST',
+      body: JSON.stringify({ userEmail, userId, itemId })
+    })
+      .then(response => response.json())
+      .then(result => {
+        if (result.message === 'Success!') {
+          this.fetchData()
+        }
+      })
+      .catch(err => console.error(err))
+  }
+
+  renewItem = itemId => {
+    const userEmail = api.getCookies('email').toString().replace('email=', '')
+    const userId = api.getCookies('id').toString().replace('id=', '')
+
+    const url = `${apiHost}/user/renew-item.php`
+    window.fetch(url, {
+      method: 'POST',
+      body: JSON.stringify({ userEmail, userId, itemId })
+    })
+      .then(response => response.json())
+      .then(result => {
+        if (result.message === 'Success!') {
+          this.fetchData()
+        }
+      })
+      .catch(err => console.error(err))
+  }
+
+  removeItem = itemId => {
+    const userEmail = api.getCookies('email').toString().replace('email=', '')
+    const userId = api.getCookies('id').toString().replace('id=', '')
+
+    const url = `${apiHost}/user/remove-item.php`
+    window.fetch(url, {
+      method: 'POST',
+      body: JSON.stringify({ userEmail, userId, itemId })
+    })
+      .then(response => response.json())
+      .then(result => {
+        if (result.message === 'Success!') {
+          this.fetchData()
+        }
       })
       .catch(err => console.error(err))
   }
@@ -54,12 +118,24 @@ class UserItems extends Component {
 
   render () {
     const { items, page, totalItems } = this.state
+    const { email, id } = api.checkIfUserIsLogged()
 
     return (
       <>
         <Search />
 
-        <ItemsList items={items} />
+        { (email && id) ? (
+          <UserItemsList
+            items={items}
+            removeItem={this.removeItem}
+            renewItem={this.renewItem}
+            changeItemStatus={this.changeItemStatus}
+          />
+        ) : (
+          <ItemsList
+            items={items}
+          />
+        )}
 
         <Pagination
           pageNumber={page}

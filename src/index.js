@@ -24,7 +24,6 @@ import Subcategory from './pages/Subcategory/Subcategory'
 import UserItems from './pages/User/Items/UserItems'
 import UserLogin from './pages/User/Login/UserLogin'
 import UserRegistration from './pages/User/Registration/user-registration'
-import Profile from './pages/User/Profile/Profile'
 import Wrapper from './components/Wrapper/Wrapper'
 
 // reducers
@@ -68,9 +67,8 @@ class App extends Component {
             <Route path='/search/:query/:pageNumber(\d+)' component={SearchResults} />
             <Route path='/user/login' component={UserLogin} />
             <Route path='/user/registration' component={UserRegistration} />
-            <Route path='/user/items/:pageNumber(\d+)' component={UserItems} />
+            <Route path='/user/:userId(\d+)/:pageNumber(\d+)?' component={UserItems} />
             <Route path='/user/settings' component={Setting} />
-            <Route path='/profile/:id(\d+)/:pageNumber(\d+)?' component={Profile} />
             <Route path='/region/:region/:pageNumber(\d+)' component={Region} />
             <Route path='/:category/:subcategory/:pageNumber(\d+)?' component={Subcategory} />
           </Switch>

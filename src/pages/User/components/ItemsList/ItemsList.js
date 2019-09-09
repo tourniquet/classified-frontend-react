@@ -1,9 +1,16 @@
 import { Link } from 'react-router-dom'
+import {
+  faEdit,
+  faEyeSlash,
+  faSyncAlt,
+  faTimesCircle
+} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
 // components
-import Image from '../Image/Image'
+import Image from '../../../../components/Image/Image'
 
 const ItemListContainer = styled.div`
   flex: 1 0 auto;
@@ -33,19 +40,42 @@ const ItemListContainer = styled.div`
         width: 16px;
       }
 
-      img.favourite-item {
-        height: 16px;
-        margin-left: 15px;
-        position: relative;
-        vertical-align: middle;
-        width: 16px;
-      }
-
-      .item-tile {
+      .item-title {
         color: #000;
         display: inline-block;
         margin-left: 15px;
         text-decoration: none;
+      }
+
+      .disabled {
+        color: #818181;
+      }
+
+      ul.action-buttons {
+        color: #BFBFBF;
+        display: inline-block;
+        width: 200px;
+
+        li {
+          display: inline-block;
+
+          &:hover {
+            color: #000;
+            cursor: pointer;
+          }
+
+          &:not(:last-child) {
+            margin-right: 15px;
+          }
+
+          &:last-child {
+            color: #FFBFBF;
+          }
+
+          &:last-child:hover {
+            color: #F00;
+          }
+        }
       }
     }
 
@@ -87,7 +117,7 @@ const ItemListContainer = styled.div`
       > li {
         height: 50px;
         line-height: 50px;
-        padding-left: 32px;
+        padding-left: 16px;
 
         &:not(:first-child) {
           border-top: 2px solid #F6F6F6;
@@ -111,12 +141,8 @@ const ItemListContainer = styled.div`
           z-index: 2;
         }
 
-        .favourite-item {
-          cursor: pointer;
-        }
-
-        .item-tile {
-          width: 852px;
+        .item-title {
+          width: 652px; 
           
           a:link, a:visited, a:active {
             text-decoration: none;
@@ -193,20 +219,41 @@ class ItemList extends Component {
                 <span className='no-thumbnail' />
               )}
 
-              <Image
-                className='favourite-item'
-                src='/img/star.png'
-                title=''
-                alt=''
-              />
-
               <Link
                 key={item.id}
                 to={{ pathname: `/item/${item.url}` }}
-                className='item-tile'
+                className={`item-title ${+item.enabled ? 'enabled' : 'disabled'}`}
               >
                 {item.title}
               </Link>
+
+              <ul className='action-buttons'>
+                <li>
+                  <FontAwesomeIcon icon={faEdit} />
+                </li>
+                <li>
+                  <FontAwesomeIcon
+                    icon={faSyncAlt}
+                    onClick={() => this.props.renewItem(item.id)}
+                  />
+                </li>
+                <li>
+                  <FontAwesomeIcon
+                    icon={faEyeSlash}
+                    onClick={() => this.props.changeItemStatus(item.id)}
+                  />
+                </li>
+                <li>
+                  <FontAwesomeIcon
+                    icon={faTimesCircle}
+                    onClick={() => {
+                      if (window.confirm('Are you sure you want to delte this item?')) {
+                        this.props.removeItem(item.id)
+                      }
+                    }}
+                  />
+                </li>
+              </ul>
 
               <a
                 className='item-category'

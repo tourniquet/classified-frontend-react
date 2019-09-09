@@ -38,7 +38,7 @@ class Settings extends Component {
     const formData = new window.FormData(form)
     formData.append('email', email)
 
-    const url = `${apiHost}/user-settings.php`
+    const url = `${apiHost}/user/settings.php`
     window
       .fetch(url, {
         method: 'POST',

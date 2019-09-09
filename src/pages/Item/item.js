@@ -174,7 +174,7 @@ class Item extends Component {
 
           <div className='item-info'>
             <span>Posted by</span>
-            <a className='posted-by' href={`/profile/${user_id}/1`}>
+            <a className='posted-by' href={`/user/${user_id}/1`}>
               &nbsp;{visitor_name}
             </a>
           </div>
