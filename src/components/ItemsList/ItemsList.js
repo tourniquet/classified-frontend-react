@@ -2,6 +2,9 @@ import { Link } from 'react-router-dom'
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
+// API host config
+import { apiHost } from '../../config'
+
 // components
 import Image from '../Image/Image'
 
@@ -165,6 +168,7 @@ class ItemList extends Component {
 
   render () {
     const { items } = this.props
+    const thumbUrl = `${apiHost}uploads/thumb_`
 
     return (
       <ItemListContainer>
@@ -184,7 +188,7 @@ class ItemList extends Component {
 
                   <Image
                     className='thumbnail-image'
-                    src={`/api/uploads/thumb_${item.images}`}
+                    src={`${thumbUrl}${item.images}`}
                     title='Particular listing thumbnail'
                     alt=''
                   />
