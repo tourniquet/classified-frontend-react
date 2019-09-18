@@ -91,7 +91,7 @@ const Footer = () =>
       <p className='script-name'>© This website is powered by the classifieds script software&nbsp;
         <a
           className='link'
-          href='https://github.com/tourniquet/classified-backend-php'
+          href='https://github.com/tourniquet/minClass'
           target='_blank'
         >
           minClass
