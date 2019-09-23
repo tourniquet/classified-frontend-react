@@ -27,7 +27,6 @@ const ItemListContainer = styled.div`
 
       img.icon-camera {
         height: 16px;
-        margin-left: 15px;
         vertical-align: middle;
         width: 16px;
       }
@@ -35,7 +34,6 @@ const ItemListContainer = styled.div`
       span.no-thumbnail {
         display: inline-block;
         height: 16px;
-        padding-left: 15px;
         vertical-align: middle;
         width: 16px;
       }
@@ -44,7 +42,11 @@ const ItemListContainer = styled.div`
         color: #000;
         display: inline-block;
         margin-left: 15px;
+        overflow: hidden;
         text-decoration: none;
+        text-overflow: ellipsis;
+        vertical-align: middle;
+        width: calc(85% - 115px);
       }
 
       .disabled {
@@ -99,6 +101,11 @@ const ItemListContainer = styled.div`
 
         &:last-child {
           border-bottom: unset;
+        }
+
+        ul.action-buttons {
+          float: right;
+          width: 115px;
         }
 
         .thumbnail-image,

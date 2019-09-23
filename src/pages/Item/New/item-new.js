@@ -47,6 +47,7 @@ class ItemNew extends Component {
       id: '',
       name: ''
     },
+    userEmail: '',
     currencies: [],
     showCurrencies: false,
     currency: {
@@ -130,6 +131,10 @@ class ItemNew extends Component {
     this.setState(state => ({ images: state.images.filter(el => el !== state.images[id]) }))
   }
 
+  handleEmail = event => {
+    this.setState({ userEmail: event.target.value })
+  }
+
   fetchCurrencies () {
     window
       .fetch(`${apiHost}/currencies.php`)
@@ -189,6 +194,12 @@ class ItemNew extends Component {
     this.fetchRegions()
   }
 
+  componentDidUpdate (prevProps) {
+    if (this.props.userEmail !== prevProps.userEmail) {
+      this.setState({ userEmail: this.props.userEmail })
+    }
+  }
+
   render () {
     const {
       categories,
@@ -201,11 +212,11 @@ class ItemNew extends Component {
       regions,
       showRegions,
       region,
+      userEmail,
       currencies,
       showCurrencies,
       currency
     } = this.state
-    const { userEmail } = this.props
     const price = document.getElementById('item-price')
 
     return (
@@ -363,6 +374,7 @@ class ItemNew extends Component {
                 placeholder='Email'
                 pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
                 value={userEmail}
+                onChange={this.handleEmail}
               />
             </div>
 

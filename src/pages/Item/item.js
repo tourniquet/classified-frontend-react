@@ -174,9 +174,15 @@ class Item extends Component {
 
           <div className='item-info'>
             <span>Posted by</span>
-            <a className='posted-by' href={`/user/${user_id}/1`}>
-              &nbsp;{visitor_name}
-            </a>
+            { user_id ? (
+              <a className='posted-by' href={`/user/${user_id}/1`}>
+                &nbsp;{visitor_name}
+              </a>
+            ) : (
+              <span className='posted-by'>
+                &nbsp;{visitor_name}
+              </span>
+            )}
           </div>
 
           <hr className='under-item-info' />
