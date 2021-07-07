@@ -1,4 +1,3 @@
-import { Helmet } from 'react-helmet'
 import { Link } from 'react-router-dom'
 import React, { Component, Fragment } from 'react'
 
@@ -6,7 +5,8 @@ import React, { Component, Fragment } from 'react'
 import { apiHost } from '../../config'
 
 // components
-import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs'
+import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs'
+import BrowserMeta from '../../components/BrowserMeta/BrowserMeta'
 import CallToActionButton from '../../components/Buttons/CallToActionButton/CallToActionButton'
 import CloseButton from '../../components/Buttons/CloseButton/CloseButton'
 import Image from '../../components/Image/Image'
@@ -116,9 +116,7 @@ class Item extends Component {
 
     return (
       <div className='item-page'>
-        <Helmet>
-          <title>{title}</title>
-        </Helmet>
+        <BrowserMeta title={title} />
 
         <div className='item'>
           { zoomedImage &&

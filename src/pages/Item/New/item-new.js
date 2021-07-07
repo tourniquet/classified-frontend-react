@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { apiHost } from '../../../config'
 
 // components
+import BrowserMeta from '../../../components/BrowserMeta/BrowserMeta'
 import Dropdown from '../components/Dropdown/Dropdown'
 import Image from '../../../components/Image/Image'
 import Input from '../../../components/Input/Input'
@@ -221,6 +222,8 @@ class ItemNew extends Component {
 
     return (
       <div className='page-body'>
+        <BrowserMeta title='Post an ad' />
+
         <Search />
 
         <form
